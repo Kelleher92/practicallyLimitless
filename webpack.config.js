@@ -1,8 +1,27 @@
+// module.exports = {
+// 	mode: 'development',
+//     entry: './dev/js/index.js',
+//     output: {
+//     	path: __dirname + '/public/js',
+//         filename: 'home.js'
+//     }
+// };
+
 module.exports = {
-	mode: 'development',
-    entry: './dev/js/index.js',
-    output: {
-    	path: __dirname + '/public/js',
-        filename: 'home.js'
-    }
+  entry: "./dev/js/index.js",
+  output: {
+    path: __dirname + '/public/js',
+    filename: 'home.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      }
+    ]
+  }
 };
