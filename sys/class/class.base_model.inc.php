@@ -29,7 +29,7 @@
 		}
 
 		public function escapeChar($str) {
-			return  htmlentities($str, ENT_QUOTES);
+			return htmlentities($str, ENT_QUOTES);
 		}
 
 		public function createUpdateStr($r) {

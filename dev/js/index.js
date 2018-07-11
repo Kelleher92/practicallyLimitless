@@ -1,21 +1,8 @@
-(function() {
-    'use strict';
-    const $ = require('jquery');
+import React from "react";
+import ReactDOM from "react-dom";
 
-    $.ajax({
-        method: 'POST',
-        data: {
-            token: token,
-            action: '',
-            data: null
-        },
-        url: 'process.php',
-        success: function(res) {
+const Index = () => {
+  return <div>Hello React!</div>;
+};
 
-        },
-        error: function(res) {
-
-        }
-    });
-
-})();
+ReactDOM.render(<Index />, document.getElementById("index"));
