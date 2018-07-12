@@ -5,7 +5,16 @@
 
 		$action = $_POST['action'];
 
-		if($action === 'registerCompany') {
+		if($action === 'checkLoggedIn') {
+			if(!isset($_SESSION['company']['id']) || !isset($_SESSION['company']['email']) || !isset($_SESSION['company']['name'])) {
+				echo 'false';   
+			}
+			else {
+				echo 'true';   
+			}
+		} 
+
+		else if($action === 'registerCompany') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
 			$admin->registerCompany($data->name, $data->email, $data->address, $data->password);
