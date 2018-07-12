@@ -5,51 +5,44 @@
  * @Last Modified time: 2018-07-11 17:51:16
  */
 
-
 import React, { Component } from "react";
-import { 
-	Route, 
-	Redirect, 
-	// BrowserRouter as Router, 
-	//Link, 
-	withRouter 
-} from "react-router-dom";
+import { Route, Redirect, withRouter } from "react-router-dom";
+import $ from 'jquery';
 
 class PrivateRoute extends Component {
-    
 	constructor(props) {
 		super(props);
-		this.state = {
-			isAuthenticated: true,
-		}
+
+        var me = this;
+        var hasAuthBeenChecked = false;
+
+        this.token = $('#session-token').val();
+
+        $.ajax({
+            method: 'POST',
+            data: {
+                token: this.token,
+                action: 'checkLoggedIn'
+            },
+            url: 'process.php',
+            success: function(res) {
+                if(res === 'true') {
+                    me.props.setLoggedOut();
+                }
+            },
+            error: function(res) {
+                console.log(res);
+            }
+        });
 	}
-
-	// componentDidMount() {
-	// 	// checkAuth();
-	// 	let me = this;
-	// 	let token = false; // this would be the session token from server
-
-
-	// 	if(!token) {
-	// 		me.setState({
-	// 			isAuthenticated: false,
-	// 		});
-	// 	} else {
-    //         // check server for authentication
-    //         // set state to prove authentication status
-    //         me.setState({
-	// 			isAuthenticated: true
-	// 		});
-	// 	}
-
-	// }
 
 	render() {
         const {component: Component, ...rest} = this.props;
         
         return (
+
             <Route {...rest} render={ props =>
-                this.state.isAuthenticated ? ( <Component {...this.props} /> ) : (
+                this.props.isLoggedIn ? ( <Component {...this.props} /> ) : (
                     <Redirect
                         to={{
                             pathname: "/"
@@ -61,6 +54,5 @@ class PrivateRoute extends Component {
 
 	}
 }
-
 
 export default withRouter(PrivateRoute);

@@ -77,7 +77,6 @@
 				`email` = '$uname' 
 				LIMIT 1";
 
-
 			$user = $this->query($sql)[0];
 
 			$res = new Response_Obj();
@@ -93,9 +92,9 @@
 
 			$hash = $user['password'];
 
-			if(password_verify($pword, $hash)) {		
+			if(password_verify($pword, $hash)) {
 				$_SESSION['company'] = array(
-					'id' => $user['id']
+					'id' => $user['id'],
 					'name' => $user['name'],
 					'email' => $user['email']
 				);

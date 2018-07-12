@@ -5,13 +5,9 @@
  * @Last Modified time: 2018-07-12 09:43:10
  */
 
-
 import React, { Component } from 'react';
 
-// import '../../styles/preLoader.css';
-
 export default class PreLoader extends Component {
-	
 	render(){
 		return(
 			<div style={{"height":"100%"}} className="d-flex justify-content-center align-items-center">
