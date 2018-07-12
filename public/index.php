@@ -13,7 +13,7 @@
 	</head>
 
 	<body>
-		<section id="index"></section>
+		<section id="root"></section>
 		
 		<input type="hidden" value="<?php echo $_SESSION['token']; ?>"/>
 		
