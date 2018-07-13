@@ -27,7 +27,7 @@
   },
   "scripts": {
     "build": "webpack -p",
-    "heroku-postbuild": "cd public"
+    "post-install": "cd public"
   },
   "repository": {
     "type": "git",
