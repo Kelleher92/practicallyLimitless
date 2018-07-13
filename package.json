@@ -31,9 +31,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://iakelleher@bitbucket.org/iakelleher/practicallylimitless.git"
+    "url": "https://github.com/Kelleher92/practicallyLimitless"
   },
   "author": "Ian Kelleher",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/iakelleher/practicallylimitless/src/master/README.md"
+  "homepage": "https://practically-limitless.herokuapp.com"
 }
