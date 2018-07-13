@@ -26,10 +26,8 @@
     "webpack-cli": "^2.1.5"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack -p",
-    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress",
-    "postinstall": "cd public"
+    "heroku-postbuild": "cd public"
   },
   "repository": {
     "type": "git",
