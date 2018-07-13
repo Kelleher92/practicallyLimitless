@@ -26,8 +26,7 @@
     "webpack-cli": "^2.1.5"
   },
   "scripts": {
-    "build": "webpack -p",
-    "heroku-postbuild": "cd public"
+    "build": "webpack -p"
   },
   "repository": {
     "type": "git",
