@@ -1,6 +1,7 @@
 <?php
 	include_once '../sys/core/init.inc.php';
 ?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -13,10 +14,11 @@
 	</head>
 
 	<body>
-		<section id="index"></section>
+		<section id="root"></section>
 		
-		<input type="hidden" value="<?php echo $_SESSION['token']; ?>"/>
-		
+		<input id="session-token" type="hidden" value="<?php echo $_SESSION['token']; ?>"/>
+		<input id="login-token" type="hidden" value="<?php if(!isset($_SESSION['company']['id']) || !isset($_SESSION['company']['email']) || !isset($_SESSION['company']['name'])) {echo 'false';} else {echo 'true';} ?>"/>
+
 		<script src="js/home.js"></script>
 	</body>
 </html>
