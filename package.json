@@ -28,7 +28,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack -p",
-    "postinstall": "cd client"
+    "postinstall": "cd public"
   },
   "repository": {
     "type": "git",
