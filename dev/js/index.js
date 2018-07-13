@@ -21,9 +21,8 @@ import PreLoader from './components/PreLoader';
 class App extends Component {
     constructor() {
         super();
-        console.log($('#login-token').val());
         this.state = {
-            isLoggedIn: $('#login-token').val()==='true'
+            isLoggedIn: $('#login-token').val() === 'true'
         };
 
         this.token = $('#session-token').val();

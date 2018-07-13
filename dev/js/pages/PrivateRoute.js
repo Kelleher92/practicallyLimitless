@@ -38,9 +38,7 @@ class PrivateRoute extends Component {
 
 	render() {
         const {component: Component, ...rest} = this.props;
-        
         return (
-
             <Route {...rest} render={ props =>
                 this.props.isLoggedIn ? ( <Component {...this.props} /> ) : (
                     <Redirect
@@ -51,7 +49,6 @@ class PrivateRoute extends Component {
                 )
             }/>
         )
-
 	}
 }
 
