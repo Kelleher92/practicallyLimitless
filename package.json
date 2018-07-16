@@ -27,7 +27,8 @@
   },
   "scripts": {
     "build": "webpack -p",
-    "post-install": "cd public"
+    "postinstall": "cd public"
+    //"postinstall": "cd public && npm install"
   },
   "repository": {
     "type": "git",
