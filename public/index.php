@@ -1,8 +1,9 @@
 <?php
-	include_once '../sys/core/init.inc.php';
+// 	include_once '../sys/core/init.inc.php';
+	echo 'In public directory!';
 ?>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 	<head>
 	    <meta charset="utf-8">
@@ -21,4 +22,4 @@
 
 		<script src="js/home.js"></script>
 	</body>
-</html>
+</html> -->
