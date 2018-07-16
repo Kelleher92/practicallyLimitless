@@ -1,5 +1,5 @@
 <?php 
     echo 'in root' 
-  	header('Location:'.'./public');
-		die();
+    header('Location:'.'./public');
+    die();
 ?>
