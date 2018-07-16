@@ -7,7 +7,7 @@
 	 */
 	//$DB_ACCESS['DB_HOST'] = 'f8ogy1hm9ubgfv2s.chr7pe7iynqr.eu-west-1.rds.amazonaws.com';
 	$DB_ACCESS['DB_HOST'] = getenv('DB_HOST');
-
+	var_dump($DB_ACCESS['DB_HOST']);
 	/**
 	 * user name
 	 */
