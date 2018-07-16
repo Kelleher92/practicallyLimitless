@@ -1,5 +1,5 @@
 <?php
-	include_once '../sys/core/init.inc.php';
+	include_once './sys/core/init.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
 	    <title></title>
 	    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-		<link rel="stylesheet" href="css/global/global.css">   
+		<link rel="stylesheet" href="./public/css/global/global.css">   
 	</head>
 
 	<body>
@@ -19,6 +19,6 @@
 		<input id="session-token" type="hidden" value="<?php echo $_SESSION['token']; ?>"/>
 		<input id="login-token" type="hidden" value="<?php if(!isset($_SESSION['company']['id']) || !isset($_SESSION['company']['email']) || !isset($_SESSION['company']['name'])) {echo 'false';} else {echo 'true';} ?>"/>
 
-		<script src="js/home.js"></script>
+		<script src="./public/js/home.js"></script>
 	</body>
 </html>

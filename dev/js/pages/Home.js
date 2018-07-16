@@ -32,7 +32,7 @@ export default class Home extends Component {
                 action: 'registerCompany',
                 data: JSON.stringify({name: 'ian', email: 'ian@goyeti.ie', address: 'thomastown', password: '1234pass$'})
             },
-            url: 'process.php',
+            url: 'public/process.php',
             success: function(res) {
                 console.log(res);
             },
