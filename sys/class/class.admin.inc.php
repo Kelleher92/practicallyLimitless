@@ -95,7 +95,7 @@
 			echo json_encode($res);
 		}
 
-		private function -($code, $message) {
+		private function createResponse($code, $message) {
 			return new Response_Obj(array(
 				'responseCode' => $code,
 				'message'=> $message
