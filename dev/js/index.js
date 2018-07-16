@@ -36,7 +36,7 @@ class App extends Component {
                 token: this.token,
                 action: 'logoutCompany'
             },
-            url: 'process.php',
+            url: 'public/process.php',
             success: function(res) {
                 console.log(res);
             },

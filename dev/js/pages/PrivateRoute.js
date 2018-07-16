@@ -24,7 +24,7 @@ class PrivateRoute extends Component {
                 token: this.token,
                 action: 'checkLoggedIn'
             },
-            url: 'process.php',
+            url: 'public/process.php',
             success: function(res) {
                 if(res === 'true') {
                     me.props.setLoggedOut();
