@@ -49,6 +49,19 @@
 			$admin->companyForgotPassword($data->email);		
 		} 
 
+		else if($action === 'resetCompany') {
+			$data = json_decode($_POST['data']);
+			$admin = new Password();
+			$res = $admin->companyVerifyResetToken($data->email, $data->token);
+			echo json_encode($res);
+		} 
+
+		else if($action === 'companyResetPassword') {
+			$data = json_decode($_POST['data']);
+			$admin = new Password();
+			$admin->companyResetPassword($data->email, $data->password);
+		} 
+
 		else {
 			throw new Exception('Invalid request');
 		}
