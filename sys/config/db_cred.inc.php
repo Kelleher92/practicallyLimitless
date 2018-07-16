@@ -13,17 +13,23 @@
 	 */
 	//$DB_ACCESS['DB_USER'] = 'fwrwpolumasf0ilb';
 	$DB_ACCESS['DB_USER'] = getenv('DB_USER');
+	var_dump($DB_ACCESS['DB_USER']);
+
 
 	/**
 	 * passoword if any
 	 */
 	//$DB_ACCESS['DB_PASS'] = 'd7ilnzckkj45v82n';
 	$DB_ACCESS['DB_PASS'] = getenv('DB_PASS');
+	var_dump($DB_ACCESS['DB_PASS']);
+
 
 	/**
 	 * database name
 	 */
 	//$DB_ACCESS['DB_NAME'] = 'efqr54vwc4uxerpy';
-	$DB_ACCESS['DB_NAME'] = getenv('DB_NAME');	
+	$DB_ACCESS['DB_NAME'] = getenv('DB_NAME');
+	var_dump($DB_ACCESS['DB_NAME']);
+
 
 ?>
