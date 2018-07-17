@@ -3,39 +3,39 @@ import React, {Component} from 'react';
 
 export default class EmailVerificationNotice extends Component {
     
-    constructor() {
-        super();
-        this.state = {
 
-        };
-
-        // practically-limitless.herokuapp.com/verify?email=ian@goyeti.ie&token=c1c69de13a5e03e7e85fcc391014ae2bddebb3925e78bbe7d7c33c82eb2ffdad  
-        // let url = new URL(window.location.href);
-		// let code = url.searchParams.get("code");
-    }
-    
     render() {
+
+
         return(
             <div>
-            <div class="verify-email__container success">
-                <div class="verify-email__smiley success">
-                    happy face
-                </div>
-                <div class="verify-email__status">
-                    success
-                </div>
-                <div class="verify-email__sub-status">
-                    You can now proceed to login
-                </div>
-                <div class="pl-input--style-1">
-                    <input type="text" placeholder="Email" />
-                </div>
-                <div class="verify-email__button">
-                    <div class="pl-button--style-1"><span>Log in</span></div>
-                    <div class="pl-button--style-1"><span>Try gain</span></div>
-                </div>
-            </div>
+                {this.props.verificationStatus ? (
+                    <div className="verify-email__container success">
+                        <div className="verify-email__icon success">
+                            <i className="far fa-thumbs-up"></i>
+                        </div>
+                        <div className="verify-email__status">success!</div>
 
+                        <div className="verify-email__sub-status">You can now proceed to login</div>
+                        <div className="verify-email__button">
+                            <div className="pl-button--style-1">Login</div>
+                        </div>
+                    </div>
+                
+                ) : (
+
+                    <div className="verify-email__container fail">
+                        <div className="verify-email__icon fail">
+                            <i className="far fa-thumbs-down"></i>
+                        </div>
+                        <div className="verify-email__status">error!</div>
+
+                        <div className="verify-email__sub-status">Your verification has timed out. Please register again.</div>
+                        <div className="verify-email__button">
+                            <div className="pl-button--style-1">Register</div>
+                        </div>
+                    </div>
+                )}
             </div>
         );
     }

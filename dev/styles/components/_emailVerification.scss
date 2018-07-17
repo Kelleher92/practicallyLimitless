@@ -1,42 +1,85 @@
-body {
-    height: 100%;
-    width: 100%;
-  }
-  
-.pl-input--style-1 {
-
-}
-
 .pl-button--style-1 {
-
     width: 200px;
     height: 40px;
-    padding-top: 5px;
+    line-height: 40px;
     background: #FCFCFC;
     border-radius: 20px;
     text-align: center;
     box-shadow: 2px 2px 10px rgba(119, 119, 119, 0.5);
-    /* transition: all .5s ease-in-out; */
+    font-size: 14px;
+    font-family: 'Roboto';
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 5px;
+}
 
+.pl-button--style-1:hover {
+    background: #efefef;
+    transform: scale(1.02);
+    transition: all .3s ease-in-out;
 }
 
 
 
 .verify-email__container {
-width: 600px;
-max-width: 80%;
-height: 400px;
-max-height: 50%;
-border-radius: 20px;
-box-shadow: 5px 5px 20px #cbcdd3;
-perspective: 40px;
-
+    -webkit-display: flex;
+    -moz-display: flex;
+    -ms-display: flex;
+    -o-display: flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    -o-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    -o-justify-content: center;
+    justify-content: center;
+    width: 600px;
+    max-width: 80%;
+    border-radius: 20px;
+    box-shadow: 5px 5px 20px #cbcdd3;
+    perspective: 40px;
+    padding: 20px;
 }
 
 .verify-email__container.success {
-background: linear-gradient(to bottom right, #B0DB7D 40%, #99DBB4 100%);  
+    background: linear-gradient(to bottom right, #B0DB7D 40%, #99DBB4 100%);  
 }
 
 .verify-email__container.fail {
-background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%);
+    background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%);
 }  
+
+.verify-email__icon {
+    font-size: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.verify-email__status {
+    font-size: 26px;
+    color: #FCFCFC;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-family: 'Roboto';
+    padding: 10px 0 15px 0;
+}
+
+.verify-email__sub-status {
+    font-family: 'Roboto';
+    font-size: 16px;
+    font-weight: 100;
+    color: #5e5e5e;
+    letter-spacing: 1px;
+}
