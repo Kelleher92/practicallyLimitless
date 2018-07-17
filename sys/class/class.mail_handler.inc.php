@@ -33,9 +33,7 @@
 			    $mail->AltBody = $verificationLink;
 
 			    $mail->send();
-			    echo 'Message has been sent';
 			} catch (Exception $e) {
-			    echo 'Message could not be sent.';
 			    echo 'Mailer Error: ' . $mail->ErrorInfo;
 			}
 		}	
@@ -65,9 +63,7 @@
 			    $mail->AltBody = $resetLink;
 
 			    $mail->send();
-			    echo 'Message has been sent';
 			} catch (Exception $e) {
-			    echo 'Message could not be sent.';
 			    echo 'Mailer Error: ' . $mail->ErrorInfo;
 			}
 		}
