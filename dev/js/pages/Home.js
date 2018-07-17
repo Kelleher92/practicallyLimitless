@@ -55,6 +55,9 @@ export default class Home extends Component {
                         <span style={{"height":"20px","width":"50px", "backgroundColor":"red", "display":"inline-block"}}></span>
                     </Link>
                     <span style={{"height":"20px","width":"50px", "backgroundColor":"blue", "display":"inline-block"}} onClick={this.registerCompany}></span>
+                    <Link to="/company-registration">
+                        <span style={{"height":"20px","width":"50px", "backgroundColor":"orange", "display":"inline-block"}}></span>
+                    </Link>
                 </div>
             </div>
 		);

@@ -17,6 +17,7 @@ import SecretPage from './pages/SecretPage';
 import PrivateRoute from './pages/PrivateRoute';
 import SayHello from './components/SayHello';
 import PreLoader from './components/PreLoader';
+import CompanyRegistration from './components/CompanyRegistration.js';
 
 class App extends Component {
     constructor() {
@@ -57,6 +58,9 @@ class App extends Component {
                         
                         <Route exact={true} path="/pl" render={() => (
                             <PreLoader />
+                        )}/>
+                        <Route exact={true} path="/company-registration" render={() => (
+                            <CompanyRegistration token={this.token}/>
                         )}/>
 
                         <PrivateRoute path="/secret-page" component={SecretPage} isLoggedIn={this.state.isLoggedIn} setLoggedOut={this.setLoggedOut}/>
