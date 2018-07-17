@@ -33,14 +33,17 @@ CREATE TABLE `company` (
   `companyId` varchar(42) NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(300) NOT NULL,
+  `password` varchar(64) NOT NULL,
   `address` varchar(200) NOT NULL,
   `geoCoor` varchar(100) NOT NULL,
   `status` varchar(100) NOT NULL,
-  `password` varchar(64) NOT NULL,
+  `isActivated` tinyint(4) NOT NULL,
   `tempActivationToken` varchar(64) NOT NULL,
   `tokenSent` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `isActivated` tinyint(4) NOT NULL,
-  `isActivationTokenExpired` tinyint(4) NOT NULL
+  `isActivationTokenExpired` tinyint(4) NOT NULL,
+  `tempResetToken` varchar(64) NOT NULL,
+  `resetTokenSent` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `isResetTokenExpired` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
