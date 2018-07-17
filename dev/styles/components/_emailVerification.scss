@@ -1,0 +1,42 @@
+body {
+    height: 100%;
+    width: 100%;
+  }
+  
+.pl-input--style-1 {
+
+}
+
+.pl-button--style-1 {
+
+    width: 200px;
+    height: 40px;
+    padding-top: 5px;
+    background: #FCFCFC;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 2px 2px 10px rgba(119, 119, 119, 0.5);
+    /* transition: all .5s ease-in-out; */
+
+}
+
+
+
+.verify-email__container {
+width: 600px;
+max-width: 80%;
+height: 400px;
+max-height: 50%;
+border-radius: 20px;
+box-shadow: 5px 5px 20px #cbcdd3;
+perspective: 40px;
+
+}
+
+.verify-email__container.success {
+background: linear-gradient(to bottom right, #B0DB7D 40%, #99DBB4 100%);  
+}
+
+.verify-email__container.fail {
+background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%);
+}  

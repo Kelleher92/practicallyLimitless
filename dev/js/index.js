@@ -2,7 +2,7 @@
  * @Author: Thomas Moran 
  * @Date: 2018-07-11 16:23:04 
  * @Last Modified by: Thomas Moran
- * @Last Modified time: 2018-07-12 09:58:59
+ * @Last Modified time: 2018-07-17 17:10:45
  */
 
 // ======== Dependencies ==========
@@ -13,8 +13,9 @@ import $ from 'jquery';
 
 // ========= Pages ===============
 import Home from './pages/Home'; 
-import SecretPage from './pages/SecretPage';
 import PrivateRoute from './pages/PrivateRoute';
+import VerifyEmail from './pages/VerifyEmail';
+import SecretPage from './pages/SecretPage';
 import SayHello from './components/SayHello';
 import PreLoader from './components/PreLoader';
 
@@ -57,6 +58,10 @@ class App extends Component {
                         
                         <Route exact={true} path="/pl" render={() => (
                             <PreLoader />
+                        )}/>
+                        
+                        <Route exact={true} path="/verify" render={() => (
+                            <VerifyEmail />
                         )}/>
 
                         <PrivateRoute path="/secret-page" component={SecretPage} isLoggedIn={this.state.isLoggedIn} setLoggedOut={this.setLoggedOut}/>
