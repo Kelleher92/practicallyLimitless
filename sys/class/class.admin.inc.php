@@ -278,7 +278,7 @@
 				throw new Exception('missing key info');
 				exit();
 			}
-			return $this->ROOT."/authentication.php#!/verify?email=".$email."&token=".$token;
+			return $this->ROOT."/verify?email=".$email."&token=".$token;
 		}
 
 		private function generateToken($email) {
@@ -290,7 +290,7 @@
 				throw new Exception('missing key info');
 				exit();
 			}
-			return $this->ROOT."/user-authentication.php#!/reset?email=".$email."&token=".$token;
+			return $this->ROOT."/reset?email=".$email."&token=".$token;
 		}
 
 		private function isActivationTokenExpired($sentTime, $limit) {
