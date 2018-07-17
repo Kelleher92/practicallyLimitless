@@ -17,7 +17,7 @@
 			    $mail->Host = 'smtp.sendgrid.net';  				  // Specify main server
 				$mail->SMTPAuth = true;                               // Enable SMTP authentication
 			    $mail->Username = 'apikey';                			  // username
-			    $mail->Password = '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';                     			 
+			    $mail->Password = getenv('SG_PASS');                     			 
 			    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 			    $mail->Port = 587;                                    // TCP port to connect to
 
@@ -49,7 +49,7 @@
 			    $mail->Host = 'smtp.sendgrid.net';  				  // Specify main server
 				$mail->SMTPAuth = true;                               // Enable SMTP authentication
 			    $mail->Username = 'apikey';                			  // username
-			    $mail->Password = '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';                     			  
+			    $mail->Password = getenv('SG_PASS');                     			  
 			    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 			    $mail->Port = 587;                                    // TCP port to connect to
 
