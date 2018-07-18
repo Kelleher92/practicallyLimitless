@@ -11,7 +11,7 @@
 			$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 			try {
 			    //Server settings
-			    $mail->SMTPDebug = false;                             // Disable verbose debug output
+			    $mail->SMTPDebug = 2;                             // Disable verbose debug output
 			    $mail->isSMTP();                                      // Set mailer to use SMTP
 			    $mail->Host = get_env('EMAIL_HOST');   		  // Specify main server
 			    $mail->SMTPAuth = true;                               // Enable SMTP authentication
@@ -40,7 +40,7 @@
 			$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 			try {
 			    //Server settings
-			    $mail->SMTPDebug = false;                             // Disable verbose debug output
+			    $mail->SMTPDebug = 2;                             // Disable verbose debug output
 			    $mail->isSMTP();                                      // Set mailer to use SMTP
 			    $mail->Host = get_env('EMAIL_HOST');   		  // Specify main server
 			    $mail->SMTPAuth = true;                               // Enable SMTP authentication
