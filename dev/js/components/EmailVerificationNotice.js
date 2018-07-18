@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
 export default class EmailVerificationNotice extends Component {
-
     render() {
-
         return(
             <div>
                 {this.props.verificationStatus ? (
@@ -42,4 +40,3 @@ export default class EmailVerificationNotice extends Component {
         );
     }
 }
-
