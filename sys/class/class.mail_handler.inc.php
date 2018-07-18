@@ -2,7 +2,6 @@
 	require 'PHPMailer/src/PHPMailer.php';
 	require 'PHPMailer/src/SMTP.php';
 	require 'PHPMailer/src/Exception.php';
-	require 'fpdf181/fpdf.php';
 	
 	use PHPMailer\PHPMailer\PHPMailer;
 	use PHPMailer\PHPMailer\Exception;
@@ -29,6 +28,7 @@
 			    $mail->Subject = 'Please click below to verify your identity';
 			    $mail->Body = "<a href =".$verificationLink.">".$verificationLink."</a>";
 			    $mail->AltBody = $verificationLink;
+				
 			    $mail->send();
 			    echo 'Message has been sent';
 			} catch (Exception $e) {
@@ -58,6 +58,7 @@
 			    $mail->Subject = 'Please click below to reset your password';
 			    $mail->Body = "<a href =".$resetLink.">".$resetLink."</a>";
 			    $mail->AltBody = $resetLink;
+				
 			    $mail->send();
 			    echo 'Message has been sent';
 			} catch (Exception $e) {
