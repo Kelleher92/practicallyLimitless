@@ -5,8 +5,7 @@ import qs from 'query-string';
 import $ from 'jquery';
 
 export default class Verify extends Component {
-    
-    constructor(props) {
+        constructor(props) {
         super(props);
         
         // Get query params from URL
@@ -26,7 +25,6 @@ export default class Verify extends Component {
     }
 
     componentDidMount() {
-
         // if query params are present, begin verification check.
         if(this.state.email && this.state.token) {   
             this.checkVerification();
@@ -38,11 +36,10 @@ export default class Verify extends Component {
     }
     
     checkVerification() {
-
         let me = this;
         let tkn = $('#session-token').val();
 
-        setTimeout(function(){ 
+        setTimeout(function() { 
             $.ajax({
                 method: 'POST',
                 data: {
@@ -72,8 +69,6 @@ export default class Verify extends Component {
             });
             
         }, 500);
-
-
     }
 
     render() {
