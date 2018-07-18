@@ -29,7 +29,7 @@ body{
 	background-color: #fff;
 }
 
-a {
+a{
   color: #000;
   cursor: pointer;
   text-decoration: none;
@@ -46,8 +46,7 @@ a {
   100% { transform: rotate(360deg); }
 }
 
-
-.pl-button--style-1 {
+.pl-button--style-1{
     width: 200px;
     height: 40px;
     line-height: 40px;
@@ -63,7 +62,7 @@ a {
     letter-spacing: 5px;
 }
 
-.pl-button--style-1:hover {
+.pl-button--style-1:hover{
     background: #efefef;
     transform: scale(1.02);
     transition: all .3s ease-in-out;
