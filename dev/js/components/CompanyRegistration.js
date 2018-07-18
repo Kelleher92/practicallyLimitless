@@ -1,4 +1,5 @@
  import React, {Component} from 'react';
+ import $ from 'jquery';
 
  export default class CompanyRegistration extends Component {
     constructor() {
@@ -20,18 +21,16 @@
 
     isValidEmail() {
         var emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        
         return emailPattern.test(this.state.CompanyEmail);
     }
 
     isValidPassword() {
         var passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
-        
         return passwordPattern.test(this.state.CompanyPassword);
     }
 
     passwordRepeatedCorrectly() {
-        return this.state.CompanyPassword === this.state.CompanyPasswordCheck;
+        return this.state.CompanyPassword == this.state.CompanyPasswordCheck;
     }
 
     containsValue(str) {
@@ -50,18 +49,23 @@
         return this.addressIsValid() && this.nameIsValid() && this.passwordRepeatedCorrectly() && this.isValidPassword() && this.isValidEmail();
     }
    
-    enableSubmitButton(){
-
-    }
-   
     onSubmit() {
-        console.log('The button should be submittable' + this.isSubmitable());
+           $.ajax({
+            method: 'POST',
+            data: {
+                token: this.props.token,
+                action: 'registerCompany',
+                data: JSON.stringify({name: this.state.CompanyName, email: this.state.CompanyEmail, address: this.state.CompanyAddress, password: this.state.CompanyPassword})
+            },
+            url: 'public/process.php',
+            success: function(res) {
+                console.log(res);
+            },
+            error: function(res) {
+                console.log(res);
+            }
+        });
     }
-
-    formIsSubmitable() {
-
-    }
-
 
     render() {
         return (
@@ -72,6 +76,12 @@
                         Company Details
                     </div>
                     <div className="form-input__section">
+                         <input id="CompanyName" type="text" name="CompanyName" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("CompanyName", e)}/>
+                     </div>
+                     <div className="form-input__section">
+                         <input id="CompanyAddress" type="text" name="CompanyAddress" placeholder="Company Address" className="form-input__value" onChange={(e) => this.handleChange("CompanyAddress", e)}/>
+                     </div>
+                    <div className="form-input__section">
                          <input id="CompanyEmail" type="email" name="CompanyEmail" placeholder="Email Address" className="form-input__value" onChange={(e) => this.handleChange("CompanyEmail", e)}/>
                      </div>
                        <div className="form-input__section">
@@ -81,7 +91,7 @@
                          <input id="CompanyPasswordCheck" type="password" name="CompanyPasswordCheck" placeholder="Password Verification" className="form-input__value" onChange={(e) => this.handleChange("CompanyPasswordCheck", e)}/>
                      </div>
                  </div>
-                <button className="form__submit-button" onClick={this.onSubmit} disabled={this.isSubmitable}>Submit Company Details</button>               
+                <button className="form__submit-button" onClick={this.onSubmit} disabled={!this.isSubmitable()}>Submit Company Details</button>               
             </div>
         );
     }
