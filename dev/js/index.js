@@ -2,7 +2,7 @@
  * @Author: Thomas Moran 
  * @Date: 2018-07-11 16:23:04 
  * @Last Modified by: Thomas Moran
- * @Last Modified time: 2018-07-17 23:55:13
+ * @Last Modified time: 2018-07-18 12:53:38
  */
 
 // ======== Dependencies ==========
@@ -52,15 +52,17 @@ class App extends Component {
             <Router >
     			<div>
                     <Switch>
-                        <Route exact={true} path="/(|home)" render={() => (
-                            <Home token={this.token}/>
+                        <Route exact={true} path="/(|home)" render={(props) => (
+                            <Home {...props} token={this.token} />
                         )}/>
                         
                         <Route exact={true} path="/pl" render={() => (
-                            <PreLoader />
+                            <PreLoader  />
                         )}/>
-                        
-                        <Route exact={true} path="/verify" component={Verify}/>
+
+                        <Route exact={true} path="/verify" render={(props) => (
+                            <Verify {...props} token={this.token} />
+                        )} />
 
                         <PrivateRoute path="/secret-page" component={SecretPage} isLoggedIn={this.state.isLoggedIn} setLoggedOut={this.setLoggedOut}/>
                     </Switch>
