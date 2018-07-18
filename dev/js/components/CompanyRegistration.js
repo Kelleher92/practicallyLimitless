@@ -38,17 +38,30 @@
         return !(str === "");
     }
 
-    formIsSubmitable(){
+   nameIsValid() {
+        return this.containsValue(this.state.CompanyName);
+    }
+   
+    addressIsValid() {
+        return this.containsValue(this.state.CompanyAddress);
+    }
+   
+    isSubmitable() {
+        return this.addressIsValid() && this.nameIsValid() && this.passwordRepeatedCorrectly() && this.isValidPassword() && this.isValidEmail();
+    }
+   
+    enableSubmitButton(){
 
     }
-
+   
     onSubmit() {
-        console.log('Got into Submit ');
-        console.log('The email is valid -- ' + this.isValidEmail(this.state.CompanyEmail));
-        console.log('The password is valid -- ' +this.isValidPassword(this.state.CompanyPassword));
-        console.log('The passwords are the same -- ' +this.passwordRepeatedCorrectly(this.state.CompanyPassword));
-        console.log('The value isnt blank -- ' +this.containsValue(this.state.CompanyName));
+        console.log('The button should be submittable' + this.isSubmitable());
     }
+
+    formIsSubmitable() {
+
+    }
+
 
     render() {
         return (
@@ -59,23 +72,16 @@
                         Company Details
                     </div>
                     <div className="form-input__section">
-                        <input id="CompanyName" type="text" name="CompanyName" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("CompanyName", e)}/>
-                    </div>
-                    <div className="form-input__section">
-                        <input id="CompanyAddress" type="text" name="CompanyAddress" placeholder="Company Address" className="form-input__value" onChange={(e) => this.handleChange("CompanyAddress", e)}/>
-                    </div>
-                    <div className="form-input__section">
-                        <input id="CompanyEmail" type="email" name="CompanyEmail" placeholder="Email Address" className="form-input__value" onChange={(e) => this.handleChange("CompanyEmail", e)}/>
-                    </div>
-                    <div className="form-input__section">
-                        <input id="CompanyPassword" type="password" name="CompanyPassword" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("CompanyPassword", e)}/>
-                    </div>
-                    <div className="form-input__section">
-                        <input id="CompanyPasswordCheck" type="password" name="CompanyPasswordCheck" placeholder="Password Verification" className="form-input__value" onChange={(e) => this.handleChange("CompanyPasswordCheck", e)}/>
-                    </div>
-                </div>
-                <button className="form__submit-button" onClick={this.onSubmit} disabled="true">Submit Company Details</button>
-                 
+                         <input id="CompanyEmail" type="email" name="CompanyEmail" placeholder="Email Address" className="form-input__value" onChange={(e) => this.handleChange("CompanyEmail", e)}/>
+                     </div>
+                       <div className="form-input__section">
+                         <input id="CompanyPassword" type="password" name="CompanyPassword" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("CompanyPassword", e)}/>
+                     </div>
+                     <div className="form-input__section">
+                         <input id="CompanyPasswordCheck" type="password" name="CompanyPasswordCheck" placeholder="Password Verification" className="form-input__value" onChange={(e) => this.handleChange("CompanyPasswordCheck", e)}/>
+                     </div>
+                 </div>
+                <button className="form__submit-button" onClick={this.onSubmit} disabled={this.isSubmitable}>Submit Company Details</button>               
             </div>
         );
     }
