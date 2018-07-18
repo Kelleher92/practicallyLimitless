@@ -13,12 +13,12 @@
 			    //Server settings
 			    $mail->SMTPDebug = false;                             // Disable verbose debug output
 			    $mail->isSMTP();                                      // Set mailer to use SMTP
-			    $mail->Host = 'smtp.sendgrid.net';  		  // Specify main server
+			    $mail->Host = get_env('EMAIL_HOST');   		  // Specify main server
 			    $mail->SMTPAuth = true;                               // Enable SMTP authentication
-			    $mail->Username = 'apikey';                		  // Username
-			    $mail->Password = get_env('SG_PASS');                 // Password    			 
+			    $mail->Username = get_env('EMAIL_UNAME');             // Username
+			    $mail->Password = get_env('EMAIL_PASS');              // Password    			 
 			    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-			    $mail->Port = 587;                                    // TCP port to connect to
+			    $mail->Port = get_env('EMAIL_PORT');                  // TCP port to connect to
 			    //Recipients
 			    $mail->setFrom('iankelleher92@gmail.com', 'Mailer');
 			    $mail->addAddress($email);              
@@ -42,12 +42,12 @@
 			    //Server settings
 			    $mail->SMTPDebug = false;                             // Disable verbose debug output
 			    $mail->isSMTP();                                      // Set mailer to use SMTP
-			    $mail->Host = 'smtp.sendgrid.net';  		  // Specify main server
+			    $mail->Host = get_env('EMAIL_HOST');   		  // Specify main server
 			    $mail->SMTPAuth = true;                               // Enable SMTP authentication
-			    $mail->Username = 'apikey';                		  // Username
-			    $mail->Password = get_env('SG_PASS');                 // Password                    			  
+			    $mail->Username = get_env('EMAIL_UNAME');             // Username
+			    $mail->Password = get_env('EMAIL_PASS');              // Password    			 
 			    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-			    $mail->Port = 587;                                    // TCP port to connect to
+			    $mail->Port = get_env('EMAIL_PORT');                  // TCP port to connect to
 			    //Recipients
 			    $mail->setFrom('iankelleher92@gmail.com', 'Mailer');
 			    $mail->addAddress($email);              
