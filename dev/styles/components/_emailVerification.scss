@@ -1,5 +1,4 @@
-
-.verify-email__container {
+.verify-email__container{
     -webkit-display: flex;
     -moz-display: flex;
     -ms-display: flex;
@@ -28,21 +27,21 @@
     padding: 20px;
 }
 
-.verify-email__container.success {
+.verify-email__container.success{
     background: linear-gradient(to bottom right, #B0DB7D 40%, #99DBB4 100%);  
 }
 
-.verify-email__container.fail {
+.verify-email__container.fail{
     background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%);
 }  
 
-.verify-email__icon {
+.verify-email__icon{
     font-size: 100px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.verify-email__status {
+.verify-email__status{
     font-size: 1.625rem;
     color: $base-off-white;
     font-weight: 700;
@@ -51,7 +50,7 @@
     padding: 10px 0 15px 0;
 }
 
-.verify-email__sub-status {
+.verify-email__sub-status{
     font-size: 1rem;
     font-weight: 100;
     color: #5e5e5e;
