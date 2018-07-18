@@ -1,4 +1,5 @@
  import React, {Component} from 'react';
+ import $ from 'jquery';
 
  export default class CompanyRegistration extends Component {
     constructor() {
@@ -49,12 +50,21 @@
     }
    
     onSubmit() {
-        console.log('The button should be submittable' + this.isSubmitable());
-        console.log('Name is valid -- '+this.nameIsValid());
-        console.log('Address is valid -- '+this.addressIsValid());
-        console.log('Is valid email -- '+this.isValidEmail());
-        console.log('Is valid passsword -- '+this.isValidPassword());
-        console.log('Is the same password -- '+this.passwordRepeatedCorrectly());
+           $.ajax({
+            method: 'POST',
+            data: {
+                token: this.props.token,
+                action: 'registerCompany',
+                data: JSON.stringify({name: this.state.CompanyName, email: this.state.CompanyEmail, address: this.state.CompanyAddress, password: this.state.CompanyPassword})
+            },
+            url: 'public/process.php',
+            success: function(res) {
+                console.log(res);
+            },
+            error: function(res) {
+                console.log(res);
+            }
+        });
     }
 
     render() {
