@@ -1,17 +1,8 @@
-/*
- * @Author: Thomas Moran 
- * @Date: 2018-07-11 16:23:04 
- * @Last Modified by: Thomas Moran
- * @Last Modified time: 2018-07-12 09:58:59
- */
-
-// ======== Dependencies ==========
 import React, { Component } from 'react';
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, browserHistory, Route, Switch } from 'react-router-dom';
 import $ from 'jquery';
 
-// ========= Pages ===============
 import Home from './pages/Home'; 
 import SecretPage from './pages/SecretPage';
 import PrivateRoute from './pages/PrivateRoute';

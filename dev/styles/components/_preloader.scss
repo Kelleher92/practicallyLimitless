@@ -1,22 +1,15 @@
-/*
- * @Author: Thomas Moran 
- * @Date: 2018-07-11 16:29:04 
- * @Last Modified by: Thomas Moran
- * @Last Modified time: 2018-07-11 16:40:24
- */
-
 $base-color: #ED3760;
 
-@-webkit-keyframes orbit {
-    from {
+@-webkit-keyframes orbit{
+    from{
         -webkit-transform: rotate(0deg)
     }
-    to {
+    to{
         -webkit-transform: rotate(360deg)
     }
 }
 
-.preloader-lane {
+.preloader-lane{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,7 +24,7 @@ $base-color: #ED3760;
     -webkit-animation-duration: 1s;
 }
 
-.preloader-lane:before {
+.preloader-lane:before{
     content: "";
     height: 15px;
     width: 15px;
@@ -41,7 +34,7 @@ $base-color: #ED3760;
     border-radius: 7.5px;
 }
 
-.preloader-inside {
+.preloader-inside{
     height: 60px;
     width: 60px;
     background-color: #fff;
