@@ -1,10 +1,3 @@
-/*
- * @Author: Thomas Moran 
- * @Date: 2018-07-11 16:45:09 
- * @Last Modified by: Thomas Moran
- * @Last Modified time: 2018-07-11 17:51:16
- */
-
 import React, { Component } from "react";
 import { Route, Redirect, withRouter } from "react-router-dom";
 import $ from 'jquery';

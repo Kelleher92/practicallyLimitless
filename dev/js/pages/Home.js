@@ -1,15 +1,6 @@
-/*
- * @Author: Thomas Moran 
- * @Date: 2018-07-11 16:22:49 
- * @Last Modified by: Thomas Moran
- * @Last Modified time: 2018-07-12 10:09:49
- */
-
-// ========= Dependencies =========
 import React, { Component } from 'react';
 import $ from 'jquery';
 
-// ========= Components =========
 import SayHello from '../components/SayHello';
 import PreLoader from '../components/PreLoader';
 import { Link } from 'react-router-dom';
@@ -51,10 +42,16 @@ export default class Home extends Component {
                     <Link to="/pl">
                         <span style={{"height":"20px","width":"50px", "backgroundColor":"green", "display":"inline-block"}}></span>
                     </Link>
+
                     <Link to="/secret-page">
                         <span style={{"height":"20px","width":"50px", "backgroundColor":"red", "display":"inline-block"}}></span>
                     </Link>
+
                     <span style={{"height":"20px","width":"50px", "backgroundColor":"blue", "display":"inline-block"}} onClick={this.registerCompany}></span>
+
+                    <Link to="/company-registration">
+                        <span style={{"height":"20px","width":"50px", "backgroundColor":"orange", "display":"inline-block"}}></span>
+                    </Link>
                 </div>
             </div>
 		);

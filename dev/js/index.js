@@ -2,22 +2,23 @@
  * @Author: Thomas Moran 
  * @Date: 2018-07-11 16:23:04 
  * @Last Modified by: Thomas Moran
- * @Last Modified time: 2018-07-18 12:53:38
+ * @Last Modified time: 2018-07-18 13:12:23
  */
 
 // ======== Dependencies ==========
+
 import React, { Component } from 'react';
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, browserHistory, Route, Switch } from 'react-router-dom';
 import $ from 'jquery';
 
-// ========= Pages ===============
 import Home from './pages/Home'; 
 import PrivateRoute from './pages/PrivateRoute';
 import Verify from './pages/Verify';
 import SecretPage from './pages/SecretPage';
 import SayHello from './components/SayHello';
 import PreLoader from './components/PreLoader';
+import CompanyRegistration from './components/CompanyRegistration.js';
 
 class App extends Component {
     constructor() {
@@ -58,6 +59,9 @@ class App extends Component {
                         
                         <Route exact={true} path="/pl" render={() => (
                             <PreLoader  />
+                        )}/>
+                        <Route exact={true} path="/company-registration" render={() => (
+                            <CompanyRegistration token={this.token}/>
                         )}/>
 
                         <Route exact={true} path="/verify" render={(props) => (
