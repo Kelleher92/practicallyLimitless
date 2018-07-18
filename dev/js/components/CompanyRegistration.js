@@ -24,23 +24,44 @@
     handleChange(name, e){
         this.setState({ [name]: e.target.value });
     }
+    isValidEmail(){
+        var emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return emailPattern.test(this.state.CompanyEmail);
+    }
+    isValidPassword(){
+        var passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+        return passwordPattern.test(this.state.CompanyPassword);
+    }
+    passwordRepeatedCorrectly(){
+        return this.state.CompanyPassword === this.state.CompanyPasswordCheck;
+    }
+    containsValue(str){
+        return !(str === "");
+    }
+    formIsSubmitable(){
+
+    }
     onSubmit(){
         console.log('Got into Submit ');
-        $.ajax({
-            method: 'POST',
-            data: {
-                token: this.props.token,
-                action: 'registerCompany',
-                data: JSON.stringify({name: this.state.CompanyName, email: this.state.CompanyName, address: this.state.CompanyAddress, password: this.state.CompanyPassword})
-            },
-            url: 'public/process.php',
-            success: function(res) {
-                console.log(res);
-            },
-            error: function(res) {
-                console.log(res);
-            }
-        });
+        console.log('The email is valid -- ' + this.isValidEmail(this.state.CompanyEmail));
+        console.log('The password is valid -- ' +this.isValidPassword(this.state.CompanyPassword));
+        console.log('The passwords are the same -- ' +this.passwordRepeatedCorrectly(this.state.CompanyPassword));
+         console.log('The value isnt blank -- ' +this.containsValue(this.state.CompanyName));
+        // $.ajax({
+        //     method: 'POST',
+        //     data: {
+        //         token: this.props.token,
+        //         action: 'registerCompany',
+        //         data: JSON.stringify({name: this.state.CompanyName, email: this.state.CompanyName, address: this.state.CompanyAddress, password: this.state.CompanyPassword})
+        //     },
+        //     url: 'public/process.php',
+        //     success: function(res) {
+        //         console.log(res);
+        //     },
+        //     error: function(res) {
+        //         console.log(res);
+        //     }
+        // });
     }
 
     render() {
@@ -67,7 +88,7 @@
                          <input id="CompanyPasswordCheck" type="password" name="CompanyPasswordCheck" placeholder = "Password Verification" className="form-input__value" onChange={(e) => this.handleChange("CompanyPasswordCheck", e)}/>
                      </div>
                  </div>
-                <button className="form__submit-button" onClick={this.onSubmit}>Submit Company Details</button>
+                <button className="form__submit-button" onClick={this.onSubmit} disabled="true">Submit Company Details</button>
                  
              </div>
         );
