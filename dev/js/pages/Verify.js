@@ -36,8 +36,7 @@ export default class Verify extends Component {
             });
         }
     }
-
-
+    
     checkVerification() {
 
         let me = this;
@@ -77,9 +76,7 @@ export default class Verify extends Component {
 
     }
 
-
     render() {
-
         return(
             <div className="verify-page__container">
                 {this.state.checkComplete ? (
@@ -91,4 +88,3 @@ export default class Verify extends Component {
         );
     }
 }
-
