@@ -12,10 +12,12 @@
             CompanyPasswordCheck: ''
         };
 
+        //this.registerCompany = this.registerCompany.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     handleChange(name, e) {
+        console.log('Changes are innn');
         this.setState({[name]: e.target.value});
     }
 
@@ -50,7 +52,14 @@
     }
    
     onSubmit() {
-           $.ajax({
+     this.registerCompany();
+     //set fields as read only
+        // loading icon for a couple of seconds
+        //direct back to homepage
+    }
+
+    registerCompany(){
+        $.ajax({
             method: 'POST',
             data: {
                 token: this.props.token,
@@ -90,8 +99,12 @@
                      <div className="form-input__section">
                          <input id="CompanyPasswordCheck" type="password" name="CompanyPasswordCheck" placeholder="Password Verification" className="form-input__value" onChange={(e) => this.handleChange("CompanyPasswordCheck", e)}/>
                      </div>
+                     <div className="form-submission__section">
+                            <button className="form__submit-button" onClick={this.onSubmit} disabled={!this.isSubmitable()}> Submit </button> 
+                            <button className="form__cancel-button" onClick={this.onCancel} disabled="false"> Cancel </button> 
+                     </div>    
                  </div>
-                <button className="form__submit-button" onClick={this.onSubmit} disabled={!this.isSubmitable()}>Submit Company Details</button>               
+                          
             </div>
         );
     }

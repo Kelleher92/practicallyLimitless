@@ -1,31 +1,49 @@
 .form-header{
-    padding: 25px 25px 25px 25px;
-    font-size: 40px
+    font-size: 40px;
+    margin: 0 auto;
+    width: 500px;
 }
 
 .form-input__heading{
-    padding: 15px 15px 15px 25px;
-    font-size: 30px
+    font-size: 30px;
+    margin: 0 auto;
+    width: 300px;
 }
 
 .form-input__section{
-    padding: 15px 15px 15px 25px
+    padding-top: 15px;
+    margin: 0 auto;
+    width: 300px;
 }
 
 .form-input__label{
     font-size: 25px;
-    padding-right: 15px
+    padding-right: 15px;
 }
 
 .form-input__value{
-    font-size: 25px
+    font-size: 25px;
 }
 
+.form-submission__section {
+    padding-top: 15px;
+    padding-left: 200px;
+    margin: 0 auto;
+}
 .form__submit-button{
-    padding: 15px 15px 15px 25px;
-    font-size: 25px;
-    background-color: #4CAF50; 
-    color: white;
-    text-align: center;
-    cursor: pointer
+   width:275px; 
+   height:40px;  
+   background-color: #676c75; 
+   color: white;
+   font-size: 25px;
+   border-radius: 10px; 
+}
+.form__cancel-button {
+    width:275px; 
+   height:40px;  
+   background-color: #d80d28; 
+   color: white;
+   font-size: 25px;
+   border-radius: 10px; 
+
 }
