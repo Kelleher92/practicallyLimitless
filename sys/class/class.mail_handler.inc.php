@@ -14,12 +14,12 @@
 			    //Server settings
 			    $mail->SMTPDebug = 2;                             // Enable verbose debug output
 			    $mail->isSMTP();                                      // Set mailer to use SMTP
-			    $mail->Host = getenv('MAILGUN_SMTP_SERVER');  				  // Specify main server
+			    $mail->Host = getenv('MAILTRAP_SMTP_SERVER');  				  // Specify main server
 				$mail->SMTPAuth = true;                               // Enable SMTP authentication
-			    $mail->Username = getenv('MAILGUN_SMTP_LOGIN');                			  // Username
-			    $mail->Password = getenv('MAILGUN_SMTP_PASSWORD');                  // Password   			 
+			    $mail->Username = getenv('MAILTRAP_SMTP_LOGIN');                			  // Username
+			    $mail->Password = getenv('MAILTRAP_SMTP_PASSWORD');                  // Password   			 
 			    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-			    $mail->Port = getenv('MAILGUN_SMTP_PORT');                                    // TCP port to connect to
+			    $mail->Port = getenv('MAILTRAP_SMTP_PORT');                                    // TCP port to connect to
 
 			    //Recipients
 			    $mail->setFrom('iankelleher92@gmail.com', 'Mailer');
@@ -44,12 +44,12 @@
 			    //Server settings
 			    $mail->SMTPDebug = 2;                             // Enable verbose debug output
 			    $mail->isSMTP();                                      // Set mailer to use SMTP
-			    $mail->Host = getenv('MAILGUN_SMTP_SERVER');  				  // Specify main server
+			    $mail->Host = getenv('MAILTRAP_SMTP_SERVER');  				  // Specify main server
 				$mail->SMTPAuth = true;                               // Enable SMTP authentication
-			    $mail->Username = getenv('MAILGUN_SMTP_LOGIN');                			  // Username
-			    $mail->Password = getenv('MAILGUN_SMTP_PASSWORD');                  // Password   			  
+			    $mail->Username = getenv('MAILTRAP_SMTP_LOGIN');                			  // Username
+			    $mail->Password = getenv('MAILTRAP_SMTP_PASSWORD');                  // Password   			  
 			    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-			    $mail->Port = getenv('MAILGUN_SMTP_PORT');                                    // TCP port to connect to
+			    $mail->Port = getenv('MAILTRAP_SMTP_PORT');                                    // TCP port to connect to
 
 			    //Recipients
 			    $mail->setFrom('iankelleher92@gmail.com', 'Mailer');
