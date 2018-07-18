@@ -162,22 +162,21 @@
 			$token = $this->sanitizeValue($token);
 
 			$company = $this->fetchCompanyForActivation($email, $token);
+			
+			$res = new Response_Obj();
 
 			if(!isset($company) || $company['isActivationTokenExpired'] || $this->isActivationTokenExpired($company['tokenSent'], $this->_expirationPeriod)) {
-				echo 'Session expired.';
-
-				return new Response_Obj(array(
-					'message' => 'Session expired.',
-					'responseCode' => 400
-				));
-
-				exit('Session expired.');
+				$res->responseCode = 400;
+				$res->message = "Session expired.";
 			} else {
 				$sql = "UPDATE `company` SET `isActivated` = 1, `isActivationTokenExpired` = 1 WHERE `email` = '$email' and tempActivationToken = '$token'";
-
 				$this->query($sql);
-				echo "Company activated.";
+
+				$res->responseCode = 200;
+				$res->message = "Session activated.";
 			}
+
+			echo json_encode($res);
 		}
 
 		public function companyForgotPassword($email) {

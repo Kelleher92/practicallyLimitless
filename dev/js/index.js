@@ -4,8 +4,9 @@ import { BrowserRouter as Router, browserHistory, Route, Switch } from 'react-ro
 import $ from 'jquery';
 
 import Home from './pages/Home'; 
-import SecretPage from './pages/SecretPage';
 import PrivateRoute from './pages/PrivateRoute';
+import Verify from './pages/Verify';
+import SecretPage from './pages/SecretPage';
 import SayHello from './components/SayHello';
 import PreLoader from './components/PreLoader';
 import CompanyRegistration from './components/CompanyRegistration.js';
@@ -43,16 +44,20 @@ class App extends Component {
             <Router >
     			<div>
                     <Switch>
-                        <Route exact={true} path="/(|home)" render={() => (
-                            <Home token={this.token}/>
+                        <Route exact={true} path="/(|home)" render={(props) => (
+                            <Home {...props} token={this.token} />
                         )}/>
                         
                         <Route exact={true} path="/pl" render={() => (
-                            <PreLoader />
+                            <PreLoader  />
                         )}/>
                         <Route exact={true} path="/company-registration" render={() => (
                             <CompanyRegistration token={this.token}/>
                         )}/>
+
+                        <Route exact={true} path="/verify" render={(props) => (
+                            <Verify {...props} token={this.token} />
+                        )} />
 
                         <PrivateRoute path="/secret-page" component={SecretPage} isLoggedIn={this.state.isLoggedIn} setLoggedOut={this.setLoggedOut}/>
                     </Switch>

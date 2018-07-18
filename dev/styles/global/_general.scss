@@ -29,6 +29,13 @@ body{
 	background-color: #fff;
 }
 
+a{
+  color: #000;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
 @-webkit-keyframes spin{
   0% { -webkit-transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); }
@@ -37,4 +44,26 @@ body{
 @keyframes spin{
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.pl-button--style-1{
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    background: $base-off-white;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 2px 2px 10px rgba(119, 119, 119, 0.5);
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 5px;
+}
+
+.pl-button--style-1:hover{
+    background: #efefef;
+    transform: scale(1.02);
+    transition: all .3s ease-in-out;
 }
