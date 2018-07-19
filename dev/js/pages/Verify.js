@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import EmailVerificationNotice from '../components/EmailVerificationNotice';
+import VerificationNotice from '../components/VerificationNotice';
 import PreLoader from '../components/PreLoader';
 import qs from 'query-string';
 import $ from 'jquery';
@@ -18,7 +18,11 @@ export default class Verify extends Component {
             email: userEmail,
             token: userToken,
             verificationStatus: false,
-            checkComplete: false
+            checkComplete: false,
+            title: "", 
+            subTitle: "",
+            linkText: "",
+            linkLocation: ""
         }
         
         this.checkVerification = this.checkVerification.bind(this);
@@ -30,20 +34,23 @@ export default class Verify extends Component {
             this.checkVerification();
         } else {
             this.setState({
-                checkComplete: true
+                checkComplete: true,
+                title: "Error!", 
+                subTitle: "Oops...I think you have come here by mistake.",
+                linkText: "Return Home",
+                linkLocation: "/home"
             });
         }
     }
     
     checkVerification() {
         let me = this;
-        let tkn = $('#session-token').val();
 
         setTimeout(function() { 
             $.ajax({
                 method: 'POST',
                 data: {
-                    token: tkn,
+                    token: me.props.token,
                     action: 'activateCompany',
                     data: JSON.stringify({email: me.state.email, token: me.state.token})
                 },
@@ -52,11 +59,19 @@ export default class Verify extends Component {
                     if(res.responseCode === 200) {
                         me.setState({
                             verificationStatus: true,
-                            checkComplete: true
+                            checkComplete: true,
+                            title: "Success!", 
+                            subTitle: "You can now proceed to login.",
+                            linkText: "Login",
+                            linkLocation: "/home"
                         });
                     } else {
                         me.setState({
-                            checkComplete: true
+                            checkComplete: true,
+                            title: "Error!", 
+                            subTitle: "There was a problem with your verification. Please register again.",
+                            linkText: "Register",
+                            linkLocation: "/home"
                         });
                     }
                     
@@ -75,7 +90,12 @@ export default class Verify extends Component {
         return(
             <div className="verify-page__container">
                 {this.state.checkComplete ? (
-                    <EmailVerificationNotice verificationStatus={this.state.verificationStatus}/>
+                    <VerificationNotice 
+                        verificationStatus={this.state.verificationStatus} 
+                        title={this.state.title} 
+                        subTitle={this.state.subTitle}  
+                        linkText={this.state.linkText}
+                        linkLocation={this.state.linkLocation} />
                 ) : (
                     <PreLoader />
                 )}
