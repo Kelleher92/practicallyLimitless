@@ -118,7 +118,7 @@
 
 			$sql = "SELECT `email` FROM `company` WHERE `email` = '$email' LIMIT 1";
 
-			$user = $this->query($sql);
+			$user = $this->query($sql)[0];
 
 			$res = new Response_Obj();
 
@@ -178,7 +178,7 @@
 				$res->message = "Session expired.";
 			} else {
 				$sql = "UPDATE `company` SET `isActivated` = 1, `isActivationTokenExpired` = 1 WHERE `email` = '$email' and tempActivationToken = '$token'";
-				$this->query($sql);
+				$results = $this->query($sql);
 
 				$res->responseCode = 200;
 				$res->message = "Company activated.";
@@ -271,7 +271,7 @@
 				$res->responseCode = 400;
 			} else {
 				$sql = "UPDATE `company` SET `isResetTokenExpired` = 1 WHERE `email` = '$email' and `tempResetToken` = '$token'";
-				$this->query($sql);
+				$results = $this->query($sql);
 				$res->message = 'Company and token valid.';
 				$res->responseCode = 200;
 			}
