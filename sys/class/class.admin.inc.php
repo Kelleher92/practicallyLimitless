@@ -178,7 +178,7 @@
 				$res->message = "Session expired.";
 			} else {
 				$sql = "UPDATE `company` SET `isActivated` = 1, `isActivationTokenExpired` = 1 WHERE `email` = '$email' and tempActivationToken = '$token'";
-				$results = $this->query($sql);
+				$this->insertQuery($sql);
 
 				$res->responseCode = 200;
 				$res->message = "Company activated.";
@@ -271,7 +271,7 @@
 				$res->responseCode = 400;
 			} else {
 				$sql = "UPDATE `company` SET `isResetTokenExpired` = 1 WHERE `email` = '$email' and `tempResetToken` = '$token'";
-				$results = $this->query($sql);
+				$this->insertQuery($sql);
 				$res->message = 'Company and token valid.';
 				$res->responseCode = 200;
 			}
@@ -356,6 +356,16 @@
 				$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				$stmt->closeCursor();
 				return $results;
+			} catch (Exception $e) {
+				die ($e->getMessage());
+			}
+		}
+
+		public function insertQuery($q) {
+			try {
+				$stmt = $this->db->prepare($q);
+				$stmt->execute();
+				$stmt->closeCursor();
 			} catch (Exception $e) {
 				die ($e->getMessage());
 			}
