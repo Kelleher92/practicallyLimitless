@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import $ from 'jquery';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { isValidEmail, isValidPassword, isValidString } from '../helpers/utils.js';
+import $ from 'jquery';
 
 class CompanyRegistration extends Component {
     constructor(props) {
@@ -65,7 +65,8 @@ class CompanyRegistration extends Component {
             },
             url: 'public/process.php',
             success: function(res) {
-                console.log(res);
+                res = JSON.parse(res);
+                console.log(res.message);
             },
             error: function(res) {
                 console.log(res);

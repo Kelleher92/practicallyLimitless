@@ -17,13 +17,15 @@
 		else if($action === 'registerCompany') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
-			$admin->registerCompany($data->name, $data->email, $data->address, $data->password);
+			$res = $admin->registerCompany($data->name, $data->email, $data->address, $data->password);
+			echo json_encode($res);
 		} 
 
 		else if($action === 'loginCompany') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
-			$admin->loginCompany($data->email, $data->password);	
+			$res = $admin->loginCompany($data->email, $data->password);	
+			echo json_encode($res);
 		}	
 
 		else if($action === 'logoutCompany') {
@@ -34,19 +36,22 @@
 		else if($action === 'companyVerifyEmail') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
-			$admin->companyVerifyEmail($data->email);			
+			$res = $admin->companyVerifyEmail($data->email);			
+			echo json_encode($res);
 		} 	
 
 		else if($action === 'activateCompany') { 
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
-			$admin->activateCompany($data->email, $data->token);		
+			$res = $admin->activateCompany($data->email, $data->token);		
+			echo json_encode($res);
 		} 
 			
 		else if($action === 'companyForgotPassword') { 
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
-			$admin->companyForgotPassword($data->email);		
+			$res = $admin->companyForgotPassword($data->email);		
+			echo json_encode($res);
 		} 
 
 		else if($action === 'resetCompany') {
@@ -59,7 +64,8 @@
 		else if($action === 'companyResetPassword') {
 			$data = json_decode($_POST['data']);
 			$admin = new Password();
-			$admin->companyResetPassword($data->email, $data->password);
+			$res = $admin->companyResetPassword($data->email, $data->password);
+			echo json_encode($res);
 		} 
 
 		else {
