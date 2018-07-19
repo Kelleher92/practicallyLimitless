@@ -63,7 +63,8 @@ class CompanyRegistration extends Component {
             },
             url: 'public/process.php',
             success: function(res) {
-                console.log(res);
+                res = JSON.parse(res);
+                console.log(res.message);
             },
             error: function(res) {
                 console.log(res);
