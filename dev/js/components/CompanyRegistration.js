@@ -1,7 +1,6 @@
  import React, {Component} from 'react';
  import $ from 'jquery';
  import { Redirect, withRouter } from 'react-router-dom';
- import { browserHistory } from 'react-router';
 
  class CompanyRegistration extends Component {
     constructor(props) {
@@ -11,11 +10,9 @@
             CompanyAddress: '',
             CompanyEmail: '',
             CompanyPassword: '',
-            CompanyPasswordCheck: '',
-            redirect: false
+            CompanyPasswordCheck: ''
         };
 
-        //this.registerCompany = this.registerCompany.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.navigateTo = this.navigateTo.bind(this);
