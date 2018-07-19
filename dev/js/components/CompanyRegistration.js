@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { isValidEmail, isValidPassword, isValidString } from '../helpers/utils.js';
 
 class CompanyRegistration extends Component {

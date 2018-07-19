@@ -6,7 +6,7 @@ import $ from 'jquery';
 import Home from './pages/Home'; 
 import PrivateRoute from './pages/PrivateRoute';
 import Verify from './pages/Verify';
-import SecretPage from './pages/SecretPage';
+import Dashboard from './pages/Dashboard';
 import SayHello from './components/SayHello';
 import PreLoader from './components/PreLoader';
 import CompanyRegistration from './components/CompanyRegistration.js';
@@ -41,7 +41,7 @@ class App extends Component {
 
 	render() {
 		return (
-            <Router >
+            <Router>
     			<div>
                     <Switch>
                         <Route exact={true} path="/(|home)" render={(props) => (
@@ -59,7 +59,7 @@ class App extends Component {
                             <Verify {...props} token={this.token} />
                         )} />
 
-                        <PrivateRoute path="/secret-page" component={SecretPage} isLoggedIn={this.state.isLoggedIn} setLoggedOut={this.setLoggedOut}/>
+                        <PrivateRoute path="/dashboard" component={Dashboard} isLoggedIn={this.state.isLoggedIn} setLoggedOut={this.setLoggedOut}/>
                     </Switch>
     	    	</div>
             </Router>

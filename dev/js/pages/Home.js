@@ -44,7 +44,7 @@ export default class Home extends Component {
                         <span style={{"height":"20px","width":"50px", "backgroundColor":"green", "display":"inline-block"}}></span>
                     </Link>
 
-                    <Link to="/secret-page">
+                    <Link to="/dashboard">
                         <span style={{"height":"20px","width":"50px", "backgroundColor":"red", "display":"inline-block"}}></span>
                     </Link>
 
