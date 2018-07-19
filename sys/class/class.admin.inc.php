@@ -52,7 +52,9 @@
 			else {
 				$res->responseCode = 400;
 				$res->message = "The e-mail address you used was already registered. Please try again with another!";
-			}			
+			}		
+
+			return $res;	
 		}
 
 		public function loginCompany($userName, $password) {
@@ -250,7 +252,7 @@
 				$res->responseCode = 400;
 		    }			
 
-		    return $res
+		    return $res;
 		}
 
 		public function companyVerifyResetToken($email, $token) {
