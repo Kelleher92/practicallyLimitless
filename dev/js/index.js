@@ -59,7 +59,7 @@ class App extends Component {
                             <Verify {...props} token={this.token} />
                         )} />
 
-                        <PrivateRoute path="/dashboard" component={Dashboard} isLoggedIn={this.state.isLoggedIn} setLoggedOut={this.setLoggedOut}/>
+                        <PrivateRoute path="/dashboard" token={this.token} component={Dashboard} isLoggedIn={this.state.isLoggedIn} setLoggedOut={this.setLoggedOut}/>
                     </Switch>
     	    	</div>
             </Router>

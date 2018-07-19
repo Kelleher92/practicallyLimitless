@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import $ from 'jquery';
 import { withRouter } from 'react-router-dom';
 import { isValidEmail, isValidPassword, isValidString } from '../helpers/utils.js';
+import $ from 'jquery';
 
 class CompanyRegistration extends Component {
     constructor(props) {
