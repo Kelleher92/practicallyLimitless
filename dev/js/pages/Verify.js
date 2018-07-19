@@ -9,7 +9,6 @@ export default class Verify extends Component {
         super(props);
         
         // Get query params from URL
-        //Sample URL: practically-limitless.herokuapp.com/verify?email=ian@goyeti.ie&token=c1c69de13a5e03e7e85fcc391014ae2bddebb3925e78bbe7d7c33c82eb2ffdad  
         let userEmail = qs.parse(this.props.location.search).email;
         let userToken = qs.parse(this.props.location.search).token;	
         
@@ -36,7 +35,7 @@ export default class Verify extends Component {
             this.setState({
                 checkComplete: true,
                 title: "Error!", 
-                subTitle: "Oops...I think you have come here by mistake.",
+                subTitle: "Oops... I think you have come here by mistake.",
                 linkText: "Return Home",
                 linkLocation: "/home"
             });
@@ -56,6 +55,7 @@ export default class Verify extends Component {
                 },
                 url: 'public/process.php',
                 success: function(res) {
+                    res = JSON.parse(res);
                     if(res.responseCode === 200) {
                         me.setState({
                             verificationStatus: true,
