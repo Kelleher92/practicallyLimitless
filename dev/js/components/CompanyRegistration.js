@@ -1,5 +1,7 @@
  import React, {Component} from 'react';
  import $ from 'jquery';
+ import { Redirect } from 'react-router-dom';
+ import { browserHistory } from 'react-router';
 
  export default class CompanyRegistration extends Component {
     constructor() {
@@ -17,7 +19,6 @@
     }
 
     handleChange(name, e) {
-        console.log('Changes are innn');
         this.setState({[name]: e.target.value});
     }
 
@@ -52,11 +53,21 @@
     }
    
     onSubmit() {
-     this.registerCompany();
+        this.registerCompany();
+        this.navigateHome();
      //set fields as read only
         // loading icon for a couple of seconds
         //direct back to homepage
     }
+
+    onCancel(){
+        this.navigateHome();
+    }
+
+    navigateHome(){
+        browserHistory.push('/home');
+    }
+
 
     registerCompany(){
         $.ajax({
@@ -75,7 +86,7 @@
             }
         });
     }
-
+    
     render() {
         return (
             <div>
