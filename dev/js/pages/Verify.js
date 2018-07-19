@@ -55,9 +55,7 @@ export default class Verify extends Component {
                 },
                 url: 'public/process.php',
                 success: function(res) {
-                    console.log(res);
                     res = JSON.parse(res);
-                    console.log(res);
                     if(res.responseCode === 200) {
                         me.setState({
                             verificationStatus: true,
