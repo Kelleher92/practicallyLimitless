@@ -1,8 +1,8 @@
- import React, {Component} from 'react';
- import $ from 'jquery';
- import { Redirect, withRouter } from 'react-router-dom';
+import React, {Component} from 'react';
+import $ from 'jquery';
+import { Redirect, withRouter } from 'react-router-dom';
 
- class CompanyRegistration extends Component {
+class CompanyRegistration extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -57,17 +57,16 @@
         this.navigateTo('/pl');
     }
 
-    onCancel(){
+    onCancel() {
         this.navigateTo('/');
     }
 
-    navigateTo(path){
+    navigateTo(path) {
         let { history } = this.props;
         history.push(path);
     }
 
-
-    registerCompany(){
+    registerCompany() {
         $.ajax({
             method: 'POST',
             data: {
@@ -88,8 +87,8 @@
     render() {
         return (
             <div>
-                 <div className="form-header"> Company Registration Form </div>
-                 <div>
+                 <div className="form-header">Company Registration Form</div>
+                 <div className="form-body">
                     <div className="form-input__heading">
                         Company Details
                     </div>
@@ -109,14 +108,13 @@
                          <input id="CompanyPasswordCheck" type="password" name="CompanyPasswordCheck" placeholder="Password Verification" className="form-input__value" onChange={(e) => this.handleChange("CompanyPasswordCheck", e)}/>
                      </div>
                      <div className="form-submission__section">
-                            <button className="form__submit-button" onClick={this.onSubmit} disabled={!this.isSubmitable()}> Submit </button>
-                            <button className="form__cancel-button" onClick={this.onCancel}> Cancel </button> 
+                            <button className="form__submit-button" onClick={this.onSubmit} disabled={!this.isSubmitable()}>Submit</button>
+                            <button className="form__cancel-button" onClick={this.onCancel}>Cancel</button> 
                      </div>    
-                 </div>
-                          
+                 </div>                       
             </div>
         );
     }
- }
+}
 
-  export default withRouter(CompanyRegistration);
+export default withRouter(CompanyRegistration);
