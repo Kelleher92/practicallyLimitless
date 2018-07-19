@@ -76,7 +76,7 @@ class CompanyRegistration extends Component {
         return (
             <div>
                  <div className="form-header">Company Registration Form</div>
-                 <div className="form-body">
+                 <div className="form-body d-flex">
                     <div className="form-input__heading">
                         Company Details
                     </div>
