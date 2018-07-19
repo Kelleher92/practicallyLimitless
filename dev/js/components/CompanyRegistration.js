@@ -1,21 +1,24 @@
  import React, {Component} from 'react';
  import $ from 'jquery';
- import { Redirect } from 'react-router-dom';
+ import { Redirect, withRouter } from 'react-router-dom';
  import { browserHistory } from 'react-router';
 
- export default class CompanyRegistration extends Component {
-    constructor() {
-        super();
+ class CompanyRegistration extends Component {
+    constructor(props) {
+        super(props);
         this.state = {
             CompanyName: '',
             CompanyAddress: '',
             CompanyEmail: '',
             CompanyPassword: '',
-            CompanyPasswordCheck: ''
+            CompanyPasswordCheck: '',
+            redirect: false
         };
 
         //this.registerCompany = this.registerCompany.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onCancel = this.onCancel.bind(this);
+        this.navigateTo = this.navigateTo.bind(this);
     }
 
     handleChange(name, e) {
@@ -54,18 +57,16 @@
    
     onSubmit() {
         this.registerCompany();
-        this.navigateHome();
-     //set fields as read only
-        // loading icon for a couple of seconds
-        //direct back to homepage
+        this.navigateTo('/pl');
     }
 
     onCancel(){
-        this.navigateHome();
+        this.navigateTo('/');
     }
 
-    navigateHome(){
-        browserHistory.push('/home');
+    navigateTo(path){
+        let { history } = this.props;
+        history.push(path);
     }
 
 
@@ -111,8 +112,8 @@
                          <input id="CompanyPasswordCheck" type="password" name="CompanyPasswordCheck" placeholder="Password Verification" className="form-input__value" onChange={(e) => this.handleChange("CompanyPasswordCheck", e)}/>
                      </div>
                      <div className="form-submission__section">
-                            <button className="form__submit-button" onClick={this.onSubmit} disabled={!this.isSubmitable()}> Submit </button> 
-                            <button className="form__cancel-button" onClick={this.onCancel} disabled="false"> Cancel </button> 
+                            <button className="form__submit-button" onClick={this.onSubmit} disabled={!this.isSubmitable()}> Submit </button>
+                            <button className="form__cancel-button" onClick={this.onCancel}> Cancel </button> 
                      </div>    
                  </div>
                           
@@ -120,3 +121,5 @@
         );
     }
  }
+
+  export default withRouter(CompanyRegistration);
