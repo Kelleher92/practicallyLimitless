@@ -9,6 +9,7 @@ import Verify from './pages/Verify';
 import SecretPage from './pages/SecretPage';
 import SayHello from './components/SayHello';
 import PreLoader from './components/PreLoader';
+import PreLoaderBounce from './components/PreLoaderBounce';
 import CompanyRegistration from './components/CompanyRegistration.js';
 
 class App extends Component {
@@ -49,7 +50,8 @@ class App extends Component {
                         )}/>
                         
                         <Route exact={true} path="/pl" render={() => (
-                            <PreLoader  />
+                            // <PreLoader />
+                            <PreLoaderBounce />
                         )}/>
                         <Route exact={true} path="/company-registration" render={() => (
                             <CompanyRegistration token={this.token}/>

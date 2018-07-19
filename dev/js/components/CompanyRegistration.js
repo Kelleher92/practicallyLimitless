@@ -12,6 +12,7 @@ class CompanyRegistration extends Component {
             CompanyEmail: '',
             CompanyPassword: '',
             CompanyPasswordCheck: ''
+            registrationStatus: false
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -41,7 +42,7 @@ class CompanyRegistration extends Component {
    
     onSubmit() {
         this.registerCompany();
-        this.navigateTo('/pl');
+        // this.navigateTo('/pl');
     }
 
     onCancel() {
@@ -70,6 +71,17 @@ class CompanyRegistration extends Component {
                 console.log(res);
             }
         });
+    }
+
+
+    fakeRegister(){
+        let me = this;
+
+        // fake async status change for testing purposes
+        setTimeout(function() { 
+            
+            
+        }, 2000);
     }
     
     render() {
