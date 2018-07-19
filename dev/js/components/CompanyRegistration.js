@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import { Redirect, withRouter } from 'react-router-dom';
+import { isValidEmail, isValidPassword, isValidString } from '../helpers/utils.js';
 
 class CompanyRegistration extends Component {
     constructor(props) {
@@ -22,34 +23,20 @@ class CompanyRegistration extends Component {
         this.setState({[name]: e.target.value});
     }
 
-    isValidEmail() {
-        var emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return emailPattern.test(this.state.CompanyEmail);
-    }
-
-    isValidPassword() {
-        var passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
-        return passwordPattern.test(this.state.CompanyPassword);
-    }
-
     passwordRepeatedCorrectly() {
-        return this.state.CompanyPassword == this.state.CompanyPasswordCheck;
+        return this.state.CompanyPassword === this.state.CompanyPasswordCheck;
     }
 
-    containsValue(str) {
-        return !(str === "");
-    }
-
-   nameIsValid() {
-        return this.containsValue(this.state.CompanyName);
+    isValidName() {
+        return isValidString(this.state.CompanyName);
     }
    
-    addressIsValid() {
-        return this.containsValue(this.state.CompanyAddress);
+    isValidAddress() {
+        return isValidString(this.state.CompanyAddress);
     }
    
     isSubmitable() {
-        return this.addressIsValid() && this.nameIsValid() && this.passwordRepeatedCorrectly() && this.isValidPassword() && this.isValidEmail();
+        return this.isValidName() && this.isValidAddress() && this.passwordRepeatedCorrectly() && isValidPassword(this.state.CompanyPassword) && isValidEmail(this.state.CompanyEmail);
     }
    
     onSubmit() {
