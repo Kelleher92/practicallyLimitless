@@ -65,33 +65,40 @@
 				`email` = '$uname' 
 				LIMIT 1";
 
-			$user = $this->query($sql)[0];
+			$result = $this->query($sql);
 
 			$res = new Response_Obj();
 
-			if (!isset($user) || empty($user)){
+			if (!isset($result) || empty($result)){
 				$res->responseCode = 400;
 				$res->message = "Your username or password is invalid.";
-			} else if(!boolVal($user['isActivated'])) {
-				$res->responseCode = 400;
-				$res->message = 'Your account is not activated yet. Please check your email.';
-				echo json_encode($res);
-			}
-
-			$hash = $user['password'];
-
-			if(password_verify($pword, $hash)) {
-				$_SESSION['company'] = array(
-					'id' => $user['id'],
-					'name' => $user['name'],
-					'email' => $user['email']
-				);
-				$res->responseCode = 200;
-				$res->message = '';
 			} else {
-				$res->responseCode = 400;
-				$res->message = 'Your username or password is invalid.';
+				$user = $result[0];
+
+				if(!boolVal($user['isActivated'])) {
+					$res->responseCode = 400;
+					$res->message = 'Your account is not activated yet. Please check your email.';
+				}
+				else{
+					$hash = $user['password'];
+
+					if(password_verify($pword, $hash)) {
+						$_SESSION['company'] = array(
+							'id' => $user['id'],
+							'name' => $user['name'],
+							'email' => $user['email']
+						);
+						$res->responseCode = 200;
+						$res->message = '';
+					} else {
+						$res->responseCode = 400;
+						$res->message = 'Your username or password is invalid.';
+					}
+				}
+
 			}
+
+			
 			echo json_encode($res);
 		}
 

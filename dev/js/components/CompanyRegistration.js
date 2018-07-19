@@ -15,6 +15,7 @@ class CompanyRegistration extends Component {
         };
 
         this.onSubmit = this.onSubmit.bind(this);
+        this.registerCompany = this.registerCompany.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.navigateTo = this.navigateTo.bind(this);
     }
@@ -54,6 +55,7 @@ class CompanyRegistration extends Component {
     }
 
     registerCompany() {
+        console.log('About to register a company');
         $.ajax({
             method: 'POST',
             data: {
@@ -73,12 +75,10 @@ class CompanyRegistration extends Component {
     
     render() {
         return (
-            <div>
+            <div className="company-registration-form">
                  <div className="form-header">Company Registration Form</div>
                  <div className="form-body">
-                    <div className="form-input__heading">
-                        Company Details
-                    </div>
+
                     <div className="form-input__section">
                          <input id="CompanyName" type="text" name="CompanyName" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("CompanyName", e)}/>
                      </div>
@@ -95,7 +95,7 @@ class CompanyRegistration extends Component {
                          <input id="CompanyPasswordCheck" type="password" name="CompanyPasswordCheck" placeholder="Password Verification" className="form-input__value" onChange={(e) => this.handleChange("CompanyPasswordCheck", e)}/>
                      </div>
                      <div className="form-submission__section">
-                            <button className="form__submit-button" onClick={this.onSubmit} disabled={!this.isSubmitable()}>Submit</button>
+                            <button className="form__submit-button" onClick={this.registerCompany}>Submit</button>
                             <button className="form__cancel-button" onClick={this.onCancel}>Cancel</button> 
                      </div>    
                  </div>                       
