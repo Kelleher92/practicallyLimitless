@@ -74,11 +74,9 @@
 
 			$results = $this->query($sql);
 
-			var_dump($results);
-
 			$res = new Response_Obj();
 
-			if(!isset($result) || empty($result)) {
+			if(!isset($results) || empty($results)) {
 				$res->responseCode = 400;
 				$res->message = "Your username is not recognised.";
 			} else {
