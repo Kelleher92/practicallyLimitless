@@ -62,17 +62,19 @@
 				return "Invalid action supplied for loginCompany.";
 			}
 
-			$uname = $this->sanitizeValue($userName);
-			$pword = $this->sanitizeValue($password);
+			$userName = $this->sanitizeValue($userName);
+			$password = $this->sanitizeValue($password);
 
 			$sql = "SELECT
 				`id`, `companyId`, `name`, `email`, `password`, `isActivated`
 				FROM `company`
 				WHERE
-				`email` = '$uname' 
+				`email` = '$userName' 
 				LIMIT 1";
 
 			$results = $this->query($sql);
+
+			var_dump($results);
 
 			$res = new Response_Obj();
 
