@@ -107,13 +107,6 @@
 			return $res;
 		}
 
-		private function createResponse($code, $message) {
-			return new Response_Obj(array(
-				'responseCode' => $code,
-				'message'=> $message
-			));
-		}
-
 		private function companyVerifyEmail($email) {
 			$email = $this->sanitizeValue($email);
 
