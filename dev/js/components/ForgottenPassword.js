@@ -16,7 +16,7 @@ class ForgottenPassword extends Component {
         this.setState({[name]: e.target.value});
     }
 
-    onClickForgottenPassword(){
+    onClickForgottenPassword() {
         let { history } = this.props;
         $.ajax({
             method: 'POST',
@@ -31,7 +31,7 @@ class ForgottenPassword extends Component {
                 if(res.responseCode === 200) {
                     history.push('/');
                 } else {
-                    console.log(res.responseCode)
+                    alert(res.message);
                 }
             },
             error: function(res) {
@@ -46,7 +46,6 @@ class ForgottenPassword extends Component {
             <div className="forgotten-password">
                  <div className="form-header"> Forgot Password </div>
                  <div className="form-body">
-
                  <div className="form-input__section">
                     <input id="CompanyEmail" type="text" name="CompanyEmail" placeholder="Company Email" className="form-input__value" onChange={(e) => this.handleChange("CompanyEmail", e)}/>
                  </div>
