@@ -71,28 +71,28 @@ class CompanyRegistration extends Component {
     render() {
         return (
             <div className="company-registration-form">
-                 <div className="form-header">Company Registration Form</div>
-                 <div className="form-body">
+                <div className="form-header">Company Registration Form</div>
+                <div className="form-body">
 
-                     <div className="form-input__section">
-                         <input id="CompanyName" type="text" name="CompanyName" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("CompanyName", e)}/>
-                     </div>
-                     <div className="form-input__section">
-                         <input id="CompanyAddress" type="text" name="CompanyAddress" placeholder="Company Address" className="form-input__value" onChange={(e) => this.handleChange("CompanyAddress", e)}/>
-                     </div>
-                     <div className="form-input__section">
-                         <input id="CompanyEmail" type="email" name="CompanyEmail" placeholder="Email Address" className="form-input__value" onChange={(e) => this.handleChange("CompanyEmail", e)}/>
-                     </div>
-                         <div className="form-input__section">
-                         <input id="CompanyPassword" type="password" name="CompanyPassword" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("CompanyPassword", e)}/>
-                     </div>
-                     <div className="form-input__section">
-                         <input id="CompanyPasswordCheck" type="password" name="CompanyPasswordCheck" placeholder="Password Verification" className="form-input__value" onChange={(e) => this.handleChange("CompanyPasswordCheck", e)}/>
-                     </div>
-                     <div className="form-submission__section">
-                         <button className="form__submit-button" onClick={this.registerCompany}>Submit</button>
-                     </div>    
-                 </div>                       
+                    <div className="form-input__section">
+                        <input id="CompanyName" type="text" name="CompanyName" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("CompanyName", e)}/>
+                    </div>
+                    <div className="form-input__section">
+                        <input id="CompanyAddress" type="text" name="CompanyAddress" placeholder="Company Address" className="form-input__value" onChange={(e) => this.handleChange("CompanyAddress", e)}/>
+                    </div>
+                    <div className="form-input__section">
+                        <input id="CompanyEmail" type="email" name="CompanyEmail" placeholder="Email Address" className="form-input__value" onChange={(e) => this.handleChange("CompanyEmail", e)}/>
+                    </div>
+                        <div className="form-input__section">
+                        <input id="CompanyPassword" type="password" name="CompanyPassword" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("CompanyPassword", e)}/>
+                    </div>
+                    <div className="form-input__section">
+                        <input id="CompanyPasswordCheck" type="password" name="CompanyPasswordCheck" placeholder="Password Verification" className="form-input__value" onChange={(e) => this.handleChange("CompanyPasswordCheck", e)}/>
+                    </div>
+                    <div className="form-submission__section">
+                        <button className="form__submit-button" onClick={this.registerCompany}>Submit</button>
+                    </div>    
+                </div>                       
             </div>
         );
     }

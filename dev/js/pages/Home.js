@@ -25,7 +25,7 @@ export default class Home extends Component {
                         <button style={{"height":"30px","width":"100px", "backgroundColor":"orange", "cursor":"pointer"}}>Registration</button>
                     </Link>
                     <Link to="/company-login">
-                        <span style={{"height":"20px","width":"50px", "backgroundColor":"black", "display":"inline-block"}}></span>
+                        <button style={{"height":"30px","width":"100px", "backgroundColor":"darkgrey", "cursor":"pointer"}}>Log In</button>
                     </Link>
                 </div>
             </div>

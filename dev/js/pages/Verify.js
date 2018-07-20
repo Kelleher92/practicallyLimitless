@@ -89,7 +89,7 @@ export default class Verify extends Component {
     }
 
     render() {
-        return(
+        return (
             <div className="verify-page__container">
                 {this.state.checkComplete ? (
                     <VerificationNotice 
