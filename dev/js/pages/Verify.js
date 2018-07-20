@@ -71,7 +71,7 @@ export default class Verify extends Component {
                         me.setState({
                             checkComplete: true,
                             title: "Error!", 
-                            subTitle: "There was a problem with your verification. Please register again.",
+                            subTitle: "There was a verification error. Please register again.",
                             linkText: "Register",
                             linkLocation: "/company-register"
                         });

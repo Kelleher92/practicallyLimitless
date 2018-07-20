@@ -15,8 +15,8 @@ class CompanyRegistration extends Component {
         };
 
         this.onSubmit = this.onSubmit.bind(this);
-        this.registerCompany = this.registerCompany.bind(this);
         this.navigateTo = this.navigateTo.bind(this);
+        this.registerCompany = this.registerCompany.bind(this);
     }
 
     handleChange(name, e) {
@@ -50,28 +50,31 @@ class CompanyRegistration extends Component {
     }
 
     registerCompany() {
-        var me = this;
+        if(this.isSubmitable) {
+            var me = this;
 
-        $.ajax({
-            method: 'POST',
-            data: {
-                token: this.props.token,
-                action: 'registerCompany',
-                data: JSON.stringify({name: this.state.name, email: this.state.email, address: this.state.address, password: this.state.password})
-            },
-            url: 'public/process.php',
-            success: function(res) {
-                res = JSON.parse(res);
-                if(res.responseCode === 200) {
-                    this.navigateTo('/');
-                } else {
-                    alert(res.message);
+            $.ajax({
+                method: 'POST',
+                data: {
+                    token: this.props.token,
+                    action: 'registerCompany',
+                    data: JSON.stringify({name: this.state.name, email: this.state.email, address: this.state.address, password: this.state.password})
+                },
+                url: 'public/process.php',
+                success: function(res) {
+                    res = JSON.parse(res);
+
+                    if(res.responseCode === 200) {
+                        me.navigateTo('/');
+                    } else {
+                        alert(res.message);
+                    }
+                },
+                error: function(res) {
+                    console.log(res);
                 }
-            },
-            error: function(res) {
-                console.log(res);
-            }
-        });
+            });
+        }
     }
     
     render() {
@@ -79,7 +82,6 @@ class CompanyRegistration extends Component {
             <div className="company-registration-form">
                 <div className="form-header">Company Registration Form</div>
                 <div className="form-body">
-
                     <div className="form-input__section">
                         <input type="text" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("name", e)}/>
                     </div>

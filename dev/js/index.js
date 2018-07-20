@@ -12,6 +12,7 @@ import PreLoader from './components/PreLoader';
 import CompanyRegistration from './components/CompanyRegistration.js';
 import CompanyLogin from './components/CompanyLogin.js';
 import ForgotPassword from './components/ForgotPassword.js';
+import ResetPassword from './components/ResetPassword.js';
 
 class App extends Component {
     constructor() {
@@ -64,6 +65,10 @@ class App extends Component {
                         <Route exact={true} path="/company-forgot-password" render={() => (
                             <ForgotPassword token={this.token}/>
                         )}/>
+
+                        <Route exact={true} path="/company-reset-password" render={(props) => (
+                            <ResetPassword token={this.token} />
+                        )} />
 
                         <Route exact={true} path="/verify" render={(props) => (
                             <Verify {...props} token={this.token} />

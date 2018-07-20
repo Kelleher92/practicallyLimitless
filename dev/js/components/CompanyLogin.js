@@ -33,6 +33,7 @@ class CompanyLogin extends Component {
             success: function(res) {
                 console.log(res);
                 res = JSON.parse(res);
+                
                 if(res.responseCode === 200) {
                     history.push('/dashboard');
                 } else {

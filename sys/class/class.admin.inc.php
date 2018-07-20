@@ -114,7 +114,7 @@
 			));
 		}
 
-		public function companyVerifyEmail($email) {
+		private function companyVerifyEmail($email) {
 			$email = $this->sanitizeValue($email);
 
 			$sql = "SELECT `email` FROM `company` WHERE `email` = '$email' LIMIT 1";

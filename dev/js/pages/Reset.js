@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router-dom';
 import VerificationNotice from '../components/VerificationNotice';
 import PreLoader from '../components/PreLoader';
 import qs from 'query-string';
 import $ from 'jquery';
 
-export default class Reset extends Component {
-        constructor(props) {
+class Reset extends Component {
+    constructor(props) {
         super(props);
         
         // Get query params from URL
@@ -44,6 +45,7 @@ export default class Reset extends Component {
     
     checkVerification() {
         let me = this;
+        let { history } = this.props;
 
         setTimeout(function() { 
             $.ajax({
@@ -55,23 +57,15 @@ export default class Reset extends Component {
                 },
                 url: 'public/process.php',
                 success: function(res) {
-                    console.log(res);
                     res = JSON.parse(res);
-                    console.log(res);
+
                     if(res.responseCode === 200) {
-                        me.setState({
-                            verificationStatus: true,
-                            checkComplete: true,
-                            title: "Success!", 
-                            subTitle: "You can now proceed to login.",
-                            linkText: "Login",
-                            linkLocation: "/company-login"
-                        });
+                        history.push('/company-reset-password');
                     } else {
                         me.setState({
                             checkComplete: true,
                             title: "Error!", 
-                            subTitle: "There was a problem with your verification. Please enter your  again.",
+                            subTitle: "There was a verification error. Please enter your details again.",
                             linkText: "Forgot Password",
                             linkLocation: "/company-forgot-password"
                         });
@@ -105,3 +99,5 @@ export default class Reset extends Component {
         );
     }
 }
+
+export default withRouter(Reset);

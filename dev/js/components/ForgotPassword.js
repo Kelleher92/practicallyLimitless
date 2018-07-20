@@ -45,15 +45,15 @@ class ForgotPassword extends Component {
     render() {
         return (
             <div className="forgotten-password">
-                 <div className="form-header">Forgot Password</div>
-                 <div className="form-body">
-                 <div className="form-input__section">
-                    <input type="text" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)}/>
-                 </div>
-                 <div className="form-submission__section">
-                    <button className="form__submit-button" onClick={this.onClickSubmit}>Submit</button>
-                 </div>    
-                 </div>                       
+                <div className="form-header">Forgot Password</div>
+                <div className="form-body">
+                    <div className="form-input__section">
+                        <input type="text" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)}/>
+                    </div>
+                    <div className="form-submission__section">
+                        <button className="form__submit-button" onClick={this.onClickSubmit}>Submit</button>
+                    </div>    
+                </div>                       
             </div>
         );
     }

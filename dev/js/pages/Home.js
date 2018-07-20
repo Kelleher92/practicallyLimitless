@@ -24,6 +24,7 @@ export default class Home extends Component {
                     <Link to="/company-registration">
                         <button style={{"height":"30px","width":"100px", "backgroundColor":"orange", "cursor":"pointer"}}>Registration</button>
                     </Link>
+                    
                     <Link to="/company-login">
                         <button style={{"height":"30px","width":"100px", "backgroundColor":"darkgrey", "cursor":"pointer"}}>Log In</button>
                     </Link>
