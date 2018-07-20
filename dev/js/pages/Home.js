@@ -53,6 +53,9 @@ export default class Home extends Component {
                     <Link to="/company-registration">
                         <span style={{"height":"20px","width":"50px", "backgroundColor":"orange", "display":"inline-block"}}></span>
                     </Link>
+                    <Link to="/company-login">
+                        <span style={{"height":"20px","width":"50px", "backgroundColor":"black", "display":"inline-block"}}></span>
+                    </Link>
                 </div>
             </div>
 		);
