@@ -5,15 +5,13 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    border: 1px solid darkslategray;
 }
 
 
 .pre-loader-bounce__balls {
-    border-radius: 50%;
     position: relative;
-    width: 180px;
-    height: 180px;
+    width: 170px;
+    height: 110px;
     top: 30%;
 
     &:before, &:after {
@@ -26,8 +24,8 @@
         width: 20px;
         background-color: red;
         border-radius: 50%;
-        top: 100px;
-        left: 100px;
+        top: 0px;
+        left: 75px;
         animation: pre-loader-bounce 0.25s ease-in-out infinite;
         animation-direction: alternate;
     }
@@ -37,7 +35,7 @@
         width: 20px;
         background-color: darkslategray;
         border-radius: 50%;
-        top: 174px;
+        top: 74px;
         left: 0px;
         animation: slide-sideways 1s ease-in-out infinite;
         animation-delay: 0.25s;
@@ -65,7 +63,7 @@
 @keyframes slide-sideways {
     
     50% {
-        transform: translateX(200px);
+        transform: translateX(150px);
     }
 }
 

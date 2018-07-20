@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import $ from 'jquery';
 import { Redirect, withRouter } from 'react-router-dom';
 import { isValidEmail, isValidPassword, isValidString } from '../helpers/utils.js';
+import VerificationNotice from './VerificationNotice.js';
+import PreLoaderBounce from './PreLoaderBounce.js';
 
 class CompanyRegistration extends Component {
     constructor(props) {
@@ -11,13 +13,16 @@ class CompanyRegistration extends Component {
             CompanyAddress: '',
             CompanyEmail: '',
             CompanyPassword: '',
-            CompanyPasswordCheck: ''
-            registrationStatus: false
+            CompanyPasswordCheck: '',
+            hasCheckedRegistration: false,
+            isVerificationCheckComplete: false,
+            wasRegistrationSuccessful: false
         };
 
         this.onSubmit = this.onSubmit.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.navigateTo = this.navigateTo.bind(this);
+        this.fakeRegister = this.fakeRegister.bind(this);
     }
 
     handleChange(name, e) {
@@ -41,8 +46,9 @@ class CompanyRegistration extends Component {
     }
    
     onSubmit() {
-        this.registerCompany();
+        // this.registerCompany();
         // this.navigateTo('/pl');
+        this.fakeRegister();
     }
 
     onCancel() {
@@ -77,43 +83,71 @@ class CompanyRegistration extends Component {
     fakeRegister(){
         let me = this;
 
-        // fake async status change for testing purposes
+        // fake async registration check change for testing purposes
+        me.setState({hasCheckedRegistration: true});
         setTimeout(function() { 
+            me.setState({
+                isVerificationCheckComplete: true,
+                wasRegistrationSuccessful: false
+            });
             
-            
-        }, 2000);
+        }, 3000);
     }
     
     render() {
         return (
             <div>
-                 <div className="form-header">Company Registration Form</div>
-                 <div className="form-body">
-                    <div className="form-input__heading">
-                        Company Details
+                {this.state.hasCheckedRegistration ? (
+                    this.state.isVerificationCheckComplete ? (
+                        this.state.wasRegistrationSuccessful ? (
+                            <VerificationNotice 
+                                verificationStatus={true} 
+                                title="success!" 
+                                subTitle="Registration successful. Check your email!"
+                                linkText="return home"
+                                linkLocation="/home" />
+                        ) : (
+                            <VerificationNotice 
+                                verificationStatus={false} 
+                                title="error!" 
+                                subTitle="There was an error processing your registration."
+                                linkText="Try Again"
+                                linkLocation="/company-registration" />
+                        )
+                    ) : (
+                        <PreLoaderBounce />
+                    )
+                ) : (
+                    <div>
+                        <div className="form-header">Company Registration Form</div>
+                        <div className="form-body">
+                            <div className="form-input__heading">
+                                Company Details
+                            </div>
+                            <div className="form-input__section">
+                                <input id="CompanyName" type="text" name="CompanyName" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("CompanyName", e)}/>
+                            </div>
+                            <div className="form-input__section">
+                                <input id="CompanyAddress" type="text" name="CompanyAddress" placeholder="Company Address" className="form-input__value" onChange={(e) => this.handleChange("CompanyAddress", e)}/>
+                            </div>
+                            <div className="form-input__section">
+                                <input id="CompanyEmail" type="email" name="CompanyEmail" placeholder="Email Address" className="form-input__value" onChange={(e) => this.handleChange("CompanyEmail", e)}/>
+                            </div>
+                            <div className="form-input__section">
+                                <input id="CompanyPassword" type="password" name="CompanyPassword" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("CompanyPassword", e)}/>
+                            </div>
+                            <div className="form-input__section">
+                                <input id="CompanyPasswordCheck" type="password" name="CompanyPasswordCheck" placeholder="Password Verification" className="form-input__value" onChange={(e) => this.handleChange("CompanyPasswordCheck", e)}/>
+                            </div>
+                            <div className="form-submission__section">
+                                    <button className="form__submit-button" onClick={this.onSubmit} disabled={!this.isSubmitable()}>Submit</button>
+                                    <button className="form__cancel-button" onClick={this.onCancel}>Cancel</button> 
+                            </div>    
+                        </div>                       
                     </div>
-                    <div className="form-input__section">
-                         <input id="CompanyName" type="text" name="CompanyName" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("CompanyName", e)}/>
-                     </div>
-                     <div className="form-input__section">
-                         <input id="CompanyAddress" type="text" name="CompanyAddress" placeholder="Company Address" className="form-input__value" onChange={(e) => this.handleChange("CompanyAddress", e)}/>
-                     </div>
-                    <div className="form-input__section">
-                         <input id="CompanyEmail" type="email" name="CompanyEmail" placeholder="Email Address" className="form-input__value" onChange={(e) => this.handleChange("CompanyEmail", e)}/>
-                     </div>
-                       <div className="form-input__section">
-                         <input id="CompanyPassword" type="password" name="CompanyPassword" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("CompanyPassword", e)}/>
-                     </div>
-                     <div className="form-input__section">
-                         <input id="CompanyPasswordCheck" type="password" name="CompanyPasswordCheck" placeholder="Password Verification" className="form-input__value" onChange={(e) => this.handleChange("CompanyPasswordCheck", e)}/>
-                     </div>
-                     <div className="form-submission__section">
-                            <button className="form__submit-button" onClick={this.onSubmit} disabled={!this.isSubmitable()}>Submit</button>
-                            <button className="form__cancel-button" onClick={this.onCancel}>Cancel</button> 
-                     </div>    
-                 </div>                       
+                )}
             </div>
-        );
+        )
     }
 }
 
