@@ -60,6 +60,7 @@ class App extends Component {
                         <Route exact={true} path="/company-login" render={() => (
                             <CompanyLogin token={this.token}/>
                         )}/>
+
                         <Route exact={true} path="/company-forgot-password" render={() => (
                             <ForgottenPassword token={this.token}/>
                         )}/>
@@ -68,7 +69,7 @@ class App extends Component {
                             <Verify {...props} token={this.token} />
                         )} />
 
-                        <Route exact={true} path="/resey" render={(props) => (
+                        <Route exact={true} path="/reset" render={(props) => (
                             <Reset {...props} token={this.token} />
                         )} />
 
