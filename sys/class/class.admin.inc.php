@@ -174,7 +174,7 @@
 			
 			$res = new Response_Obj();
 
-			if(!isset($company) || $company['isActivationTokenExpired'] || $this->isActivationTokenExpired($company['tokenSent'], $this->_expirationPeriod)) {
+			if(!isset($company) || $company['isActivationTokenExpired'] || $this->isTokenExpired($company['tokenSent'], $this->_expirationPeriod)) {
 				$res->responseCode = 400;
 				$res->message = "Session expired.";
 			} else {
@@ -197,7 +197,7 @@
 			$token = $this->generateToken($email);
 
 			$res = new Response_Obj();
-			
+
 			if(($this->companyVerifyEmail($email)->responseCode == 400)) {
 				$sql = "UPDATE `company` SET `tempResetToken` = '$token', `resetTokenSent` = now(), `isResetTokenExpired` = 0 WHERE `email` = '$email'";
 
@@ -317,7 +317,7 @@
 			return $this->ROOT."/reset?email=".$email."&token=".$token;
 		}
 
-		private function isActivationTokenExpired($sentTime, $limit) {
+		private function isTokenExpired($sentTime, $limit) {
 			$today = new DateTime('now');
 			$sentDate  = new DateTime($sentTime);
 			$diff = $today->diff($sentDate)->days;
