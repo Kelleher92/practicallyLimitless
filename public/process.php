@@ -49,14 +49,14 @@
 
 		else if($action === 'resetCompany') {
 			$data = json_decode($_POST['data']);
-			$admin = new Password();
+			$admin = new Admin();
 			$res = $admin->companyVerifyResetToken($data->email, $data->token);
 			echo json_encode($res);
 		} 
 
 		else if($action === 'companyResetPassword') {
 			$data = json_decode($_POST['data']);
-			$admin = new Password();
+			$admin = new Admin();
 			$res = $admin->companyResetPassword($data->email, $data->password);
 			echo json_encode($res);
 		} 
