@@ -60,7 +60,10 @@ class Reset extends Component {
                     res = JSON.parse(res);
 
                     if(res.responseCode === 200) {
-                        history.push('/company-reset-password');
+                        history.push({
+                            pathname: '/company-reset-password',
+                            search: '?email=' + me.state.email
+                        });
                     } else {
                         me.setState({
                             checkComplete: true,

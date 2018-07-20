@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import $ from 'jquery';
 import { Redirect, withRouter } from 'react-router-dom';
 import { isValidPassword } from '../helpers/utils.js';
 import qs from 'query-string';
+import $ from 'jquery';
 
 class ResetPassword extends Component {
     constructor(props) {
@@ -15,7 +15,6 @@ class ResetPassword extends Component {
             password: '',
             confirmPassword: ''
         };
-
 
         this.onClickSubmit = this.onClickSubmit.bind(this);
         this.isPasswordConfirmValid = this.isPasswordConfirmValid.bind(this);

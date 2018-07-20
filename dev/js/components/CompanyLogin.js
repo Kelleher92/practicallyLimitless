@@ -36,7 +36,7 @@ class CompanyLogin extends Component {
                 res = JSON.parse(res);
 
                 if(res.responseCode === 200) {
-                    me.props.setLoggedin();
+                    me.props.setLoggedIn();
                     history.push('/dashboard');
                 } else {
                     alert(res.message);
