@@ -125,6 +125,8 @@
 
 			$user = $this->query($sql);
 
+			$res = new Response_Obj();
+
 			if(empty($user)) {
 				$res->message = 'E-mail ok.';
 				$res->responseCode = 200;
