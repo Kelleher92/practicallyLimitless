@@ -115,10 +115,6 @@
 		}
 
 		public function companyVerifyEmail($email) {
-			if($_POST['action'] != 'companyVerifyEmail') {
-				return "Invalid action supplied for companyVerifyEmail.";
-			}
-
 			$email = $this->sanitizeValue($email);
 
 			$sql = "SELECT `email` FROM `company` WHERE `email` = '$email' LIMIT 1";
@@ -201,7 +197,7 @@
 			$token = $this->generateToken($email);
 
 			$res = new Response_Obj();
-		
+			
 			if(($this->companyVerifyEmail($email)->responseCode == 400)) {
 				$sql = "UPDATE `company` SET `tempResetToken` = '$token', `resetTokenSent` = now(), `isResetTokenExpired` = 0 WHERE `email` = '$email'";
 

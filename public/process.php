@@ -31,14 +31,7 @@
 		else if($action === 'logoutCompany') {
 			$admin = new Admin();
 			$admin->logoutCompany();			
-		} 	
-
-		else if($action === 'companyVerifyEmail') {
-			$data = json_decode($_POST['data']);
-			$admin = new Admin();
-			$res = $admin->companyVerifyEmail($data->email);			
-			echo json_encode($res);
-		} 	
+		} 	 	
 
 		else if($action === 'activateCompany') { 
 			$data = json_decode($_POST['data']);
