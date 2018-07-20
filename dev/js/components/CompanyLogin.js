@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import $ from 'jquery';
 import { Redirect, withRouter } from 'react-router-dom';
 
+
 class CompanyLogin extends Component {
     constructor(props) {
         super(props);
@@ -11,6 +12,7 @@ class CompanyLogin extends Component {
         };
         
         this.onClickLogin = this.onClickLogin.bind(this);
+        this.onClickForgotPassword = this.onClickForgotPassword.bind(this);
     }
 
     handleChange(name, e) {
@@ -41,6 +43,11 @@ class CompanyLogin extends Component {
             }
         });
     }
+
+    onClickForgotPassword() {
+        let { history } = this.props;
+        history.push('/company-forgot-password');
+    }
     
     render() {
         return (
@@ -55,6 +62,7 @@ class CompanyLogin extends Component {
                 </div>
                     <div className="form-submission__section">
                         <button className="form__submit-button" onClick={this.onClickLogin}>Login</button>
+                        <button className="form__submit-button" onClick={this.onClickForgotPassword}>Forgot Password</button>
                     </div>    
                 </div>                       
             </div>
