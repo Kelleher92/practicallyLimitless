@@ -73,7 +73,7 @@ class App extends Component {
                         )}/>
 
                         <Route exact={true} path="/company-reset-password" render={(props) => (
-                            <ResetPassword token={this.token} />
+                            <ResetPassword {...props} token={this.token} />
                         )} />
 
                         <Route exact={true} path="/verify" render={(props) => (
