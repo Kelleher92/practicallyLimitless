@@ -10,7 +10,7 @@ class Dashboard extends Component {
 	}
 
 	onClickLogout() {
-		var me = this;
+		let { history } = this.props;
 
 		$.ajax({
             method: 'POST',
@@ -20,7 +20,6 @@ class Dashboard extends Component {
             },
             url: 'public/process.php',
             success: function(res) {
-				let { history } = me.props;
 			    history.push('/');
             },
             error: function(res) {
@@ -33,7 +32,7 @@ class Dashboard extends Component {
 		return (
             <div>
                 <div>You are now logged in.</div>
-            	<button onClick={this.onClickLogout}>Log Out</button>
+            	<button style={{"height":"30px","width":"100px", "cursor":"pointer"}} onClick={this.onClickLogout}>Log Out</button>
             </div>
 		);
 	}

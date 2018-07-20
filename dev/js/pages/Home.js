@@ -1,57 +1,28 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 
-import SayHello from '../components/SayHello';
 import PreLoader from '../components/PreLoader';
 import { Link } from 'react-router-dom';
 
 export default class Home extends Component {
-    constructor() {
-        super();
-        this.state = {
-            message: 'Hello World'
-        };
-
-        this.registerCompany = this.registerCompany.bind(this);
-    }
-
-    registerCompany() {
-        $.ajax({
-            method: 'POST',
-            data: {
-                token: this.props.token,
-                action: 'registerCompany',
-                data: JSON.stringify({name: 'ian', email: 'ian@goyeti.ie', address: 'thomastown', password: '1234pass$'})
-            },
-            url: 'public/process.php',
-            success: function(res) {
-                res = JSON.parse(res);
-                console.log(res.message);
-            },
-            error: function(res) {
-                console.log(res);
-            }
-        });
+    constructor(props) {
+        super(props);
     }
 
 	render() {
 		return (
-            <div>
-                <SayHello />
-                
+            <div>               
                 <div>
                     <Link to="/pl">
-                        <span style={{"height":"20px","width":"50px", "backgroundColor":"green", "display":"inline-block"}}></span>
+                        <button style={{"height":"30px","width":"100px", "backgroundColor":"cyan", "cursor":"pointer"}}>Spinner</button>
                     </Link>
 
                     <Link to="/dashboard">
-                        <span style={{"height":"20px","width":"50px", "backgroundColor":"red", "display":"inline-block"}}></span>
+                        <button style={{"height":"30px","width":"100px", "backgroundColor":"red", "cursor":"pointer"}}>Dashboard</button>
                     </Link>
 
-                    <span style={{"height":"20px","width":"50px", "backgroundColor":"blue", "display":"inline-block"}} onClick={this.registerCompany}></span>
-
                     <Link to="/company-registration">
-                        <span style={{"height":"20px","width":"50px", "backgroundColor":"orange", "display":"inline-block"}}></span>
+                        <button style={{"height":"30px","width":"100px", "backgroundColor":"orange", "cursor":"pointer"}}>Registration</button>
                     </Link>
                 </div>
             </div>

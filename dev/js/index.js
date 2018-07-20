@@ -7,7 +7,6 @@ import Home from './pages/Home';
 import PrivateRoute from './pages/PrivateRoute';
 import Verify from './pages/Verify';
 import Dashboard from './pages/Dashboard';
-import SayHello from './components/SayHello';
 import PreLoader from './components/PreLoader';
 import CompanyRegistration from './components/CompanyRegistration.js';
 
