@@ -2,14 +2,20 @@ import React, {Component} from 'react';
 import $ from 'jquery';
 import { Redirect, withRouter } from 'react-router-dom';
 import { isValidPassword } from '../helpers/utils.js';
+import qs from 'query-string';
 
 class ResetPassword extends Component {
     constructor(props) {
         super(props);
+
+        let userEmail = qs.parse(this.props.location.search).email;
+        
         this.state = {
+            email: userEmail,
             password: '',
             confirmPassword: ''
         };
+
 
         this.onClickSubmit = this.onClickSubmit.bind(this);
         this.isPasswordConfirmValid = this.isPasswordConfirmValid.bind(this);
@@ -37,7 +43,7 @@ class ResetPassword extends Component {
                 data: {
                     token: this.props.token,
                     action: 'companyResetPassword',
-                    data: JSON.stringify({email: this.state.email})
+                    data: JSON.stringify({email: this.state.email, password: this.state.password})
                 },
                 url: 'public/process.php',
                 success: function(res) {

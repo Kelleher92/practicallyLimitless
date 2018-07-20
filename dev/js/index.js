@@ -25,6 +25,10 @@ class App extends Component {
         this.setLoggedOut = this.setLoggedOut.bind(this);
     }   
 
+    setLoggedIn() {
+        this.setState({isLoggedIn: true});
+    } 
+
     setLoggedOut() {
         $.ajax({
             method: 'POST',
@@ -40,6 +44,8 @@ class App extends Component {
                 console.log(res);
             }
         });
+
+        this.setState({isLoggedIn: false});
     } 
 
 	render() {
@@ -59,7 +65,7 @@ class App extends Component {
                         )}/>
 
                         <Route exact={true} path="/company-login" render={() => (
-                            <CompanyLogin token={this.token}/>
+                            <CompanyLogin token={this.token} setLoggedIn={this.setLoggedIn}/>
                         )}/>
 
                         <Route exact={true} path="/company-forgot-password" render={() => (

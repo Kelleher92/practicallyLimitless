@@ -20,6 +20,7 @@ class CompanyLogin extends Component {
     }
 
     onClickLogin() {
+        var me = this;
         let { history } = this.props;
 
         $.ajax({
@@ -33,8 +34,9 @@ class CompanyLogin extends Component {
             success: function(res) {
                 console.log(res);
                 res = JSON.parse(res);
-                
+
                 if(res.responseCode === 200) {
+                    me.props.setLoggedin();
                     history.push('/dashboard');
                 } else {
                     alert(res.message);
