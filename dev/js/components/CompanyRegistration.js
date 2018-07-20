@@ -50,6 +50,8 @@ class CompanyRegistration extends Component {
     }
 
     registerCompany() {
+        var me = this;
+
         $.ajax({
             method: 'POST',
             data: {
@@ -60,7 +62,11 @@ class CompanyRegistration extends Component {
             url: 'public/process.php',
             success: function(res) {
                 res = JSON.parse(res);
-                console.log(res.message);
+                if(res.responseCode === 200) {
+                    this.navigateTo('/');
+                } else {
+                    alert(res.message);
+                }
             },
             error: function(res) {
                 console.log(res);

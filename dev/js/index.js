@@ -6,6 +6,7 @@ import $ from 'jquery';
 import Home from './pages/Home'; 
 import PrivateRoute from './pages/PrivateRoute';
 import Verify from './pages/Verify';
+import Reset from './pages/Reset';
 import Dashboard from './pages/Dashboard';
 import PreLoader from './components/PreLoader';
 import CompanyRegistration from './components/CompanyRegistration.js';
@@ -61,6 +62,10 @@ class App extends Component {
 
                         <Route exact={true} path="/verify" render={(props) => (
                             <Verify {...props} token={this.token} />
+                        )} />
+
+                        <Route exact={true} path="/resey" render={(props) => (
+                            <Reset {...props} token={this.token} />
                         )} />
 
                         <PrivateRoute path="/dashboard" token={this.token} component={Dashboard} isLoggedIn={this.state.isLoggedIn} setLoggedOut={this.setLoggedOut}/>

@@ -4,7 +4,7 @@ import PreLoader from '../components/PreLoader';
 import qs from 'query-string';
 import $ from 'jquery';
 
-export default class Verify extends Component {
+export default class Reset extends Component {
         constructor(props) {
         super(props);
         
@@ -50,7 +50,7 @@ export default class Verify extends Component {
                 method: 'POST',
                 data: {
                     token: me.props.token,
-                    action: 'activateCompany',
+                    action: 'resetCompany',
                     data: JSON.stringify({email: me.state.email, token: me.state.token})
                 },
                 url: 'public/process.php',
@@ -71,9 +71,9 @@ export default class Verify extends Component {
                         me.setState({
                             checkComplete: true,
                             title: "Error!", 
-                            subTitle: "There was a problem with your verification. Please register again.",
-                            linkText: "Register",
-                            linkLocation: "/company-register"
+                            subTitle: "There was a problem with your verification. Please enter your  again.",
+                            linkText: "Forgot Password",
+                            linkLocation: "/company-forgot-password"
                         });
                     }
                     

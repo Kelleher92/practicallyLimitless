@@ -19,6 +19,7 @@ class CompanyLogin extends Component {
 
     onClickLogin() {
         let { history } = this.props;
+        
         $.ajax({
             method: 'POST',
             data: {
@@ -44,19 +45,18 @@ class CompanyLogin extends Component {
     render() {
         return (
             <div className="company-login-form">
-                 <div className="form-header"> Login </div>
-                 <div className="form-body">
-
-                 <div className="form-input__section">
+                <div className="form-header">Login</div>
+                <div className="form-body">
+                <div className="form-input__section">
                     <input id="CompanyName" type="text" name="CompanyName" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("CompanyEmail", e)}/>
-                 </div>
-                 <div className="form-input__section">
+                </div>
+                <div className="form-input__section">
                     <input id="CompanyPassword" type="password" name="CompanyPassword" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("CompanyPassword", e)}/>
-                 </div>
-                     <div className="form-submission__section">
-                        <button className="form__submit-button" onClick={this.onClickLogin}> Login </button>
-                     </div>    
-                 </div>                       
+                </div>
+                    <div className="form-submission__section">
+                        <button className="form__submit-button" onClick={this.onClickLogin}>Login</button>
+                    </div>    
+                </div>                       
             </div>
         );
     }
