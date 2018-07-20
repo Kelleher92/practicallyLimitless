@@ -3,30 +3,31 @@ import $ from 'jquery';
 import { Redirect, withRouter } from 'react-router-dom';
 
 
-class ForgottenPassword extends Component {
+class ForgotPassword extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            CompanyEmail: ''
+            email: ''
         };
-        this.onClickForgottenPassword = this.onClickForgottenPassword.bind(this);
+        this.onClickSubmit = this.onClickSubmit.bind(this);
     }
 
     handleChange(name, e) {
         this.setState({[name]: e.target.value});
     }
 
-    onClickForgottenPassword() {
+    onClickSubmit() {
         let { history } = this.props;
         $.ajax({
             method: 'POST',
             data: {
                 token: this.props.token,
                 action: 'companyForgotPassword',
-                data: JSON.stringify({email: this.state.CompanyEmail})
+                data: JSON.stringify({email: this.state.email})
             },
             url: 'public/process.php',
             success: function(res) {
+                console.log(res);
                 res = JSON.parse(res);
                 if(res.responseCode === 200) {
                     history.push('/');
@@ -44,13 +45,13 @@ class ForgottenPassword extends Component {
     render() {
         return (
             <div className="forgotten-password">
-                 <div className="form-header"> Forgot Password </div>
+                 <div className="form-header">Forgot Password</div>
                  <div className="form-body">
                  <div className="form-input__section">
-                    <input id="CompanyEmail" type="text" name="CompanyEmail" placeholder="Company Email" className="form-input__value" onChange={(e) => this.handleChange("CompanyEmail", e)}/>
+                    <input type="text" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)}/>
                  </div>
                  <div className="form-submission__section">
-                    <button className="form__submit-button" onClick={this.onClickForgottenPassword}> Submit </button>
+                    <button className="form__submit-button" onClick={this.onClickSubmit}>Submit</button>
                  </div>    
                  </div>                       
             </div>
@@ -58,4 +59,4 @@ class ForgottenPassword extends Component {
     }
 }
 
-export default withRouter(ForgottenPassword);
+export default withRouter(ForgotPassword);
