@@ -76,9 +76,9 @@
 
 			$res = new Response_Obj();
 
-			if (!isset($result) || empty($result)){
+			if(!isset($result) || empty($result)) {
 				$res->responseCode = 400;
-				$res->message = "Your username or password is invalid.";
+				$res->message = "Your username is not recognised.";
 			} else {
 				$user = $results[0];
 
@@ -89,7 +89,7 @@
 				else{
 					$hash = $user['password'];
 
-					if(password_verify($pword, $hash)) {
+					if(password_verify($password, $hash)) {
 						$_SESSION['company'] = array(
 							'id' => $user['id'],
 							'name' => $user['name'],
@@ -99,7 +99,7 @@
 						$res->message = 'Login successful.';
 					} else {
 						$res->responseCode = 400;
-						$res->message = 'Your username or password is invalid.';
+						$res->message = 'Your username and password combination is invalid.';
 					}
 				}
 			}
