@@ -7,11 +7,11 @@ class CompanyRegistration extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            CompanyName: '',
-            CompanyAddress: '',
-            CompanyEmail: '',
-            CompanyPassword: '',
-            CompanyPasswordCheck: ''
+            name: '',
+            address: '',
+            email: '',
+            password: '',
+            confirmPassword: ''
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -23,20 +23,20 @@ class CompanyRegistration extends Component {
         this.setState({[name]: e.target.value});
     }
 
-    passwordRepeatedCorrectly() {
-        return this.state.CompanyPassword === this.state.CompanyPasswordCheck;
+    isPasswordConfirmValid() {
+        return this.state.password === this.state.confirmPassword;
     }
 
     isValidName() {
-        return isValidString(this.state.CompanyName);
+        return isValidString(this.state.name);
     }
    
     isValidAddress() {
-        return isValidString(this.state.CompanyAddress);
+        return isValidString(this.state.address);
     }
    
     isSubmitable() {
-        return this.isValidName() && this.isValidAddress() && this.passwordRepeatedCorrectly() && isValidPassword(this.state.CompanyPassword) && isValidEmail(this.state.CompanyEmail);
+        return this.isValidName() && this.isValidAddress() && isValidEmail(this.state.email) && isValidPassword(this.state.password) && this.isPasswordConfirmValid();
     }
    
     onSubmit() {
@@ -57,7 +57,7 @@ class CompanyRegistration extends Component {
             data: {
                 token: this.props.token,
                 action: 'registerCompany',
-                data: JSON.stringify({name: this.state.CompanyName, email: this.state.CompanyEmail, address: this.state.CompanyAddress, password: this.state.CompanyPassword})
+                data: JSON.stringify({name: this.state.name, email: this.state.email, address: this.state.address, password: this.state.password})
             },
             url: 'public/process.php',
             success: function(res) {
@@ -81,19 +81,19 @@ class CompanyRegistration extends Component {
                 <div className="form-body">
 
                     <div className="form-input__section">
-                        <input id="CompanyName" type="text" name="CompanyName" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("CompanyName", e)}/>
+                        <input type="text" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("name", e)}/>
                     </div>
                     <div className="form-input__section">
-                        <input id="CompanyAddress" type="text" name="CompanyAddress" placeholder="Company Address" className="form-input__value" onChange={(e) => this.handleChange("CompanyAddress", e)}/>
+                        <input type="text" placeholder="Company Address" className="form-input__value" onChange={(e) => this.handleChange("address", e)}/>
                     </div>
                     <div className="form-input__section">
-                        <input id="CompanyEmail" type="email" name="CompanyEmail" placeholder="Email Address" className="form-input__value" onChange={(e) => this.handleChange("CompanyEmail", e)}/>
+                        <input type="email" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)}/>
                     </div>
                         <div className="form-input__section">
-                        <input id="CompanyPassword" type="password" name="CompanyPassword" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("CompanyPassword", e)}/>
+                        <input type="password" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)}/>
                     </div>
                     <div className="form-input__section">
-                        <input id="CompanyPasswordCheck" type="password" name="CompanyPasswordCheck" placeholder="Password Verification" className="form-input__value" onChange={(e) => this.handleChange("CompanyPasswordCheck", e)}/>
+                        <input type="password" placeholder="Confirm Password" className="form-input__value" onChange={(e) => this.handleChange("confirmPassword", e)}/>
                     </div>
                     <div className="form-submission__section">
                         <button className="form__submit-button" onClick={this.registerCompany}>Submit</button>
