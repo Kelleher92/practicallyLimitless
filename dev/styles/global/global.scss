@@ -5,6 +5,22 @@
 
 body{
 	font-size: 16px;
-	background-color: #f3f3f3;
+    background-image: url('../../images/green-background.jpg');
 	font-family: "Roboto" !important;
+}
+
+$steps: 51;
+@for $i from 0 to $steps{
+	.pl-buffer-bottom-#{$i} {
+		margin-bottom: #{$i}px!important;
+	}
+	.pl-buffer-top-#{$i} {
+		margin-top: #{$i}px!important;
+	}
+	.pl-buffer-right-#{$i} {
+		margin-right: #{$i}px!important;
+	}
+	.pl-buffer-left-#{$i} {
+		margin-left: #{$i}px!important;
+	}
 }

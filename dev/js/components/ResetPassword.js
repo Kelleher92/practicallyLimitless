@@ -64,19 +64,21 @@ class ResetPassword extends Component {
     
     render() {
         return (
-            <div className="forgotten-password">
-                <div className="form-header">Set New Password</div>
-                <div className="form-body">
-                    <div className="form-input__section">
-                        <input type="password" placeholder="New Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)}/>
-                    </div>                 
-                    <div className="form-input__section">
-                        <input type="password" placeholder="Confirm Password" className="form-input__value" onChange={(e) => this.handleChange("confirmPassword", e)}/>
-                    </div>
-                    <div className="form-submission__section">
-                        <button className="form__submit-button" onClick={this.onClickSubmit}>Submit</button>
-                    </div>    
-                </div>                       
+            <div className="form__wrap">
+                <div className="form__container">
+                    <div className="form-header">Set New Password</div>
+                    <div className="form-body">
+                        <div className="form-input__section">
+                            <input type="password" placeholder="New Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)}/>
+                        </div>                 
+                        <div className="form-input__section">
+                            <input type="password" placeholder="Confirm Password" className="form-input__value" onChange={(e) => this.handleChange("confirmPassword", e)}/>
+                        </div>
+                        <div className="form-submission__section">
+                            <button className="form__submit-button" onClick={this.onClickSubmit}>Submit</button>
+                        </div>    
+                    </div>                       
+                </div>
             </div>
         );
     }
