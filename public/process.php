@@ -56,6 +56,7 @@
 
 		else if($action === 'companyResetPassword') {
 			$data = json_decode($_POST['data']);
+			var_dump($data);
 			$admin = new Admin();
 			$res = $admin->companyResetPassword($data->email, $data->password);
 			echo json_encode($res);
