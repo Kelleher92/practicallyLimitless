@@ -9,6 +9,7 @@ import Verify from './pages/Verify';
 import Dashboard from './pages/Dashboard';
 import PreLoader from './components/PreLoader';
 import CompanyRegistration from './components/CompanyRegistration.js';
+import CompanyLogin from './components/CompanyLogin.js'
 
 class App extends Component {
     constructor() {
@@ -52,6 +53,10 @@ class App extends Component {
                         )}/>
                         <Route exact={true} path="/company-registration" render={() => (
                             <CompanyRegistration token={this.token}/>
+                        )}/>
+
+                        <Route exact={true} path="/company-login" render={() => (
+                            <CompanyLogin token={this.token}/>
                         )}/>
 
                         <Route exact={true} path="/verify" render={(props) => (

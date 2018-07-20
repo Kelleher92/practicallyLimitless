@@ -34,19 +34,19 @@
 
 				try {
 				    $this->getDb()->beginTransaction();
-					$this->getDb()->exec($query . $values);		
+				    $this->getDb()->exec($query . $values);		
 				    $this->getDb()->commit();
 
 				    $mh = new Mail_Handler();
-					$mh->sendVerificationEmail($email, $this->generateVefificationLink($email, $token));
+				    $mh->sendVerificationEmail($email, $this->generateVefificationLink($email, $token));
 
-					$res->responseCode = 200;
-					$res->message = "Your registration was successful. Check your inbox!";
+				    $res->responseCode = 200;
+				    $res->message = "Your registration was successful. Check your inbox!";
 			    }
 				catch(PDOException $e) {
 				    $this->getDb()->rollback();
 				    $res->responseCode = 400;
-					$res->message = "Error: " . $e->getMessage();
+				    $res->message = "Error: " . $e->getMessage();
 			    }
 			}
 			else {
@@ -72,31 +72,36 @@
 				`email` = '$uname' 
 				LIMIT 1";
 
-			$user = $this->query($sql)[0];
+			$result = $this->query($sql);
 
 			$res = new Response_Obj();
 
-			if (!isset($user) || empty($user)){
+			if (!isset($result) || empty($result)){
 				$res->responseCode = 400;
 				$res->message = "Your username or password is invalid.";
-			} else if(!boolVal($user['isActivated'])) {
-				$res->responseCode = 400;
-				$res->message = 'Your account is not activated yet. Please check your email.';
-			}
-
-			$hash = $user['password'];
-
-			if(password_verify($pword, $hash)) {
-				$_SESSION['company'] = array(
-					'id' => $user['id'],
-					'name' => $user['name'],
-					'email' => $user['email']
-				);
-				$res->responseCode = 200;
-				$res->message = '';
 			} else {
-				$res->responseCode = 400;
-				$res->message = 'Your username or password is invalid.';
+				$user = $result[0];
+
+				if(!boolVal($user['isActivated'])) {
+					$res->responseCode = 400;
+					$res->message = 'Your account is not activated yet. Please check your email.';
+				}
+				else{
+					$hash = $user['password'];
+
+					if(password_verify($pword, $hash)) {
+						$_SESSION['company'] = array(
+							'id' => $user['id'],
+							'name' => $user['name'],
+							'email' => $user['email']
+						);
+						$res->responseCode = 200;
+						$res->message = 'Login successful.';
+					} else {
+						$res->responseCode = 400;
+						$res->message = 'Your username or password is invalid.';
+					}
+				}
 			}
 
 			return $res;
