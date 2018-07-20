@@ -45,10 +45,6 @@ class CompanyRegistration extends Component {
         this.navigateTo('/pl');
     }
 
-    onCancel() {
-        this.navigateTo('/');
-    }
-
     navigateTo(path) {
         let { history } = this.props;
         history.push(path);
@@ -96,7 +92,6 @@ class CompanyRegistration extends Component {
                      </div>
                      <div className="form-submission__section">
                          <button className="form__submit-button" onClick={this.registerCompany}>Submit</button>
-                         <button className="form__cancel-button" onClick={this.onCancel}>Cancel</button> 
                      </div>    
                  </div>                       
             </div>
