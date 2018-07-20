@@ -62,7 +62,6 @@ class CompanyLogin extends Component {
                      </div>
                      <div className="form-submission__section">
                         <button className="form__submit-button" onClick={this.onClickLogin}> Login </button>
-                        <button className="form__submit-button" onClick={this.onClickForgottenPassword}> Forgotten Password </button>
                      </div>    
                  </div>                       
             </div>

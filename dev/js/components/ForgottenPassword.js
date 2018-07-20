@@ -31,7 +31,6 @@ class ForgottenPassword extends Component {
                 if(res.responseCode === 200) {
                     history.push('/');
                 } else {
-                    alert(res.message);
                     console.log(res.responseCode)
                 }
             },
