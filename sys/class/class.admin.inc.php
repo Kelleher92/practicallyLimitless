@@ -72,7 +72,7 @@
 				`email` = '$uname' 
 				LIMIT 1";
 
-			$result = $this->query($sql);
+			$results = $this->query($sql);
 
 			$res = new Response_Obj();
 
@@ -80,7 +80,7 @@
 				$res->responseCode = 400;
 				$res->message = "Your username or password is invalid.";
 			} else {
-				$user = $result[0];
+				$user = $results[0];
 
 				if(!boolVal($user['isActivated'])) {
 					$res->responseCode = 400;
@@ -123,16 +123,14 @@
 
 			$sql = "SELECT `email` FROM `company` WHERE `email` = '$email' LIMIT 1";
 
-			$user = $this->query($sql)[0];
+			$user = $this->query($sql);
 
-			$res = new Response_Obj();
-
-			if(!empty($user)) {
-				$res->message = 'E-mail already registered.';
-				$res->responseCode = 400;
-			} else {
+			if(empty($user)) {
 				$res->message = 'E-mail ok.';
 				$res->responseCode = 200;
+			} else {
+				$res->message = 'E-mail already registered.';
+				$res->responseCode = 400;
 			}
 
 			return $res;

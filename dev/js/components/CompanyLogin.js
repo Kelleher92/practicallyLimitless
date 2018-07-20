@@ -7,12 +7,12 @@ class CompanyLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            CompanyEmail: '',
-            CompanyPassword: ''
+            email: '',
+            password: ''
         };
         
         this.onClickLogin = this.onClickLogin.bind(this);
-        this.onClickForgottenPassword = this.onClickForgottenPassword.bind(this);
+        this.onClickForgotPassword = this.onClickForgotPassword.bind(this);
     }
 
     handleChange(name, e) {
@@ -21,12 +21,13 @@ class CompanyLogin extends Component {
 
     onClickLogin() {
         let { history } = this.props;
+
         $.ajax({
             method: 'POST',
             data: {
                 token: this.props.token,
                 action: 'loginCompany',
-                data: JSON.stringify({email: this.state.CompanyEmail, password: this.state.CompanyPassword})
+                data: JSON.stringify({email: this.state.email, password: this.state.password})
             },
             url: 'public/process.php',
             success: function(res) {
@@ -43,27 +44,27 @@ class CompanyLogin extends Component {
         });
     }
 
-    onClickForgottenPassword(){
+    onClickForgotPassword() {
         let { history } = this.props;
         history.push('/company-forgot-password');
-
     }
     
     render() {
         return (
             <div className="company-login-form">
-                 <div className="form-header"> Login </div>
-                 <div className="form-body">
-                     <div className="form-input__section">
-                        <input id="CompanyName" type="text" name="CompanyName" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("CompanyEmail", e)}/>
-                     </div>
-                     <div className="form-input__section">
-                        <input id="CompanyPassword" type="password" name="CompanyPassword" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("CompanyPassword", e)}/>
-                     </div>
-                     <div className="form-submission__section">
-                        <button className="form__submit-button" onClick={this.onClickLogin}> Login </button>
-                     </div>    
-                 </div>                       
+                <div className="form-header">Login</div>
+                <div className="form-body">
+                <div className="form-input__section">
+                    <input type="text" placeholder="E-mail address" className="form-input__value" onChange={(e) => this.handleChange("email", e)}/>
+                </div>
+                <div className="form-input__section">
+                    <input type="password" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)}/>
+                </div>
+                    <div className="form-submission__section">
+                        <button className="form__submit-button" onClick={this.onClickLogin}>Login</button>
+                        <button className="form__submit-button" onClick={this.onClickForgotPassword}>Forgot Password</button>
+                    </div>    
+                </div>                       
             </div>
         );
     }
