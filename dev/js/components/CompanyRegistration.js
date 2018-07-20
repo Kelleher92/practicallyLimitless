@@ -16,7 +16,6 @@ class CompanyRegistration extends Component {
 
         this.onSubmit = this.onSubmit.bind(this);
         this.registerCompany = this.registerCompany.bind(this);
-        this.onCancel = this.onCancel.bind(this);
         this.navigateTo = this.navigateTo.bind(this);
     }
 
