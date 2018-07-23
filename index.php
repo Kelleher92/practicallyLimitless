@@ -11,8 +11,8 @@
 	    <title></title>
 	    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
-		<link rel="stylesheet" href="./public/css/global/global.css"> 
 		<link rel="stylesheet" href="./public/css/lib/bootstrap.min.css">  
+		<link rel="stylesheet" href="./public/css/global/global.css"> 
 	</head>
 
 	<body>

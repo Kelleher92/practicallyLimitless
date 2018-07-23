@@ -85,29 +85,30 @@ class CompanyRegistration extends Component {
     
     render() {
         return (
-            <div className="company-registration-form">
-                <div className="form-header">Company Registration Form</div>
-                <div className="form-body">
-                    <div className="form-input__section">
-                        <input type="text" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("name", e)}/>
-                    </div>
-                    <div className="form-input__section">
-                        <input type="text" placeholder="Company Address" className="form-input__value" onChange={(e) => this.handleChange("address", e)}/>
-                        <a target ="_blank()" href="/location-map">Choose from map</a>
-                    </div>
-                    <div className="form-input__section">
-                        <input type="email" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)}/>
-                    </div>
+            <div className="form__wrap">
+                <div className="form__container">
+                    <div className="form-header">Company Registration</div>
+                    <div className="form-body">
                         <div className="form-input__section">
-                        <input type="password" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)}/>
+                            <input type="text" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("name", e)}/>
+                        </div>
+                        <div className="form-input__section">
+                            <input type="text" placeholder="Company Address" className="form-input__value" onChange={(e) => this.handleChange("address", e)}/>
+                        </div>
+                        <div className="form-input__section">
+                            <input type="email" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)}/>
+                        </div>
+                            <div className="form-input__section">
+                            <input type="password" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)}/>
+                        </div>
+                        <div className="form-input__section">
+                            <input type="password" placeholder="Confirm Password" className="form-input__value" onChange={(e) => this.handleChange("confirmPassword", e)}/>
+                        </div>
+                        <div className="form-submission__section">
+                            <button className="form__submit-button" onClick={this.registerCompany}>Submit</button>
+                        </div>    
                     </div>
-                    <div className="form-input__section">
-                        <input type="password" placeholder="Confirm Password" className="form-input__value" onChange={(e) => this.handleChange("confirmPassword", e)}/>
-                    </div>
-                    <div className="form-submission__section">
-                        <button className="form__submit-button" onClick={this.registerCompany}>Submit</button>
-                    </div>    
-                </div>                       
+                </div>
             </div>
         );
     }

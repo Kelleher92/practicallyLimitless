@@ -23,7 +23,12 @@ class App extends Component {
 
         this.token = $('#session-token').val();
         this.setLoggedOut = this.setLoggedOut.bind(this);
+
     }   
+
+    setLoggedIn() {
+        this.setState({isLoggedIn: true});
+    } 
 
     setLoggedOut() {
         $.ajax({
@@ -40,6 +45,8 @@ class App extends Component {
                 console.log(res);
             }
         });
+
+        this.setState({isLoggedIn: false});
     } 
 
 	render() {
@@ -54,20 +61,20 @@ class App extends Component {
                         <Route exact={true} path="/pl" render={() => (
                             <PreLoader  />
                         )}/>
-                        <Route exact={true} path="/company-registration" render={() => (
-                            <CompanyRegistration token={this.token}/>
+                        <Route exact={true} path="/company-registration" render={(props) => (
+                            <CompanyRegistration {...props} token={this.token}/>
                         )}/>
 
-                        <Route exact={true} path="/company-login" render={() => (
-                            <CompanyLogin token={this.token}/>
+                        <Route exact={true} path="/company-login" render={(props) => (
+                            <CompanyLogin {...props} token={this.token} setLoggedIn={this.setLoggedIn}/>
                         )}/>
 
-                        <Route exact={true} path="/company-forgot-password" render={() => (
-                            <ForgotPassword token={this.token}/>
+                        <Route exact={true} path="/company-forgot-password" render={(props) => (
+                            <ForgotPassword {...props} token={this.token}/>
                         )}/>
 
                         <Route exact={true} path="/company-reset-password" render={(props) => (
-                            <ResetPassword token={this.token} />
+                            <ResetPassword {...props} token={this.token} />
                         )} />
 
                         <Route exact={true} path="/verify" render={(props) => (
