@@ -47,16 +47,16 @@ class Reset extends Component {
         let me = this;
         let { history } = this.props;
 
-        setTimeout(function() { 
-            $.ajax({
-                method: 'POST',
-                data: {
-                    token: me.props.token,
-                    action: 'resetCompany',
-                    data: JSON.stringify({email: me.state.email, token: me.state.token})
-                },
-                url: 'public/process.php',
-                success: function(res) {
+        $.ajax({
+            method: 'POST',
+            data: {
+                token: me.props.token,
+                action: 'resetCompany',
+                data: JSON.stringify({email: me.state.email, token: me.state.token})
+            },
+            url: 'public/process.php',
+            success: function(res) {
+                setTimeout(function() { 
                     res = JSON.parse(res);
 
                     if(res.responseCode === 200) {
@@ -73,16 +73,16 @@ class Reset extends Component {
                             linkLocation: "/company-forgot-password"
                         });
                     }
-                    
-                },
-                error: function(res) {
+                }, 500);
+            },
+            error: function(res) {
+                setTimeout(function() { 
                     me.setState({
                         checkComplete: true
                     });
-                }
-            });
-            
-        }, 500);
+                }, 500);
+            }
+        });
     }
 
     render() {

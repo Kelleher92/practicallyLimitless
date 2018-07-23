@@ -31,7 +31,6 @@ class App extends Component {
     componentWillMount() {
         window.callback = (loggedInState) => {
             this.setState({isLoggedIn: loggedInState});  
-            console.log(this.state.isLoggedIn);
         };
 
         $.ajax({
@@ -86,7 +85,6 @@ class App extends Component {
             },
             url: 'public/process.php',
             success: function(res) {
-                console.log(res);
                 window.callback(false);
             },
             error: function(res) {

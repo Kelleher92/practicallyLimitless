@@ -62,7 +62,7 @@ class CompanyRegistration extends Component {
     registerCompany() {
         if(this.isSubmitable) {
             let me = this;
-            me.setState({hasStartedRegistrationCheck: true});  // enable the pre-loader
+            me.setState({hasStartedRegistrationCheck: true});  
             
             $.ajax({
                 method: 'POST',
@@ -73,10 +73,9 @@ class CompanyRegistration extends Component {
                 },
                 url: 'public/process.php',
                 success: function(res) {
-                    // set timeout for minimum 1 second so that per-loader does not flash
                     setTimeout(function() { 
                         res = JSON.parse(res);
-                        console.log(res.message);
+
                         if(res.responseCode === 200) {
                             me.setState({
                                 isVerificationCheckComplete: true,
@@ -103,7 +102,6 @@ class CompanyRegistration extends Component {
         }
     }
     
-    
     render() {
         return (
             <div className="form__wrap">
@@ -113,9 +111,9 @@ class CompanyRegistration extends Component {
                             <VerificationNotice 
                                 verificationStatus={true} 
                                 title="success!" 
-                                subTitle="Registration successful. Check your email!"
-                                linkText="return home"
-                                linkLocation="/home" />
+                                subTitle="Registration successful. Check your inbox!"
+                                linkText="Return Home"
+                                linkLocation="/" />
                         ) : (
                             <VerificationNotice 
                                 verificationStatus={false} 
@@ -153,7 +151,7 @@ class CompanyRegistration extends Component {
                     </div>
                 )}
             </div>
-        )
+        );
     }
 }
 
