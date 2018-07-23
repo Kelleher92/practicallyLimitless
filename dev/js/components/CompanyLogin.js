@@ -19,11 +19,18 @@ class CompanyLogin extends Component {
         this.setState({[name]: e.target.value});
     }
 
-    onClickLogin() {
+    onClickLogin() { 
         let { history } = this.props;
 
-        this.props.setLoggedIn(this.state.email, this.state.password);
-        history.push('/dashboard');
+        this.props.setLoggedIn(this.state.email, this.state.password).then(function(res) {
+            res = JSON.parse(res);
+
+            if(res.responseCode === 200) {
+                history.push('/dashboard');
+            } else {
+                alert(res.message);
+            }
+        });
     }
 
     onClickForgotPassword() {

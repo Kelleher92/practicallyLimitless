@@ -51,7 +51,7 @@ class App extends Component {
     }
 
     setLoggedIn(email, password) {
-        $.ajax({
+        return $.ajax({
             method: 'POST',
             data: {
                 token: this.token,
@@ -66,12 +66,10 @@ class App extends Component {
                     window.callback(true);
                 } else {
                     window.callback(false);
-                    alert(res.message);
                 }
             },
             error: function(res) {
                 console.log(res);
-                window.callback(false);
             }
         });
     } 

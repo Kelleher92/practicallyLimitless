@@ -60,7 +60,7 @@ class CompanyRegistration extends Component {
     }
 
     registerCompany() {
-        if(this.isSubmitable) {
+        if(this.isSubmitable()) {
             let me = this;
             me.setState({hasStartedRegistrationCheck: true});  
             

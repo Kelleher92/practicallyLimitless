@@ -39,7 +39,7 @@ class ResetPassword extends Component {
     }
 
     onClickSubmit() {
-        if(this.isSubmitable) {
+        if(this.isSubmitable()) {
             let me = this;
             me.setState({hasStartedRegistrationCheck: true});  
 
