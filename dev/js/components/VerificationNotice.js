@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 class VerificationNotice extends Component {
     render() {
         let status = this.props.verificationStatus;
-        return(
+        return (
             <div className={"verify-email__container " + (status ? "success": "fail")}>
                 <div className={"verify-email__icon " + (status ? "success": "fail")}>
                     <i className={"far " + (status ? "fa-thumbs-up" : "fa-thumbs-down")}></i>

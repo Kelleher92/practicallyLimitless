@@ -31,14 +31,7 @@
 		else if($action === 'logoutCompany') {
 			$admin = new Admin();
 			$admin->logoutCompany();			
-		} 	
-
-		else if($action === 'companyVerifyEmail') {
-			$data = json_decode($_POST['data']);
-			$admin = new Admin();
-			$res = $admin->companyVerifyEmail($data->email);			
-			echo json_encode($res);
-		} 	
+		} 	 	
 
 		else if($action === 'activateCompany') { 
 			$data = json_decode($_POST['data']);
@@ -56,14 +49,14 @@
 
 		else if($action === 'resetCompany') {
 			$data = json_decode($_POST['data']);
-			$admin = new Password();
+			$admin = new Admin();
 			$res = $admin->companyVerifyResetToken($data->email, $data->token);
 			echo json_encode($res);
 		} 
 
 		else if($action === 'companyResetPassword') {
 			$data = json_decode($_POST['data']);
-			$admin = new Password();
+			$admin = new Admin();
 			$res = $admin->companyResetPassword($data->email, $data->password);
 			echo json_encode($res);
 		} 
