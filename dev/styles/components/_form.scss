@@ -1,0 +1,93 @@
+.form__wrap{
+    height: 100%;
+    width: 100%;
+}
+
+.form__container{
+    border: solid 0.5px $black;
+    border-radius: 5px;
+    background-color: $form-background;
+    width: 400px;
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%); 
+}
+
+.form-header{
+    font-size: 38px;
+    color: $white;
+    text-align: center;
+}
+
+.form-body{
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.form-input__heading{
+    font-size: 30px;
+    color: $white;
+}
+
+.form-input__section{
+    padding-top: 15px;
+    margin: 0 auto;
+    width: 90%;
+}
+
+.form-input__label{
+    font-size: 25px;
+    padding-right: 15px;
+}
+
+.form-input__value{
+    color: $white;
+    background: $form-background;
+    font-size: 25px;
+    border: 0.5px solid $black;
+    border-radius: 2px;
+    padding: 2px;
+}
+
+.form-submission__section{
+    padding-top: 30px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.form__submit-button{
+    width: 275px; 
+    height: 40px;  
+    background-color: #676c75; 
+    color: $white;
+    font-size: 25px;
+    border-radius: 10px; 
+    margin: auto;
+    cursor: pointer;
+}
+
+.form__submit-link{
+    background: none;
+    color: $black;
+    font-size: 15px;
+    margin: auto;
+    cursor: pointer;
+}
+
+@media (max-width: $mobile-break-point){
+    .form__submit-button{
+        width: 105px; 
+        height: 50px;  
+    }
+
+    .form__container{
+        width: 100%;
+        position: relative;
+        left: 0;
+        transform: none;
+    }
+}

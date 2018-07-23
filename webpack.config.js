@@ -10,9 +10,6 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        // use: {
-        //   loader: "babel-loader"
-        // }
         loader: 'babel-loader',
         query: {
           plugins:[ 'transform-object-rest-spread' ]
