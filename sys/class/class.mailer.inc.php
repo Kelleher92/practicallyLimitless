@@ -5,7 +5,7 @@
 	
 	use PHPMailer\PHPMailer\PHPMailer;
 	use PHPMailer\PHPMailer\Exception;
-	class Mail_Handler {
+	class Mailer {
 		public function sendVerificationEmail($email, $verificationLink) {
 			$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 			try {

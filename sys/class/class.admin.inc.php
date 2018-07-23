@@ -37,7 +37,7 @@
 				    $this->getDb()->exec($query . $values);		
 				    $this->getDb()->commit();
 
-				    $mh = new Mail_Handler();
+				    $mh = new Mailer();
 				    $mh->sendVerificationEmail($email, $this->generateVefificationLink($email, $token));
 
 				    $res->responseCode = 200;
@@ -201,7 +201,7 @@
 					$this->getDb()->exec($sql);		
 				    $this->getDb()->commit();
 
-				    $mh = new Mail_Handler();
+				    $mh = new Mailer();
 					$mh->sendResetPasswordEmail($email, $this->generateResetLink($email, $token));
 
 					$res->message = 'Reset password was successful. Check your inbox!';
