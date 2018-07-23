@@ -1,5 +1,4 @@
-
-.pre-loader-bounce__wrapper {
+.pre-loader-bounce__wrapper{
     height: 100vh;
     display: flex;
     flex-direction: row;
@@ -7,19 +6,18 @@
     justify-content: space-around;
 }
 
-
-.pre-loader-bounce__balls {
+.pre-loader-bounce__balls{
     position: relative;
     width: 170px;
     height: 110px;
     top: 30%;
 
-    &:before, &:after {
+    &:before, &:after{
         position: absolute;
         content: "";
     }
     
-    &:after {
+    &:after{
         height: 20px;
         width: 20px;
         background-color: red;
@@ -30,7 +28,7 @@
         animation-direction: alternate;
     }
     
-    &:before {
+    &:before{
         height: 20px;
         width: 20px;
         background-color: darkslategray;
@@ -44,7 +42,7 @@
     }
 }
 
-@keyframes pre-loader-bounce {
+@keyframes pre-loader-bounce{
     0% {
         height: 24px;
         transform: translateY(0px);
@@ -60,10 +58,8 @@
     }
 }
 
-@keyframes slide-sideways {
-    
+@keyframes slide-sideways{   
     50% {
         transform: translateX(150px);
     }
 }
-
