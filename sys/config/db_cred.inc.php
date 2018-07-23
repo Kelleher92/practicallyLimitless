@@ -7,7 +7,6 @@
 	// $DB_ACCESS['DB_HOST'] = 'localhost';
 	$DB_ACCESS['DB_HOST'] = getenv('DB_HOST');
 	
-
 	/**
 	 * username
 	 */
