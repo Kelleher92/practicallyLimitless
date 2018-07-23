@@ -50,7 +50,7 @@ class CompanyRegistration extends Component {
         history.push(path);
     }
 
-    onClickMapChoice(){
+    onClickMapChoice() {
         //
         this.navigateTo('/location-map');
     }
