@@ -45,7 +45,7 @@ class CompanyLogin extends Component {
                     <div className="form-header">Login</div>
                     <div className="form-body">
                     <div className="form-input__section">
-                        <input type="text" placeholder="E-mail address" className="form-input__value" onChange={(e) => this.handleChange("email", e)}/>
+                        <input type="text" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)}/>
                     </div>
                     <div className="form-input__section">
                         <input type="password" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)}/>
