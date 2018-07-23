@@ -15,20 +15,19 @@ export class LocationMap extends Component {
         }
     }
 
-    getUserCurrentLocation(){
+    getUserCurrentLocation() {
 
     }
 
-    setUserLocationFromMap(){
+    setUserLocationFromMap() {
         // pass values from the map to the lat, lng
     }
 
-    mapClicked(){
+    mapClicked() {
         alert('Map was clicked');
     }
 
-
-    render(){
+    render() {
         return (
             <Map 
                 google={this.props.google} 
