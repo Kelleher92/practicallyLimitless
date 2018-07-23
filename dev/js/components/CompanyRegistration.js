@@ -15,6 +15,7 @@ class CompanyRegistration extends Component {
         };
 
         this.onSubmit = this.onSubmit.bind(this);
+        this.onClickMapChoice = this.onClickMapChoice.bind(this);
         this.navigateTo = this.navigateTo.bind(this);
         this.registerCompany = this.registerCompany.bind(this);
     }
@@ -47,6 +48,11 @@ class CompanyRegistration extends Component {
     navigateTo(path) {
         let { history } = this.props;
         history.push(path);
+    }
+
+    onClickMapChoice() {
+        //
+        this.navigateTo('/location-map');
     }
 
     registerCompany() {
