@@ -37,8 +37,8 @@
 					$this->getDb()->exec($query . $values);		
 				    $this->getDb()->commit();
 
-				    $mh = new Mail_Handler();
-					$mh->sendVerificationEmail($email, $this->generateVefificationLink($email, $token));
+				    // $mh = new Mail_Handler();
+					// $mh->sendVerificationEmail($email, $this->generateVefificationLink($email, $token));
 
 					$res->responseCode = 200;
 					$res->message = "Your registration was successful. Check your inbox!";

@@ -14,7 +14,7 @@ class CompanyRegistration extends Component {
             CompanyEmail: '',
             CompanyPassword: '',
             CompanyPasswordCheck: '',
-            hasCheckedRegistration: false,
+            hasStartedRegistrationCheck: false,
             isVerificationCheckComplete: false,
             wasRegistrationSuccessful: false
         };
@@ -46,9 +46,8 @@ class CompanyRegistration extends Component {
     }
    
     onSubmit() {
-        // this.registerCompany();
-        // this.navigateTo('/pl');
-        this.fakeRegister();
+        this.registerCompany();
+        // this.fakeRegister();
     }
 
     onCancel() {
@@ -61,6 +60,9 @@ class CompanyRegistration extends Component {
     }
 
     registerCompany() {
+        let me = this;
+        me.setState({hasStartedRegistrationCheck: true});  // enable the pre-loader
+        
         $.ajax({
             method: 'POST',
             data: {
@@ -70,34 +72,41 @@ class CompanyRegistration extends Component {
             },
             url: 'public/process.php',
             success: function(res) {
-                res = JSON.parse(res);
-                console.log(res.message);
+                // set timeout for minimum 1 second so that per-loader does not flash
+                setTimeout(function() { 
+                    console.log('xxx ', res);
+                    res = JSON.parse(res);
+                    console.log(res.message);
+                    if(res.responseCode === 200) {
+                        me.setState({
+                            isVerificationCheckComplete: true,
+                            wasRegistrationSuccessful: true
+                        });
+                    } else {
+                        me.setState({
+                            isVerificationCheckComplete: true,
+                            wasRegistrationSuccessful: false
+                        });
+                    }
+                }, 1000);
             },
             error: function(res) {
-                console.log(res);
+                setTimeout(function() { 
+                    console.log(res);
+                    me.setState({
+                        isVerificationCheckComplete: true,
+                        wasRegistrationSuccessful: false
+                    });
+                }, 1000);
             }
         });
     }
-
-
-    fakeRegister(){
-        let me = this;
-
-        // fake async registration check change for testing purposes
-        me.setState({hasCheckedRegistration: true});
-        setTimeout(function() { 
-            me.setState({
-                isVerificationCheckComplete: true,
-                wasRegistrationSuccessful: false
-            });
-            
-        }, 3000);
-    }
+    
     
     render() {
         return (
             <div>
-                {this.state.hasCheckedRegistration ? (
+                {this.state.hasStartedRegistrationCheck ? (
                     this.state.isVerificationCheckComplete ? (
                         this.state.wasRegistrationSuccessful ? (
                             <VerificationNotice 
