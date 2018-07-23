@@ -20,31 +20,10 @@ class CompanyLogin extends Component {
     }
 
     onClickLogin() {
-        var me = this;
         let { history } = this.props;
 
-        $.ajax({
-            method: 'POST',
-            data: {
-                token: this.props.token,
-                action: 'loginCompany',
-                data: JSON.stringify({email: this.state.email, password: this.state.password})
-            },
-            url: 'public/process.php',
-            success: function(res) {
-                res = JSON.parse(res);
-
-                if(res.responseCode === 200) {
-                    me.props.setLoggedIn();
-                    history.push('/dashboard');
-                } else {
-                    alert(res.message);
-                }
-            },
-            error: function(res) {
-                console.log(res);
-            }
-        });
+        this.props.setLoggedIn(this.state.email, this.state.password);
+        history.push('/dashboard');
     }
 
     onClickForgotPassword() {

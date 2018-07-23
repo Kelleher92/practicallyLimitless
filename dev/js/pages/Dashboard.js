@@ -12,20 +12,8 @@ class Dashboard extends Component {
 	onClickLogout() {
 		let { history } = this.props;
 
-		$.ajax({
-            method: 'POST',
-            data: {
-                token: this.props.token,
-                action: 'logoutCompany'
-            },
-            url: 'public/process.php',
-            success: function(res) {
-			    history.push('/');
-            },
-            error: function(res) {
-                console.log(res);
-            }
-        });
+        this.props.setLoggedOut();
+		history.push('/');
 	}
 
 	render() {

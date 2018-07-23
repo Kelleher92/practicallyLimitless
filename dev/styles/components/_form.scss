@@ -67,6 +67,7 @@
     font-size: 25px;
     border-radius: 10px; 
     margin: auto;
+    cursor: pointer;
 }
 
 .form__submit-link{
@@ -74,6 +75,7 @@
     color: $black;
     font-size: 15px;
     margin: auto;
+    cursor: pointer;
 }
 
 @media (max-width: $mobile-break-point){
@@ -88,5 +90,4 @@
         left: 0;
         transform: none;
     }
-
 }

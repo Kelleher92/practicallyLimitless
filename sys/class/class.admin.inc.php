@@ -137,6 +137,8 @@
 				'name' => '',
 				'email' => ''
 			);
+
+			echo 'Log out complete.';
 		}
 
 		private function fetchCompanyForActivation($email, $token) {

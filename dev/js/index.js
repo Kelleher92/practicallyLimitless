@@ -19,16 +19,62 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            isLoggedIn: $('#login-token').val() === 'true'
+            isLoggedIn: false
         };
 
         this.token = $('#session-token').val();
+        
         this.setLoggedOut = this.setLoggedOut.bind(this);
-
+        this.setLoggedIn = this.setLoggedIn.bind(this);
     }   
 
-    setLoggedIn() {
-        this.setState({isLoggedIn: true});
+    componentWillMount() {
+        window.callback = (loggedInState) => {
+            this.setState({isLoggedIn: loggedInState});  
+            console.log(this.state.isLoggedIn);
+        };
+
+        $.ajax({
+            method: 'POST',
+            data: {
+                token: this.token,
+                action: 'checkLoggedIn'
+            },
+            url: 'public/process.php',
+            success: function(res) {
+                res = JSON.parse(res);
+                window.callback(res.result);
+            },
+            error: function(res) {
+                window.callback(false);
+            }
+        });
+    }
+
+    setLoggedIn(email, password) {
+        $.ajax({
+            method: 'POST',
+            data: {
+                token: this.token,
+                action: 'loginCompany',
+                data: JSON.stringify({email:email, password: password})
+            },
+            url: 'public/process.php',
+            success: function(res) {
+                res = JSON.parse(res);
+
+                if(res.responseCode === 200) {
+                    window.callback(true);
+                } else {
+                    window.callback(false);
+                    alert(res.message);
+                }
+            },
+            error: function(res) {
+                console.log(res);
+                window.callback(false);
+            }
+        });
     } 
 
     setLoggedOut() {
@@ -41,13 +87,13 @@ class App extends Component {
             url: 'public/process.php',
             success: function(res) {
                 console.log(res);
+                window.callback(false);
             },
             error: function(res) {
                 console.log(res);
+                window.callback(false);
             }
         });
-
-        this.setState({isLoggedIn: false});
     } 
 
 	render() {

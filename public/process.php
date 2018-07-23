@@ -6,11 +6,15 @@
 		$action = $_POST['action'];
 
 		if($action === 'checkLoggedIn') {
-			if(!isset($_SESSION['company']['id']) || !isset($_SESSION['company']['email']) || !isset($_SESSION['company']['name'])) {
-				echo 'false';   
+			if(empty($_SESSION['company']['id']) || empty($_SESSION['company']['email']) || empty($_SESSION['company']['name'])) {
+				echo json_encode(array(
+    				'result' => false,
+				));  
 			}
-			else {
-				echo 'true';   
+			else { 
+				echo json_encode(array(
+	    			'result' => true,
+				));
 			}
 		} 
 
@@ -30,7 +34,7 @@
 
 		else if($action === 'logoutCompany') {
 			$admin = new Admin();
-			$admin->logoutCompany();			
+			echo $admin->logoutCompany();			
 		} 	 	
 
 		else if($action === 'activateCompany') { 
