@@ -15,6 +15,7 @@ class CompanyRegistration extends Component {
         };
 
         this.onSubmit = this.onSubmit.bind(this);
+        this.onClickMapChoice = this.onClickMapChoice.bind(this);
         this.navigateTo = this.navigateTo.bind(this);
         this.registerCompany = this.registerCompany.bind(this);
     }
@@ -47,6 +48,11 @@ class CompanyRegistration extends Component {
     navigateTo(path) {
         let { history } = this.props;
         history.push(path);
+    }
+
+    onClickMapChoice(){
+        //
+        this.navigateTo('/location-map');
     }
 
     registerCompany() {
@@ -87,6 +93,7 @@ class CompanyRegistration extends Component {
                     </div>
                     <div className="form-input__section">
                         <input type="text" placeholder="Company Address" className="form-input__value" onChange={(e) => this.handleChange("address", e)}/>
+                        <a target ="_blank()" href="/location-map">Choose from map</a>
                     </div>
                     <div className="form-input__section">
                         <input type="email" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)}/>
