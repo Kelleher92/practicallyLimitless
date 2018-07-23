@@ -30,9 +30,14 @@ body{
 }
 
 a{
-  color: #000;
+  color: #000 !important;
   cursor: pointer;
   text-decoration: none;
+}
+
+a:hover{
+  color: #000 !important;
+  text-decoration: none !important;
 }
 
 

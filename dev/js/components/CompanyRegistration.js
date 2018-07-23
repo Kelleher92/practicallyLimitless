@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import { isValidEmail, isValidPassword, isValidString } from '../helpers/utils.js';
+import VerificationNotice from './VerificationNotice.js';
+import PreLoaderBounce from './PreLoaderBounce.js';
 import $ from 'jquery';
 
 class CompanyRegistration extends Component {
@@ -11,7 +13,10 @@ class CompanyRegistration extends Component {
             address: '',
             email: '',
             password: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            hasStartedRegistrationCheck: false,
+            isVerificationCheckComplete: false,
+            wasRegistrationSuccessful: false
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -42,7 +47,6 @@ class CompanyRegistration extends Component {
    
     onSubmit() {
         this.registerCompany();
-        this.navigateTo('/pl');
     }
 
     navigateTo(path) {
@@ -57,8 +61,9 @@ class CompanyRegistration extends Component {
 
     registerCompany() {
         if(this.isSubmitable) {
-            var me = this;
-
+            let me = this;
+            me.setState({hasStartedRegistrationCheck: true});  // enable the pre-loader
+            
             $.ajax({
                 method: 'POST',
                 data: {
@@ -68,49 +73,87 @@ class CompanyRegistration extends Component {
                 },
                 url: 'public/process.php',
                 success: function(res) {
-                    res = JSON.parse(res);
-
-                    if(res.responseCode === 200) {
-                        me.navigateTo('/');
-                    } else {
-                        alert(res.message);
-                    }
+                    // set timeout for minimum 1 second so that per-loader does not flash
+                    setTimeout(function() { 
+                        res = JSON.parse(res);
+                        console.log(res.message);
+                        if(res.responseCode === 200) {
+                            me.setState({
+                                isVerificationCheckComplete: true,
+                                wasRegistrationSuccessful: true
+                            });
+                        } else {
+                            me.setState({
+                                isVerificationCheckComplete: true,
+                                wasRegistrationSuccessful: false
+                            });
+                        }
+                    }, 1000);
                 },
                 error: function(res) {
-                    console.log(res);
+                    setTimeout(function() { 
+                        console.log(res);
+                        me.setState({
+                            isVerificationCheckComplete: true,
+                            wasRegistrationSuccessful: false
+                        });
+                    }, 1000);
                 }
             });
         }
     }
     
+    
     render() {
         return (
             <div className="form__wrap">
-                <div className="form__container">
-                    <div className="form-header">Company Registration</div>
-                    <div className="form-body">
-                        <div className="form-input__section">
-                            <input type="text" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("name", e)}/>
-                        </div>
-                        <div className="form-input__section">
-                            <input type="text" placeholder="Company Address" className="form-input__value" onChange={(e) => this.handleChange("address", e)}/>
-                        </div>
-                        <div className="form-input__section">
-                            <input type="email" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)}/>
-                        </div>
+                {this.state.hasStartedRegistrationCheck ? (
+                    this.state.isVerificationCheckComplete ? (
+                        this.state.wasRegistrationSuccessful ? (
+                            <VerificationNotice 
+                                verificationStatus={true} 
+                                title="success!" 
+                                subTitle="Registration successful. Check your email!"
+                                linkText="return home"
+                                linkLocation="/home" />
+                        ) : (
+                            <VerificationNotice 
+                                verificationStatus={false} 
+                                title="error!" 
+                                subTitle="There was an error processing your registration."
+                                linkText="Try Again"
+                                linkLocation="/company-registration" />
+                        )
+                    ) : (
+                        <PreLoaderBounce />
+                    )
+                ) : (
+                    <div className="form__container">
+                        <div className="form-header">Company Registration</div>
+                        <div className="form-body">
                             <div className="form-input__section">
-                            <input type="password" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)}/>
+                                <input type="text" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("name", e)}/>
+                            </div>
+                            <div className="form-input__section">
+                                <input type="text" placeholder="Company Address" className="form-input__value" onChange={(e) => this.handleChange("address", e)}/>
+                            </div>
+                            <div className="form-input__section">
+                                <input type="email" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)}/>
+                            </div>
+                                <div className="form-input__section">
+                                <input type="password" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)}/>
+                            </div>
+                            <div className="form-input__section">
+                                <input type="password" placeholder="Confirm Password" className="form-input__value" onChange={(e) => this.handleChange("confirmPassword", e)}/>
+                            </div>
+                            <div className="form-submission__section">
+                                <button className="form__submit-button" onClick={this.registerCompany}>Submit</button>
+                            </div>    
                         </div>
-                        <div className="form-input__section">
-                            <input type="password" placeholder="Confirm Password" className="form-input__value" onChange={(e) => this.handleChange("confirmPassword", e)}/>
-                        </div>
-                        <div className="form-submission__section">
-                            <button className="form__submit-button" onClick={this.registerCompany}>Submit</button>
-                        </div>    
                     </div>
-                </div>
+                )}
             </div>
-        );
+        )
     }
 }
 

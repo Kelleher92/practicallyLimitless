@@ -9,6 +9,7 @@ import Verify from './pages/Verify';
 import Reset from './pages/Reset';
 import Dashboard from './pages/Dashboard';
 import PreLoader from './components/PreLoader';
+import PreLoaderBounce from './components/PreLoaderBounce';
 import CompanyRegistration from './components/CompanyRegistration.js';
 import CompanyLogin from './components/CompanyLogin.js';
 import ForgotPassword from './components/ForgotPassword.js';
@@ -59,7 +60,8 @@ class App extends Component {
                         )}/>
                         
                         <Route exact={true} path="/pl" render={() => (
-                            <PreLoader  />
+                            // <PreLoader />
+                            <PreLoaderBounce />
                         )}/>
                         <Route exact={true} path="/company-registration" render={(props) => (
                             <CompanyRegistration {...props} token={this.token}/>

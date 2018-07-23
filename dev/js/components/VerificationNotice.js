@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
-export default class VerificationNotice extends Component {
+class VerificationNotice extends Component {
     render() {
         let status = this.props.verificationStatus;
         return (
@@ -12,7 +12,7 @@ export default class VerificationNotice extends Component {
                 <div className="verify-email__status">{this.props.title}</div>
                 <div className="verify-email__sub-status">{this.props.subTitle}</div>
                 <div className="verify-email__button">
-                    <Link to={this.props.linkLocation}>
+                    <Link onClick={this.forceUpdate} to={this.props.linkLocation}>
                         <div className="pl-button--style-1">{this.props.linkText}</div>
                     </Link>
                 </div>
@@ -20,3 +20,5 @@ export default class VerificationNotice extends Component {
         );
     }
 }
+
+export default VerificationNotice;
