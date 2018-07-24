@@ -19,7 +19,7 @@
 		<section id="root"></section>
 		
 		<input id="session-token" type="hidden" value="<?php echo $_SESSION['token']; ?>"/>
-		<input id="login-token" type="hidden" value="<?php if(!isset($_SESSION['company']['id']) || !isset($_SESSION['company']['email']) || !isset($_SESSION['company']['name'])) {echo 'false';} else {echo 'true';} ?>"/>
+		<input id="login-token" type="hidden" value="<?php echo $_SESSION['company']['id']; ?>"/>
 
 		<script src="./public/js/home.js"></script>
 	</body>

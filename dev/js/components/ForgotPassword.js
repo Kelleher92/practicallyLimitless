@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import $ from 'jquery';
 import { Redirect, withRouter } from 'react-router-dom';
 import VerificationNotice from './VerificationNotice.js';
-import PreLoaderBounce from './PreLoaderBounce.js';
+import PreLoader from './PreLoader.js';
 
 class ForgotPassword extends Component {
     constructor(props) {
@@ -83,7 +83,7 @@ class ForgotPassword extends Component {
                                 linkLocation="/company-forgot-password" />
                         )
                     ) : (
-                        <PreLoaderBounce />
+                        <PreLoader />
                     )
                 ) : (
                     <div className="form__container">

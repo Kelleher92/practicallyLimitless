@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 import { isValidPassword } from '../helpers/utils.js';
 import VerificationNotice from './VerificationNotice.js';
-import PreLoaderBounce from './PreLoaderBounce.js';
+import PreLoader from './PreLoader.js';
 import qs from 'query-string';
 import $ from 'jquery';
 
@@ -102,7 +102,7 @@ class ResetPassword extends Component {
                                 linkLocation="/company-forgot-password" />
                         )
                     ) : (
-                        <PreLoaderBounce />
+                        <PreLoader />
                     )
                 ) : (
                     <div className="form__container">

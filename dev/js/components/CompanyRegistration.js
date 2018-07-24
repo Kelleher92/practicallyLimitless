@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import { isValidEmail, isValidPassword, isValidString } from '../helpers/utils.js';
 import VerificationNotice from './VerificationNotice.js';
-import PreLoaderBounce from './PreLoaderBounce.js';
+import PreLoader from './PreLoader.js';
 import $ from 'jquery';
 
 class CompanyRegistration extends Component {
@@ -123,7 +123,7 @@ class CompanyRegistration extends Component {
                                 linkLocation="/company-registration" />
                         )
                     ) : (
-                        <PreLoaderBounce />
+                        <PreLoader />
                     )
                 ) : (
                     <div className="form__container">
