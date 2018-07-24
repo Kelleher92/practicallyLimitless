@@ -1,5 +1,5 @@
 .pre-loader-bounce__wrapper{
-    height: 100vh;
+    height: 200px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -20,7 +20,7 @@
     &:after{
         height: 20px;
         width: 20px;
-        background-color: red;
+        background-color: $dark-blue;
         border-radius: 50%;
         top: 0px;
         left: 75px;
@@ -31,7 +31,7 @@
     &:before{
         height: 20px;
         width: 20px;
-        background-color: darkslategray;
+        background-color: $dark-grey;
         border-radius: 50%;
         top: 74px;
         left: 0px;

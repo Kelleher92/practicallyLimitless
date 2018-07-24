@@ -15,8 +15,11 @@ import React, { Component } from 'react';
 export default class PreLoader extends Component {
 	render() {
 		return(
-            <div className="pre-loader-bounce__wrapper">
-                <div className="pre-loader-bounce__balls"></div> 
+			<div className="form__container">
+			    <div className="form-logo"></div>
+	            <div className="pre-loader-bounce__wrapper">
+	                <div className="pre-loader-bounce__balls"></div> 
+	            </div>
             </div>
 		);
 	}

@@ -3,6 +3,7 @@ import $ from 'jquery';
 import { Redirect, withRouter } from 'react-router-dom';
 import VerificationNotice from './VerificationNotice.js';
 import PreLoader from './PreLoader.js';
+import { isValidEmail } from '../helpers/utils.js';
 
 class ForgotPassword extends Component {
     constructor(props) {
@@ -22,44 +23,49 @@ class ForgotPassword extends Component {
     }
 
     onClickSubmit() {
-        let me = this;
-        me.setState({hasStartedRegistrationCheck: true});  
+        if(isValidEmail(this.state.email)) {
+            let me = this;
+            me.setState({hasStartedRegistrationCheck: true});  
 
-        $.ajax({
-            method: 'POST',
-            data: {
-                token: this.props.token,
-                action: 'companyForgotPassword',
-                data: JSON.stringify({email: this.state.email})
-            },
-            url: 'public/process.php',
-            success: function(res) {
-                setTimeout(function() { 
-                    res = JSON.parse(res);
+            $.ajax({
+                method: 'POST',
+                data: {
+                    token: this.props.token,
+                    action: 'companyForgotPassword',
+                    data: JSON.stringify({email: this.state.email})
+                },
+                url: 'public/process.php',
+                success: function(res) {
+                    setTimeout(function() { 
+                        res = JSON.parse(res);
 
-                    if(res.responseCode === 200) {
-                        me.setState({
-                            isVerificationCheckComplete: true,
-                            wasRegistrationSuccessful: true
-                        });
-                    } else {
+                        if(res.responseCode === 200) {
+                            me.setState({
+                                isVerificationCheckComplete: true,
+                                wasRegistrationSuccessful: true
+                            });
+                        } else {
+                            me.setState({
+                                isVerificationCheckComplete: true,
+                                wasRegistrationSuccessful: false
+                            });
+                        }
+                    }, 1000);
+                },
+                error: function(res) {
+                    setTimeout(function() { 
+                        console.log(res);
                         me.setState({
                             isVerificationCheckComplete: true,
                             wasRegistrationSuccessful: false
                         });
-                    }
-                }, 1000);
-            },
-            error: function(res) {
-                setTimeout(function() { 
-                    console.log(res);
-                    me.setState({
-                        isVerificationCheckComplete: true,
-                        wasRegistrationSuccessful: false
-                    });
-                }, 1000);
-            }
-        });
+                    }, 1000);
+                }
+            });
+        }
+        else {
+            alert('E-mail invalid.');
+        }
     }
     
     render() {
@@ -87,6 +93,7 @@ class ForgotPassword extends Component {
                     )
                 ) : (
                     <div className="form__container">
+                        <div className="form-logo"></div>
                         <div className="form-header">Forgot Password</div>
                         <div className="form-body">
                             <div className="form-input__section">

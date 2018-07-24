@@ -79,6 +79,9 @@ class ResetPassword extends Component {
                 }
             });
         }
+        else {
+            alert('Password invalid.');
+        }
     }
     
     render() {
@@ -106,6 +109,7 @@ class ResetPassword extends Component {
                     )
                 ) : (
                     <div className="form__container">
+                        <div className="form-logo"></div>
                         <div className="form-header">Set New Password</div>
                         <div className="form-body">
                             <div className="form-input__section">

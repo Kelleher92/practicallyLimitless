@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import { Redirect, withRouter } from 'react-router-dom';
+import { isValidEmail, isValidPassword } from '../helpers/utils.js';
 
 class CompanyLogin extends Component {
     constructor(props) {
@@ -10,7 +11,7 @@ class CompanyLogin extends Component {
             password: ''
         };
         
-        this.onClickLogin = this.onClickLogin.bind(this);
+        this.onClickSubmit = this.onClickSubmit.bind(this);
         this.onClickForgotPassword = this.onClickForgotPassword.bind(this);
     }
 
@@ -18,18 +19,27 @@ class CompanyLogin extends Component {
         this.setState({[name]: e.target.value});
     }
 
-    onClickLogin() { 
-        let { history } = this.props;
+    isSubmitable() {
+        return isValidEmail(this.state.email) && isValidPassword(this.state.password);
+    }
 
-        this.props.setLoggedIn(this.state.email, this.state.password).then(function(res) {
-            res = JSON.parse(res);
+    onClickSubmit() { 
+        if(this.isSubmitable()) {
+            let { history } = this.props;
 
-            if(res.responseCode === 200) {
-                history.push('/dashboard');
-            } else {
-                alert(res.message);
-            }
-        });
+            this.props.setLoggedIn(this.state.email, this.state.password).then(function(res) {
+                res = JSON.parse(res);
+
+                if(res.responseCode === 200) {
+                    history.push('/dashboard');
+                } else {
+                    alert(res.message);
+                }
+            });
+        }
+        else {
+            alert('E-mail or password invalid.');
+        }
     }
 
     onClickForgotPassword() {
@@ -41,7 +51,8 @@ class CompanyLogin extends Component {
         return (
             <div className="form__wrap">
                 <div className="form__container">
-                    <div className="form-header">Login</div>
+                    <div className="form-logo"></div>
+                    <div className="form-header">Log In</div>
                     <div className="form-body">
                     <div className="form-input__section">
                         <input type="text" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)}/>
@@ -50,7 +61,7 @@ class CompanyLogin extends Component {
                         <input type="password" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)}/>
                     </div>
                         <div className="form-submission__section">
-                            <button className="form__submit-button" onClick={this.onClickLogin}>Login</button>
+                            <button className="form__submit-button" onClick={this.onClickSubmit}>Submit</button>
                             <button className="form__submit-link pl-buffer-top-10" onClick={this.onClickForgotPassword}>Forgot Password?</button>
                         </div>    
                     </div>                       
