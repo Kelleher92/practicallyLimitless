@@ -14,7 +14,7 @@ export default class Home extends Component {
             <div>               
                 <div>
                     <Link to="/pl">
-                        <button style={{"height":"30px","width":"100px", "backgroundColor":"cyan", "cursor":"pointer"}}>Spinner</button>
+                        <button style={{"height":"30px","width":"100px", "backgroundColor":"honeydew", "cursor":"pointer"}}>Spinner</button>
                     </Link>
 
                     <Link to="/dashboard">
