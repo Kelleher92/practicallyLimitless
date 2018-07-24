@@ -100,23 +100,22 @@ class App extends Component {
     			<div>
                     <Switch>
                         <Route exact={true} path="/(|home)" render={(props) => (
-                            <Home {...props} token={this.token} />
+                            <Home {...props} token={this.token} isLoggedIn={this.state.isLoggedIn} />
                         )}/>
                         
                         <Route exact={true} path="/pl" render={() => (
-                            // <PreLoader />
-                            <PreLoaderBounce />
+                            <PreLoader />
                         )}/>
                         <Route exact={true} path="/company-registration" render={(props) => (
-                            <CompanyRegistration {...props} token={this.token}/>
+                            <CompanyRegistration {...props} token={this.token} />
                         )}/>
 
                         <Route exact={true} path="/company-login" render={(props) => (
-                            <CompanyLogin {...props} token={this.token} setLoggedIn={this.setLoggedIn}/>
+                            <CompanyLogin {...props} token={this.token} setLoggedIn={this.setLoggedIn} />
                         )}/>
 
                         <Route exact={true} path="/company-forgot-password" render={(props) => (
-                            <ForgotPassword {...props} token={this.token}/>
+                            <ForgotPassword {...props} token={this.token} />
                         )}/>
 
                         <Route exact={true} path="/company-reset-password" render={(props) => (
