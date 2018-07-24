@@ -184,7 +184,7 @@
 
 			$company = $this->query($sql);
 
-			return empty($company) ? null : $company;
+			return empty($company) ? null : $company[0];
 		}
 
 		public function activateCompany($email, $token) {
