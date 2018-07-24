@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import $ from 'jquery';
 import { Redirect, withRouter } from 'react-router-dom';
 
-
 class CompanyLogin extends Component {
     constructor(props) {
         super(props);

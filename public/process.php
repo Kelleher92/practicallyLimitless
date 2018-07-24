@@ -9,11 +9,13 @@
 			if(empty($_SESSION['company']['id']) || empty($_SESSION['company']['email']) || empty($_SESSION['company']['name'])) {
 				echo json_encode(array(
     				'result' => false,
+    				'companyId' => null
 				));  
 			}
 			else { 
 				echo json_encode(array(
 	    			'result' => true,
+	    			'companyId' => $_SESSION['company']['id']
 				));
 			}
 		} 
@@ -35,6 +37,13 @@
 		else if($action === 'logoutCompany') {
 			$admin = new Admin();
 			echo $admin->logoutCompany();			
+		} 
+
+		else if($action === 'fetchCompany') {
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->fetchCompany($data->companyId);	
+			echo json_encode($res);
 		} 	 	
 
 		else if($action === 'activateCompany') { 

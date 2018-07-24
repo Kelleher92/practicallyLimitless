@@ -91,12 +91,13 @@
 
 					if(password_verify($password, $hash)) {
 						$_SESSION['company'] = array(
-							'id' => $user['id'],
+							'id' => $user['companyId'],
 							'name' => $user['name'],
 							'email' => $user['email']
 						);
 						$res->responseCode = 200;
 						$res->message = 'Login successful.';
+						$res->data = $user['companyId'];
 					} else {
 						$res->responseCode = 400;
 						$res->message = 'Your username and password combination is invalid.';
@@ -141,6 +142,35 @@
 			echo 'Log out complete.';
 		}
 
+		public function fetchCompany($companyId) {
+			if($_POST['action'] != 'fetchCompany') {
+				return "Invalid action supplied for fetchCompany.";
+			}
+
+			$companyId = $this->sanitizeValue($companyId);
+
+			$sql = "SELECT
+				* 
+				FROM `company`
+				WHERE `companyId` = '$companyId'
+				LIMIT 1";
+
+			$res = new Response_Obj();
+
+			$company = $this->query($sql);
+
+			if(!empty($company)) {
+				$res->message = 'Successful fetch.';
+				$res->responseCode = 200;
+				$res->data = $company[0];
+			} else {
+				$res->message = 'No company found.';
+				$res->responseCode = 400;
+			}
+
+			return $res;
+		}
+
 		private function fetchCompanyForActivation($email, $token) {
 			if(!isset($email) || !isset($token)) {
 				exit('Invalid request');
@@ -154,7 +184,7 @@
 
 			$company = $this->query($sql);
 
-			return empty($company) ? null : $company[0];
+			return empty($company) ? null : $company;
 		}
 
 		public function activateCompany($email, $token) {
