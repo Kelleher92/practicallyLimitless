@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import { Link } from 'react-router-dom';
+import {openSnackbar} from '../components/FlashNotification';
 
 export default class Home extends Component {
     constructor(props) {
         super(props);
     }
+
+    
+    showFlashNotification() {
+        openSnackbar({ message: 'This is a message.' });
+    }
+    
 
 	render() {
         let logInButton, registrationButton, dashboardButton;
@@ -32,6 +39,7 @@ export default class Home extends Component {
                     {dashboardButton}
                     {registrationButton}
                     {logInButton}
+                    <button className="btn btn-danger" onClick={this.showFlashNotification}>show Notification </button>
                 </div>
             </div>
 		);
