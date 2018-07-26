@@ -13,6 +13,8 @@ import CompanyRegistration from './components/CompanyRegistration.js';
 import CompanyLogin from './components/CompanyLogin.js';
 import ForgotPassword from './components/ForgotPassword.js';
 import ResetPassword from './components/ResetPassword.js';
+import LocationMap from './components/LocationMap.js';
+import LocationMap__TextInput from './components/LocationMap__TextInput.js';
 
 class App extends Component {
     constructor() {
@@ -112,6 +114,10 @@ class App extends Component {
 
                         <Route exact={true} path="/company-login" render={(props) => (
                             <CompanyLogin {...props} token={this.token} setLoggedIn={this.setLoggedIn} />
+                        )}/>
+
+                        <Route exact={true} path="/location-map" render={(props) => (
+                            <LocationMap token={this.token} setLoggedIn={this.setLoggedIn} />
                         )}/>
 
                         <Route exact={true} path="/company-forgot-password" render={(props) => (
