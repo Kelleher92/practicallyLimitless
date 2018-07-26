@@ -100,6 +100,9 @@ class CompanyRegistration extends Component {
                 }
             });
         }
+        else{
+            alert('Its not submittable');
+        }
     }
     
     render() {
