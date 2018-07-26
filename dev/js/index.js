@@ -15,6 +15,7 @@ import ForgotPassword from './components/ForgotPassword.js';
 import ResetPassword from './components/ResetPassword.js';
 import FlashNotification, {openSnackbar} from './components/FlashNotification';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Donate from './pages/Donate';
 
 class App extends Component {
     constructor() {
@@ -127,6 +128,10 @@ class App extends Component {
 
                             <Route exact={true} path="/company-reset-password" render={(props) => (
                                 <ResetPassword {...props} token={this.token} />
+                            )} />
+
+                            <Route exact={true} path="/donate" render={(props) => (
+                                <Donate {...props} token={this.token} />
                             )} />
 
                             <Route exact={true} path="/verify" render={(props) => (
