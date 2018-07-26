@@ -80,11 +80,10 @@ class CheckoutForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleFormInputs(name, e) {
+    handleInputChange(name, e) {
         this.setState({[name]: e.target.value});
-        console.log(this.setState('asdasa'));
     }
-   
+    
     handleBlur = () => {
         console.log('[blur]');
     };
@@ -106,7 +105,7 @@ class CheckoutForm extends Component {
         console.log('User clicked submit');
         if (this.props.stripe) {
             this.props.stripe
-                .createToken()
+                .createToken({ name: this.state.name })
                 .then((payload) => console.log('[token]', payload));
         } else {
             console.log("Stripe.js hasn't loaded yet.");
@@ -118,8 +117,8 @@ class CheckoutForm extends Component {
             <div className="stripe-checkout">
                 <form className="stripe-form" onSubmit={this.handleSubmit}> 
                     <p className="stripe-label">Would you like to donate to the cause?</p>
-                    <input className="stripe-amount" type='text' placeholder='Name' />
-                    <input className="stripe-amount" type='number' placeholder='Amount eg. 10.00' />
+                    <input className="stripe-amount" type='text' placeholder='Name' onChange={(e) => this.handleInputChange("name", e)}/>
+                    <input className="stripe-amount" type='number' placeholder='Amount eg. 10.00' onChange={(e) => this.handleInputChange("total", e)} />
                     <CardElement
                         onBlur={this.handleBlur}
                         onChange={this.handleChange}
