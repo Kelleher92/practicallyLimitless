@@ -4,6 +4,7 @@
   "description": "",
   "main": "gulpfile.js",
   "dependencies": {
+    "@material-ui/core": "^1.4.1",
     "bootstrap": "4.0.0",
     "google-maps": "^3.3.0",
     "google-maps-react": "^2.0.2",
