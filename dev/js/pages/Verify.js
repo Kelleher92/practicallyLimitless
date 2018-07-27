@@ -18,10 +18,10 @@ export default class Verify extends Component {
             token: userToken,
             verificationStatus: false,
             checkComplete: false,
-            title: "", 
-            subTitle: "",
-            linkText: "",
-            linkLocation: ""
+            title: '', 
+            subTitle: '',
+            linkText: '',
+            linkLocation: ''
         }
         
         this.checkVerification = this.checkVerification.bind(this);

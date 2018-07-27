@@ -20,15 +20,15 @@
     -o-justify-content: center;
     justify-content: center;
     width: 600px;
-    max-width: 80%;
-    border-radius: 20px;
+    max-width: 95vw;
+    border-radius: 0.3rem;
     box-shadow: 5px 5px 20px #cbcdd3;
     perspective: 40px;
     padding: 20px;
-    position: absolute;
-    top: 50px;
-    left: 50%;
-    transform: translateX(-50%); 
+    // position: absolute;
+    // top: 50px;
+    // left: 50%;
+    // transform: translateX(-50%); 
 }
 
 .verify-email__container.success{

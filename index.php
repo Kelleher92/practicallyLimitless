@@ -17,6 +17,7 @@
 
 	<body>
 		<section id="root"></section>
+		<div id="modal-root"></div>
 		
 		<input id="session-token" type="hidden" value="<?php echo $_SESSION['token']; ?>"/>
 		<input id="login-token" type="hidden" value="<?php echo $_SESSION['company']['id']; ?>"/>
