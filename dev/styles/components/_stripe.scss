@@ -73,6 +73,32 @@
     min-width: 200px;
   }
 
+  .stripe-amount-euro {
+    position: relative;
+
+    &::before {
+        content: '€';
+        position: absolute;
+        z-index: 100;
+        font-size: 23px;
+        font-family: 'Source Code Pro', monospace;
+        left: 15px;
+        top: 5px;
+        color: #abb9c7;
+    }
+
+    input {
+        padding-left: 35px;
+        width: 60% !important;
+        min-width: 200px;
+    }
+  }
+
+  .stripe-amount-euro::before {
+    
+
+  }
+
   input:focus,
   .StripeElement--focus {
     box-shadow: rgba(50, 50, 93, 0.109804) 0px 4px 6px, rgba(0, 0, 0, 0.0784314) 0px 1px 3px;

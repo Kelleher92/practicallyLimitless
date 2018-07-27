@@ -1,54 +1,6 @@
-// import React, { Component } from 'react';
-// import {injectStripe, Elements} from 'react-stripe-elements';
-// // import StripePaymentRequestForm from './StripePaymentRequestForm';
-// import StripeCardForm from './StripeCardForm';
-
-// class CheckoutForm extends Component {
-    
-//     constructor(props) {
-//         super(props);
-//         this.handleSubmit = this.handleSubmit.bind(this);
-//     }
-    
-
-//     handleSubmit(ev) {
-//         ev.preventDefault();
-//         if (this.props.stripe) {
-//             this.props.stripe
-//                 .createToken()
-//                 .then((payload) => console.log('[token]', payload));
-//         } else {
-//             console.log("Stripe.js hasn't loaded yet.");
-//         }
-//     };
-
-
-
-//     render() {
-//         return (
-//             <div className="stripe-checkout">
-//                 <h1>Enter Card Details Below</h1>
-//                 <form className="stripe-form" onSubmit={this.handleSubmit}>    
-//                     <label className="stripe-label">Donation details</label>
-//                     <Elements>
-//                         <input className="stripe-amount" type='number' placeholder='Amount: e.g. 10.00' />
-//                     </Elements>
-//                     <Elements>
-//                         {/* <StripePaymentRequestForm fontSize={'14px'} /> */}
-//                         <StripeCardForm fontSize={'18px'}/>
-//                     </Elements>
-//                     <button className="stripe-button">Pay</button>
-//                 </form>
-//             </div>
-//         );
-//     }
-// }
-
-// export default injectStripe(CheckoutForm);
-
-
 import React, {Component} from 'react';
-import {CardElement, injectStripe} from 'react-stripe-elements';
+import {CardElement, injectStripe, CardNumberElement, CardExpiryElement, CardCVCElement} from 'react-stripe-elements';
+import $ from 'jquery';
 
 const createOptions = (fontSize, padding) => {
     return {
@@ -75,7 +27,9 @@ class CheckoutForm extends Component {
         super(props);
         this.state = {
             name: '',
-            total: 0
+            amount: 0,
+            paymentComplete: false,
+            paymentFail: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -102,23 +56,66 @@ class CheckoutForm extends Component {
     
     async handleSubmit(ev) {
         ev.preventDefault();
+        let me = this;
         console.log('User clicked submit');
         if (this.props.stripe) {
             this.props.stripe
-                .createToken({ name: this.state.name })
-                .then((payload) => console.log('[token]', payload));
+                .createToken({ name: this.state.name, amount: this.state.amount })
+                .then((stripeToken) => {
+                    console.log('[token]', stripeToken);
+
+                    $.ajax({
+                        method: 'POST',
+                        data: {
+                            token: this.props.token,
+                            action: 'processPayment',
+                            data: JSON.stringify({token: stripeToken})
+                        },
+                        url: 'public/process.php',
+                        success: function(res) {
+                            setTimeout(function() { 
+                                res = JSON.parse(res);
+                                console.log(res.responseCode);
+            
+                                if(res.responseCode === 200) {
+                                    me.setState({
+                                        paymentComplete: true
+                                    });
+                                } else {
+                                    // me.setState({
+                                    //     isVerificationCheckComplete: true,
+                                    //     wasRegistrationSuccessful: false
+                                    // });
+                                }
+                            }, 1000);
+                        },
+                        error: function(res) {
+                            setTimeout(function() { 
+                                console.log('error ',res);
+                                // me.setState({
+                                //     isVerificationCheckComplete: true,
+                                //     wasRegistrationSuccessful: false
+                                // });
+                            }, 1000);
+                        }
+                    });
+                    
+            });
         } else {
             console.log("Stripe.js hasn't loaded yet.");
         }
     }
 
     render() {
+        if (this.state.paymentComplete) return <h1>Purchase Complete</h1>;
+        if (this.state.paymentFail) return <h1>Payment Failed.</h1>;
+
         return (
             <div className="stripe-checkout">
                 <form className="stripe-form" onSubmit={this.handleSubmit}> 
                     <p className="stripe-label">Would you like to donate to the cause?</p>
                     <input className="stripe-amount" type='text' placeholder='Name' onChange={(e) => this.handleInputChange("name", e)}/>
-                    <input className="stripe-amount" type='number' placeholder='Amount eg. 10.00' onChange={(e) => this.handleInputChange("total", e)} />
+                    <span className="stripe-amount-euro"><input type='number' placeholder='Amount eg. 10.00' onChange={(e) => this.handleInputChange("amount", e)} /></span>
                     <CardElement
                         onBlur={this.handleBlur}
                         onChange={this.handleChange}
@@ -126,6 +123,7 @@ class CheckoutForm extends Component {
                         onReady={this.handleReady}
                         {...createOptions(this.props.fontSize)}
                     />
+                    {/* <CardNumberElement /> */}
                     <button className="stripe-button">Submit</button>
                 </form>
             </div>

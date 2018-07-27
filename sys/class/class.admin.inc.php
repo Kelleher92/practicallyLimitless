@@ -321,6 +321,20 @@
 			return empty($company) ? null : $company[0];
 		}
 
+		public function processPayment($token) {
+			$res = new Response_Obj();
+
+			// if() {
+				$res->message = 'Payment success.';
+				$res->responseCode = 200;
+			// } else {
+				// $res->message = 'Payment processed successfully.';
+				// $res->responseCode = 200;
+			// }
+
+			return $res;
+		}
+
 		private function generateVefificationLink($email, $token) {
 			if(!$email || !$token) {
 				throw new Exception('missing key info');

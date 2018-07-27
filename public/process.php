@@ -74,6 +74,13 @@
 			echo json_encode($res);
 		} 
 
+		else if($action === 'processPayment') {
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->processPayment($data->token);
+			echo json_encode($res);
+		} 
+
 		else {
 			throw new Exception('Invalid request');
 		}

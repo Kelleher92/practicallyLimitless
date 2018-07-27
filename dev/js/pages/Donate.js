@@ -12,7 +12,7 @@ class Donate extends Component {
             // </StripeProvider>
             <StripeProvider apiKey="pk_test_OwBlwmstGHJD6CYOJB9w386a">
                 <Elements>
-                    <CheckoutForm />
+                    <CheckoutForm token={this.props.token}/>
                 </Elements>
             </StripeProvider>
         );
