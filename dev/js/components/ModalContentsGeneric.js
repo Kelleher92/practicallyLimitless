@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
-export default class ModalContentsGeneric extends Component{
-    render(){
+export default class ModalContentsGeneric extends Component {
+    render() {
         return (
             <div>
                 <div className="modal-header">
