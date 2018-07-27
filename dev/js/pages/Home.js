@@ -8,13 +8,11 @@ export default class Home extends Component {
         super(props);
     }
 
-    
     showFlashNotification() {
         openSnackbar({ message: 'This is a message.' });
     }
     
-
-	render() {
+    render() {
         let logInButton, registrationButton, dashboardButton;
         if(this.props.isLoggedIn) {
             logInButton = null;
