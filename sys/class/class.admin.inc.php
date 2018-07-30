@@ -321,16 +321,13 @@
 			return empty($company) ? null : $company[0];
 		}
 
-		public function processPayment($token) {
+		public function processPayment($stripeToken, $amount) {
+			
+			
 			$res = new Response_Obj();
 
-			// if() {
-				$res->message = 'Payment success.';
-				$res->responseCode = 200;
-			// } else {
-				// $res->message = 'Payment processed successfully.';
-				// $res->responseCode = 200;
-			// }
+			$res->message = 'Payment success.';
+			$res->responseCode = 200;
 
 			return $res;
 		}

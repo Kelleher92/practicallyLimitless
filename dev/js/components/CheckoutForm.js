@@ -74,6 +74,8 @@ class CheckoutForm extends Component {
                         url: 'public/process.php',
                         success: function(res) {
                             setTimeout(function() { 
+                                console.log('xxxx')
+                                console.log(res);
                                 res = JSON.parse(res);
                                 console.log(res.responseCode);
             
@@ -82,6 +84,7 @@ class CheckoutForm extends Component {
                                         paymentComplete: true
                                     });
                                 } else {
+                                    console.log('400: ', res)
                                     // me.setState({
                                     //     isVerificationCheckComplete: true,
                                     //     wasRegistrationSuccessful: false

@@ -77,7 +77,7 @@
 		else if($action === 'processPayment') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
-			$res = $admin->processPayment($data->token);
+			$res = $admin->processPayment($data->token, $data->amount);
 			echo json_encode($res);
 		} 
 
