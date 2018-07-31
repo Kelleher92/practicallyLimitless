@@ -1,24 +1,24 @@
-  .stripe-checkout {
+  .stripe-checkout{
     margin: 0 auto;
     max-width: 800px;
     box-sizing: border-box;
     padding: 0 5px;
   }
 
-  .stripe-label {
+  .stripe-label{
     color: #fff;
     font-weight: 300;
     letter-spacing: 0.025em;
     width: 100%;
   }
 
-  .stripe-form {
+  .stripe-form{
     padding: 15px;
     border-radius: 6px;
     background-color: #2a2a2a;
   }
 
-  .stripe-button {
+  .stripe-button{
     white-space: nowrap;
     border: 0;
     outline: 0;
@@ -40,8 +40,7 @@
     margin-top: 10px;
   }
 
-
-  .stripe-button:hover {
+  .stripe-button:hover{
     color: #fff;
     cursor: pointer;
     background-color: #7795f8;
@@ -49,8 +48,7 @@
     box-shadow: 0 7px 14px rgba(50, 50, 93, .10), 0 3px 6px rgba(0, 0, 0, .08);
   }
 
-  input,
-  .StripeElement {
+  input, .StripeElement{
     display: block;
     margin: 10px 0 20px 0;
     width: 100%;
@@ -64,19 +62,19 @@
     background: white;
   }
 
-  input::placeholder {
+  input::placeholder{
     color: #aab7c4;
   }
 
-  .stripe-amount {
+  .stripe-amount{
     width: 60% !important;
     min-width: 200px;
   }
 
-  .stripe-amount-euro {
+  .stripe-amount-euro{
     position: relative;
 
-    &::before {
+    &::before{
         content: '€';
         position: absolute;
         z-index: 100;
@@ -87,26 +85,23 @@
         color: #abb9c7;
     }
 
-    input {
+    input{
         padding-left: 35px;
         width: 60% !important;
         min-width: 200px;
     }
   }
 
-  .stripe-amount-euro::before {
-    
+  .stripe-amount-euro::before{
 
   }
 
-  input:focus,
-  .StripeElement--focus {
+  input:focus, .StripeElement--focus{
     box-shadow: rgba(50, 50, 93, 0.109804) 0px 4px 6px, rgba(0, 0, 0, 0.0784314) 0px 1px 3px;
     -webkit-transition: all 150ms ease;
     transition: all 150ms ease;
   }
 
-  .StripeElement.IdealBankElement,
-  .StripeElement.PaymentRequestButton {
+  .StripeElement.IdealBankElement, .StripeElement.PaymentRequestButton{
     padding: 0;
   }
