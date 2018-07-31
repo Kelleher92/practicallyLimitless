@@ -1,6 +1,4 @@
 <?php
-
-	
 	require 'Stripe/init.php';
 
 	class Admin extends DB_Connect{
@@ -326,16 +324,13 @@
 		}
 
 		public function processPayment($stripeToken, $amount) {
-			
 			$stripeToken = $this->sanitizeValue("".$stripeToken."");
 			$amount = $this->sanitizeValue("".$amount."");
 			$res = new Response_Obj();
 
 			if(!$stripeToken || !$amount) {
-
 				$res->message = 'Payment failure...please try again';
 				$res->responseCode = 400;
-
 			} else {
 				$privateKey = getenv('STRIPE_PK');
 				\Stripe\Stripe::setApiKey($privateKey);
@@ -349,7 +344,6 @@
 
 				$res->message = 'Payment success.';
 				$res->responseCode = 200;
-				
 			}
 
 			return $res;
