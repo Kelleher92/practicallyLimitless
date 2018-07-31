@@ -19,9 +19,9 @@
 			    $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
 			    $mail->Port = getenv('EMAIL_PORT');                   // TCP port to connect to
 			    //Recipients
-			    $mail->setFrom('iankelleher92@gmail.com', 'Mailer');
+			    $mail->setFrom('info@limitless.ie', 'Mailer');
 			    $mail->addAddress($email);              
-			    $mail->addReplyTo('iankelleher92@gmail.com', 'Information');
+			    $mail->addReplyTo('info@limitless.ie', 'Information');
 			   
 			    //Content
 			    $mail->isHTML(true);                                  // Set email format to HTML
@@ -47,9 +47,9 @@
 			    $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
 			    $mail->Port = getenv('EMAIL_PORT');                   // TCP port to connect to
 			    //Recipients
-			    $mail->setFrom('iankelleher92@gmail.com', 'Mailer');
+			    $mail->setFrom('info@limitless.ie', 'Mailer');
 			    $mail->addAddress($email);              
-			    $mail->addReplyTo('iankelleher92@gmail.com', 'Information');
+			    $mail->addReplyTo('info@limitless.ie', 'Information');
 			   
 			    //Content
 			    $mail->isHTML(true);                                  // Set email format to HTML
