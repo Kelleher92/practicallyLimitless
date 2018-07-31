@@ -40,19 +40,23 @@ class CheckoutForm extends Component {
     
     handleBlur = () => {
         console.log('[blur]');
-    };
+    }
+
     handleChange = (change) => {
         console.log('[change]', change);
-    };
+    }
+    
     handleClick = () => {
         console.log('[click]');
-    };
+    }
+    
     handleFocus = () => {
         console.log('[focus]');
-    };
+    }
+    
     handleReady = () => {
         console.log('[ready]');
-    };
+    }
     
     async handleSubmit(ev) {
         ev.preventDefault();
@@ -60,7 +64,7 @@ class CheckoutForm extends Component {
         
         let amount = this.state.amount*100;  // convert to cents
 
-        if (this.props.stripe) {
+        if(this.props.stripe) {
             this.props.stripe
                 .createToken({ name: this.state.name})
                 .then((stripeToken) => {
@@ -93,7 +97,7 @@ class CheckoutForm extends Component {
                         },
                         error: function(res) {
                             setTimeout(function() { 
-                                console.log('error ',res);
+                                console.log('error ', res);
                                 // me.setState({
                                 //     isVerificationCheckComplete: true,
                                 //     wasRegistrationSuccessful: false
@@ -101,13 +105,11 @@ class CheckoutForm extends Component {
                             }, 1000);
                         }
                     });
-                    
             });
         } else {
             console.log("Stripe.js hasn't loaded yet.");
         }
     }
-    
 
     render() {
         if (this.state.paymentComplete) return <h1>Purchase Complete</h1>;
