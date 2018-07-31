@@ -37,6 +37,9 @@ export default class Home extends Component {
                     {dashboardButton}
                     {registrationButton}
                     {logInButton}
+                    <Link to="/donate">
+                        <button style={{"height":"30px","width":"100px", "backgroundColor":"blue", "cursor":"pointer"}}>Donate</button>
+                    </Link>
                     <button className="btn btn-danger" onClick={this.showFlashNotification}>show Notification </button>
                 </div>
             </div>
