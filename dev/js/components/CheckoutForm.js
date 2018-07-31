@@ -57,28 +57,27 @@ class CheckoutForm extends Component {
     async handleSubmit(ev) {
         ev.preventDefault();
         let me = this;
-        console.log('User clicked submit');
+        
+        let amount = this.state.amount*100;  // convert to cents
+
         if (this.props.stripe) {
             this.props.stripe
-                .createToken({ name: this.state.name, amount: this.state.amount })
+                .createToken({ name: this.state.name})
                 .then((stripeToken) => {
-                    console.log('[token]', stripeToken);
+                    console.log('[token]', stripeToken.token.id);
 
                     $.ajax({
                         method: 'POST',
                         data: {
                             token: this.props.token,
                             action: 'processPayment',
-                            data: JSON.stringify({token: stripeToken})
+                            data: JSON.stringify({stripeToken: stripeToken.token.id, amount: amount })
                         },
                         url: 'public/process.php',
                         success: function(res) {
-                            setTimeout(function() { 
-                                console.log('xxxx')
-                                console.log(res);
+                            setTimeout(function() {
+                                console.log(res);                                 
                                 res = JSON.parse(res);
-                                console.log(res.responseCode);
-            
                                 if(res.responseCode === 200) {
                                     me.setState({
                                         paymentComplete: true
@@ -108,6 +107,7 @@ class CheckoutForm extends Component {
             console.log("Stripe.js hasn't loaded yet.");
         }
     }
+    
 
     render() {
         if (this.state.paymentComplete) return <h1>Purchase Complete</h1>;
@@ -118,7 +118,7 @@ class CheckoutForm extends Component {
                 <form className="stripe-form" onSubmit={this.handleSubmit}> 
                     <p className="stripe-label">Would you like to donate to the cause?</p>
                     <input className="stripe-amount" type='text' placeholder='Name' onChange={(e) => this.handleInputChange("name", e)}/>
-                    <span className="stripe-amount-euro"><input type='number' placeholder='Amount eg. 10.00' onChange={(e) => this.handleInputChange("amount", e)} /></span>
+                    <span className="stripe-amount-euro"><input type='number' min='0' step='1' placeholder='Amount eg. 10' onChange={(e) => this.handleInputChange("amount", e)} /></span>
                     <CardElement
                         onBlur={this.handleBlur}
                         onChange={this.handleChange}
