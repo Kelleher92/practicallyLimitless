@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, browserHistory, Route, Switch } from 'react-router-dom';
 import $ from 'jquery';
 
+import Modal from './components/Modal';
+import ModalContentsGeneric from './components/ModalContentsGeneric';
 import Home from './pages/Home'; 
 import PrivateRoute from './pages/PrivateRoute';
 import Verify from './pages/Verify';
@@ -16,6 +18,7 @@ import ResetPassword from './components/ResetPassword.js';
 import FlashNotification, {openSnackbar} from './components/FlashNotification';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Donate from './pages/Donate';
+import VerificationNotice from './components/VerificationNotice';
 
 class App extends Component {
     constructor() {
@@ -25,11 +28,20 @@ class App extends Component {
         
         this.state = {
             isLoggedIn: false,
-            companyId: this.companyId
+            companyId: this.companyId,
+            showModal: false,
+            modalType: '',
+            modalVerificationStatus: false,
+            modalTitle: '', 
+            modalSubTitle: '',
+            modalLinkText: '',
+            modalLinkLocation: ''
         };
         
         this.setLoggedOut = this.setLoggedOut.bind(this);
         this.setLoggedIn = this.setLoggedIn.bind(this);
+        this.handleShowModal = this.handleShowModal.bind(this);
+        this.handleHideModal = this.handleHideModal.bind(this);
     }   
 
     componentWillMount() {
@@ -101,55 +113,103 @@ class App extends Component {
         openSnackbar({ message: 'Opened from the home page!' });
     }
 
+    handleShowModal(modalType, modalParams) {
+        if(!modalParams) {
+            modalParams = {};
+        }
+
+        let newState = {
+            showModal: true,
+            modalType: modalType,
+            modalVerificationStatus: modalParams.modalVerificationStatus || true,
+            modalTitle: modalParams.modalTitle || 'success!', 
+            modalSubTitle: modalParams.modalSubTitle || 'no errors found',
+            modalLinkText: modalParams.modalLinkText || 'Home',
+            modalLinkLocation: modalParams.modalLinkLocation || '/home'
+        };
+        this.setState(newState);
+    }
+      
+    handleHideModal() {
+        this.setState({showModal: false});
+    }
+
+    renderModal() {
+        if(this.state.modalType==='genericModal') {
+            return(
+                <Modal hide={this.handleHideModal}>
+                    <ModalContentsGeneric handleHideModal={this.handleHideModal} />
+                </Modal>
+            );
+        } 
+        else if(this.state.modalType==='successModal') {
+            return(
+                <Modal hide={this.handleHideModal}>
+                    <VerificationNotice 
+                        verificationStatus={true} 
+                        title={this.state.modalTitle} 
+                        subTitle={this.state.modalSubTitle}  
+                        linkText={this.state.modalLinkText}
+                        linkLocation={this.state.modalLinkLocation} />
+                </Modal>
+            );
+        }
+        else {
+            return(<Modal hide={this.handleHideModal}><div>Error rendering modal</div></Modal>)
+        }
+    }
+
 	render() {
 		return (
-            <MuiThemeProvider>
-                <Router>
-                    <div>
-                        <Switch>
-                            <Route exact={true} path="/(|home)" render={(props) => (
-                                <Home {...props} token={this.token} isLoggedIn={this.state.isLoggedIn} />
-                            )}/>
-                            
-                            <Route exact={true} path="/pl" render={() => (
-                                <PreLoader />
-                            )}/>
-                            <Route exact={true} path="/company-registration" render={(props) => (
-                                <CompanyRegistration {...props} token={this.token} />
-                            )}/>
+            <div>
+                <MuiThemeProvider>
+                    <Router>
+                        <div>
+                            <Switch>
+                                <Route exact={true} path="/(|home)" render={(props) => (
+                                    <Home {...props} token={this.token} isLoggedIn={this.state.isLoggedIn} />
+                                )}/>
+                                
+                                <Route exact={true} path="/pl" render={() => (
+                                    <PreLoader />
+                                )}/>
+                                <Route exact={true} path="/company-registration" render={(props) => (
+                                    <CompanyRegistration {...props} token={this.token} handleShowModal={this.handleShowModal} handleHideModal={this.handleHideModal} />
+                                )}/>
 
-                            <Route exact={true} path="/company-login" render={(props) => (
-                                <CompanyLogin {...props} token={this.token} setLoggedIn={this.setLoggedIn} />
-                            )}/>
+                                <Route exact={true} path="/company-login" render={(props) => (
+                                    <CompanyLogin {...props} token={this.token} setLoggedIn={this.setLoggedIn} />
+                                )}/>
 
-                            <Route exact={true} path="/company-forgot-password" render={(props) => (
-                                <ForgotPassword {...props} token={this.token} />
-                            )}/>
+                                <Route exact={true} path="/company-forgot-password" render={(props) => (
+                                    <ForgotPassword {...props} token={this.token} />
+                                )}/>
 
-                            <Route exact={true} path="/company-reset-password" render={(props) => (
-                                <ResetPassword {...props} token={this.token} />
-                            )} />
+                                <Route exact={true} path="/company-reset-password" render={(props) => (
+                                    <ResetPassword {...props} token={this.token} />
+                                )} />
+                                
+                                <Route exact={true} path="/donate" render={(props) => (
+                                    <Donate {...props} token={this.token} />
+                                )} />
 
-                            <Route exact={true} path="/donate" render={(props) => (
-                                <Donate {...props} token={this.token} />
-                            )} />
+                                <Route exact={true} path="/verify" render={(props) => (
+                                    <Verify {...props} token={this.token} />
+                                )} />
 
-                            <Route exact={true} path="/verify" render={(props) => (
-                                <Verify {...props} token={this.token} />
-                            )} />
+                                <Route exact={true} path="/reset" render={(props) => (
+                                    <Reset {...props} token={this.token} />
+                                )} />
 
-                            <Route exact={true} path="/reset" render={(props) => (
-                                <Reset {...props} token={this.token} />
-                            )} />
-
-                            <PrivateRoute path="/dashboard" token={this.token} component={Dashboard} isLoggedIn={this.state.isLoggedIn} companyId={this.state.companyId} setLoggedOut={this.setLoggedOut}/>
-                        </Switch>
-
-                        <FlashNotification />
-                    </div>
-                </Router>
-            </MuiThemeProvider>
-		);
+                                <PrivateRoute path="/dashboard" token={this.token} component={Dashboard} isLoggedIn={this.state.isLoggedIn} companyId={this.state.companyId} setLoggedOut={this.setLoggedOut}/>
+                            </Switch>
+                            <FlashNotification />
+                            {this.state.showModal ? this.renderModal() : null}
+                        </div>
+                    </Router>
+                </MuiThemeProvider>
+            </div>
+        );
 	}
 }
 
