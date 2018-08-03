@@ -1,0 +1,27 @@
+.header__container {
+    height: 60px;
+    width: 100%;
+    background: $primary-header-background-color;
+    padding: 0 20px 0 20px;
+    margin: 0 auto 0 auto;
+    -webkit-display: flex;
+    -moz-display: flex;
+    -ms-display: flex;
+    -o-display: flex;
+    display: flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    align-items: center;
+    -webkit-justify-content: space-between;
+    -moz-justify-content: space-between;
+    -ms-justify-content: space-between;
+    -o-justify-content: space-between;
+    justify-content: space-between;
+    box-shadow: $header-box-shadow;
+}
+
+.header__buttons {
+
+}

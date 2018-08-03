@@ -1,0 +1,16 @@
+.footer--container {
+    -webkit-display: flex;
+    -moz-display: flex;
+    -ms-display: flex;
+    -o-display: flex;
+    display: flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    align-items: center;
+    height: 60px;
+    background-color: $primary-footer-background-color;
+    padding: 0 20px;
+    font-size: 0.7rem;
+}

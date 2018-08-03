@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import {openSnackbar} from '../components/FlashNotification';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
-export default class Home extends Component {
+class Home extends Component {
     constructor(props) {
         super(props);
     }
@@ -32,17 +34,21 @@ export default class Home extends Component {
         }
 
 		return (
-            <div>               
-                <div>
+            <div className="contain">               
+                <Header isLoggedIn={this.props.isLoggedIn}/>
+                <div className="content-contain">
                     {dashboardButton}
                     {registrationButton}
                     {logInButton}
                     <Link to="/donate">
                         <button style={{"height":"30px","width":"100px", "backgroundColor":"blue", "cursor":"pointer"}}>Donate</button>
                     </Link>
-                    <button className="btn btn-danger" onClick={this.showFlashNotification}>show Notification </button>
+                    <button style={{"height":"30px","width":"180px", "backgroundColor":"red", "cursor":"pointer"}} onClick={this.showFlashNotification}>show Notification </button>
                 </div>
+                <Footer />
             </div>
 		);
 	}
 }
+
+export default withRouter(Home);
