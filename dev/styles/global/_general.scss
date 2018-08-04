@@ -80,11 +80,6 @@ a:hover{
     text-decoration: none !important;
 }
 
-
-.gen--ih {
-    height: inherit;
-}
-
 // =================================================
 // Keyframes
 // =================================================
@@ -182,19 +177,4 @@ a:hover{
 	border: 1px solid #333;
 	color: #333;
 	cursor: pointer;
-}
-
-
-// ======================================
-// Logo
-// ======================================
-
-.logo{
-    // background-image: url('../../images/pl-logo2.png');
-    height: 80%;
-    width: auto;
-    cursor: pointer;
-    // background-size: contain;
-    // background-repeat: no-repeat;
-    // background-position: center;
 }

@@ -166,7 +166,7 @@ class App extends Component {
                     <div className="contain">
                         <Switch>
                             <Route exact={true} path="/(|home)" render={(props) => (
-                                <Home {...props} token={this.token} isLoggedIn={this.state.isLoggedIn} />
+                                <Home {...props} token={this.token} isLoggedIn={this.state.isLoggedIn} setLoggedOut={this.setLoggedOut}/>
                             )}/>
                             
                             <Route exact={true} path="/pl" render={() => (
