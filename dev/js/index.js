@@ -189,7 +189,7 @@ class App extends Component {
                             )} />
                             
                             <Route exact={true} path="/donate" render={(props) => (
-                                <Donate {...props} token={this.token} />
+                                <Donate {...props} token={this.token} isLoggedIn={this.state.isLoggedIn} setLoggedOut={this.setLoggedOut}/>
                             )} />
 
                             <Route exact={true} path="/verify" render={(props) => (

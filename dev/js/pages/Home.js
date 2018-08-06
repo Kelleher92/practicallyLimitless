@@ -18,9 +18,15 @@ class Home extends Component {
 
 		return (
             <div className="contain">               
-                <Header isLoggedIn={this.props.isLoggedIn} setLoggedOut={this.props.setLoggedOut}/>
-                <div className="content-contain">
-                    Put public facing web content here.
+                <Header isLoggedIn={this.props.isLoggedIn} setLoggedOut={this.props.setLoggedOut} includeShadow={false}/>
+                <div className="home-contain justify-content-center">
+                    <div className="home__section1__container">
+                        <div className="home__section1__text__wrap">
+                            A platform for <span>change.</span>
+                        </div>
+                        <div className="home__section1__image">
+                        </div>
+                    </div>
                 </div>
                 <Footer />
             </div>

@@ -20,6 +20,11 @@
     // -o-justify-content: space-between;
     // justify-content: space-between;
     box-shadow: $header-box-shadow;
+    font-size: 1rem;
+}
+
+.header__container.no-shadow {
+    box-shadow: none;
 }
 
 .header__logo--wrapper {
@@ -92,4 +97,20 @@
     color: $primary-font-color;
     cursor: pointer;
     margin: 0 4px;
+}
+
+
+
+@media (max-width: $mobile-break-point){
+    .header__container{
+        font-size: 0.9rem;
+    }
+
+    .header__nav__container {
+        width: 0;
+    }
+    
+    .header__buttons {
+        width: 90%;
+    }
 }

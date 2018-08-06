@@ -50,9 +50,9 @@ class Header extends Component {
         }
         
         return (
-            <div className="header__container">
+            <div className={"header__container " + (this.props.includeShadow ?"":"no-shadow")}>
                 <div className="header__logo--wrapper">
-                    <img className="header__logo" src='../public/images/pl-logo2.png' onClick={this.handleLogoClick} />
+                    <img className="header__logo" src='../public/images/logo.ico' onClick={this.handleLogoClick} />
                 </div>
                 {this.renderNav()}
                 <div className="header__buttons">

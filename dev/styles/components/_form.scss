@@ -12,16 +12,20 @@
     -ms-justify-content: center;
     -o-justify-content: center;
     justify-content: center;
+    background-image: url('../../images/form-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover; 
 }
 
 .form__container{
-    border: solid 0.5px $white;
+    // border: solid 0.5px $white;
     border-radius: 5px;
-    background-color: $form-background;
-    width: 300px;
+    background-color: rgba(255,255,255,0.7);
+    width: 400px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%); 
+    box-shadow: 0em 0em 1.2em rgba(0, 0, 0, 0.25)
 }
 
 .form-logo{
@@ -52,9 +56,13 @@
 }
 
 .form-input__section{
-    padding-top: 10px;
+    // padding-top: 10px;
     margin: 0 auto;
     width: 90%;
+
+    input {
+        margin: 10px 0 15px 0;
+    }
 }
 
 .form-input__label{
@@ -64,11 +72,11 @@
 
 .form-input__value{
     color: $black;
-    background: $form-background;
-    font-size: 20px;
+    // background: $form-background;
+    font-size: 1rem;
     border: 0.5px solid $black;
     border-radius: 2px;
-    padding: 2px;
+    padding: 5px;
 }
 
 .form-submission__section{
@@ -82,8 +90,8 @@
 .form__submit-button{
     width: 250px; 
     height: 40px;  
-    background-color: #676c75; 
-    color: $white;
+    background-color: $secondary-color; 
+    color: $black;
     font-size: 20px;
     border-radius: 10px; 
     margin: auto;
@@ -106,6 +114,8 @@
 
     .form__container{
         width: 100%;
+        height: 100%;
+        border-radius: 0;
         position: relative;
         left: 0;
         transform: none;
