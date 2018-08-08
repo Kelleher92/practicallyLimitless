@@ -1,15 +1,8 @@
 @import '../base/all';
+@import '../helpers/allHelpers';
 @import 'general';
-@import '../components/allComponents';
 @import '../pages/allPages';
-
-body{
-	font-size: 16px;
-    background-image: url('../../images/green-background.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-	font-family: "Oxygen" !important;
-}
+@import '../components/allComponents';
 
 $steps: 51;
 @for $i from 0 to $steps{

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import {openSnackbar} from '../components/FlashNotification';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
-export default class Home extends Component {
+class Home extends Component {
     constructor(props) {
         super(props);
     }
@@ -13,36 +15,23 @@ export default class Home extends Component {
     }
     
     render() {
-        let logInButton, registrationButton, dashboardButton;
-        if(this.props.isLoggedIn) {
-            logInButton = null;
-            registrationButton = null;
-            dashboardButton = <Link to="/dashboard">
-                                  <button style={{"height":"30px","width":"100px", "backgroundColor":"red", "cursor":"pointer"}}>Dashboard</button>
-                              </Link>
-        }
-        else {
-            logInButton = <Link to="/company-login">
-                              <button style={{"height":"30px","width":"100px", "backgroundColor":"darkgrey", "cursor":"pointer"}}>Log In</button>
-                          </Link>;
-            registrationButton = <Link to="/company-registration">
-                                     <button style={{"height":"30px","width":"100px", "backgroundColor":"orange", "cursor":"pointer"}}>Registration</button>
-                                 </Link>   
-            dashboardButton = null;                            
-        }
 
 		return (
-            <div>               
-                <div>
-                    {dashboardButton}
-                    {registrationButton}
-                    {logInButton}
-                    <Link to="/donate">
-                        <button style={{"height":"30px","width":"100px", "backgroundColor":"blue", "cursor":"pointer"}}>Donate</button>
-                    </Link>
-                    <button className="btn btn-danger" onClick={this.showFlashNotification}>show Notification </button>
+            <div className="contain">               
+                <Header isLoggedIn={this.props.isLoggedIn} setLoggedOut={this.props.setLoggedOut} includeShadow={false}/>
+                <div className="home-contain justify-content-center">
+                    <div className="home__section1__container">
+                        <div className="home__section1__text__wrap">
+                            A platform for <span>change.</span>
+                        </div>
+                        <div className="home__section1__image">
+                        </div>
+                    </div>
                 </div>
+                <Footer />
             </div>
 		);
 	}
 }
+
+export default withRouter(Home);
