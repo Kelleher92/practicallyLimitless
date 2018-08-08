@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import {openSnackbar} from '../components/FlashNotification';
 
-class Header extends Component {
-    
+class Header extends Component {    
     constructor(props) {
         super(props);
         this.state = {
@@ -21,7 +20,7 @@ class Header extends Component {
     handleLogOutClick() {
         let { history } = this.props;
         this.props.setLoggedOut();
-		history.push('/');
+	history.push('/');
     }
 
     handleNotificationClick() {
@@ -39,7 +38,6 @@ class Header extends Component {
     }
     
     render() {
-
         let logInButton, registerButton, logOutButton = null;
         
         if(!this.props.isLoggedIn) {
