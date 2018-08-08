@@ -1,4 +1,4 @@
-.home-contain {
+.home-contain{
     -webkit-display: flex;
     -moz-display: flex;
     -ms-display: flex;
@@ -8,13 +8,13 @@
     background-color: $white;
 }
 
-.home__section1__container {
+.home__section1__container{
     padding: 30px 0;
     font-family: Calibri;
     width: 80%;
 }
 
-.home__section1__text__wrap {
+.home__section1__text__wrap{
     background-color: white;
     margin-left: 30px;
     padding: 10px;
@@ -23,14 +23,14 @@
     position: relative;
     z-index: 1;
 
-    span {
+    span{
         font-style: italic;
         font-size: 80px;
         font-family: Times
     }
 }
 
-.home__section1__image {
+.home__section1__image{
     height: 75%;
     margin-top: -50px;
     position: relative;
@@ -40,16 +40,14 @@
     background-position: 30% 50%;
 }
 
-
-
 @media (max-width: $mobile-break-point){
-    .home__section1__text__wrap {
+    .home__section1__text__wrap{
         margin-left: 10px;
         padding: 5px;
         width: 180px;
         font-size: 24px;
     
-        span {
+        span{
             font-style: italic;
             font-size: 40px;
         }
