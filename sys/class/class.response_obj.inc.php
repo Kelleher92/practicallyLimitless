@@ -1,5 +1,5 @@
 <?php
-	class Response_Obj {
+	class Response_Obj{
 		public $repsonse = null;
 		public $message = null;
 		public $responseCode = null;

@@ -76,8 +76,15 @@
 
 		else if($action === 'processPayment') {
 			$data = json_decode($_POST['data']);
-			$admin = new Admin();
-			$res = $admin->processPayment($data->stripeToken, $data->amount);
+			$offer = new Offer();
+			$res = $offer->processPayment($data->stripeToken, $data->amount);
+			echo json_encode($res);
+		} 
+
+		else if($action === 'insertOffer') {
+			$data = json_decode($_POST['data']);
+			$offer = new Offer();
+			$res = $offer->insertOffer($data->companyId, $data->name, $data->expiry);
 			echo json_encode($res);
 		} 
 

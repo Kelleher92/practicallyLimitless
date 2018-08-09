@@ -1,6 +1,4 @@
 <?php
-	require 'Stripe/init.php';
-
 	class Admin extends DB_Connect{
 		private $ROOT = null;
 		private $_expirationPeriod = 3;
@@ -321,32 +319,6 @@
 			$company = $this->query($sql);
 
 			return empty($company) ? null : $company[0];
-		}
-
-		public function processPayment($stripeToken, $amount) {
-			$stripeToken = $this->sanitizeValue("".$stripeToken."");
-			$amount = $this->sanitizeValue("".$amount."");
-			$res = new Response_Obj();
-
-			if(!$stripeToken || !$amount) {
-				$res->message = 'Payment failure...please try again';
-				$res->responseCode = 400;
-			} else {
-				$privateKey = getenv('STRIPE_PK');
-				\Stripe\Stripe::setApiKey($privateKey);
-				
-				$charge = \Stripe\Charge::create([
-					'amount' => $amount,
-					'currency' => 'eur',
-					'description' => 'Sample charge',
-					'source' => $stripeToken,
-				]);
-
-				$res->message = 'Payment success.';
-				$res->responseCode = 200;
-			}
-
-			return $res;
 		}
 
 		private function generateVefificationLink($email, $token) {

@@ -1,0 +1,20 @@
+.dashboard__tab{
+    width: 40%;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    color: $primary-font-color;
+
+    &.selected{
+        border-bottom: 2px solid $secondary-color;
+    }
+
+    &.unselected{
+        color: $primary-font-color-inactive;
+    }
+}
+
+.dashboard__tab-container{
+    width: 100%;
+    height: 40px;
+}

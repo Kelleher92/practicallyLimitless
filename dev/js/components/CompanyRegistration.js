@@ -55,7 +55,6 @@ class CompanyRegistration extends Component {
     }
 
     onClickMapChoice() {
-        //
         this.navigateTo('/location-map');
     }
 

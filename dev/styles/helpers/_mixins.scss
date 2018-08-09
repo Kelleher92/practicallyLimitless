@@ -1,13 +1,13 @@
 @mixin box-shadow($top, $left, $blur, $color, $inset: false) {
-  @if $inset {
-    -webkit-box-shadow:inset $top $left $blur $color;
-    -moz-box-shadow:inset $top $left $blur $color;
-    box-shadow:inset $top $left $blur $color;
-  } @else {
-    -webkit-box-shadow: $top $left $blur $color;
-    -moz-box-shadow: $top $left $blur $color;
-    box-shadow: $top $left $blur $color;
-  }
+    @if $inset {
+        -webkit-box-shadow:inset $top $left $blur $color;
+        -moz-box-shadow:inset $top $left $blur $color;
+        box-shadow:inset $top $left $blur $color;
+    } @else {
+        -webkit-box-shadow: $top $left $blur $color;
+        -moz-box-shadow: $top $left $blur $color;
+        box-shadow: $top $left $blur $color;
+    }
 }
 
 @mixin transform($transforms) {
@@ -15,38 +15,37 @@
 	-o-transform: $transforms;
 	-ms-transform: $transforms;
 	-webkit-transform: $transforms;
-  transform: $transforms;
+    transform: $transforms;
 }
 
 @mixin transition($args) {
-  -webkit-transition: $args;
-  -moz-transition: $args;
-  -ms-transition: $args;
-  -o-transition: $args;
-  transition: $args;
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    -o-transition: $args;
+    transition: $args;
 }
 
 @mixin noselect{
-  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
 @mixin border-radius($radius) {
-  border-radius: $radius;
-  -webkit-border-radius: $radius;
-  -moz-border-radius: $radius;
+    border-radius: $radius;
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
 }
 
 @mixin background-with-gradient() {
-  background: -moz-linear-gradient(90deg, #F0F0F0 0%, #FBFBFB 25%, #FBFBFB 100%); /* ff3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FBFBFB), color-stop(75%, #FBFBFB), color-stop(100%, #F0F0F0)); /* safari4+,chrome */
-  background: -webkit-linear-gradient(90deg, #F0F0F0 0%, #FBFBFB 25%, #FBFBFB 100%); /* safari5.1+,chrome10+ */
-  background: -o-linear-gradient(90deg, #F0F0F0 0%, #FBFBFB 25%, #FBFBFB 100%); /* opera 11.10+ */
-  background: -ms-linear-gradient(90deg, #F0F0F0 0%, #FBFBFB 25%, #FBFBFB 100%); /* ie10+ */
-  background: linear-gradient(0deg, #F0F0F0 0%, #FBFBFB 25%, #FBFBFB 100%); /* w3c */
+    background: -moz-linear-gradient(90deg, #ababab 0%, #FBFBFB 25%, #FBFBFB 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FBFBFB), color-stop(75%, #FBFBFB), color-stop(100%, #ababab)); /* safari4+,chrome */
+    background: -webkit-linear-gradient(90deg, #ababab 0%, #FBFBFB 25%, #FBFBFB 100%); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(90deg, #ababab 0%, #FBFBFB 25%, #FBFBFB 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(90deg, #ababab 0%, #FBFBFB 25%, #FBFBFB 100%); /* ie10+ */
+    background: linear-gradient(0deg, #ababab 0%, #FBFBFB 25%, #FBFBFB 100%); /* w3c */
 }

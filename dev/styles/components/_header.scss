@@ -1,4 +1,4 @@
-.header__container {
+.header__container{
     height: 60px;
     width: 100%;
     background: $primary-header-background-color;
@@ -23,24 +23,25 @@
     font-size: 1rem;
 }
 
-.header__container.no-shadow {
+.header__container.no-shadow{
     box-shadow: none;
 }
 
-.header__logo--wrapper {
+.header__logo--wrapper{
     width: 10%;
 }
+
 .header__logo{
     height: 50px;
     width: auto;
     cursor: pointer;
 }
 
-.header__nav__container {
+.header__nav__container{
     width: 50%;
 }
 
-.header__nav__item {
+.header__nav__item{
     -webkit-display: inline-block;
     -moz-display: inline-block;
     -ms-display: inline-block;
@@ -51,7 +52,7 @@
     color: $primary-font-color;
     position: relative;
 
-    &:before {
+    &:before{
         content: '';
         position: absolute;
         width: 0%;
@@ -64,17 +65,17 @@
         transition: all 0.3s ease-in-out 0s;
     }
 
-    &:hover {
+    &:hover{
         color: $secondary-color;
     }
 
-    &:hover:before {
+    &:hover:before{
         visibility: visible;
         width: 100%;
     }
 }
 
-.header__buttons {
+.header__buttons{
     width: 40%;
     -webkit-display: flex;
     -moz-display: flex;
@@ -93,24 +94,22 @@
     align-items: center;
 }
 
-.header__buttons__notify {
+.header__buttons__notify{
     color: $primary-font-color;
     cursor: pointer;
     margin: 0 4px;
 }
-
-
 
 @media (max-width: $mobile-break-point){
     .header__container{
         font-size: 0.9rem;
     }
 
-    .header__nav__container {
+    .header__nav__container{
         width: 0;
     }
     
-    .header__buttons {
+    .header__buttons{
         width: 90%;
     }
 }
