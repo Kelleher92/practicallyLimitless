@@ -33,9 +33,7 @@
 				$values = "values ('$companyId', '$uname', '$email', '$address', '$userhash', '$token', now())";
 
 				try {
-				    $this->getDb()->beginTransaction();
-				    $this->getDb()->exec($query . $values);		
-				    $this->getDb()->commit();
+				    $this->insertQuery($query . $values);		
 
 				    $mh = new Mailer();
 				    $mh->sendVerificationEmail($email, $this->generateVefificationLink($email, $token));
@@ -227,9 +225,7 @@
 				$sql = "UPDATE `company` SET `tempResetToken` = '$token', `resetTokenSent` = now(), `isResetTokenExpired` = 0 WHERE `email` = '$email'";
 
 				try {
-				    $this->getDb()->beginTransaction();
-					$this->getDb()->exec($sql);		
-				    $this->getDb()->commit();
+				   	$this->insertQuery($sql);
 
 				    $mh = new Mailer();
 					$mh->sendResetPasswordEmail($email, $this->generateResetLink($email, $token));
@@ -265,9 +261,7 @@
 			$res = new Response_Obj();
 
 			try {
-			    $this->getDb()->beginTransaction();
-				$this->getDb()->exec($query);		
-			    $this->getDb()->commit();
+			    $this->insertQuery($query);
 
 				$res->message = 'Reset password was successful.';
 				$res->responseCode = 200;

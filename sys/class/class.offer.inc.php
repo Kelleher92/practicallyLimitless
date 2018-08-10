@@ -32,8 +32,8 @@
 		}
 
 		public function processPayment($stripeToken, $amount) {
-			$stripeToken = $this->sanitizeValue("".$stripeToken."");
-			$amount = $this->sanitizeValue("".$amount."");
+			$stripeToken = $this->sanitizeValue($stripeToken);
+			$amount = $this->sanitizeValue($amount);
 			$res = new Response_Obj();
 
 			if(!$stripeToken || !$amount) {
