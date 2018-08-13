@@ -4,7 +4,7 @@
   "description": "",
   "main": "gulpfile.js",
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.55",
+    "@babel/runtime": "7.0.0-beta.46",
     "@material-ui/core": "1.4.1",
     "bootstrap": "4.0.0",
     "google-maps": "3.3.0",
@@ -24,7 +24,7 @@
     "react-stripe-elements": "^2.0.1"
   },
   "devDependencies": {
-    "@babel/runtime": "^7.0.0-beta.55",
+    "@babel/runtime": "7.0.0-beta.46",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
