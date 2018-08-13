@@ -149,10 +149,6 @@ class CompanyRegistration extends Component {
                             <div className="form-submission__section">
                                 <button className="form__submit-button" onClick={this.onClickSubmit}>Submit</button>
                                 <button className="form__submit-link pl-buffer-top-10" onClick={this.onClickLogin}>Already registered?</button>
-                                <button className="form__submit-link pl-buffer-top-10" 
-                                    onClick={() => this.props.handleShowModal('successModal')}>
-                                    Help
-                                </button>
                             </div>    
                         </div>
                     </div>
