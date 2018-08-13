@@ -70,7 +70,6 @@ class ResetPassword extends Component {
                 },
                 error: function(res) {
                     setTimeout(function() { 
-                        console.log(res);
                         me.setState({
                             isVerificationCheckComplete: true,
                             wasRegistrationSuccessful: false

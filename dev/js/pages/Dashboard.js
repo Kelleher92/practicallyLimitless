@@ -129,20 +129,23 @@ class Dashboard extends Component {
                 <div className="home-contain justify-content-center">
                     <div className="form__wrap">
                     {this.state.checkComplete ? (
-                        <div className="form__container">
-                            <div className="dashboard__tab-container d-flex justify-content-center">
+                        <div className="form__container wide">
+                            <div className="dashboard__tab-container d-flex">
                                 <div className={"dashboard__tab " + (this.state.homeTab ? 'selected' : 'unselected')} onClick={this.toggleTab}>Company Details</div>
                                 <div className={"dashboard__tab " + (!this.state.homeTab ? 'selected' : 'unselected')} onClick={this.toggleTab}>Offers</div>
                             </div>
                                 {this.state.homeTab ? (
                                     <div className="form-body">
-                                        <div className="form-input__section">
+                                        <div className="form-input__section labelled">
+                                            <div className="form-input__label">Company Name</div>
                                             <input type="text" placeholder="Company Name" className="form-input__value" value={this.state.name} readOnly/>
                                         </div>
-                                        <div className="form-input__section">
+                                        <div className="form-input__section labelled">
+                                            <div className="form-input__label">Company Address</div>
                                             <input type="text" placeholder="Company Address" className="form-input__value" value={this.state.address} readOnly/>
                                         </div>
-                                        <div className="form-input__section">
+                                        <div className="form-input__section labelled">
+                                            <div className="form-input__label">E-mail Address</div>
                                             <input type="email" placeholder="E-mail Address" className="form-input__value" value={this.state.email} readOnly/>
                                         </div>       
                                     </div>

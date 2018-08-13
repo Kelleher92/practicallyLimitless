@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
-import { isValidEmail, isValidPassword, isValidString } from '../helpers/utils.js';
 import VerificationNotice from './VerificationNotice.js';
 import PreLoader from './PreLoader.js';
 import $ from 'jquery';
+import AuthenticationModel from '../models/authentication.model.js';
 
 class CompanyRegistration extends Component {
     constructor(props) {
@@ -22,27 +22,13 @@ class CompanyRegistration extends Component {
         this.onClickLogin = this.onClickLogin.bind(this);
         this.onClickMapChoice = this.onClickMapChoice.bind(this);
         this.navigateTo = this.navigateTo.bind(this);
-        this.registerCompany = this.registerCompany.bind(this);
+        this.onClickSubmit = this.onClickSubmit.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
+        this.authenticationModel = new AuthenticationModel();
     }
 
     handleChange(name, e) {
         this.setState({[name]: e.target.value});
-    }
-
-    isPasswordConfirmValid() {
-        return this.state.password === this.state.confirmPassword;
-    }
-
-    isValidName() {
-        return isValidString(this.state.name);
-    }
-   
-    isValidAddress() {
-        return isValidString(this.state.address);
-    }
-   
-    isSubmitable() {
-        return this.isValidName() && this.isValidAddress() && isValidEmail(this.state.email) && isValidPassword(this.state.password) && this.isPasswordConfirmValid();
     }
    
     onClickLogin() {
@@ -58,8 +44,22 @@ class CompanyRegistration extends Component {
         this.navigateTo('/location-map');
     }
 
-    registerCompany() {
-        if(this.isSubmitable()) {
+    handleKeyPress(target) {
+        if(target.charCode == 13) {
+            this.onClickSubmit();    
+        }
+    }
+
+    onClickSubmit() {
+        this.authenticationModel.setData({
+            name: this.state.name,
+            email: this.state.email,
+            address: this.state.address,
+            password: this.state.password,
+            confirmPassword: this.state.confirmPassword
+        });
+
+        if(this.authenticationModel.isSubmitable()) {
             let me = this;
             me.setState({hasStartedRegistrationCheck: true});  
             
@@ -67,8 +67,8 @@ class CompanyRegistration extends Component {
                 method: 'POST',
                 data: {
                     token: this.props.token,
-                    action: 'registerCompany',
-                    data: JSON.stringify({name: this.state.name, email: this.state.email, address: this.state.address, password: this.state.password})
+                    action: 'onClickSubmit',
+                    data: this.authenticationModel.registrationData()
                 },
                 url: 'public/process.php',
                 success: function(res) {
@@ -90,7 +90,6 @@ class CompanyRegistration extends Component {
                 },
                 error: function(res) {
                     setTimeout(function() { 
-                        console.log(res);
                         me.setState({
                             isVerificationCheckComplete: true,
                             wasRegistrationSuccessful: false
@@ -133,22 +132,22 @@ class CompanyRegistration extends Component {
                         <div className="form-header">Sign Up</div>
                         <div className="form-body">
                             <div className="form-input__section">
-                                <input type="text" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("name", e)}/>
+                                <input type="text" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("name", e)} onKeyPress={this.handleKeyPress} />
                             </div>
                             <div className="form-input__section">
-                                <input type="email" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)}/>
+                                <input type="email" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)} onKeyPress={this.handleKeyPress} />
                             </div>
                             <div className="form-input__section">
-                                <input type="text" placeholder="Company Address" className="form-input__value" onChange={(e) => this.handleChange("address", e)}/>
+                                <input type="text" placeholder="Company Address" className="form-input__value" onChange={(e) => this.handleChange("address", e)} onKeyPress={this.handleKeyPress} />
                             </div>
                                 <div className="form-input__section">
-                                <input type="password" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)}/>
+                                <input type="password" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)} onKeyPress={this.handleKeyPress} />
                             </div>
                             <div className="form-input__section">
-                                <input type="password" placeholder="Confirm Password" className="form-input__value" onChange={(e) => this.handleChange("confirmPassword", e)}/>
+                                <input type="password" placeholder="Confirm Password" className="form-input__value" onChange={(e) => this.handleChange("confirmPassword", e)} onKeyPress={this.handleKeyPress} />
                             </div>
                             <div className="form-submission__section">
-                                <button className="form__submit-button" onClick={this.registerCompany}>Submit</button>
+                                <button className="form__submit-button" onClick={this.onClickSubmit}>Submit</button>
                                 <button className="form__submit-link pl-buffer-top-10" onClick={this.onClickLogin}>Already registered?</button>
                                 <button className="form__submit-link pl-buffer-top-10" 
                                     onClick={() => this.props.handleShowModal('successModal')}>

@@ -1,9 +1,19 @@
+.dashboard__tab-container{
+    width: 100%;
+    height: 40px;
+    padding: 5px 20px;
+    justify-content: left;
+}
+
 .dashboard__tab{
-    width: 40%;
-    text-align: center;
+    width: 20%;
     padding: 10px;
     cursor: pointer;
     color: $primary-font-color;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
 
     &.selected{
         border-bottom: 2px solid $secondary-color;
@@ -14,7 +24,9 @@
     }
 }
 
-.dashboard__tab-container{
-    width: 100%;
-    height: 40px;
+@media (max-width: $mobile-break-point){
+    .dashboard__tab-container{
+        height: 70px;
+        justify-content: center;
+    }
 }

@@ -18,14 +18,17 @@
 }
 
 .form__container{
-    // border: solid 0.5px $white;
     border-radius: 5px;
     background-color: rgba(255,255,255,0.7);
     width: 400px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%); 
-    box-shadow: 0em 0em 1.2em rgba(0, 0, 0, 0.25)
+    box-shadow: 0em 0em 1.2em rgba(0, 0, 0, 0.25);
+
+    &.wide{
+        width: 1000px;
+    }
 }
 
 .form-logo{
@@ -60,23 +63,27 @@
 }
 
 .form-input__section{
-    // padding-top: 10px;
     margin: 0 auto;
     width: 90%;
 
-    input {
-        margin: 10px 0 15px 0;
+    input{
+        margin: 0;
+    }
+
+    &.labelled{
+        display: flex;
+        padding: 10px;
     }
 }
 
 .form-input__label{
-    font-size: 20px;
-    padding-right: 15px;
+    font-size: 1.25rem;
+    width: 250px;
+    text-align: left;
 }
 
 .form-input__value{
     color: $black;
-    // background: $form-background;
     font-size: 1rem;
     border: 0.5px solid $black;
     border-radius: 2px;
@@ -123,5 +130,19 @@
         position: relative;
         left: 0;
         transform: none;
+
+        &.wide{
+            width: 100%;
+        }
+    }
+
+    .form-body{
+        margin-top: 40px;
+    }
+
+    .form-input__section{
+        &.labelled{
+            display: block;
+        }
     }
 }

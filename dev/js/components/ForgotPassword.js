@@ -16,10 +16,17 @@ class ForgotPassword extends Component {
         };
 
         this.onClickSubmit = this.onClickSubmit.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
     }
 
     handleChange(name, e) {
         this.setState({[name]: e.target.value});
+    }
+
+    handleKeyPress(target) {
+        if(target.charCode == 13) {
+            this.onClickSubmit();    
+        }
     }
 
     onClickSubmit() {
@@ -54,7 +61,6 @@ class ForgotPassword extends Component {
                 },
                 error: function(res) {
                     setTimeout(function() { 
-                        console.log(res);
                         me.setState({
                             isVerificationCheckComplete: true,
                             wasRegistrationSuccessful: false
@@ -97,7 +103,7 @@ class ForgotPassword extends Component {
                         <div className="form-header">Forgot Password</div>
                         <div className="form-body">
                             <div className="form-input__section">
-                                <input type="text" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)}/>
+                                <input type="text" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)} onKeyPress={this.handleKeyPress}/>
                             </div>
                             <div className="form-submission__section">
                                 <button className="form__submit-button" onClick={this.onClickSubmit}>Submit</button>

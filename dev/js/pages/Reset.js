@@ -29,7 +29,6 @@ class Reset extends Component {
     }
 
     componentDidMount() {
-        // if query params are present, begin verification check.
         if(this.state.email && this.state.token) {   
             this.checkVerification();
         } else {
