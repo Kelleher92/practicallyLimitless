@@ -54,4 +54,8 @@ p.registrationData = function() {
 	return JSON.stringify({name: this.data.name, email: this.data.email, address: this.data.address, password: this.data.password})
 }
 
+p.updateData = function() {
+	return JSON.stringify({name: this.data.name, email: this.data.email, address: this.data.address})
+}
+
 export default AuthenticationModel;

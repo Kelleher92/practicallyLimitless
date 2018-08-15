@@ -27,6 +27,13 @@
 			echo json_encode($res);
 		} 
 
+		else if($action === 'updateCompany') {
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->updateCompany($data->companyId, $data->name, $data->address);
+			echo json_encode($res);
+		} 
+
 		else if($action === 'loginCompany') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();

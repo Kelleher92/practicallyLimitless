@@ -55,6 +55,34 @@
 			return $res;	
 		}
 
+		public function updateCompany($companyId, $name, $address) {
+			if($_POST['action'] != 'updateCompany') {
+				return "Invalid action supplied for updateCompany.";
+			}
+
+			$companyId = $this->sanitizeValue($companyId);
+			$name = $this->sanitizeValue($name);
+			$address = $this->sanitizeValue($address);
+			
+			$res = new Response_Obj();
+		
+			$sql = "UPDATE `company` SET `name` = '$name', `address` = '$address' WHERE `companyId` = '$companyId'";
+
+			try {
+				$this->insertQuery($sql);		
+
+				$res->responseCode = 200;
+				$res->message = "Details updated successfully.";
+			}
+			catch(PDOException $e) {
+				$this->getDb()->rollback();
+				$res->responseCode = 400;
+				$res->message = "Error: " . $e->getMessage();
+			}
+
+			return $res;	
+		}
+
 		public function loginCompany($userName, $password) {
 			if($_POST['action'] != 'loginCompany') {
 				return "Invalid action supplied for loginCompany.";
@@ -148,19 +176,38 @@
 			$companyId = $this->sanitizeValue($companyId);
 
 			$sql = "SELECT
-				* 
+				`name`, `email`, `address`, `geoCoor` 
 				FROM `company`
-				WHERE `companyId` = '$companyId'
-				LIMIT 1";
-
-			$res = new Response_Obj();
+				WHERE `companyId` = '$companyId'";
 
 			$company = $this->query($sql);
+
+			$sql = "SELECT
+				`id`, `offerName`, `expiryDate` 
+				FROM `offer`
+				WHERE `companyId` = '$companyId'
+				ORDER BY `expiryDate`";
+
+			$offers = $this->query($sql);
+			$expiredOffers = array();
+			
+			foreach($offers as $key => $value) {
+			    if($value["expiryDate"] < date('Y-m-d')) {
+			        $expiredOffers[] = $value;
+			        unset($offers[$key]);
+			    }
+			}
+			
+			$res = new Response_Obj();
 
 			if(!empty($company)) {
 				$res->message = 'Successful fetch.';
 				$res->responseCode = 200;
-				$res->data = $company[0];
+				$res->data = array(
+					'company' => $company[0], 
+					'currentOffers' => array_values($offers), 
+					'expiredOffers' => array_values($expiredOffers)
+				);
 			} else {
 				$res->message = 'No company found.';
 				$res->responseCode = 400;

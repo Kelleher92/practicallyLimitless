@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
-import VerificationNotice from './VerificationNotice.js';
-import PreLoader from './PreLoader.js';
+import VerificationNotice from '../components/VerificationNotice.js';
+import PreLoader from '../components/PreLoader.js';
 import $ from 'jquery';
 import AuthenticationModel from '../models/authentication.model.js';
 
@@ -67,7 +67,7 @@ class CompanyRegistration extends Component {
                 method: 'POST',
                 data: {
                     token: this.props.token,
-                    action: 'onClickSubmit',
+                    action: 'registerCompany',
                     data: this.authenticationModel.registrationData()
                 },
                 url: 'public/process.php',

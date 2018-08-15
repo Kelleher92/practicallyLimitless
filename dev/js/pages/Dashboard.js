@@ -5,6 +5,8 @@ import $ from 'jquery';
 import PreLoader from '../components/PreLoader';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import DashboardTable from '../components/DashboardTable';
+import DashboardDetails from '../components/DashboardDetails';
 
 class Dashboard extends Component {
 	constructor(props) {
@@ -17,6 +19,8 @@ class Dashboard extends Component {
             address: '',
             offerName: '',
             offerExpiry: '',
+            currentOffers: [],
+            expiredOffers: [],
             homeTab: true,
             newOffer: false
         }
@@ -24,7 +28,7 @@ class Dashboard extends Component {
         this.onClickLogout = this.onClickLogout.bind(this);
         this.onClickNew = this.onClickNew.bind(this);
         this.onClickCreate = this.onClickCreate.bind(this);
-	    this.toggleTab = this.toggleTab.bind(this);
+	    this.switchTab = this.switchTab.bind(this);
 	}
 
 	componentDidMount() {
@@ -43,9 +47,11 @@ class Dashboard extends Component {
 
                     if(res.responseCode === 200) {
                         me.setState({
-                        	name: res.data.name,
-                        	email: res.data.email,
-                        	address: res.data.address,
+                        	name: res.data.company.name,
+                        	email: res.data.company.email,
+                        	address: res.data.company.address,
+                            currentOffers: res.data.currentOffers,
+                            expiredOffers: res.data.expiredOffers,
                             checkComplete: true
                         });
                     } else {
@@ -73,16 +79,8 @@ class Dashboard extends Component {
         this.setState({[name]: e.target.value});
     }
 
-    isValidName() {
-        return isValidString(this.state.offerName);
-    }
-   
-    isValidDate() {
-        return isValidString(this.state.offerExpiry);
-    }
-
     isSubmitable() {
-        return this.isValidName() && this.isValidDate();
+        return isValidString(this.state.offerExpiry) && isValidString(this.state.offerName);
     }
    
     onClickCreate() {
@@ -108,8 +106,9 @@ class Dashboard extends Component {
 
                 }
             });
+            this.setState({offerName: "", offerExpiry: ""});
         }
-    }
+    } 
 
 	onClickLogout() {
 		let { history } = this.props;
@@ -118,8 +117,8 @@ class Dashboard extends Component {
 		history.push('/');
 	}
 
-    toggleTab() {
-        this.setState({homeTab: !this.state.homeTab, newOffer: false});
+    switchTab(index) {
+        this.setState({homeTab: index === 0, newOffer: false});
     }
 
     render() {
@@ -131,30 +130,23 @@ class Dashboard extends Component {
                     {this.state.checkComplete ? (
                         <div className="form__container wide">
                             <div className="dashboard__tab-container d-flex">
-                                <div className={"dashboard__tab " + (this.state.homeTab ? 'selected' : 'unselected')} onClick={this.toggleTab}>Company Details</div>
-                                <div className={"dashboard__tab " + (!this.state.homeTab ? 'selected' : 'unselected')} onClick={this.toggleTab}>Offers</div>
+                                <div className={"dashboard__tab " + (this.state.homeTab ? 'selected' : 'unselected')} onClick={() => this.switchTab(0)}>Company Details</div>
+                                <div className={"dashboard__tab " + (!this.state.homeTab ? 'selected' : 'unselected')} onClick={() => this.switchTab(1)}>Offers</div>
                             </div>
                                 {this.state.homeTab ? (
-                                    <div className="form-body">
-                                        <div className="form-input__section labelled">
-                                            <div className="form-input__label">Company Name</div>
-                                            <input type="text" placeholder="Company Name" className="form-input__value" value={this.state.name} readOnly/>
-                                        </div>
-                                        <div className="form-input__section labelled">
-                                            <div className="form-input__label">Company Address</div>
-                                            <input type="text" placeholder="Company Address" className="form-input__value" value={this.state.address} readOnly/>
-                                        </div>
-                                        <div className="form-input__section labelled">
-                                            <div className="form-input__label">E-mail Address</div>
-                                            <input type="email" placeholder="E-mail Address" className="form-input__value" value={this.state.email} readOnly/>
-                                        </div>       
-                                    </div>
+                                    <DashboardDetails token={this.props.token} companyId={this.props.companyId} name={this.state.name} address={this.state.address} email={this.state.email}/>
                                 ) : (this.state.newOffer ? (
                                     <div className="form-body">
                                         <div className="form-input__section">
-                                            <input type="text" placeholder="Offer Name" className="form-input__value" value={this.state.offerName} onChange={(e) => this.handleChange("offerName", e)}/>
                                         </div>
                                         <div className="form-input__section">
+                                        </div>
+                                        <div className="form-input__section labelled">
+                                            <div className="form-input__label">Offer Name</div>
+                                            <input type="text" placeholder="Offer Name" className="form-input__value" value={this.state.offerName} onChange={(e) => this.handleChange("offerName", e)}/>
+                                        </div>
+                                        <div className="form-input__section labelled">
+                                            <div className="form-input__label">Offer Expiry Date</div>
                                             <input type="date" placeholder="Valid Until" className="form-input__value" value={this.state.offerExpiry} onChange={(e) => this.handleChange("offerExpiry", e)}/>
                                         </div>
                                         <div className="form-input__section">
@@ -162,17 +154,7 @@ class Dashboard extends Component {
                                         </div>
                                     </div>
                                 ) : (
-                                    <div className="form-body">
-                                        <div className="form-input__section">
-                                            Current Offers: 
-                                        </div>
-                                        <div className="form-input__section">
-                                            Expired Offers: 
-                                        </div>
-                                        <div className="form-input__section">
-                                            <button className="form__submit-button" onClick={this.onClickNew}>New Offer</button>
-                                        </div>
-                                    </div>
+                                    <DashboardTable active={this.state.currentOffers} expired={this.state.expiredOffers} onClickNew={this.onClickNew}/>
                                     )
                                 )}
                         </div>

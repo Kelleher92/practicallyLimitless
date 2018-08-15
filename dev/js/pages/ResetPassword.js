@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 import { isValidPassword } from '../helpers/utils.js';
-import VerificationNotice from './VerificationNotice.js';
-import PreLoader from './PreLoader.js';
+import VerificationNotice from '../components/VerificationNotice.js';
+import PreLoader from '../components/PreLoader.js';
 import qs from 'query-string';
 import $ from 'jquery';
 

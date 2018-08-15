@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import { Redirect, withRouter } from 'react-router-dom';
-import VerificationNotice from './VerificationNotice.js';
-import PreLoader from './PreLoader.js';
+import VerificationNotice from '../components/VerificationNotice.js';
+import PreLoader from '../components/PreLoader.js';
 import { isValidEmail } from '../helpers/utils.js';
 
 class ForgotPassword extends Component {
