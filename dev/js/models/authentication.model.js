@@ -1,4 +1,4 @@
-import { isValidEmail, isValidPassword, isValidString, doPasswordsMatch } from '../helpers/utils.js';
+import { isValidEmail, isValidPassword, doPasswordsMatch, areAllFieldsComplete } from '../helpers/utils.js';
 
 function AuthenticationModel(config) {
 	this.config = config || {};
@@ -37,25 +37,17 @@ p.setData = function(input) {
 p.isPasswordConfirmValid = function() {
     return doPasswordsMatch(this.data.password, this.data.confirmPassword);
 }
-
-p.isValidName = function() {
-    return isValidString(this.data.name);
-}
    
-p.isValidAddress = function() {
-    return isValidString(this.data.address);
+p.allFieldsComplete = function() {
+    return areAllFieldsComplete([this.data.name, this.data.address, this.data.email, this.data.password, this.data.confirmPassword]);
 }
    
 p.isSubmitable = function() {
-    return this.isValidName() && this.isValidAddress() && isValidEmail(this.data.email) && isValidPassword(this.data.password) && this.isPasswordConfirmValid();
+    return this.allFieldsComplete() && isValidEmail(this.data.email) && isValidPassword(this.data.password) && this.isPasswordConfirmValid();
 }
 
 p.registrationData = function() {
 	return JSON.stringify({name: this.data.name, email: this.data.email, address: this.data.address, password: this.data.password})
-}
-
-p.updateData = function() {
-	return JSON.stringify({name: this.data.name, email: this.data.email, address: this.data.address})
 }
 
 export default AuthenticationModel;

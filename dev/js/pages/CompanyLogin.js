@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import { Redirect, withRouter } from 'react-router-dom';
-import { isValidEmail, isValidPassword } from '../helpers/utils.js';
+import { isValidEmail, isValidPassword, areAllFieldsComplete } from '../helpers/utils.js';
 
 class CompanyLogin extends Component {
     constructor(props) {
@@ -21,7 +21,7 @@ class CompanyLogin extends Component {
     }
 
     onClickSubmit() { 
-        if(isValidEmail(this.state.email) && isValidPassword(this.state.password)) {
+        if(areAllFieldsComplete([this.state.email, this.state.password]) && isValidEmail(this.state.email) && isValidPassword(this.state.password)) {
             let { history } = this.props;
 
             this.props.setLoggedIn(this.state.email, this.state.password).then(function(res) {

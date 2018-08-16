@@ -25,3 +25,13 @@ export const dateIsNotPast = (input) => {
 	var today = new Date();
     return !(then < today) ? true : openSnackbar({message: 'Date cannot be in the past.'}); false;
 }
+
+export const areAllFieldsComplete = (input) => {
+	for(var i = 0; i < input.length; i++) {
+		if(input[i] === "") {
+			openSnackbar({message: 'Please fill in all the fields.'}); 
+			return false;
+		}  
+	}
+	return true;	
+}

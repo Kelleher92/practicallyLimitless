@@ -3,7 +3,7 @@ import $ from 'jquery';
 import { Redirect, withRouter } from 'react-router-dom';
 import VerificationNotice from '../components/VerificationNotice.js';
 import PreLoader from '../components/PreLoader.js';
-import { isValidEmail } from '../helpers/utils.js';
+import { isValidEmail, areAllFieldsComplete } from '../helpers/utils.js';
 
 class ForgotPassword extends Component {
     constructor(props) {
@@ -30,7 +30,7 @@ class ForgotPassword extends Component {
     }
 
     onClickSubmit() {
-        if(isValidEmail(this.state.email)) {
+        if(areAllFieldsComplete([this.state.email]) && isValidEmail(this.state.email)) {
             let me = this;
             me.setState({hasStartedRegistrationCheck: true});  
 
