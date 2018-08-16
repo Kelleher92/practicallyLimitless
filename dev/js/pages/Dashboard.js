@@ -151,7 +151,7 @@ class Dashboard extends Component {
                                         </div>
                                         <div className="form-input__section labelled">
                                             <div className="form-input__label">Offer Name</div>
-                                            <input type="text" placeholder="Offer Name" className="form-input__value" value={this.state.offerName} onChange={(e) => this.handleChange("offerName", e)} />
+                                            <input type="text" placeholder="Offer Name" className="form-input__value" value={this.state.offerName} onChange={(e) => this.handleChange("offerName", e)} autoFocus />
                                         </div>
                                         <div className="form-input__section labelled">
                                             <div className="form-input__label">Offer Expiry Date</div>

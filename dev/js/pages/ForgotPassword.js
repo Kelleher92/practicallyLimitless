@@ -100,7 +100,7 @@ class ForgotPassword extends Component {
                         <div className="form-header">Forgot Password</div>
                         <div className="form-body">
                             <div className="form-input__section">
-                                <input type="text" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)} onKeyPress={this.handleKeyPress}/>
+                                <input type="text" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)} onKeyPress={this.handleKeyPress} autoFocus />
                             </div>
                             <div className="form-submission__section">
                                 <button className="form__submit-button" onClick={this.onClickSubmit}>Submit</button>

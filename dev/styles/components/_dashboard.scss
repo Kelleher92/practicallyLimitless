@@ -25,6 +25,11 @@
     }
 }
 
+.dashboard__table-header{
+    cursor: pointer;
+    user-select: none; 
+}
+
 @media (max-width: $mobile-break-point){
     .dashboard__tab-container{
         height: 70px;

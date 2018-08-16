@@ -129,7 +129,7 @@ class CompanyRegistration extends Component {
                         <div className="form-header">Sign Up</div>
                         <div className="form-body">
                             <div className="form-input__section">
-                                <input type="text" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("name", e)} onKeyPress={this.handleKeyPress} />
+                                <input type="text" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("name", e)} onKeyPress={this.handleKeyPress} autoFocus />
                             </div>
                             <div className="form-input__section">
                                 <input type="email" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)} onKeyPress={this.handleKeyPress} />

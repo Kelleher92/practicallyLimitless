@@ -109,10 +109,10 @@ class ResetPassword extends Component {
                         <div className="form-header">Set New Password</div>
                         <div className="form-body">
                             <div className="form-input__section">
-                                <input type="password" placeholder="New Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)}/>
+                                <input type="password" placeholder="New Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)} autoFocus />
                             </div>                 
                             <div className="form-input__section">
-                                <input type="password" placeholder="Confirm Password" className="form-input__value" onChange={(e) => this.handleChange("confirmPassword", e)}/>
+                                <input type="password" placeholder="Confirm Password" className="form-input__value" onChange={(e) => this.handleChange("confirmPassword", e)} />
                             </div>
                             <div className="form-submission__section">
                                 <button className="form__submit-button" onClick={this.onClickSubmit}>Submit</button>
