@@ -85,6 +85,8 @@ class Dashboard extends Component {
    
     onClickCreate() {
         if(this.isSubmitable()) {
+            let me = this;
+
             $.ajax({
                 method: 'POST',
                 data: {
@@ -97,9 +99,9 @@ class Dashboard extends Component {
                     res = JSON.parse(res);
 
                     if(res.responseCode === 200) {
-                        alert(res.message);
+                        me.props.showFlashNotification(res.message);
                     } else {
-                        alert(res.message);
+                        me.props.showFlashNotification(res.message);
                     }
                 },
                 error: function(res) {
@@ -108,9 +110,9 @@ class Dashboard extends Component {
             });
             this.setState({
                 currentOffers: [...this.state.currentOffers, {
-                    id:this.state.currentOffers.length+this.state.expiredOffers.length , 
-                    offerName:this.state.offerName, 
-                    expiryDate:this.state.offerExpiry}],
+                    id: this.state.currentOffers.length + this.state.expiredOffers.length, 
+                    offerName: this.state.offerName, 
+                    expiryDate: this.state.offerExpiry}],
                 offerName: "", offerExpiry: ""
             })
         }
@@ -140,7 +142,7 @@ class Dashboard extends Component {
                                 <div className={"dashboard__tab " + (!this.state.homeTab ? 'selected' : 'unselected')} onClick={() => this.switchTab(1)}>Offers</div>
                             </div>
                                 {this.state.homeTab ? (
-                                    <DashboardDetails token={this.props.token} companyId={this.props.companyId} name={this.state.name} address={this.state.address} email={this.state.email}/>
+                                    <DashboardDetails token={this.props.token} companyId={this.props.companyId} name={this.state.name} address={this.state.address} email={this.state.email} showFlashNotification={this.props.showFlashNotification} />
                                 ) : (this.state.newOffer ? (
                                     <div className="form-body">
                                         <div className="form-input__section">
@@ -149,18 +151,18 @@ class Dashboard extends Component {
                                         </div>
                                         <div className="form-input__section labelled">
                                             <div className="form-input__label">Offer Name</div>
-                                            <input type="text" placeholder="Offer Name" className="form-input__value" value={this.state.offerName} onChange={(e) => this.handleChange("offerName", e)}/>
+                                            <input type="text" placeholder="Offer Name" className="form-input__value" value={this.state.offerName} onChange={(e) => this.handleChange("offerName", e)} />
                                         </div>
                                         <div className="form-input__section labelled">
                                             <div className="form-input__label">Offer Expiry Date</div>
-                                            <input type="date" placeholder="Valid Until" className="form-input__value" value={this.state.offerExpiry} onChange={(e) => this.handleChange("offerExpiry", e)}/>
+                                            <input type="date" placeholder="Valid Until" className="form-input__value" value={this.state.offerExpiry} onChange={(e) => this.handleChange("offerExpiry", e)} />
                                         </div>
                                         <div className="form-input__section">
                                             <button className="form__submit-button" onClick={this.onClickCreate}>Create</button>
                                         </div>
                                     </div>
                                 ) : (
-                                    <DashboardTable active={this.state.currentOffers} expired={this.state.expiredOffers} onClickNew={this.onClickNew}/>
+                                    <DashboardTable active={this.state.currentOffers} expired={this.state.expiredOffers} onClickNew={this.onClickNew} />
                                     )
                                 )}
                         </div>

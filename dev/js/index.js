@@ -86,7 +86,7 @@ class App extends Component {
                 }
             },
             error: function(res) {
-                console.log(res);
+                showFlashNotification(res);
             }
         });
     } 
@@ -103,7 +103,7 @@ class App extends Component {
                 window.callback(false);
             },
             error: function(res) {
-                console.log(res);
+                showFlashNotification(res);
                 window.callback(false);
             }
         });
@@ -166,7 +166,7 @@ class App extends Component {
                     <div className="contain">
                         <Switch>
                             <Route exact={true} path="/(|home)" render={(props) => (
-                                <Home {...props} token={this.token} isLoggedIn={this.state.isLoggedIn} setLoggedOut={this.setLoggedOut}/>
+                                <Home {...props} token={this.token} isLoggedIn={this.state.isLoggedIn} setLoggedOut={this.setLoggedOut} />
                             )}/>
                             
                             <Route exact={true} path="/pl" render={() => (
@@ -177,7 +177,7 @@ class App extends Component {
                             )}/>
 
                             <Route exact={true} path="/company-login" render={(props) => (
-                                <CompanyLogin {...props} token={this.token} setLoggedIn={this.setLoggedIn} />
+                                <CompanyLogin {...props} token={this.token} setLoggedIn={this.setLoggedIn} showFlashNotification={this.showFlashNotification} />
                             )}/>
 
                             <Route exact={true} path="/company-forgot-password" render={(props) => (
@@ -189,7 +189,7 @@ class App extends Component {
                             )} />
                             
                             <Route exact={true} path="/donate" render={(props) => (
-                                <Donate {...props} token={this.token} isLoggedIn={this.state.isLoggedIn} setLoggedOut={this.setLoggedOut}/>
+                                <Donate {...props} token={this.token} isLoggedIn={this.state.isLoggedIn} setLoggedOut={this.setLoggedOut} />
                             )} />
 
                             <Route exact={true} path="/verify" render={(props) => (
@@ -200,7 +200,7 @@ class App extends Component {
                                 <Reset {...props} token={this.token} />
                             )} />
 
-                            <PrivateRoute path="/dashboard" token={this.token} component={Dashboard} isLoggedIn={this.state.isLoggedIn} companyId={this.state.companyId} setLoggedOut={this.setLoggedOut}/>
+                            <PrivateRoute path="/dashboard" token={this.token} component={Dashboard} isLoggedIn={this.state.isLoggedIn} companyId={this.state.companyId} setLoggedOut={this.setLoggedOut} showFlashNotification={this.showFlashNotification} />
                         </Switch>
                         <FlashNotification />
                         {this.state.showModal ? this.renderModal() : null}

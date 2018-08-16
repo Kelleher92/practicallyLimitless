@@ -30,7 +30,7 @@ class CompanyLogin extends Component {
                 if(res.responseCode === 200) {
                     history.push('/dashboard');
                 } else {
-                    alert(res.message);
+                    this.props.showFlashNotification(res.message);
                 }
             });
         }

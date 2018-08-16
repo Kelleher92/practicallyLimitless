@@ -37,25 +37,24 @@ class DashboardDetails extends Component {
                 url: 'public/process.php',
                 success: function(res) {
                     setTimeout(function() { 
-                        console.log(res);
                         res = JSON.parse(res);
 
                         if(res.responseCode === 200) {
-                            alert(res.message);
+                            me.props.showFlashNotification(res.message);
                         } else {
-                            alert(res.message);
+                            me.props.showFlashNotification(res.message);
                         }
                     }, 1000);
                 },
                 error: function(res) {
                     setTimeout(function() { 
-                        alert(res.message);
+                        me.props.showFlashNotification(res.message);
                     }, 1000);
                 }
             });
         }
         else {
-            alert('Update of information failed, please try again.');
+            this.props.showFlashNotification('Update of information failed, please try again.');
         }
     }
     
