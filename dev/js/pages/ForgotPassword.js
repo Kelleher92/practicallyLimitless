@@ -69,9 +69,6 @@ class ForgotPassword extends Component {
                 }
             });
         }
-        else {
-            alert('E-mail invalid.');
-        }
     }
     
     render() {

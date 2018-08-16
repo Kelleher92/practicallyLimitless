@@ -78,9 +78,6 @@ class ResetPassword extends Component {
                 }
             });
         }
-        else {
-            alert('Password invalid.');
-        }
     }
     
     render() {

@@ -109,8 +109,8 @@ class App extends Component {
         });
     } 
 
-    showFlashNotification() {
-        openSnackbar({ message: 'Opened from the home page!' });
+    showFlashNotification(message) {
+        openSnackbar({message: message});
     }
 
     handleShowModal(modalType, modalParams) {

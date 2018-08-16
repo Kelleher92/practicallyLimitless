@@ -34,9 +34,6 @@ class CompanyLogin extends Component {
                 }
             });
         }
-        else {
-            alert('E-mail or password invalid.');
-        }
     }
 
     handleKeyPress(target) {

@@ -98,9 +98,6 @@ class CompanyRegistration extends Component {
                 }
             });
         }
-        else {
-            alert('E-mail or password invalid.');
-        }
     }
     
     render() {

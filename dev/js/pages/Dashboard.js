@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { isValidString } from '../helpers/utils.js';
+import { dateIsNotPast, isValidString } from '../helpers/utils.js';
 import $ from 'jquery';
 import PreLoader from '../components/PreLoader';
 import Header from '../components/Header';
@@ -80,7 +80,7 @@ class Dashboard extends Component {
     }
 
     isSubmitable() {
-        return isValidString(this.state.offerExpiry) && isValidString(this.state.offerName);
+        return dateIsNotPast(this.state.offerExpiry) && isValidString(this.state.offerName);
     }
    
     onClickCreate() {
@@ -106,7 +106,13 @@ class Dashboard extends Component {
 
                 }
             });
-            this.setState({offerName: "", offerExpiry: ""});
+            this.setState({
+                currentOffers: [...this.state.currentOffers, {
+                    id:this.state.currentOffers.length+this.state.expiredOffers.length , 
+                    offerName:this.state.offerName, 
+                    expiryDate:this.state.offerExpiry}],
+                offerName: "", offerExpiry: ""
+            })
         }
     } 
 

@@ -1,4 +1,4 @@
-import { isValidEmail, isValidPassword, isValidString } from '../helpers/utils.js';
+import { isValidEmail, isValidPassword, isValidString, doPasswordsMatch } from '../helpers/utils.js';
 
 function AuthenticationModel(config) {
 	this.config = config || {};
@@ -35,7 +35,7 @@ p.setData = function(input) {
 }
 
 p.isPasswordConfirmValid = function() {
-    return this.data.password === this.data.confirmPassword;
+    return doPasswordsMatch(this.data.password, this.data.confirmPassword);
 }
 
 p.isValidName = function() {
