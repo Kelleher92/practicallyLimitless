@@ -38,7 +38,7 @@ class CompanyRegistration extends Component {
         history.push('/company-login');
     }
 
-    onCompanyAddressChosen(lat, lng, address){
+    onCompanyAddressChosen(lat, lng, address) {
         var geoCoor = lat + ',' + lng;
         this.setState({
             geoCoor: geoCoor,
@@ -46,10 +46,10 @@ class CompanyRegistration extends Component {
         });
     }
 
-    onCompanyAddressChange(address){
-       this.setState({
-          address:address
-       });
+    onCompanyAddressChange(address) {
+        this.setState({
+            address: address
+        });
     }
 
     handleKeyPress(target) {
@@ -145,7 +145,7 @@ class CompanyRegistration extends Component {
                                 <input type="email" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)} onKeyPress={this.handleKeyPress} />
                             </div>
                             <div className="form-input__section">
-                                <LocationSearchBox className="form-input__value" pHolder="Company Address" onPlaceSelect={this.onCompanyAddressChosen} onAddressUpdate={this.onCompanyAddressChange}/>
+                                <LocationSearchBox className="form-input__value" placeHolder="Company Address" onPlaceSelect={this.onCompanyAddressChosen} onAddressUpdate={this.onCompanyAddressChange} />
                             </div>
                                 <div className="form-input__section">
                                 <input type="password" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)} onKeyPress={this.handleKeyPress} />

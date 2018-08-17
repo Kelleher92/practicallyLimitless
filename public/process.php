@@ -30,7 +30,7 @@
 		else if($action === 'updateCompany') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
-			$res = $admin->updateCompany($data->companyId, $data->name, $data->address);
+			$res = $admin->updateCompany($data->companyId, $data->name, $data->address, $data->geoCoor);
 			echo json_encode($res);
 		} 
 

@@ -21,12 +21,12 @@
 			$email = $this->sanitizeValue($email);
 			$address = $this->sanitizeValue($address);
 			$pword = $this->sanitizeValue($password);
+			$geoCoor = $this->sanitizeValue($geoCoor); 
 
 			$userhash = $this->_getHashFromPassword($pword);
 			$token = $this->generateToken($email);
 			$companyId = md5($email.time());
 
-			$geoCoor = $this->sanitizeValue($geoCoor); 
 			
 			$res = new Response_Obj();
 		
@@ -57,7 +57,7 @@
 			return $res;	
 		}
 
-		public function updateCompany($companyId, $name, $address) {
+		public function updateCompany($companyId, $name, $address, $geoCoor) {
 			if($_POST['action'] != 'updateCompany') {
 				return "Invalid action supplied for updateCompany.";
 			}
@@ -65,10 +65,11 @@
 			$companyId = $this->sanitizeValue($companyId);
 			$name = $this->sanitizeValue($name);
 			$address = $this->sanitizeValue($address);
+			$geoCoor = $this->sanitizeValue($geoCoor);
 			
 			$res = new Response_Obj();
 		
-			$sql = "UPDATE `company` SET `name` = '$name', `address` = '$address' WHERE `companyId` = '$companyId'";
+			$sql = "UPDATE `company` SET `name` = '$name', `address` = '$address', `geoCoor` = '$geoCoor' WHERE `companyId` = '$companyId'";
 
 			try {
 				$this->insertQuery($sql);		

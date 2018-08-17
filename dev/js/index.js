@@ -19,8 +19,6 @@ import FlashNotification, {openSnackbar} from './components/FlashNotification';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Donate from './pages/Donate';
 import VerificationNotice from './components/VerificationNotice';
-import LocationMap from './components/LocationMap';
-import LocationSearchBox from './components/LocationSearchBox';
 
 class App extends Component {
     constructor() {

@@ -168,3 +168,9 @@ a:hover{
     color: #333;
     cursor: pointer;
 }
+
+@media (max-width: $mobile-break-point){
+    .contain{
+        height: 100vh;
+    }
+}

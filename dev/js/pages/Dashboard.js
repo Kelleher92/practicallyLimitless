@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { isValidString } from '../helpers/utils.js';
 import $ from 'jquery';
 import PreLoader from '../components/PreLoader';
 import Header from '../components/Header';
@@ -18,6 +19,7 @@ class Dashboard extends Component {
             name: '',
             email: '',
             address: '',
+            geoCoor: '',
             offerName: '',
             offerExpiry: '',
             currentOffers: [],
@@ -27,8 +29,11 @@ class Dashboard extends Component {
         }
 
         this.onClickNew = this.onClickNew.bind(this);
+        this.onClickUpdate = this.onClickUpdate.bind(this);
 	    this.switchTab = this.switchTab.bind(this);
         this.createNewOffer = this.createNewOffer.bind(this);
+        this.updateGeoCoor = this.updateGeoCoor.bind(this);
+        this.updateAddress = this.updateAddress.bind(this);
 	}
 
 	componentDidMount() {
@@ -50,6 +55,7 @@ class Dashboard extends Component {
                         	name: res.data.company.name,
                         	email: res.data.company.email,
                         	address: res.data.company.address,
+                            geoCoor: res.data.company.geoCoor,
                             currentOffers: res.data.currentOffers,
                             expiredOffers: res.data.expiredOffers,
                             checkComplete: true
@@ -73,6 +79,14 @@ class Dashboard extends Component {
 
     onClickNew() {
         this.setState({newOffer: true});
+    }
+
+    updateGeoCoor(newCoor) {
+        this.setState({geoCoor: newCoor});
+    }
+
+    updateAddress(newAddress) {
+        this.setState({address: newAddress});
     }
 
     handleChange(name, e) {
@@ -116,6 +130,45 @@ class Dashboard extends Component {
         this.setState({tab: index, newOffer: false});
     }
 
+    isSubmitable() {
+        return isValidString(this.state.name) && isValidString(this.state.address) && isValidString(this.state.geoCoor);
+    }
+
+    onClickUpdate() {
+        if(this.isSubmitable()) {
+            let me = this;
+            
+            $.ajax({
+                method: 'POST',
+                data: {
+                    token: this.props.token,
+                    action: 'updateCompany',
+                    data: JSON.stringify({companyId: this.props.companyId, name: this.state.name, address: this.state.address, geoCoor: this.state.geoCoor})
+                },
+                url: 'public/process.php',
+                success: function(res) {
+                    setTimeout(function() { 
+                        res = JSON.parse(res);
+
+                        if(res.responseCode === 200) {
+                            me.props.showFlashNotification(res.message);
+                        } else {
+                            me.props.showFlashNotification(res.message);
+                        }
+                    }, 1000);
+                },
+                error: function(res) {
+                    setTimeout(function() { 
+                        me.props.showFlashNotification(res.message);
+                    }, 1000);
+                }
+            });
+        }
+        else {
+            this.props.showFlashNotification('Update of information failed, please try again.');
+        }
+    }
+
     render() {
         return (
             <div className="contain">               
@@ -126,14 +179,15 @@ class Dashboard extends Component {
                         <div className="form__container wide">
                             <div className="dashboard__tab-container d-flex">
                                 <div className={"dashboard__tab " + (this.state.tab === 0 ? 'selected' : 'unselected')} onClick={() => this.switchTab(0)}>Company Details</div>
-                                <div className={"dashboard__tab " + (!this.state.tab === 1 ? 'selected' : 'unselected')} onClick={() => this.switchTab(1)}>Offers</div>
-                                <div className={"dashboard__tab " + (!this.state.tab === 2 ? 'selected' : 'unselected')} onClick={() => this.switchTab(2)}>Location</div>
+                                <div className={"dashboard__tab " + (this.state.tab === 1 ? 'selected' : 'unselected')} onClick={() => this.switchTab(1)}>Location</div>
+                                <div className={"dashboard__tab " + (this.state.tab === 2 ? 'selected' : 'unselected')} onClick={() => this.switchTab(2)}>Offers</div>
+                                {this.state.tab !== 2 ? (<div className="dashboard__update"><button className="form__submit-button" onClick={this.onClickUpdate}>Update</button></div>) : (<div></div>)}
                             </div>
                                 {this.state.tab === 0 ? (
                                     <DashboardDetails token={this.props.token} companyId={this.props.companyId} name={this.state.name} address={this.state.address} email={this.state.email} showFlashNotification={this.props.showFlashNotification} />
                                 ) : (
-                                this.state.tab === 2 ? (
-                                    <LocationMap />
+                                this.state.tab === 1 ? (
+                                    <LocationMap address={this.state.address} newAddress={this.updateAddress} geoCoor={this.state.geoCoor} newGeoCoor={this.updateGeoCoor} />
                                 ) : (
                                 this.state.newOffer ? (
                                     <DashboardCreate createNewOffer={this.createNewOffer} />

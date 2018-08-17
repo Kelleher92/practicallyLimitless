@@ -1,0 +1,16 @@
+.map__container{
+	padding: 10px;
+	height: 400px;
+	width: 700px;
+}
+
+.map{
+	height: 300px;
+	width: 100%;
+}
+
+@media (max-width: $mobile-break-point){
+    .map__container{
+		width: 100%;
+    }
+}
