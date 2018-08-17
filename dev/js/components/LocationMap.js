@@ -1,50 +1,67 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import $ from 'jquery';
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
-export class LocationMap extends Component {
-    constructor(){
-        super();
-        this.state = {
-            startLat: 52.7977,
-            startLon: -6.1599,
-            address: '',
-            latitude: '',
-            longitude: '',
-        }
+
+class LocationMap extends Component {
+  constructor(){
+    super();
+    this.state = {
+        lat: 41.0082,
+        lng: 28.9784
     }
 
-    getUserCurrentLocation() {
+    this.map = null;
+  }
 
-    }
+  mapClicked(e){
+    this.setState({
+        lat: e.latLng.lat(),
+        lng: e.latLng.lng()
+    });
 
-    setUserLocationFromMap() {
-        // pass values from the map to the lat, lng
-    }
+    this.movePin();
+  }
 
-    mapClicked() {
-        alert('Map was clicked');
-    }
+  initPin() {
+    this.marker = new google.maps.Marker({
+        position: {lat: this.state.lat, lng: this.state.lng},
+        map: this.map
+    });
+  }
 
-    render() {
-        return (
-            <Map 
-                google={this.props.google} 
-                  initialCenter={{
-                    lat: this.state.startLat,
-                    lng: this.state.startLon
-                  }}
-                  zoom={15}
-                  onClick={
-                    this.mapClicked
-                  }
-            >
-            </Map>
-        );
-    }
+  movePin() {
+     this.marker.setPosition({lat: this.state.lat, lng: this.state.lng});
+  }
+
+  componentDidMount() {
+    let me = this;
+
+    this.map = new window.google.maps.Map(document.getElementById('map'), {
+      center: {lat: this.state.lat, lng: this.state.lng},
+      zoom: 14,
+      gestureHandling: 'greedy',
+      streetViewControl: false,
+      fullscreenControl: false,
+      mapTypeControl: false
+    });
+    
+    this.initPin();
+
+    this.map.addListener('click', function(e) {
+        me.mapClicked(e);
+    });
+
+  }
+
+  render() {
+    return (
+        <div>
+          <input id="gMap__search-input" className="controls" type="text" placeholder="Search Box" />
+          <div style={{ width: 500, height: 500 }} id="map" />
+        </div>
+    );
+  }
 }
 
-export default GoogleApiWrapper({
-    apiKey: "AIzaSyA8mT1Hzafi1MrAYe3xHABzF_VSdWbNZGk"
-})(LocationMap)
+export default LocationMap;
