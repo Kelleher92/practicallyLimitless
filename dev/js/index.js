@@ -19,6 +19,7 @@ import FlashNotification, {openSnackbar} from './components/FlashNotification';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Donate from './pages/Donate';
 import VerificationNotice from './components/VerificationNotice';
+import CompanyLogo from './components/CompanyLogo';
 
 class App extends Component {
     constructor() {
@@ -198,6 +199,10 @@ class App extends Component {
 
                             <Route exact={true} path="/reset" render={(props) => (
                                 <Reset {...props} token={this.token} />
+                            )} />
+
+                            <Route exact={true} path="/company-logo" render={(props) => (
+                                <CompanyLogo {...props} token={this.token} companyId={this.state.companyId}/>
                             )} />
 
                             <PrivateRoute path="/dashboard" token={this.token} component={Dashboard} isLoggedIn={this.state.isLoggedIn} companyId={this.state.companyId} setLoggedOut={this.setLoggedOut} showFlashNotification={this.showFlashNotification} />

@@ -1,4 +1,5 @@
 <?php
+
 	class Admin extends DB_Connect{
 		private $ROOT = null;
 		private $_expirationPeriod = 3;
@@ -255,6 +256,41 @@
 				$res->message = "Company activated.";
 			}
 
+			return $res;
+		}
+
+		public function uploadCompanyLogo($companyId, $image, $imageName) {
+
+			$companyId = $this->sanitizeValue($companyId);
+			// $image = $this->sanitizeValue($image);
+			// $imageName = $this->sanitizeValue($imageName);
+
+			// Upload image to cloudinary and get image url as response.
+			require 'Cloudinary/Cloudinary.php';
+			require 'Cloudinary/Uploader.php';
+			require 'Cloudinary/Api.php';
+			
+			\Cloudinary::config(array( 
+				"cloud_name" => "dxdhcnwlz", 
+				"api_key" => "874773625734141", 
+				"api_secret" => "bsUwGDNKK-DphD8Q1Rqwu0wD6mo" 
+			));
+
+			// $image_url = \Cloudinary\Uploader::upload($image);	
+			$response = \Cloudinary\Uploader::upload($image, array("folder" => $companyId."/", "public_id" => $imageName, "resource_type" => "auto"));					
+
+			
+			// save image url to compnay database
+			$res = new Response_Obj();
+			$res->responseCode = 200;
+			$res->message = $image_url;
+			
+			// $query = "INSERT INTO company WHERE ID". ""
+			// try {
+				// $this.insertQuery($query . $values)
+			// }
+			// catch(PDOException $e) {
+			// }
 			return $res;
 		}
 

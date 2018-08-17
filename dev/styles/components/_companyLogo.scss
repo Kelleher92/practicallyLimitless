@@ -1,0 +1,34 @@
+.logo__wrapper{
+    position: relative;
+    height: 128px;
+    width: 128px;
+    border-radius: 4px;
+    background-color: #205081;
+}
+
+.logo {
+    height: inherit;
+    width: inherit;
+    border-radius: 4px;
+}
+
+.logo__overlay {
+    position: absolute;
+    width: 128px;
+    height: 128px;
+    line-height: 128px;
+    text-align: center;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer
+}
+
+.logo__overlay:hover {
+    opacity: .8;
+    background-color: #e9e9e9;
+}
+
+.logo__upload {
+    display: none;
+}

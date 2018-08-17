@@ -51,7 +51,14 @@
 			$admin = new Admin();
 			$res = $admin->fetchCompany($data->companyId);	
 			echo json_encode($res);
-		} 	 	
+		}
+		
+		else if($action === 'uploadCompanyLogo') {
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->uploadCompanyLogo($data->companyId, $data->image, $data->imageName);	
+			echo json_encode($res);
+		}
 
 		else if($action === 'activateCompany') { 
 			$data = json_decode($_POST['data']);
