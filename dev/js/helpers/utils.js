@@ -1,4 +1,4 @@
-import FlashNotification, {openSnackbar} from '../components/FlashNotification';
+import {openSnackbar} from '../components/FlashNotification';
 import moment from 'moment';
 
 const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -24,7 +24,7 @@ export const doPasswordsMatch = (input, confirm) => {
 export const dateIsNotPast = (input) => {
 	var then = moment(input).format("YYYY-MM-DD");
 	var today = moment(new Date()).format("YYYY-MM-DD");
-	
+
     return (then >= today) ? true : openSnackbar({message: 'Date cannot be in the past.'}); false;
 }
 
