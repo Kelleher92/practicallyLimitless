@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import DashboardTable from '../components/DashboardTable';
 import DashboardDetails from '../components/DashboardDetails';
 import DashboardCreate from '../components/DashboardCreate';
+import LocationMap from '../components/LocationMap';
 
 class Dashboard extends Component {
 	constructor(props) {
@@ -21,7 +22,7 @@ class Dashboard extends Component {
             offerExpiry: '',
             currentOffers: [],
             expiredOffers: [],
-            homeTab: true,
+            tab: 0,
             newOffer: false
         }
 
@@ -112,7 +113,7 @@ class Dashboard extends Component {
     } 
 
     switchTab(index) {
-        this.setState({homeTab: index === 0, newOffer: false});
+        this.setState({tab: index, newOffer: false});
     }
 
     render() {
@@ -124,17 +125,21 @@ class Dashboard extends Component {
                     {this.state.checkComplete ? (
                         <div className="form__container wide">
                             <div className="dashboard__tab-container d-flex">
-                                <div className={"dashboard__tab " + (this.state.homeTab ? 'selected' : 'unselected')} onClick={() => this.switchTab(0)}>Company Details</div>
-                                <div className={"dashboard__tab " + (!this.state.homeTab ? 'selected' : 'unselected')} onClick={() => this.switchTab(1)}>Offers</div>
+                                <div className={"dashboard__tab " + (this.state.tab === 0 ? 'selected' : 'unselected')} onClick={() => this.switchTab(0)}>Company Details</div>
+                                <div className={"dashboard__tab " + (!this.state.tab === 1 ? 'selected' : 'unselected')} onClick={() => this.switchTab(1)}>Offers</div>
+                                <div className={"dashboard__tab " + (!this.state.tab === 2 ? 'selected' : 'unselected')} onClick={() => this.switchTab(2)}>Location</div>
                             </div>
-                                {this.state.homeTab ? (
+                                {this.state.tab === 0 ? (
                                     <DashboardDetails token={this.props.token} companyId={this.props.companyId} name={this.state.name} address={this.state.address} email={this.state.email} showFlashNotification={this.props.showFlashNotification} />
+                                ) : (
+                                this.state.tab === 2 ? (
+                                    <LocationMap />
                                 ) : (
                                 this.state.newOffer ? (
                                     <DashboardCreate createNewOffer={this.createNewOffer} />
                                 ) : (
                                     <DashboardTable active={this.state.currentOffers} expired={this.state.expiredOffers} onClickNew={this.onClickNew} />
-                                    )
+                                    ))
                                 )}
                         </div>
                     ) : (
