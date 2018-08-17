@@ -4,6 +4,7 @@ import VerificationNotice from '../components/VerificationNotice.js';
 import PreLoader from '../components/PreLoader.js';
 import $ from 'jquery';
 import AuthenticationModel from '../models/authentication.model.js';
+import LocationSearchBox from '../components/LocationSearchBox.js';
 
 class CompanyRegistration extends Component {
     constructor(props) {
@@ -16,15 +17,16 @@ class CompanyRegistration extends Component {
             confirmPassword: '',
             hasStartedRegistrationCheck: false,
             isVerificationCheckComplete: false,
-            wasRegistrationSuccessful: false
+            wasRegistrationSuccessful: false,
+            geoCoor: ''
         };
 
         this.onClickLogin = this.onClickLogin.bind(this);
-        this.onClickMapChoice = this.onClickMapChoice.bind(this);
-        this.navigateTo = this.navigateTo.bind(this);
         this.onClickSubmit = this.onClickSubmit.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.authenticationModel = new AuthenticationModel();
+        this.onCompanyAddressChosen = this.onCompanyAddressChosen.bind(this);
+        this.onCompanyAddressChange = this.onCompanyAddressChange.bind(this);
     }
 
     handleChange(name, e) {
@@ -32,16 +34,22 @@ class CompanyRegistration extends Component {
     }
    
     onClickLogin() {
-        this.navigateTo('/company-login');
-    }
-
-    navigateTo(path) {
         let { history } = this.props;
-        history.push(path);
+        history.push('/company-login');
     }
 
-    onClickMapChoice() {
-        this.navigateTo('/location-map');
+    onCompanyAddressChosen(lat, lng, address){
+        var geoCoor = lat + ',' + lng;
+        this.setState({
+            geoCoor: geoCoor,
+            address: address
+        });
+    }
+
+    onCompanyAddressChange(address){
+       this.setState({
+          address:address
+       });
     }
 
     handleKeyPress(target) {
@@ -56,7 +64,8 @@ class CompanyRegistration extends Component {
             email: this.state.email,
             address: this.state.address,
             password: this.state.password,
-            confirmPassword: this.state.confirmPassword
+            confirmPassword: this.state.confirmPassword,
+            geoCoor: this.state.geoCoor
         });
 
         if(this.authenticationModel.isSubmitable()) {
@@ -73,6 +82,7 @@ class CompanyRegistration extends Component {
                 url: 'public/process.php',
                 success: function(res) {
                     setTimeout(function() { 
+                        console.log(res);
                         res = JSON.parse(res);
 
                         if(res.responseCode === 200) {
@@ -135,7 +145,7 @@ class CompanyRegistration extends Component {
                                 <input type="email" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)} onKeyPress={this.handleKeyPress} />
                             </div>
                             <div className="form-input__section">
-                                <input type="text" placeholder="Company Address" className="form-input__value" onChange={(e) => this.handleChange("address", e)} onKeyPress={this.handleKeyPress} />
+                                <LocationSearchBox className="form-input__value" pHolder="Company Address" onPlaceSelect={this.onCompanyAddressChosen} onAddressUpdate={this.onCompanyAddressChange}/>
                             </div>
                                 <div className="form-input__section">
                                 <input type="password" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)} onKeyPress={this.handleKeyPress} />
