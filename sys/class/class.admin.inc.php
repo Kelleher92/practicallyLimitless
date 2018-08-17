@@ -12,7 +12,7 @@
 			}
 		}
 
-		public function registerCompany($name, $email, $address, $password) {
+		public function registerCompany($name, $email, $address, $password, $geoCoor) {
 			if($_POST['action'] != 'registerCompany') {
 				return "Invalid action supplied for registerCompany.";
 			}
@@ -25,12 +25,14 @@
 			$userhash = $this->_getHashFromPassword($pword);
 			$token = $this->generateToken($email);
 			$companyId = md5($email.time());
+
+			$geoCoor = $this->sanitizeValue($geoCoor); 
 			
 			$res = new Response_Obj();
 		
 			if($this->isUniqueForCompanies('email', $email)) {
-				$query ="INSERT INTO company". "(companyId, name, email, address, password, tempActivationToken, tokenSent) ";
-				$values = "values ('$companyId', '$uname', '$email', '$address', '$userhash', '$token', now())";
+				$query ="INSERT INTO company". "(companyId, name, email, address, password, tempActivationToken, tokenSent, geoCoor) ";
+				$values = "values ('$companyId', '$uname', '$email', '$address', '$userhash', '$token', now(), '$geoCoor')";
 
 				try {
 				    $this->insertQuery($query . $values);		

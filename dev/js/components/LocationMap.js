@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import { withRouter } from 'react-router-dom';
-import $ from 'jquery';
-
+import LocationSearchBox from './LocationSearchBox';
 
 class LocationMap extends Component {
   constructor(){
@@ -57,7 +55,7 @@ class LocationMap extends Component {
   render() {
     return (
         <div>
-          <input id="gMap__search-input" className="controls" type="text" placeholder="Search Box" />
+          <LocationSearchBox />
           <div style={{ width: 500, height: 500 }} id="map" />
         </div>
     );

@@ -23,7 +23,7 @@
 		else if($action === 'registerCompany') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
-			$res = $admin->registerCompany($data->name, $data->email, $data->address, $data->password);
+			$res = $admin->registerCompany($data->name, $data->email, $data->address, $data->password, $data->geoCoor);
 			echo json_encode($res);
 		} 
 
