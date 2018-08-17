@@ -19,6 +19,7 @@ import FlashNotification, {openSnackbar} from './components/FlashNotification';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Donate from './pages/Donate';
 import VerificationNotice from './components/VerificationNotice';
+import LocationMap from './components/LocationMap';
 
 class App extends Component {
     constructor() {
@@ -196,6 +197,10 @@ class App extends Component {
                                 <Verify {...props} token={this.token} />
                             )} />
 
+                             <Route exact={true} path="/gMap" render={(props) => (
+                                <LocationMap   />
+                            )} />
+                         
                             <Route exact={true} path="/reset" render={(props) => (
                                 <Reset {...props} token={this.token} />
                             )} />
