@@ -45,9 +45,10 @@ class CompanyLogo extends Component {
                     },
                     url: 'public/process.php',
                     success: function(res) {
+                        console.log(res);
                         setTimeout(function() { 
                             res = JSON.parse(res);
-                            if(res.responseCode === 200) {
+                            if(res.responseCode === 200 && (res.message.secure_url !== null))    {
                                 me.setState({imageUrl: res.message.secure_url});
                             } else {
                                 me.setState({imageUrl: 'https://avatar-cdn.atlassian.com/95f5e447148da5383b0652e0a50516a5'});

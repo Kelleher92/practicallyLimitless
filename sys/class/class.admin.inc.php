@@ -276,10 +276,8 @@
 				"api_secret" => "bsUwGDNKK-DphD8Q1Rqwu0wD6mo" 
 			));
 
-			// $image_url = \Cloudinary\Uploader::upload($image);	
-			$response = \Cloudinary\Uploader::upload($image, array("folder" => $companyId."/", "public_id" => $imageName, "resource_type" => "auto"));					
+			$image_url = \Cloudinary\Uploader::upload($image, array("folder" => $companyId."/", "public_id" => $imageName, "resource_type" => "auto", "width"=>128, "height"=>128, "crop"=>"fill"));					
 
-			
 			// save image url to compnay database
 			$res = new Response_Obj();
 			$res->responseCode = 200;
