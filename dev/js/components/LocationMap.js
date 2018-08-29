@@ -1,50 +1,86 @@
 import React, {Component} from 'react';
-import { withRouter } from 'react-router-dom';
-import $ from 'jquery';
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import LocationSearchBox from './LocationSearchBox';
 
-export class LocationMap extends Component {
-    constructor(){
-        super();
+class LocationMap extends Component {
+    constructor(props) {
+        super(props);
         this.state = {
-            startLat: 52.7977,
-            startLon: -6.1599,
-            address: '',
-            latitude: '',
-            longitude: '',
+            lat: parseFloat(this.props.geoCoor.split(',')[0]),
+            lng: parseFloat(this.props.geoCoor.split(',')[1]),
+            address: this.props.address
         }
+
+        this.map = null;
+        this.onCompanyAddressChosen = this.onCompanyAddressChosen.bind(this);
+        this.onCompanyAddressChange = this.onCompanyAddressChange.bind(this);
     }
 
-    getUserCurrentLocation() {
+    componentDidMount() {
+        let me = this;
 
+        this.map = new window.google.maps.Map(document.getElementById('map'), {
+            center: {lat: this.state.lat, lng: this.state.lng},
+            zoom: 14,
+            gestureHandling: 'greedy',
+            streetViewControl: false,
+            fullscreenControl: false,
+            mapTypeControl: false
+        });
+        
+        this.initPin();
+
+        this.map.addListener('click', function(e) {
+            me.mapClicked(e);
+        });
     }
 
-    setUserLocationFromMap() {
-        // pass values from the map to the lat, lng
+    mapClicked(e) {
+        this.setState({
+            lat: e.latLng.lat(),
+            lng: e.latLng.lng()
+        });
+
+        this.movePin();
+        this.props.newGeoCoor(this.state.lat + ',' + this.state.lng);
     }
 
-    mapClicked() {
-        alert('Map was clicked');
+    initPin() {
+        this.marker = new google.maps.Marker({
+            position: {lat: this.state.lat, lng: this.state.lng},
+            map: this.map
+        });
+    }
+
+    movePin() {
+        this.marker.setPosition({lat: this.state.lat, lng: this.state.lng});
+    }
+
+    onCompanyAddressChosen(lat, lng, address) {
+        var geoCoor = lat + ',' + lng;
+        this.setState({
+            geoCoor: geoCoor,
+            address: address
+        });
+
+        this.props.newAddress(this.state.address);
+    }
+
+    onCompanyAddressChange(address) {
+        this.setState({
+            address: address
+        });
     }
 
     render() {
         return (
-            <Map 
-                google={this.props.google} 
-                  initialCenter={{
-                    lat: this.state.startLat,
-                    lng: this.state.startLon
-                  }}
-                  zoom={15}
-                  onClick={
-                    this.mapClicked
-                  }
-            >
-            </Map>
+            <div className="form-body">
+                <div className="map__container">
+                    <LocationSearchBox className="form-input__value" placeHolder="Company Address" value={this.state.address} onPlaceSelect={this.onCompanyAddressChosen} onAddressUpdate={this.onCompanyAddressChange} />
+                    <div className="map" id="map"></div>
+                </div>
+            </div>
         );
     }
 }
 
-export default GoogleApiWrapper({
-    apiKey: "AIzaSyA8mT1Hzafi1MrAYe3xHABzF_VSdWbNZGk"
-})(LocationMap)
+export default LocationMap;

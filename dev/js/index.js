@@ -173,6 +173,7 @@ class App extends Component {
                             <Route exact={true} path="/pl" render={() => (
                                 <PreLoader />
                             )}/>
+                            
                             <Route exact={true} path="/company-registration" render={(props) => (
                                 <CompanyRegistration {...props} token={this.token} handleShowModal={this.handleShowModal} handleHideModal={this.handleHideModal} />
                             )}/>
@@ -196,7 +197,7 @@ class App extends Component {
                             <Route exact={true} path="/verify" render={(props) => (
                                 <Verify {...props} token={this.token} />
                             )} />
-
+                         
                             <Route exact={true} path="/reset" render={(props) => (
                                 <Reset {...props} token={this.token} />
                             )} />

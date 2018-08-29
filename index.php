@@ -15,6 +15,7 @@
 		<link rel="stylesheet" href="./public/css/lib/bootstrap.min.css">  
 		<link rel="stylesheet" href="./public/css/global/global.css"> 
 		<script src="https://js.stripe.com/v3/"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8mT1Hzafi1MrAYe3xHABzF_VSdWbNZGk&libraries=places"> </script>
 	</head>
 
 	<body>

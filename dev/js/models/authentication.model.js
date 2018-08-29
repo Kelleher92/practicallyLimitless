@@ -22,7 +22,8 @@ p.clearData = function() {
 		email: null,
 		address: null,
 		password: null,
-		confirmPassword: null
+		confirmPassword: null,
+		geoCoor: null
 	}
 }
 
@@ -47,7 +48,7 @@ p.isSubmitable = function() {
 }
 
 p.registrationData = function() {
-	return JSON.stringify({name: this.data.name, email: this.data.email, address: this.data.address, password: this.data.password})
+	return JSON.stringify({name: this.data.name, email: this.data.email, address: this.data.address, password: this.data.password, geoCoor: this.data.geoCoor})
 }
 
 export default AuthenticationModel;

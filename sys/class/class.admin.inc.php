@@ -13,7 +13,7 @@
 			}
 		}
 
-		public function registerCompany($name, $email, $address, $password) {
+		public function registerCompany($name, $email, $address, $password, $geoCoor) {
 			if($_POST['action'] != 'registerCompany') {
 				return "Invalid action supplied for registerCompany.";
 			}
@@ -22,16 +22,18 @@
 			$email = $this->sanitizeValue($email);
 			$address = $this->sanitizeValue($address);
 			$pword = $this->sanitizeValue($password);
+			$geoCoor = $this->sanitizeValue($geoCoor); 
 
 			$userhash = $this->_getHashFromPassword($pword);
 			$token = $this->generateToken($email);
 			$companyId = md5($email.time());
+
 			
 			$res = new Response_Obj();
 		
 			if($this->isUniqueForCompanies('email', $email)) {
-				$query ="INSERT INTO company". "(companyId, name, email, address, password, tempActivationToken, tokenSent) ";
-				$values = "values ('$companyId', '$uname', '$email', '$address', '$userhash', '$token', now())";
+				$query ="INSERT INTO company". "(companyId, name, email, address, password, tempActivationToken, tokenSent, geoCoor) ";
+				$values = "values ('$companyId', '$uname', '$email', '$address', '$userhash', '$token', now(), '$geoCoor')";
 
 				try {
 				    $this->insertQuery($query . $values);		
@@ -56,7 +58,7 @@
 			return $res;	
 		}
 
-		public function updateCompany($companyId, $name, $address) {
+		public function updateCompany($companyId, $name, $address, $geoCoor) {
 			if($_POST['action'] != 'updateCompany') {
 				return "Invalid action supplied for updateCompany.";
 			}
@@ -64,10 +66,11 @@
 			$companyId = $this->sanitizeValue($companyId);
 			$name = $this->sanitizeValue($name);
 			$address = $this->sanitizeValue($address);
+			$geoCoor = $this->sanitizeValue($geoCoor);
 			
 			$res = new Response_Obj();
 		
-			$sql = "UPDATE `company` SET `name` = '$name', `address` = '$address' WHERE `companyId` = '$companyId'";
+			$sql = "UPDATE `company` SET `name` = '$name', `address` = '$address', `geoCoor` = '$geoCoor' WHERE `companyId` = '$companyId'";
 
 			try {
 				$this->insertQuery($sql);		
