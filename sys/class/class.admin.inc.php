@@ -180,7 +180,7 @@
 			$companyId = $this->sanitizeValue($companyId);
 
 			$sql = "SELECT
-				`name`, `email`, `address`, `geoCoor` 
+				`name`, `email`, `address`, `logo`, `geoCoor` 
 				FROM `company`
 				WHERE `companyId` = '$companyId'";
 

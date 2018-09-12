@@ -19,6 +19,7 @@ class Dashboard extends Component {
             name: '',
             email: '',
             address: '',
+            logo: '',
             geoCoor: '',
             offerName: '',
             offerExpiry: '',
@@ -34,6 +35,7 @@ class Dashboard extends Component {
         this.createNewOffer = this.createNewOffer.bind(this);
         this.updateGeoCoor = this.updateGeoCoor.bind(this);
         this.updateAddress = this.updateAddress.bind(this);
+        this.handleUpdateLogo = this.handleUpdateLogo.bind(this);
 	}
 
 	componentDidMount() {
@@ -51,10 +53,12 @@ class Dashboard extends Component {
                     res = JSON.parse(res);
 
                     if(res.responseCode === 200) {
+                        console.log();//'https://avatar-cdn.atlassian.com/95f5e447148da5383b0652e0a50516a5'
                         me.setState({
                         	name: res.data.company.name,
                         	email: res.data.company.email,
-                        	address: res.data.company.address,
+                            address: res.data.company.address,
+                            logo: res.data.company.logo,
                             geoCoor: res.data.company.geoCoor,
                             currentOffers: res.data.currentOffers,
                             expiredOffers: res.data.expiredOffers,
@@ -169,6 +173,10 @@ class Dashboard extends Component {
         }
     }
 
+    handleUpdateLogo(newLogo) {
+        this.setState({logo:newLogo});
+    }
+
     render() {
         return (
             <div className="contain">               
@@ -184,7 +192,14 @@ class Dashboard extends Component {
                                 {this.state.tab !== 2 ? (<div className="dashboard__update"><button className="form__submit-button" onClick={this.onClickUpdate}>Update</button></div>) : (<div></div>)}
                             </div>
                                 {this.state.tab === 0 ? (
-                                    <DashboardDetails token={this.props.token} companyId={this.props.companyId} name={this.state.name} address={this.state.address} email={this.state.email} showFlashNotification={this.props.showFlashNotification} />
+                                    <DashboardDetails  token={this.props.token} 
+                                                       companyId={this.props.companyId} 
+                                                       name={this.state.name} 
+                                                       address={this.state.address} 
+                                                       email={this.state.email}
+                                                       logo={this.state.logo} 
+                                                       handleUpdateLogo={this.handleUpdateLogo}
+                                                       showFlashNotification={this.props.showFlashNotification} />
                                 ) : (
                                 this.state.tab === 1 ? (
                                     <LocationMap address={this.state.address} newAddress={this.updateAddress} geoCoor={this.state.geoCoor} newGeoCoor={this.updateGeoCoor} />

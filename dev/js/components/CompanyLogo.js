@@ -6,16 +6,12 @@ class CompanyLogo extends Component {
     
     constructor(props) {
         super(props);
-        this.state = {
-            imageUrl: 'https://avatar-cdn.atlassian.com/95f5e447148da5383b0652e0a50516a5',
-        }
 
         this.handleUploadImage = this.handleUploadImage.bind(this);
         this.handleLaunchFileExplorer = this.handleLaunchFileExplorer.bind(this);
     }
 
     handleLaunchFileExplorer() {
-        console.log(this.state.imageUrl);
         $('.logo__upload').trigger('click');
     }
 
@@ -27,10 +23,10 @@ class CompanyLogo extends Component {
 
         if(newImageToUpload) {
             // set loader while image is being processed.
-            this.setState({imageUrl: '../public/images/loading.gif'})
+            this.props.handleUpdateLogo('../public/images/loading.gif');
             var reader  = new FileReader();
             reader.readAsDataURL(ev.target.files[0]);
-
+            
             reader.addEventListener("load", function () {
                 $.ajax({
                     method: 'POST',
@@ -49,9 +45,11 @@ class CompanyLogo extends Component {
                         setTimeout(function() { 
                             res = JSON.parse(res);
                             if(res.responseCode === 200 && (res.message.secure_url !== null))    {
-                                me.setState({imageUrl: res.message.secure_url});
+                                //me.setState({imageUrl: res.message.secure_url});
+                                me.props.handleUpdateLogo(res.message.secure_url);
                             } else {
-                                me.setState({imageUrl: 'https://avatar-cdn.atlassian.com/95f5e447148da5383b0652e0a50516a5'});
+                                //me.setState({imageUrl: 'https://avatar-cdn.atlassian.com/95f5e447148da5383b0652e0a50516a5'});
+                                me.props.handleUpdateLogo('');
                                 openSnackbar({ message: 'Error uploading image, please try again.' });
                             }
                         }, 1000);
@@ -59,7 +57,8 @@ class CompanyLogo extends Component {
                     error: function(res) {
                         console.log(res);
                         setTimeout(function() { 
-                            me.setState({imageUrl: 'https://avatar-cdn.atlassian.com/95f5e447148da5383b0652e0a50516a5'});
+                            //me.setState({imageUrl: 'https://avatar-cdn.atlassian.com/95f5e447148da5383b0652e0a50516a5'});
+                            me.props.handleUpdateLogo('');
                             openSnackbar({ message: 'Error uploading image, please try again.' });
                         }, 1000);
                     }
@@ -70,13 +69,14 @@ class CompanyLogo extends Component {
     }
     
     render() {
+        let logo = this.props.logo ? this.props.logo : 'https://avatar-cdn.atlassian.com/95f5e447148da5383b0652e0a50516a5';
         return (
             <div className="logo__wrapper">
                 <input className="logo__upload" type="file" accept=".jpg, .png, .jpeg, .gif, .svg" onChange={this.handleUploadImage}/>
                 <div className="logo__overlay" onClick={this.handleLaunchFileExplorer}>
                     Update Logo
                 </div>
-                <img className="logo" src={this.state.imageUrl} alt="Company Logo"/>
+                <img className="logo" src={logo} alt="Company Logo"/>
             </div>
         );
     }
