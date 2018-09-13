@@ -290,10 +290,7 @@
 		}
 
 		public function uploadCompanyLogo($companyId, $image, $imageName) {
-
 			$companyId = $this->sanitizeValue($companyId);
-			// $image = $this->sanitizeValue($image);
-			// $imageName = $this->sanitizeValue($imageName);
 
 			// Upload image to cloudinary and get image url as response.
 			require 'Cloudinary/Cloudinary.php';
@@ -308,17 +305,11 @@
 
 			$image_url = \Cloudinary\Uploader::upload($image, array("folder" => $companyId."/", "public_id" => $imageName, "resource_type" => "auto", "width"=>128, "height"=>128, "crop"=>"fill"));					
 
-			// save image url to compnay database
+			// save image url to company database
 			$res = new Response_Obj();
 			$res->responseCode = 200;
 			$res->message = $image_url;
-			
-			// $query = "INSERT INTO company WHERE ID". ""
-			// try {
-				// $this.insertQuery($query . $values)
-			// }
-			// catch(PDOException $e) {
-			// }
+
 			return $res;
 		}
 
