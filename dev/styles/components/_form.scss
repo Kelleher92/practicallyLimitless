@@ -58,6 +58,10 @@
     align-items: center;
 }
 
+.form-company-details__logo {
+    padding: 30px 0 0 40px; 
+}
+
 .form-input__heading{
     font-size: 25px;
     color: $white;
@@ -140,12 +144,22 @@
     }
 
     .form-body{
-        margin-top: 40px;
+        margin-top: 20px;
     }
 
+    .form-company-details__logo {
+        padding: 20px 0 0 0;
+        margin: auto;
+    }
+    
     .form-input__section{
         &.labelled{
             display: block;
         }
+    }
+
+    .form-input__label{
+        font-size: 1.1rem;
+        margin-top: 0px;
     }
 }

@@ -87,6 +87,33 @@
 			return $res;	
 		}
 
+		public function updateCompanyLogo($companyId, $logo) {
+			if($_POST['action'] != 'updateCompanyLogo') {
+				return "Invalid action supplied for updateCompanyLogo.";
+			}
+
+			$companyId = $this->sanitizeValue($companyId);
+			$logo = $this->sanitizeValue($logo);
+			
+			$res = new Response_Obj();
+		
+			$sql = "UPDATE `company` SET `logo` = '$logo' WHERE `companyId` = '$companyId'";
+
+			try {
+				$this->insertQuery($sql);		
+
+				$res->responseCode = 200;
+				$res->message = "Details updated successfully.";
+			}
+			catch(PDOException $e) {
+				$this->getDb()->rollback();
+				$res->responseCode = 400;
+				$res->message = "Error: " . $e->getMessage();
+			}
+
+			return $res;	
+		}
+
 		public function loginCompany($userName, $password) {
 			if($_POST['action'] != 'loginCompany') {
 				return "Invalid action supplied for loginCompany.";

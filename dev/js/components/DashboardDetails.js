@@ -10,7 +10,6 @@ class DashboardDetails extends Component {
             name: this.props.name,
             address: this.props.address,
             email: this.props.email,
-            logo: this.props.logo
         };
     }
 
@@ -20,11 +19,13 @@ class DashboardDetails extends Component {
     
     render() {
         return (
-            <div>
-                <CompanyLogo logo={this.state.logo} 
-                             companyId={this.state.companyId}
-                             token={this.props.token}
-                             handleUpdateLogo={this.props.handleUpdateLogo}/>
+            <div className="d-flex flex-column flex-md-row">
+                <div className="form-company-details__logo">
+                    <CompanyLogo logo={this.props.logo} 
+                                companyId={this.state.companyId}
+                                token={this.props.token}
+                                handleUpdateLogo={this.props.handleUpdateLogo}/>
+                </div>
                 <div className="form-body">
                     <div className="form-input__section labelled">
                         <div className="form-input__label">Company Name</div>
