@@ -17,7 +17,6 @@ class LocationMap extends Component {
 
     componentDidMount() {
         let me = this;
-        console.log('lat:'+ this.state.lat, 'lng:'+ this.state.lng);
         this.map = new window.google.maps.Map(document.getElementById('map'), {
             center: {lat: this.state.lat, lng: this.state.lng},
             zoom: 14,
@@ -72,7 +71,6 @@ class LocationMap extends Component {
     }
 
     render() {
-        console.log('lat:'+ this.state.lat, 'lng:'+ this.state.lng);
         return (
             <div className="form-body">
                 <div className="map__container">
