@@ -9,7 +9,7 @@ class DashboardDetails extends Component {
             companyId: this.props.companyId,
             name: this.props.name,
             address: this.props.address,
-            email: this.props.email,
+            email: this.props.email
         };
     }
 
