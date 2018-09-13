@@ -14,7 +14,7 @@ class Dashboard extends Component {
 	constructor(props) {
         super(props);
  		
- 		this.state = {
+ 	this.state = {
             checkComplete: false,
             name: '',
             email: '',
@@ -31,15 +31,15 @@ class Dashboard extends Component {
 
         this.onClickNew = this.onClickNew.bind(this);
         this.onClickUpdate = this.onClickUpdate.bind(this);
-	    this.switchTab = this.switchTab.bind(this);
+	this.switchTab = this.switchTab.bind(this);
         this.createNewOffer = this.createNewOffer.bind(this);
         this.updateGeoCoor = this.updateGeoCoor.bind(this);
         this.updateAddress = this.updateAddress.bind(this);
         this.handleUpdateLogo = this.handleUpdateLogo.bind(this);
-	}
+    }
 
-	componentDidMount() {
-		var me = this;
+    componentDidMount() {
+	var me = this;
         $.ajax({
             method: 'POST',
             data: {
@@ -53,7 +53,6 @@ class Dashboard extends Component {
                     res = JSON.parse(res);
 
                     if(res.responseCode === 200) {
-                        console.log();//'https://avatar-cdn.atlassian.com/95f5e447148da5383b0652e0a50516a5'
                         me.setState({
                         	name: res.data.company.name,
                         	email: res.data.company.email,
