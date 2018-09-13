@@ -31,7 +31,7 @@ class Dashboard extends Component {
 
         this.onClickNew = this.onClickNew.bind(this);
         this.onClickUpdate = this.onClickUpdate.bind(this);
-	this.switchTab = this.switchTab.bind(this);
+	   this.switchTab = this.switchTab.bind(this);
         this.createNewOffer = this.createNewOffer.bind(this);
         this.updateGeoCoor = this.updateGeoCoor.bind(this);
         this.updateAddress = this.updateAddress.bind(this);
@@ -45,14 +45,17 @@ class Dashboard extends Component {
             data: {
                 token: this.props.token,
                 action: 'fetchCompany',
-                data: JSON.stringify({companyId: this.props.companyId})
+                data: JSON.stringify({'companyId': this.props.companyId})
             },
             url: 'public/process.php',
             success: function(res) {
+                console.log(res);
+
                 setTimeout(function() { 
                     res = JSON.parse(res);
 
                     if(res.responseCode === 200) {
+                        console.log('Got into success');
                         me.setState({
                         	name: res.data.company.name,
                         	email: res.data.company.email,
@@ -71,6 +74,7 @@ class Dashboard extends Component {
                 }, 500);
             },
             error: function(res) {
+                console.log(res);
                 setTimeout(function() { 
                     me.setState({
                         checkComplete: true

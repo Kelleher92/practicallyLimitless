@@ -55,13 +55,19 @@ class LocationMap extends Component {
     }
 
     onCompanyAddressChosen(lat, lng, address) {
+        console.log('Company address was chosen');
         var geoCoor = lat + ',' + lng;
         this.setState({
+            lat: lat,
+            lng: lng,
             geoCoor: geoCoor,
             address: address
         });
 
         this.props.newAddress(this.state.address);
+        this.props.newGeoCoor(geoCoor);
+        this.movePin();
+        this.map.setCenter({lat:lat, lng:lng});
     }
 
     onCompanyAddressChange(address) {
