@@ -1,4 +1,5 @@
 <?php
+
 	class Admin extends DB_Connect{
 		private $ROOT = null;
 		private $_expirationPeriod = 3;
@@ -70,6 +71,33 @@
 			$res = new Response_Obj();
 		
 			$sql = "UPDATE `company` SET `name` = '$name', `address` = '$address', `geoCoor` = '$geoCoor' WHERE `companyId` = '$companyId'";
+
+			try {
+				$this->insertQuery($sql);		
+
+				$res->responseCode = 200;
+				$res->message = "Details updated successfully.";
+			}
+			catch(PDOException $e) {
+				$this->getDb()->rollback();
+				$res->responseCode = 400;
+				$res->message = "Error: " . $e->getMessage();
+			}
+
+			return $res;	
+		}
+
+		public function updateCompanyLogo($companyId, $logo) {
+			if($_POST['action'] != 'updateCompanyLogo') {
+				return "Invalid action supplied for updateCompanyLogo.";
+			}
+
+			$companyId = $this->sanitizeValue($companyId);
+			$logo = $this->sanitizeValue($logo);
+			
+			$res = new Response_Obj();
+		
+			$sql = "UPDATE `company` SET `logo` = '$logo' WHERE `companyId` = '$companyId'";
 
 			try {
 				$this->insertQuery($sql);		
@@ -179,7 +207,7 @@
 			$companyId = $this->sanitizeValue($companyId);
 
 			$sql = "SELECT
-				`name`, `email`, `address`, `geoCoor` 
+				`name`, `email`, `address`, `logo`, `geoCoor` 
 				FROM `company`
 				WHERE `companyId` = '$companyId'";
 
@@ -257,6 +285,30 @@
 				$res->responseCode = 200;
 				$res->message = "Company activated.";
 			}
+
+			return $res;
+		}
+
+		public function uploadCompanyLogo($companyId, $image, $imageName) {
+			$companyId = $this->sanitizeValue($companyId);
+
+			// Upload image to cloudinary and get image url as response.
+			require 'Cloudinary/Cloudinary.php';
+			require 'Cloudinary/Uploader.php';
+			require 'Cloudinary/Api.php';
+			
+			\Cloudinary::config(array( 
+				"cloud_name" => "dxdhcnwlz", 
+				"api_key" => "874773625734141", 
+				"api_secret" => "bsUwGDNKK-DphD8Q1Rqwu0wD6mo" 
+			));
+
+			$image_url = \Cloudinary\Uploader::upload($image, array("folder" => $companyId."/", "public_id" => $imageName, "resource_type" => "auto", "width"=>128, "height"=>128, "crop"=>"fill"));					
+
+			// save image url to company database
+			$res = new Response_Obj();
+			$res->responseCode = 200;
+			$res->message = $image_url;
 
 			return $res;
 		}

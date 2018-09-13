@@ -17,7 +17,6 @@ class LocationMap extends Component {
 
     componentDidMount() {
         let me = this;
-
         this.map = new window.google.maps.Map(document.getElementById('map'), {
             center: {lat: this.state.lat, lng: this.state.lng},
             zoom: 14,

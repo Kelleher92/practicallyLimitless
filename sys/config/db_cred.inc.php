@@ -23,6 +23,5 @@
 	 * database name
 	 */
 	// $DB_ACCESS['DB_NAME'] = 'p_l_db';
-	$DB_ACCESS['DB_NAME'] = getenv('DB_NAME');
-
+	$DB_ACCESS['DB_NAME'] = getenv('DB_NAME');	
 ?>
