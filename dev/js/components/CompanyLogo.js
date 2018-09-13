@@ -3,7 +3,6 @@ import $ from 'jquery';
 import {openSnackbar} from '../components/FlashNotification';
 
 class CompanyLogo extends Component {
-    
     constructor(props) {
         super(props);
 
@@ -16,10 +15,8 @@ class CompanyLogo extends Component {
         $('.logo__upload').trigger('click');
     }
 
-
     //upload image to Cloudinary
-    handleUploadImage = (ev) => {
-        
+    handleUploadImage = (ev) => {        
         let me = this;
         let newImageToUpload = ev.target.files[0];
 
@@ -61,8 +58,7 @@ class CompanyLogo extends Component {
                         }, 1000);
                     }
                 });
-            }, false);
-            
+            }, false);           
         }
     }
 
