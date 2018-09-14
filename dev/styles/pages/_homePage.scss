@@ -1,15 +1,4 @@
-.home-contain{
-    // -webkit-display: flex;
-    // -moz-display: flex;
-    // -ms-display: flex;
-    // -o-display: flex;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
-}
-
-.home__section--title {
+.home__section--title{
     width: 200px;
     margin: 10px auto;
     padding: 5px 0;
@@ -20,7 +9,7 @@
     color: $off-black;
 }
   
-.home__section--title::before {
+.home__section--title::before{
     content: '';
     position: absolute;
     width: 40px;
@@ -30,7 +19,7 @@
     bottom: 0px;
 }
 
-.home__step__wrapper {
+.home__step__wrapper{
     display: flex;
     justify-content: space-around;
     width: 90%;
@@ -38,7 +27,7 @@
     margin: 80px auto 0 auto;
 }
 
-.home__step {
+.home__step{
     width: 30%;
     background-color: $white;
     box-shadow: 0em 0em 0.25em rgba(0,0,0,0.25);
@@ -49,7 +38,7 @@
     padding: 80px 10px 10px 10px;
 }
 
-.home__step__icon {
+.home__step__icon{
     height: 100px;
     width: 100px;
     position: absolute;
@@ -62,25 +51,25 @@
     font-size: 2.2rem;
 }
 
-.home__step__icon.green {
+.home__step__icon.green{
     border: 3px solid #ddffdd;
-    // background-color: #ddffdd;
 }
+
 .home__step__icon.pink {
     border: 3px solid $base-color;
-    // background-color: $base-color
 }
+
 .home__step__icon.orange {
     border: 3px solid $secondary-color;
-    // background-color: $secondary-color;
 }
-.home__step__title {
+
+.home__step__title{
     padding: 10px 0;
     font-size: 1.3rem;
     position: relative;
 }
 
-.home__step__title::before {
+.home__step__title::before{
     content: '';
     position: absolute;
     width: 40px;
@@ -90,39 +79,35 @@
     bottom: 0px;
 }
 
-
-.home__step__description {
+.home__step__description{
     padding: 20px 0;
     font-size: 0.9rem;
     text-align: center;
 }
 
-.home__button--wrap {
+.home__button--wrap{
     margin: 40px auto;
     width: 300px;
     font-size: 1.2rem;
     font-weight: bold;
 }
 
-
-@media (max-width: $mobile-break-point){
-    
-    .home__step__wrapper {
+@media (max-width: $mobile-break-point) {
+    .home__step__wrapper{
         width: 100%;
         flex-direction: column;
         align-items: center;
         margin: 20px auto 0 auto;
     }
 
-    .home__step__title {
+    .home__step__title{
         padding: 10px 0;
         font-size: 1.3rem;
     }
 
-    .home__step {
+    .home__step{
         width: 80%;
         margin-top: 60px;
         padding: 60px 10px 10px 10px;
-    }
-    
+    }    
 }
