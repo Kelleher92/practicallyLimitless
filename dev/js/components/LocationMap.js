@@ -57,11 +57,20 @@ class LocationMap extends Component {
     onCompanyAddressChosen(lat, lng, address) {
         var geoCoor = lat + ',' + lng;
         this.setState({
-            geoCoor: geoCoor,
+            lat: lat,
+            lng: lng,
             address: address
         });
 
         this.props.newAddress(this.state.address);
+        this.props.newGeoCoor(geoCoor);
+        this.centerMap(lat, lng);
+           
+    }
+
+    centerMap(lat, lng){
+        this.marker.setPosition({lat: lat, lng: lng});
+        this.map.setCenter({lat: lat, lng: lng}); 
     }
 
     onCompanyAddressChange(address) {

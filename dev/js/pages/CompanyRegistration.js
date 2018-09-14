@@ -18,7 +18,7 @@ class CompanyRegistration extends Component {
             hasStartedRegistrationCheck: false,
             isVerificationCheckComplete: false,
             wasRegistrationSuccessful: false,
-            geoCoor: ''
+            geoCoor: '52.7942,-6.1469'
         };
 
         this.onClickLogin = this.onClickLogin.bind(this);
