@@ -20,17 +20,17 @@ class Home extends Component {
                             <div className="home__step__icon green"><i className="fas fa-pencil-alt"></i></div>
                             <div className="home__step__title">1. Sign Up</div>
                             <div className="home__step__description">
-                                Enter you details, experince, availability, skills, favorite 
-                                catagoies and more in order to help us find you the best ways to help.
+                                Enter you details, experience, availability, skills, favourite 
+                                catagories, and more in order to help us find you the best ways to help.
                             </div>
                         </div>
                         <div className="home__step">
                             <div className="home__step__icon pink"><i className="fas fa-hand-pointer"></i></div>
                             <div className="home__step__title">2. Apply</div>
                             <div className="home__step__description">
-                                Choose the voluntering task that is right for you. Click Apply and then the charity will contact you if you are a match!
+                                Choose the volunteering task that is right for you. Simply click Apply and then the charity will contact you if you are a match!
                                 <br/><br/>
-                                Tasks can range from professional services to transport to painting and decorating.
+                                Tasks can range from professional services, to transport, to painting and decorating.
                             </div>
                         </div>
                         <div className="home__step">
@@ -39,7 +39,7 @@ class Home extends Component {
                             <div className="home__step__description">
                                 Once you are accepted, you can complete your volunteering task as required.
                                 <br/><br/>
-                                Why not share on Social Media and keep the trend of helping each other out going. 
+                                Why not share on Social Media and keep the trend of helping each other out going? 
                             </div>
                         </div>
                     </div>
