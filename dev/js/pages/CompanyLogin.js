@@ -21,6 +21,8 @@ class CompanyLogin extends Component {
     }
 
     onClickSubmit() { 
+        let me = this;
+
         if(areAllFieldsComplete([this.state.email, this.state.password]) && isValidEmail(this.state.email) && isValidPassword(this.state.password)) {
             let { history } = this.props;
 
@@ -30,7 +32,7 @@ class CompanyLogin extends Component {
                 if(res.responseCode === 200) {
                     history.push('/dashboard');
                 } else {
-                    this.props.showFlashNotification(res.message);
+                    me.props.showFlashNotification(res.message);
                 }
             });
         }

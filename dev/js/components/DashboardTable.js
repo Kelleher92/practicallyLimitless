@@ -34,6 +34,7 @@ class DashboardTable extends Component {
                         <thead>
                             <tr>
                                 <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'offerName')}>Name</th>
+                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'requirements')}>Requirements</th>
                                 <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'expiryDate')}>Expiry Date</th>
                             </tr>
                         </thead>
@@ -41,12 +42,14 @@ class DashboardTable extends Component {
                         {this.state.active.map(i => 
                             <tr key={i.id}>
                                 <td>{i.offerName}</td>
+                                <td>{i.requirements}</td>
                                 <td>{i.expiryDate}</td>
                             </tr>
                         )}
                         {this.state.expired.map(i => 
                             <tr key={i.id}>
                                 <td className="table-danger">{i.offerName}</td>
+                                <td className="table-danger">{i.requirements}</td>
                                 <td className="table-danger">{i.expiryDate}</td>
                             </tr>
                         )}
@@ -54,7 +57,7 @@ class DashboardTable extends Component {
                     </table>
                 </div>
                 <div className="form-input__section">
-                    <button className="form__submit-button" onClick={this.props.onClickNew}>New Offer</button>
+                    <button className="form__submit-button" onClick={this.props.onClickNew}>New Task</button>
                 </div>
             </div>
         );

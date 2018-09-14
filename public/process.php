@@ -37,7 +37,7 @@
 		else if($action === 'updateCompany') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
-			$res = $admin->updateCompany($data->companyId, $data->name, $data->address, $data->geoCoor);
+			$res = $admin->updateCompany($data->companyId, $data->name, $data->address, $data->geoCoor, $data->number, $data->blurb);
 			echo json_encode($res);
 		} 
 
@@ -105,7 +105,7 @@
 		else if($action === 'insertOffer') {
 			$data = json_decode($_POST['data']);
 			$offer = new Offer();
-			$res = $offer->insertOffer($data->companyId, $data->name, $data->expiry);
+			$res = $offer->insertOffer($data->companyId, $data->name, $data->requirements, $data->expiry);
 			echo json_encode($res);
 		} 
 

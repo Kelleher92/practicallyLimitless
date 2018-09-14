@@ -6,6 +6,7 @@ class DashboardCreate extends Component {
         super(props);
         this.state = {
             offerName: '',
+            requirements: '',
             offerExpiry: ''
         };
 
@@ -17,12 +18,12 @@ class DashboardCreate extends Component {
     }
     
     isSubmitable() {
-        return dateIsNotPast(this.state.offerExpiry) && isValidString(this.state.offerName);
+        return dateIsNotPast(this.state.offerExpiry) && isValidString(this.state.requirements) && isValidString(this.state.offerName);
     }
 
     onClickCreate() {
-        if(this.isSubmitable()){
-            this.props.createNewOffer(this.state.offerName, this.state.offerExpiry);
+        if(this.isSubmitable()) {
+            this.props.createNewOffer(this.state.offerName, this.state.requirements, this.state.offerExpiry);
         }
     }
 
@@ -30,11 +31,15 @@ class DashboardCreate extends Component {
         return (
             <div className="form-body">
                 <div className="form-input__section labelled">
-                    <div className="form-input__label">Offer Name</div>
-                    <input type="text" placeholder="Offer Name" className="form-input__value" value={this.state.offerName} onChange={(e) => this.handleChange("offerName", e)} autoFocus />
+                    <div className="form-input__label">Task Name</div>
+                    <input type="text" placeholder="Task Name" className="form-input__value" value={this.state.offerName} onChange={(e) => this.handleChange("offerName", e)} autoFocus />
                 </div>
                 <div className="form-input__section labelled">
-                    <div className="form-input__label">Offer Expiry Date</div>
+                    <div className="form-input__label">Skills Required</div>
+                    <textarea rows="5" placeholder="Skills, equipment etc." className="form-input__value" value={this.state.requirements} onChange={(e) => this.handleChange("requirements", e)} ></textarea>
+                </div>
+                <div className="form-input__section labelled">
+                    <div className="form-input__label">Task Expiry Date</div>
                     <input type="date" placeholder="Valid Until" className="form-input__value" value={this.state.offerExpiry} onChange={(e) => this.handleChange("offerExpiry", e)} />
                 </div>
                 <div className="form-input__section">

@@ -28,6 +28,7 @@
 
     &.wide{
         width: 1000px;
+        min-height: 500px;
     }
 }
 
@@ -95,6 +96,7 @@
     border: 0.5px solid $black;
     border-radius: 2px;
     padding: 5px;
+    width: 100%;
 }
 
 .form-submission__section{
