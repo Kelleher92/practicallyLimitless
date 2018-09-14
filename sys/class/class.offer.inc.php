@@ -2,19 +2,20 @@
 	require 'Stripe/init.php';
 
 	class Offer extends Admin{
-		public function insertOffer($companyId, $offerName, $expiryDate) {
+		public function insertOffer($companyId, $offerName, $requirements, $expiryDate) {
 			if($_POST['action'] != 'insertOffer') {
 				return "Invalid action supplied for insertOffer.";
 			}
 
 			$companyId = $this->sanitizeValue($companyId);
 			$offerName = $this->sanitizeValue($offerName);
+			$offerName = $this->sanitizeValue($requirements);
 			$expiryDate = $this->sanitizeValue($expiryDate);
 			
 			$res = new Response_Obj();
 		
-			$query ="INSERT INTO offer". "(companyId, offerName, expiryDate) ";
-			$values = "values ('$companyId', '$offerName', '$expiryDate')";
+			$query ="INSERT INTO offer". "(companyId, offerName, requirements, expiryDate) ";
+			$values = "values ('$companyId', '$offerName', '$requirements', '$expiryDate')";
 
 			try {
 			    $this->insertQuery($query . $values);		

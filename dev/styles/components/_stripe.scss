@@ -48,18 +48,20 @@
     box-shadow: 0 7px 14px rgba(50, 50, 93, .10), 0 3px 6px rgba(0, 0, 0, .08);
 }
 
-input, .StripeElement{
-    display: block;
-    margin: 10px 0 20px 0;
-    width: 100%;
-    padding: 10px 14px;
-    font-size: 16px;
-    font-family: 'Source Code Pro', monospace;
-    box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
-    border: 0;
-    outline: 0;
-    border-radius: 4px;
-    background: white;
+.StripeElement{
+    input{
+        display: block;
+        margin: 10px 0 20px 0;
+        width: 100%;
+        padding: 10px 14px;
+        font-size: 16px;
+        font-family: 'Source Code Pro', monospace;
+        box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
+        border: 0;
+        outline: 0;
+        border-radius: 4px;
+        background: white;    
+    }
 }
 
 input::placeholder{

@@ -19,6 +19,8 @@ class Dashboard extends Component {
             name: '',
             email: '',
             address: '',
+            number: '',
+            blurb: '',
             logo: '',
             geoCoor: '',
             offerName: '',
@@ -31,8 +33,9 @@ class Dashboard extends Component {
 
         this.onClickNew = this.onClickNew.bind(this);
         this.onClickUpdate = this.onClickUpdate.bind(this);
-	this.switchTab = this.switchTab.bind(this);
+	    this.switchTab = this.switchTab.bind(this);
         this.createNewOffer = this.createNewOffer.bind(this);
+        this.updateDetails = this.updateDetails.bind(this);
         this.updateGeoCoor = this.updateGeoCoor.bind(this);
         this.updateAddress = this.updateAddress.bind(this);
         this.handleUpdateLogo = this.handleUpdateLogo.bind(this);
@@ -58,6 +61,8 @@ class Dashboard extends Component {
                         	email: res.data.company.email,
                             address: res.data.company.address,
                             logo: res.data.company.logo,
+                            number: res.data.company.number,
+                            blurb: res.data.company.blurb,
                             geoCoor: res.data.company.geoCoor,
                             currentOffers: res.data.currentOffers,
                             expiredOffers: res.data.expiredOffers,
@@ -84,6 +89,10 @@ class Dashboard extends Component {
         this.setState({newOffer: true});
     }
 
+    updateDetails(name, value) {
+        this.setState({[name]: value});
+    }
+
     updateGeoCoor(newCoor) {
         this.setState({geoCoor: newCoor});
     }
@@ -96,7 +105,7 @@ class Dashboard extends Component {
         this.setState({[name]: e.target.value});
     }
    
-    createNewOffer(name, expiry) {
+    createNewOffer(name, requirements, expiry) {
         let me = this;
 
         $.ajax({
@@ -104,7 +113,7 @@ class Dashboard extends Component {
             data: {
                 token: this.props.token,
                 action: 'insertOffer',
-                data: JSON.stringify({companyId: this.props.companyId, name: name, expiry: expiry})
+                data: JSON.stringify({companyId: this.props.companyId, name: name, requirements: requirements, expiry: expiry})
             },
             url: 'public/process.php',
             success: function(res) {
@@ -124,8 +133,9 @@ class Dashboard extends Component {
             currentOffers: [...this.state.currentOffers, {
                 id: this.state.currentOffers.length + this.state.expiredOffers.length, 
                 offerName: name, 
+                requirements: requirements,
                 expiryDate: expiry}],
-            offerName: "", offerExpiry: ""
+            offerName: "", requirements: "", offerExpiry: ""
         })
     } 
 
@@ -146,7 +156,7 @@ class Dashboard extends Component {
                 data: {
                     token: this.props.token,
                     action: 'updateCompany',
-                    data: JSON.stringify({companyId: this.props.companyId, name: this.state.name, address: this.state.address, geoCoor: this.state.geoCoor})
+                    data: JSON.stringify({companyId: this.props.companyId, name: this.state.name, address: this.state.address, geoCoor: this.state.geoCoor, number: this.state.number, blurb: this.state.blurb})
                 },
                 url: 'public/process.php',
                 success: function(res) {
@@ -185,9 +195,9 @@ class Dashboard extends Component {
                     {this.state.checkComplete ? (
                         <div className="form__container wide">
                             <div className="dashboard__tab-container d-flex">
-                                <div className={"dashboard__tab " + (this.state.tab === 0 ? 'selected' : 'unselected')} onClick={() => this.switchTab(0)}>Company Details</div>
+                                <div className={"dashboard__tab " + (this.state.tab === 0 ? 'selected' : 'unselected')} onClick={() => this.switchTab(0)}>Organisation Details</div>
                                 <div className={"dashboard__tab " + (this.state.tab === 1 ? 'selected' : 'unselected')} onClick={() => this.switchTab(1)}>Location</div>
-                                <div className={"dashboard__tab " + (this.state.tab === 2 ? 'selected' : 'unselected')} onClick={() => this.switchTab(2)}>Offers</div>
+                                <div className={"dashboard__tab " + (this.state.tab === 2 ? 'selected' : 'unselected')} onClick={() => this.switchTab(2)}>Tasks</div>
                                 {this.state.tab !== 2 ? (<div className="dashboard__update"><button className="form__submit-button" onClick={this.onClickUpdate}>Update</button></div>) : (<div></div>)}
                             </div>
                                 {this.state.tab === 0 ? (
@@ -195,9 +205,12 @@ class Dashboard extends Component {
                                                        companyId={this.props.companyId} 
                                                        name={this.state.name} 
                                                        address={this.state.address} 
+                                                       number={this.state.number} 
+                                                       blurb={this.state.blurb} 
                                                        email={this.state.email}
                                                        logo={this.state.logo} 
                                                        handleUpdateLogo={this.handleUpdateLogo}
+                                                       updateDetails={this.updateDetails}
                                                        showFlashNotification={this.props.showFlashNotification} />
                                 ) : (
                                 this.state.tab === 1 ? (

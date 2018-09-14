@@ -58,7 +58,7 @@
 			return $res;	
 		}
 
-		public function updateCompany($companyId, $name, $address, $geoCoor) {
+		public function updateCompany($companyId, $name, $address, $geoCoor, $number, $blurb) {
 			if($_POST['action'] != 'updateCompany') {
 				return "Invalid action supplied for updateCompany.";
 			}
@@ -67,10 +67,12 @@
 			$name = $this->sanitizeValue($name);
 			$address = $this->sanitizeValue($address);
 			$geoCoor = $this->sanitizeValue($geoCoor);
+			$number = $this->sanitizeValue($number);
+			$blurb = $this->sanitizeValue($blurb);
 			
 			$res = new Response_Obj();
 		
-			$sql = "UPDATE `company` SET `name` = '$name', `address` = '$address', `geoCoor` = '$geoCoor' WHERE `companyId` = '$companyId'";
+			$sql = "UPDATE `company` SET `name` = '$name', `address` = '$address', `geoCoor` = '$geoCoor', `number` = '$number', `blurb` = '$blurb' WHERE `companyId` = '$companyId'";
 
 			try {
 				$this->insertQuery($sql);		
@@ -207,14 +209,14 @@
 			$companyId = $this->sanitizeValue($companyId);
 
 			$sql = "SELECT
-				`name`, `email`, `address`, `logo`, `geoCoor` 
+				`name`, `email`, `address`, `logo`, `geoCoor`, `number`, `blurb` 
 				FROM `company`
 				WHERE `companyId` = '$companyId'";
 
 			$company = $this->query($sql);
 
 			$sql = "SELECT
-				`id`, `offerName`, `expiryDate` 
+				`id`, `offerName`, `requirements`, `expiryDate` 
 				FROM `offer`
 				WHERE `companyId` = '$companyId'
 				ORDER BY `expiryDate`";
