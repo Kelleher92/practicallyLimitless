@@ -65,10 +65,9 @@ class LocationMap extends Component {
         this.props.newAddress(this.state.address);
         this.props.newGeoCoor(geoCoor);
         this.centerMap(lat, lng);
-           
     }
 
-    centerMap(lat, lng){
+    centerMap(lat, lng) {
         this.marker.setPosition({lat: lat, lng: lng});
         this.map.setCenter({lat: lat, lng: lng}); 
     }
