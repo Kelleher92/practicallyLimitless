@@ -1,55 +1,113 @@
-.home-contain{
-    -webkit-display: flex;
-    -moz-display: flex;
-    -ms-display: flex;
-    -o-display: flex;
+.home__section--title{
+    width: 200px;
+    margin: 10px auto;
+    padding: 5px 0;
+    text-align: center;
+    position: relative;
+    height: max-content;
+    font-size: 1.5rem;
+    color: $off-black;
+}
+  
+.home__section--title::before{
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 2px;
+    background-color: lightgray;
+    left: calc(50% - 20px);
+    bottom: 0px;
+}
+
+.home__step__wrapper{
     display: flex;
-    flex: 1;
-    // background-color: $white;
+    justify-content: space-around;
+    width: 90%;
+    color: $off-black;
+    margin: 80px auto 0 auto;
 }
 
-.home__section1__container{
-    padding: 30px 0;
-    font-family: Calibri;
-    width: 80%;
-}
-
-.home__section1__text__wrap{
-    background-color: white;
-    margin-left: 30px;
-    padding: 10px;
-    width: 400px;
-    font-size: 46px;
+.home__step{
+    width: 30%;
+    background-color: $white;
+    box-shadow: 0em 0em 0.25em rgba(0,0,0,0.25);
     position: relative;
-    z-index: 1;
-
-    span{
-        font-style: italic;
-        font-size: 80px;
-        font-family: Times
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 10px 10px 10px;
 }
 
-.home__section1__image{
-    height: 75%;
-    margin-top: -50px;
+.home__step__icon{
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: -50px;
+    border-radius: 50%;
+    background-color: $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2rem;
+}
+
+.home__step__icon.green{
+    border: 3px solid #ddffdd;
+}
+
+.home__step__icon.pink {
+    border: 3px solid $base-color;
+}
+
+.home__step__icon.orange {
+    border: 3px solid $secondary-color;
+}
+
+.home__step__title{
+    padding: 10px 0;
+    font-size: 1.3rem;
     position: relative;
-    // background-image: url('../../images/haircut.jpeg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 30% 50%;
 }
 
-@media (max-width: $mobile-break-point){
-    .home__section1__text__wrap{
-        margin-left: 10px;
-        padding: 5px;
-        width: 180px;
-        font-size: 24px;
-    
-        span{
-            font-style: italic;
-            font-size: 40px;
-        }
+.home__step__title::before{
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 2px;
+    background-color: gray;
+    left: calc(50% - 20px);
+    bottom: 0px;
+}
+
+.home__step__description{
+    padding: 20px 0;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.home__button--wrap{
+    margin: 40px auto;
+    width: 300px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+@media (max-width: $mobile-break-point) {
+    .home__step__wrapper{
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px auto 0 auto;
     }
+
+    .home__step__title{
+        padding: 10px 0;
+        font-size: 1.3rem;
+    }
+
+    .home__step{
+        width: 80%;
+        margin-top: 60px;
+        padding: 60px 10px 10px 10px;
+    }    
 }

@@ -119,6 +119,21 @@ a:hover{
     margin: 0 5px;
 }
 
+.pl-button--style-4{
+    width: inherit;
+    height: 40px;
+    line-height: 36px;
+    border-radius: 2px;
+    text-align: center;  
+    color: $primary-font-color;
+    padding: 0 10px;
+    cursor: pointer;
+    margin: 0 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: orange;
+}
+
 .pl-button--style-2.off-black{
     background-color: $off-black;
 }
@@ -171,6 +186,6 @@ a:hover{
 
 @media (max-width: $mobile-break-point){
     .contain{
-        height: 100vh;
+        height: 100%;
     }
 }
