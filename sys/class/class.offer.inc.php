@@ -9,7 +9,7 @@
 
 			$companyId = $this->sanitizeValue($companyId);
 			$offerName = $this->sanitizeValue($offerName);
-			$offerName = $this->sanitizeValue($requirements);
+			$requirements = $this->sanitizeValue($requirements);
 			$expiryDate = $this->sanitizeValue($expiryDate);
 			
 			$res = new Response_Obj();
