@@ -117,7 +117,7 @@ class CheckoutForm extends Component {
 
         return (
             <div className="stripe-checkout">
-                <form className="stripe-form" onSubmit={this.handleSubmit}> 
+                <form className="stripe-form StripeElement" onSubmit={this.handleSubmit}> 
                     <p className="stripe-label">Help us out by donating.</p>
                     <input className="stripe-amount" type='text' placeholder='Name' onChange={(e) => this.handleInputChange("name", e)}/>
                     <span className="stripe-amount-euro"><input type='number' min='0' step='1' placeholder='Amount eg. 10' onChange={(e) => this.handleInputChange("amount", e)} /></span>
