@@ -12,6 +12,7 @@ import Reset from './pages/Reset';
 import Dashboard from './pages/Dashboard';
 import PreLoader from './components/PreLoader';
 import CompanyRegistration from './pages/CompanyRegistration.js';
+import UserRegistration from './pages/UserRegistration.js';
 import CompanyLogin from './pages/CompanyLogin.js';
 import ForgotPassword from './pages/ForgotPassword.js';
 import ResetPassword from './pages/ResetPassword.js';
@@ -174,6 +175,10 @@ class App extends Component {
                                 <PreLoader />
                             )}/>
                             
+                            <Route exact={true} path="/user-registration" render={(props) => (
+                                <UserRegistration {...props} token={this.token} handleShowModal={this.handleShowModal} handleHideModal={this.handleHideModal} />
+                            )}/>
+
                             <Route exact={true} path="/company-registration" render={(props) => (
                                 <CompanyRegistration {...props} token={this.token} handleShowModal={this.handleShowModal} handleHideModal={this.handleHideModal} />
                             )}/>

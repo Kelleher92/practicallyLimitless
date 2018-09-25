@@ -27,13 +27,56 @@
 			$userhash = $this->_getHashFromPassword($pword);
 			$token = $this->generateToken($email);
 			$companyId = md5($email.time());
-
 			
 			$res = new Response_Obj();
 		
 			if($this->isUniqueForCompanies('email', $email)) {
 				$query ="INSERT INTO company". "(companyId, name, email, address, password, tempActivationToken, tokenSent, geoCoor) ";
 				$values = "values ('$companyId', '$uname', '$email', '$address', '$userhash', '$token', now(), '$geoCoor')";
+
+				try {
+				    $this->insertQuery($query . $values);		
+
+				    $mh = new Mailer();
+				    $mh->sendVerificationEmail($email, $this->generateVefificationLink($email, $token));
+
+				    $res->responseCode = 200;
+				    $res->message = "Your registration was successful. Check your inbox!";
+			    }
+				catch(PDOException $e) {
+				    $this->getDb()->rollback();
+				    $res->responseCode = 400;
+				    $res->message = "Error: " . $e->getMessage();
+			    }
+			}
+			else {
+				$res->responseCode = 400;
+				$res->message = "The e-mail address you used was already registered. Please try again with another!";
+			}		
+
+			return $res;	
+		}
+
+		public function registerUser($name, $email, $address, $password, $geoCoor) {
+			if($_POST['action'] != 'registerUser') {
+				return "Invalid action supplied for registerUser.";
+			}
+
+			$uname = $this->sanitizeValue($name);
+			$email = $this->sanitizeValue($email);
+			$address = $this->sanitizeValue($address);
+			$pword = $this->sanitizeValue($password);
+			$geoCoor = $this->sanitizeValue($geoCoor); 
+
+			$userhash = $this->_getHashFromPassword($pword);
+			$token = $this->generateToken($email);
+			$userId = md5($email.time());
+
+			$res = new Response_Obj();
+		
+			if($this->isUniqueForCompanies('email', $email)) {
+				$query ="INSERT INTO users". "(userId, name, email, address, password, tempActivationToken, tokenSent, geoCoor) ";
+				$values = "values ('$userId', '$uname', '$email', '$address', '$userhash', '$token', now(), '$geoCoor')";
 
 				try {
 				    $this->insertQuery($query . $values);		

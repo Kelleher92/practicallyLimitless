@@ -44,7 +44,7 @@ class Home extends Component {
                         </div>
                     </div>
                     <div className="home__button--wrap">
-                        <button className="pl-button--style-4"><Link to="/company-registration">Get Started</Link></button>
+                        <button className="pl-button--style-4"><Link to="/user-registration">Get Started</Link></button>
                     </div>
                 </div>
                 <Footer />

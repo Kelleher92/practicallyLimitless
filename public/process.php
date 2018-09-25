@@ -27,6 +27,13 @@
 			echo json_encode($res);
 		} 
 
+		else if($action === 'registerUser') {
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->registerUser($data->name, $data->email, $data->address, $data->password, $data->geoCoor);
+			echo json_encode($res);
+		} 
+
 		else if($action === 'updateCompanyLogo') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
