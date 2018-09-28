@@ -70,6 +70,7 @@ class App extends Component {
     }
 
     setLoggedIn(email, password) {
+        let me = this;
         return $.ajax({
             method: 'POST',
             data: {
@@ -88,12 +89,13 @@ class App extends Component {
                 }
             },
             error: function(res) {
-                showFlashNotification(res);
+                me.showFlashNotification(res);
             }
         });
     } 
 
     setLoggedOut() {
+        let me = this;
         $.ajax({
             method: 'POST',
             data: {
@@ -105,7 +107,7 @@ class App extends Component {
                 window.callback(false);
             },
             error: function(res) {
-                showFlashNotification(res);
+                me.showFlashNotification(res);
                 window.callback(false);
             }
         });
