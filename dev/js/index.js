@@ -12,7 +12,9 @@ import Reset from './pages/Reset';
 import Dashboard from './pages/Dashboard';
 import PreLoader from './components/PreLoader';
 import CompanyRegistration from './pages/CompanyRegistration.js';
+import UserRegistration from './pages/UserRegistration.js';
 import CompanyLogin from './pages/CompanyLogin.js';
+import UserLogin from './pages/UserLogin.js';
 import ForgotPassword from './pages/ForgotPassword.js';
 import ResetPassword from './pages/ResetPassword.js';
 import FlashNotification, {openSnackbar} from './components/FlashNotification';
@@ -68,7 +70,9 @@ class App extends Component {
         });
     }
 
-    setLoggedIn(email, password) {
+    
+setLoggedIn(email, password) {
+        let me = this;
         return $.ajax({
             method: 'POST',
             data: {
@@ -87,24 +91,52 @@ class App extends Component {
                 }
             },
             error: function(res) {
-                showFlashNotification(res);
+                me.showFlashNotification(res);
             }
         });
     } 
 
+
+    setLoggedInUser(email, password) {
+        let me = this;
+        return $.ajax({
+            method: 'POST',
+            data: {
+                token: this.token,
+                action: 'loginUser',
+                data: JSON.stringify({email: email, password: password})
+            },
+            url: 'public/process.php',
+            success: function(res) {
+                res = JSON.parse(res);
+
+                if(res.responseCode === 200) {
+                    window.callback(true, res.data);
+                } else {
+                    window.callback(false);
+                }
+            },
+            error: function(res) {
+                me.showFlashNotification(res);
+            }
+        });
+    } 
+
+
     setLoggedOut() {
+        let me = this;
         $.ajax({
             method: 'POST',
             data: {
                 token: this.token,
-                action: 'logoutCompany'
+                action: 'logoutUser'
             },
             url: 'public/process.php',
             success: function(res) {
                 window.callback(false);
             },
             error: function(res) {
-                showFlashNotification(res);
+                me.showFlashNotification(res);
                 window.callback(false);
             }
         });
@@ -174,12 +206,20 @@ class App extends Component {
                                 <PreLoader />
                             )}/>
                             
+                            <Route exact={true} path="/user-registration" render={(props) => (
+                                <UserRegistration {...props} token={this.token} handleShowModal={this.handleShowModal} handleHideModal={this.handleHideModal} />
+                            )}/>
+
                             <Route exact={true} path="/company-registration" render={(props) => (
                                 <CompanyRegistration {...props} token={this.token} handleShowModal={this.handleShowModal} handleHideModal={this.handleHideModal} />
                             )}/>
 
                             <Route exact={true} path="/company-login" render={(props) => (
                                 <CompanyLogin {...props} token={this.token} setLoggedIn={this.setLoggedIn} showFlashNotification={this.showFlashNotification} />
+                            )}/>
+
+                            <Route exact={true} path="/user-login" render={(props) => (
+                                <UserLogin {...props} token={this.token} setLoggedIn={this.setLoggedIn} showFlashNotification={this.showFlashNotification} />
                             )}/>
 
                             <Route exact={true} path="/company-forgot-password" render={(props) => (

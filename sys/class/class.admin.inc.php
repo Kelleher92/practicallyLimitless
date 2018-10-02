@@ -27,13 +27,55 @@
 			$userhash = $this->_getHashFromPassword($pword);
 			$token = $this->generateToken($email);
 			$companyId = md5($email.time());
-
 			
 			$res = new Response_Obj();
 		
 			if($this->isUniqueForCompanies('email', $email)) {
 				$query ="INSERT INTO company". "(companyId, name, email, address, password, tempActivationToken, tokenSent, geoCoor) ";
 				$values = "values ('$companyId', '$uname', '$email', '$address', '$userhash', '$token', now(), '$geoCoor')";
+
+				try {
+				    $this->insertQuery($query . $values);		
+
+				    $mh = new Mailer();
+				    $mh->sendVerificationEmail($email, $this->generateVefificationLink($email, $token));
+
+				    $res->responseCode = 200;
+				    $res->message = "Your registration was successful. Check your inbox!";
+			    }
+				catch(PDOException $e) {
+				    $this->getDb()->rollback();
+				    $res->responseCode = 400;
+				    $res->message = "Error: " . $e->getMessage();
+			    }
+			}
+			else {
+				$res->responseCode = 400;
+				$res->message = "The e-mail address you used was already registered. Please try again with another!";
+			}		
+
+			return $res;	
+		}
+
+		public function registerUser($name, $email, $password, $geoCoor) {
+			if($_POST['action'] != 'registerUser') {
+				return "Invalid action supplied for registerUser.";
+			}
+
+			$uname = $this->sanitizeValue($name);
+			$email = $this->sanitizeValue($email);
+			$pword = $this->sanitizeValue($password);
+			$geoCoor = $this->sanitizeValue($geoCoor); 
+
+			$userhash = $this->_getHashFromPassword($pword);
+			$token = $this->generateToken($email);
+			$userId = md5($email.time());
+
+			$res = new Response_Obj();
+		
+			if($this->isUniqueForUsers('email', $email)) {
+				$query ="INSERT INTO users". "(userId, name, email, password, tempActivationToken, tokenSent, geoCoor) ";
+				$values = "values ('$userId', '$name', '$email', '$userhash', '$token', now(), '$geoCoor')";
 
 				try {
 				    $this->insertQuery($query . $values);		
@@ -167,6 +209,57 @@
 			return $res;
 		}
 
+		public function loginUser($userName, $password) {
+			if($_POST['action'] != 'loginUser') {
+				return "Invalid action supplied for loginUser.";
+			}
+
+			$userName = $this->sanitizeValue($userName);
+			$password = $this->sanitizeValue($password);
+
+			$sql = "SELECT
+				`id`, `userId`, `name`, `email`, `password`, `isActivated`
+				FROM `users`
+				WHERE
+				`email` = '$userName' 
+				LIMIT 1";
+
+			$results = $this->query($sql);
+
+			$res = new Response_Obj();
+
+			if(!isset($results) || empty($results)) {
+				$res->responseCode = 400;
+				$res->message = "Your username is not recognised.";
+			} else {
+				$user = $results[0];
+
+				if(!boolVal($user['isActivated'])) {
+					$res->responseCode = 400;
+					$res->message = 'Your account is not activated yet. Please check your email.';
+				}
+				else{
+					$hash = $user['password'];
+
+					if(password_verify($password, $hash)) {
+						$_SESSION['user'] = array(
+							'id' => $user['userId'],
+							'name' => $user['name'],
+							'email' => $user['email']
+						);
+						$res->responseCode = 200;
+						$res->message = 'Login successful.';
+						$res->data = $user['userId'];
+					} else {
+						$res->responseCode = 400;
+						$res->message = 'Your username and password combination is invalid.';
+					}
+				}
+			}
+
+			return $res;
+		}
+
 		private function companyVerifyEmail($email) {
 			$email = $this->sanitizeValue($email);
 
@@ -193,6 +286,21 @@
 			}
 
 			$_SESSION['company'] = array(
+				'id' => '',
+				'name' => '',
+				'email' => ''
+			);
+
+			echo 'Log out complete.';
+		}
+
+
+		public function logoutUser() {
+			if($_POST['action'] != 'logoutUser') {
+				echo "Invalid action supplied for logoutUser.";
+			}
+
+			$_SESSION['user'] = array(
 				'id' => '',
 				'name' => '',
 				'email' => ''
@@ -265,6 +373,22 @@
 			return empty($company) ? null : $company[0];
 		}
 
+		private function fetchUserForActivation($email, $token) {
+			if(!isset($email) || !isset($token)) {
+				exit('Invalid request');
+			}
+
+			$sql = "SELECT
+				`id`, `email`, `isActivated`, `tempActivationToken`, `tokenSent`, `isActivationTokenExpired` 
+				FROM `users`
+				WHERE `email` = '$email' AND `tempActivationToken` = '$token' 
+				LIMIT 1";
+
+			$user = $this->query($sql);
+
+			return empty($user) ? null : $user[0];
+		}
+
 		public function activateCompany($email, $token) {
 			if($_POST['action'] != 'activateCompany') {
 				return "Invalid action supplied for activateCompany.";
@@ -274,22 +398,38 @@
 			$token = $this->sanitizeValue($token);
 
 			$company = $this->fetchCompanyForActivation($email, $token);
+			$user= $this->fetchUserForActivation($email, $token);
 			
 			$res = new Response_Obj();
 
-			if(!isset($company) || $company['isActivationTokenExpired'] || $this->isTokenExpired($company['tokenSent'], $this->_expirationPeriod)) {
+			if($company['isActivationTokenExpired'] || $this->isTokenExpired($company['tokenSent'], $this->_expirationPeriod)) {
 				$res->responseCode = 400;
 				$res->message = "Session expired.";
-			} else {
+			} elseif (!isset($company)) {
+
+				if($user['isActivationTokenExpired'] || $this->isTokenExpired($user['tokenSent'], $this->_expirationPeriod)) {
+				$res->responseCode = 400;
+				$res->message = "Session expired.";
+			} else{
+				$sql1 = "UPDATE `users` SET `isActivated` = 1, `isActivationTokenExpired` = 1 WHERE `email` = '$email' and tempActivationToken = '$token'";
+				$this->insertQuery($sql1);
+				$res->responseCode = 200;
+				$res->message = "Activated.";
+			}
+			}
+
+			else {
+
 				$sql = "UPDATE `company` SET `isActivated` = 1, `isActivationTokenExpired` = 1 WHERE `email` = '$email' and tempActivationToken = '$token'";
 				$this->insertQuery($sql);
-
 				$res->responseCode = 200;
-				$res->message = "Company activated.";
+				$res->message = "Activated.";
 			}
 
 			return $res;
 		}
+
+		
 
 		public function uploadCompanyLogo($companyId, $image, $imageName) {
 			$companyId = $this->sanitizeValue($companyId);
@@ -466,6 +606,21 @@
 					`name`, `email` 
 					from
 					`company` 
+					where ". $field ."=". "'".$value. "'";
+
+				return empty($this->query($sql));
+		 	}
+		 	return false;
+		}
+
+		public function isUniqueForUsers($field, $value) {
+		 	$allowedFields = ['name', 'email'];
+
+		 	if(in_array($field, $allowedFields)) {
+				$sql = "SELECT 
+					`name`, `email` 
+					from
+					`users` 
 					where ". $field ."=". "'".$value. "'";
 
 				return empty($this->query($sql));

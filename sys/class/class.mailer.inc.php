@@ -10,18 +10,22 @@
 			$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 			try {
 			    //Server settings
-			    $mail->SMTPDebug = false;                             // Disable verbose debug output
+			    $mail->SMTPDebug =;                             // Disable verbose debug output
 			    $mail->isSMTP();                                      // Set mailer to use SMTP
-			    $mail->Host = getenv('EMAIL_HOST');   		 		  // Specify main server
+			    $mail->Host = "smtp.gmail.com";   		 		  // Specify main server
 			    $mail->SMTPAuth = true;                               // Enable SMTP authentication
-			    $mail->Username = getenv('EMAIL_UNAME');              // Username
-			    $mail->Password = getenv('EMAIL_PASS');               // Password    			 
-			    $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+			    //$mail->Username = getenv('EMAIL_UNAME');              // Username
+			    //$mail->Password = getenv('EMAIL_PASS'); 
+
+			    $mail->Username = "phoebestaab@gmail.com";
+				//Password to use for SMTP authentication
+				$mail->Password = "60221phoebe";              // Password    			 
+			    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 			    $mail->Port = getenv('EMAIL_PORT');                   // TCP port to connect to
 			    //Recipients
-			    $mail->setFrom('info@limitless.ie', 'Mailer');
+			    $mail->setFrom('phoebestaab@gmail.com', 'Mailer');
 			    $mail->addAddress($email);              
-			    $mail->addReplyTo('info@limitless.ie', 'Information');
+			    $mail->addReplyTo('phoebestaab@gmail.com', 'Information');
 			   
 			    //Content
 			    $mail->isHTML(true);                                  // Set email format to HTML
@@ -34,6 +38,9 @@
 			    echo 'Mailer Error: ' . $mail->ErrorInfo;
 			}
 		}	
+
+		
+
 		public function sendResetPasswordEmail($email, $resetLink) {
 			$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 			try {

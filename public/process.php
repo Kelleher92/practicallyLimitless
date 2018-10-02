@@ -27,6 +27,14 @@
 			echo json_encode($res);
 		} 
 
+		else if($action === 'registerUser') {
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->registerUser($data->name, $data->email, $data->password, $data->geoCoor);
+			echo json_encode($res);
+		} 
+
+
 		else if($action === 'updateCompanyLogo') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
@@ -48,15 +56,34 @@
 			echo json_encode($res);
 		}	
 
+		else if($action === 'loginUser') {
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->loginUser($data->email, $data->password);	
+			echo json_encode($res);
+		}	
+
 		else if($action === 'logoutCompany') {
 			$admin = new Admin();
 			echo $admin->logoutCompany();			
+		} 
+
+		else if($action === 'logoutUser') {
+			$admin = new Admin();
+			echo $admin->logoutUser();			
 		} 
 
 		else if($action === 'fetchCompany') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
 			$res = $admin->fetchCompany($data->companyId);	
+			echo json_encode($res);
+		}
+
+		else if($action === 'userCompany') {
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->fetchUser($data->userId);	
 			echo json_encode($res);
 		}
 		
