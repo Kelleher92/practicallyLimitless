@@ -108,6 +108,13 @@
 			echo json_encode($res);
 		} 
 
+		else if($action === 'userForgotPassword') { 
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->userForgotPassword($data->email);		
+			echo json_encode($res);
+		} 
+
 		else if($action === 'resetCompany') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();

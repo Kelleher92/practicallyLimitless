@@ -47,7 +47,7 @@ class UserLogin extends Component {
 
     onClickForgotPassword() {
         let { history } = this.props;
-        history.push('/company-forgot-password');
+        history.push('/user-forgot-password');
     }
 
      onClickSignup() {

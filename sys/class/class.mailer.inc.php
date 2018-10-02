@@ -10,22 +10,22 @@
 			$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 			try {
 			    //Server settings
-			    $mail->SMTPDebug =;                             // Disable verbose debug output
+			    $mail->SMTPDebug = 2;                              // Disable verbose debug output
 			    $mail->isSMTP();                                      // Set mailer to use SMTP
 			    $mail->Host = "smtp.gmail.com";   		 		  // Specify main server
 			    $mail->SMTPAuth = true;                               // Enable SMTP authentication
 			    //$mail->Username = getenv('EMAIL_UNAME');              // Username
 			    //$mail->Password = getenv('EMAIL_PASS'); 
 
-			    $mail->Username = "phoebestaab@gmail.com";
+			    $mail->Username = "phoebestaab1@gmail.com";
 				//Password to use for SMTP authentication
 				$mail->Password = "60221phoebe";              // Password    			 
 			    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 			    $mail->Port = getenv('EMAIL_PORT');                   // TCP port to connect to
 			    //Recipients
-			    $mail->setFrom('phoebestaab@gmail.com', 'Mailer');
+			    $mail->setFrom('phoebestaab1@gmail.com', 'Mailer');
 			    $mail->addAddress($email);              
-			    $mail->addReplyTo('phoebestaab@gmail.com', 'Information');
+			    $mail->addReplyTo('phoebestaab1@gmail.com', 'Information');
 			   
 			    //Content
 			    $mail->isHTML(true);                                  // Set email format to HTML
@@ -45,22 +45,26 @@
 			$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 			try {
 			    //Server settings
-			    $mail->SMTPDebug = false;                             // Disable verbose debug output
+			    $mail->SMTPDebug = 2;                              // Disable verbose debug output
 			    $mail->isSMTP();                                      // Set mailer to use SMTP
-			    $mail->Host = getenv('EMAIL_HOST');   		 		  // Specify main server
+			    $mail->Host = "smtp.gmail.com";   		 		  // Specify main server
 			    $mail->SMTPAuth = true;                               // Enable SMTP authentication
-			    $mail->Username = getenv('EMAIL_UNAME');              // Username
-			    $mail->Password = getenv('EMAIL_PASS');               // Password    			 
-			    $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+			    //$mail->Username = getenv('EMAIL_UNAME');              // Username
+			    //$mail->Password = getenv('EMAIL_PASS'); 
+
+			    $mail->Username = "phoebestaab1@gmail.com";
+				//Password to use for SMTP authentication
+				$mail->Password = "60221phoebe";              // Password    			 
+			    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 			    $mail->Port = getenv('EMAIL_PORT');                   // TCP port to connect to
 			    //Recipients
-			    $mail->setFrom('info@limitless.ie', 'Mailer');
+			    $mail->setFrom('phoebestaab1@gmail.com', 'Mailer');
 			    $mail->addAddress($email);              
-			    $mail->addReplyTo('info@limitless.ie', 'Information');
+			    $mail->addReplyTo('phoebestaab1@gmail.com', 'Information');
 			   
 			    //Content
 			    $mail->isHTML(true);                                  // Set email format to HTML
-			    $mail->Subject = 'Please click below to reset your password';
+			    $mail->Subject = 'Please click below to reser your password';
 			    $mail->Body = "<a href =".$resetLink.">".$resetLink."</a>";
 			    $mail->AltBody = $resetLink;
 				

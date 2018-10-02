@@ -16,6 +16,7 @@ import UserRegistration from './pages/UserRegistration.js';
 import CompanyLogin from './pages/CompanyLogin.js';
 import UserLogin from './pages/UserLogin.js';
 import ForgotPassword from './pages/ForgotPassword.js';
+import UserForgotPassword from './pages/UserForgotPassword.js';
 import ResetPassword from './pages/ResetPassword.js';
 import FlashNotification, {openSnackbar} from './components/FlashNotification';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -224,6 +225,10 @@ setLoggedIn(email, password) {
 
                             <Route exact={true} path="/company-forgot-password" render={(props) => (
                                 <ForgotPassword {...props} token={this.token} />
+                            )}/>
+
+                            <Route exact={true} path="/user-forgot-password" render={(props) => (
+                                <UserForgotPassword {...props} token={this.token} />
                             )}/>
 
                             <Route exact={true} path="/company-reset-password" render={(props) => (

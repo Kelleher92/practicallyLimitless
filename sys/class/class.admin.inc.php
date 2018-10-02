@@ -280,6 +280,27 @@
 			return $res;
 		}
 
+		private function userVerifyEmail($email) {
+			$email = $this->sanitizeValue($email);
+
+			$sql = "SELECT `email` FROM `users` WHERE `email` = '$email' LIMIT 1";
+
+			$user = $this->query($sql);
+
+			$res = new Response_Obj();
+
+			if(empty($user)) {
+				$res->message = 'E-mail ok.';
+				$res->responseCode = 200;
+			} else {
+				$res->message = 'E-mail already registered.';
+				$res->responseCode = 400;
+			}
+
+			return $res;
+		}
+
+
 		public function logoutCompany() {
 			if($_POST['action'] != 'logoutCompany') {
 				echo "Invalid action supplied for logoutCompany.";
@@ -491,6 +512,42 @@
 			return $res;		
 		}
 
+		public function userForgotPassword($email) {
+			if($_POST['action'] != 'userForgotPassword') {
+				return "Invalid action supplied for userForgotPassword.";
+			}
+
+			$email = $this->sanitizeValue($email);
+			$token = $this->generateToken($email);
+
+			$res = new Response_Obj();
+
+			if(($this->userVerifyEmail($email)->responseCode == 400)) {
+				$sql = "UPDATE `users` SET `tempResetToken` = '$token', `resetTokenSent` = now(), `isResetTokenExpired` = 0 WHERE `email` = '$email'";
+
+				try {
+				   	$this->insertQuery($sql);
+
+				    $mh = new Mailer();
+					$mh->sendResetPasswordEmail($email, $this->generateResetLink($email, $token));
+
+					$res->message = 'Reset password was successful. Check your inbox!';
+					$res->responseCode = 200;
+			    }
+				catch(PDOException $e) {
+				    $this->getDb()->rollback();
+				    $res->message = "Error: " . $e->getMessage();
+					$res->responseCode = 400;
+			    }
+			}
+			else {
+				$res->message = "The e-mail address you used was not recognised. Please try again!";
+				$res->responseCode = 400;
+			}	
+
+			return $res;		
+		}
+
 		public function companyResetPassword($email, $password) {
 			if($_POST['action'] != 'companyResetPassword') {
 				return "Invalid action supplied for companyResetPassword.";
@@ -528,17 +585,35 @@
 			$token = $this->sanitizeValue($token);
 
 			$company = $this->fetchCompanyForReset($email, $token);
+			$user=$this->fetchUserForReset($email, $token);
 			$res = new Response_Obj();
 
-			if(!isset($company) || $company['isResetTokenExpired'] || !$company['isActivated'] || $this->isTokenExpired($company['resetTokenSent'], $this->_expirationPeriod)) {
-				$res->message = 'Company or token invalid.';
+
+			if(!isset($company)){
+				if (!isset($user)) {
+				$res->message = 'Uer or token invalid.';
 				$res->responseCode = 400;
-			} else {
+				} 
+				elseif ($user['isResetTokenExpired'] || !$user['isActivated'] || $this->isTokenExpired($user['resetTokenSent'], $this->_expirationPeriod)) {
+					$res->message = 'Uer or token invalid.';
+					$res->responseCode = 400;
+				} else{
+				 $sql1 = "UPDATE `users` SET `isResetTokenExpired` = 1 WHERE `email` = '$email' and `tempResetToken` = '$token'";
+				$this->insertQuery($sql1);
+				$res->message = 'User and token valid.';
+				$res->responseCode = 200;
+				}
+			}elseif (($company['isResetTokenExpired'] || !$company['isActivated'] || $this->isTokenExpired($company['resetTokenSent'], $this->_expirationPeriod)) {
+					$res->message = 'Uer or token invalid.';
+				$res->responseCode = 400;	
+			}else{
 				$sql = "UPDATE `company` SET `isResetTokenExpired` = 1 WHERE `email` = '$email' and `tempResetToken` = '$token'";
 				$this->insertQuery($sql);
 				$res->message = 'Company and token valid.';
 				$res->responseCode = 200;
+
 			}
+			
 
 			return $res;
 		}
@@ -557,6 +632,22 @@
 			$company = $this->query($sql);
 
 			return empty($company) ? null : $company[0];
+		}
+
+		public function fetchUserForReset($email, $token) {
+			if(!isset($email) || !isset($token)) {
+				exit('Invalid request');
+			}
+
+			$sql = "SELECT
+				`id`, `email`, `isActivated`, `tempResetToken`, `resetTokenSent`, `isResetTokenExpired` 
+				FROM `users`
+				WHERE `email` = '$email' AND `tempResetToken` = '$token' 
+				LIMIT 1";
+
+			$user = $this->query($sql);
+
+			return empty($user) ? null : $user[0];
 		}
 
 		private function generateVefificationLink($email, $token) {
