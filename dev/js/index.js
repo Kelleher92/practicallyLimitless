@@ -12,6 +12,7 @@ import UserVerify from './pages/UserVerify';
 import Reset from './pages/Reset';
 import UserReset from './pages/UserReset';
 import Dashboard from './pages/Dashboard';
+import UserDashboard from './pages/UserDashboard';
 import PreLoader from './components/PreLoader';
 import CompanyRegistration from './pages/CompanyRegistration.js';
 import UserRegistration from './pages/UserRegistration.js';
@@ -265,6 +266,9 @@ class App extends Component {
                             )} />
 
                             <PrivateRoute path="/dashboard" token={this.token} component={Dashboard} isLoggedIn={this.state.isLoggedIn} companyId={this.state.companyId} setLoggedOut={this.setLoggedOut} showFlashNotification={this.showFlashNotification} />
+                        
+                            <PrivateRoute path="/user-dashboard" token={this.token} component={UserDashboard} isLoggedIn={this.state.isLoggedIn} companyId={this.state.companyId} setLoggedOut={this.setLoggedOut} showFlashNotification={this.showFlashNotification} />
+                        
                         </Switch>
                         <FlashNotification />
                         {this.state.showModal ? this.renderModal() : null}

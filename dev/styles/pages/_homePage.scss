@@ -9,8 +9,8 @@
     text-align: center;
     position: relative;
     height: max-content;
-    font-size: 1.5rem;
-    color: $white;
+    font-size: 2rem;
+    color: $green;
 }
   
 .home__section--title::before{
@@ -32,44 +32,22 @@
 }
 
 .home__step{
-    width: 30%;
+    width: 30.5%;
     background-color: $white;
     opacity: 0.6;
     box-shadow: 0em 0em 0.25em rgba(0,0,0,0.25);
+    moz-border-radius: 200px;
+    -webkit-border-radius: 200px;
+    border-radius: 240px;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 80px 10px 10px 10px;
-}
-
-.home__step__icon{
-    height: 100px;
-    width: 100px;
-    position: absolute;
-    top: -50px;
-    border-radius: 50%;
-    background-color: $white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.2rem;
-}
-
-.home__step__icon.green{
-    border: 3px solid #ddffdd;
-}
-
-.home__step__icon.pink {
-    border: 3px solid $base-color;
-}
-
-.home__step__icon.orange {
-    border: 3px solid $secondary-color;
+    padding: 70px 10px 10px 10px;
 }
 
 .home__step__title{
-    padding: 10px 0;
+    padding: 5px 0;
     font-size: 1.3rem;
     position: relative;
 }
@@ -77,16 +55,16 @@
 .home__step__title::before{
     content: '';
     position: absolute;
-    width: 40px;
-    height: 2px;
+    width: 30px;
+    height: 1px;
     background-color: gray;
     left: calc(50% - 20px);
     bottom: 0px;
 }
 
 .home__step__description{
-    padding: 20px 0;
-    font-size: 0.9rem;
+    padding: 35px 0;
+    font-size: 1rem;
     text-align: center;
 }
 

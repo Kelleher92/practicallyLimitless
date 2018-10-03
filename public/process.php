@@ -6,7 +6,7 @@
 		$action = $_POST['action'];
 
 		if($action === 'checkLoggedIn') {
-			if(empty($_SESSION['company']['id']) || empty($_SESSION['company']['email']) || empty($_SESSION['company']['name'])) {
+			if(empty($_SESSION['user']['id']) || empty($_SESSION['user']['email']) || empty($_SESSION['user']['name'])) {
 				echo json_encode(array(
     				'result' => false,
     				'companyId' => null
@@ -15,7 +15,7 @@
 			else { 
 				echo json_encode(array(
 	    			'result' => true,
-	    			'companyId' => $_SESSION['company']['id']
+	    			'companyId' => $_SESSION['user']['id']
 				));
 			}
 		} 
@@ -79,10 +79,10 @@
 			echo json_encode($res);
 		}
 
-		else if($action === 'userCompany') {
+		else if($action === 'fetchUser') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
-			$res = $admin->fetchUser($data->userId);	
+			$res = $admin->fetchUser($data->companyId);	
 			echo json_encode($res);
 		}
 		

@@ -4,7 +4,7 @@ html, body{
     font-family: $font-family-primary;
     font-family: arial;
     font-size: 16px;
-    background: url('../../images/test1.png');
+    background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)),url('../../images/test3.png') 0 20%;
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 100vh;

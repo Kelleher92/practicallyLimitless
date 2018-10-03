@@ -136,7 +136,7 @@ class CompanyRegistration extends Component {
                 ) : (
                     <div className="form__container">
                         <div className="form-logo"></div>
-                        <div className="form-header">Sign Up</div>
+                        <div className="form-header"></div>
                         <div className="form-body">
                             <div className="form-input__section">
                                 <input type="text" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("name", e)} onKeyPress={this.handleKeyPress} autoFocus />

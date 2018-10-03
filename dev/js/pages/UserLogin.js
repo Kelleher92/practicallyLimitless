@@ -31,7 +31,7 @@ class UserLogin extends Component {
                 res = JSON.parse(res);
 
                 if(res.responseCode === 200) {
-                    history.push('/dashboard');
+                    history.push('/user-dashboard');
                 } else {
                     me.props.showFlashNotification(res.message);
                 }
@@ -60,7 +60,7 @@ class UserLogin extends Component {
             <div className="form__wrap">
                 <div className="form__container">
                     <div className="form-logo"></div>
-                    <div className="form-header">Log In</div>
+                    <div className="form-header"></div>
                     <div className="form-body">
                     <div className="form-input__section">
                         <input type="text" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)} onKeyPress={this.handleKeyPress} autoFocus />

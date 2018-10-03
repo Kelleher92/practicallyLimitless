@@ -191,7 +191,7 @@
 					$hash = $user['password'];
 
 					if(password_verify($password, $hash)) {
-						$_SESSION['company'] = array(
+						$_SESSION['user'] = array(
 							'id' => $user['companyId'],
 							'name' => $user['name'],
 							'email' => $user['email']
@@ -306,7 +306,7 @@
 				echo "Invalid action supplied for logoutCompany.";
 			}
 
-			$_SESSION['company'] = array(
+			$_SESSION['user'] = array(
 				'id' => '',
 				'name' => '',
 				'email' => ''
@@ -372,6 +372,54 @@
 				);
 			} else {
 				$res->message = 'No company found.';
+				$res->responseCode = 400;
+			}
+
+			return $res;
+		}
+
+		public function fetchUser($companyId) {
+			if($_POST['action'] != 'fetchUser') {
+				return "Invalid action supplied for fetchCompany.";
+			}
+
+			$companyId = $this->sanitizeValue($companyId);
+
+			$sql = "SELECT
+				`name`, `email`, `address`, `logo`, `geoCoor`, `number`, `blurb` 
+				FROM `users`
+				WHERE `userId` = '$companyId'";
+
+			$user = $this->query($sql);
+
+			$sql = "SELECT
+				`id`, `offerName`, `requirements`, `expiryDate` 
+				FROM `offer`
+				WHERE `companyId` = '$companyId'
+				ORDER BY `expiryDate`";
+
+			$offers = $this->query($sql);
+			$expiredOffers = array();
+			
+			foreach($offers as $key => $value) {
+			    if($value["expiryDate"] < date('Y-m-d')) {
+			        $expiredOffers[] = $value;
+			        unset($offers[$key]);
+			    }
+			}
+			
+			$res = new Response_Obj();
+
+			if(!empty($user)) {
+				$res->message = 'Successful fetch.';
+				$res->responseCode = 200;
+				$res->data = array(
+					'user' => $user[0], 
+					'currentOffers' => array_values($offers), 
+					'expiredOffers' => array_values($expiredOffers)
+				);
+			} else {
+				$res->message = 'No userfound.';
 				$res->responseCode = 400;
 			}
 
