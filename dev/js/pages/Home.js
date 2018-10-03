@@ -20,7 +20,7 @@ class Home extends Component {
                             <div className="home__step__icon green"><i className="fas fa-pencil-alt"></i></div>
                             <div className="home__step__title">1. Sign Up</div>
                             <div className="home__step__description">
-                                Enter you details, test test experience, availability, skills, favourite 
+                                Enter you details, experience, availability, skills, favourite 
                                 catagories, and more in order to help us find you the best ways to help.
                             </div>
                         </div>
