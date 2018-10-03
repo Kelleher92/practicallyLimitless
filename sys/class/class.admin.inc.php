@@ -57,13 +57,21 @@
 			return $res;	
 		}
 
+<<<<<<< HEAD
 		public function registerUser($name, $email, $password, $geoCoor) {
+=======
+		public function registerUser($name, $email, $address, $password, $geoCoor) {
+>>>>>>> dev
 			if($_POST['action'] != 'registerUser') {
 				return "Invalid action supplied for registerUser.";
 			}
 
 			$uname = $this->sanitizeValue($name);
 			$email = $this->sanitizeValue($email);
+<<<<<<< HEAD
+=======
+			$address = $this->sanitizeValue($address);
+>>>>>>> dev
 			$pword = $this->sanitizeValue($password);
 			$geoCoor = $this->sanitizeValue($geoCoor); 
 
@@ -73,15 +81,25 @@
 
 			$res = new Response_Obj();
 		
+<<<<<<< HEAD
 			if($this->isUniqueForUsers('email', $email)) {
 				$query ="INSERT INTO users". "(userId, name, email, password, tempActivationToken, tokenSent, geoCoor) ";
 				$values = "values ('$userId', '$name', '$email', '$userhash', '$token', now(), '$geoCoor')";
+=======
+			if($this->isUniqueForCompanies('email', $email)) {
+				$query ="INSERT INTO users". "(userId, name, email, address, password, tempActivationToken, tokenSent, geoCoor) ";
+				$values = "values ('$userId', '$uname', '$email', '$address', '$userhash', '$token', now(), '$geoCoor')";
+>>>>>>> dev
 
 				try {
 				    $this->insertQuery($query . $values);		
 
 				    $mh = new Mailer();
+<<<<<<< HEAD
 				    $mh->sendVerificationEmail($email, $this->generateUserVefificationLink($email, $token));
+=======
+				    $mh->sendVerificationEmail($email, $this->generateVefificationLink($email, $token));
+>>>>>>> dev
 
 				    $res->responseCode = 200;
 				    $res->message = "Your registration was successful. Check your inbox!";

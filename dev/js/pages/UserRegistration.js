@@ -4,13 +4,21 @@ import VerificationNotice from '../components/VerificationNotice.js';
 import PreLoader from '../components/PreLoader.js';
 import $ from 'jquery';
 import AuthenticationModel from '../models/authentication.model.js';
+<<<<<<< HEAD
 
+=======
+import LocationSearchBox from '../components/LocationSearchBox.js';
+>>>>>>> dev
 
 class UserRegistration extends Component {
     constructor(props) {
         super(props);
         this.state = {
             name: '',
+<<<<<<< HEAD
+=======
+            address: '',
+>>>>>>> dev
             email: '',
             password: '',
             confirmPassword: '',
@@ -24,7 +32,12 @@ class UserRegistration extends Component {
         this.onClickSubmit = this.onClickSubmit.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.authenticationModel = new AuthenticationModel();
+<<<<<<< HEAD
        
+=======
+        this.onCompanyAddressChosen = this.onCompanyAddressChosen.bind(this);
+        this.onCompanyAddressChange = this.onCompanyAddressChange.bind(this);
+>>>>>>> dev
     }
 
     handleChange(name, e) {
@@ -33,9 +46,28 @@ class UserRegistration extends Component {
    
     onClickLogin() {
         let { history } = this.props;
+<<<<<<< HEAD
         history.push('/user-login');
     }
 
+=======
+        history.push('/company-login');
+    }
+
+    onCompanyAddressChosen(lat, lng, address) {
+        var geoCoor = lat + ',' + lng;
+        this.setState({
+            geoCoor: geoCoor,
+            address: address
+        });
+    }
+
+    onCompanyAddressChange(address) {
+        this.setState({
+            address: address
+        });
+    }
+>>>>>>> dev
 
     handleKeyPress(target) {
         if(target.charCode == 13) {
@@ -47,6 +79,10 @@ class UserRegistration extends Component {
         this.authenticationModel.setData({
             name: this.state.name,
             email: this.state.email,
+<<<<<<< HEAD
+=======
+            address: this.state.address,
+>>>>>>> dev
             password: this.state.password,
             confirmPassword: this.state.confirmPassword,
             geoCoor: this.state.geoCoor
@@ -65,7 +101,10 @@ class UserRegistration extends Component {
                 },
                 url: 'public/process.php',
                 success: function(res) {
+<<<<<<< HEAD
                     console.log(res);
+=======
+>>>>>>> dev
                     setTimeout(function() { 
                         console.log(res);
                         res = JSON.parse(res);
@@ -113,7 +152,11 @@ class UserRegistration extends Component {
                                 title="error!" 
                                 subTitle="There was an error processing your registration."
                                 linkText="Try Again"
+<<<<<<< HEAD
                                 linkLocation="/user-registration" />
+=======
+                                linkLocation="/company-registration" />
+>>>>>>> dev
                         )
                     ) : (
                         <PreLoader />
@@ -121,15 +164,28 @@ class UserRegistration extends Component {
                 ) : (
                     <div className="form__container">
                         <div className="form-logo"></div>
+<<<<<<< HEAD
                         <div className="form-header">Sign Up</div>
                         <div className="form-body">
                             <div className="form-input__section">
                                 <input type="text" placeholder="Name" className="form-input__value" onChange={(e) => this.handleChange("name", e)} onKeyPress={this.handleKeyPress} autoFocus />
+=======
+                        <div className="form-header">Sign Up Below</div>
+                        <div className="form-body">
+                            <div className="form-input__section">
+                                <input type="text" placeholder="Company Name" className="form-input__value" onChange={(e) => this.handleChange("name", e)} onKeyPress={this.handleKeyPress} autoFocus />
+>>>>>>> dev
                             </div>
                             <div className="form-input__section">
                                 <input type="email" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)} onKeyPress={this.handleKeyPress} />
                             </div>
                             <div className="form-input__section">
+<<<<<<< HEAD
+=======
+                                <LocationSearchBox className="form-input__value" placeHolder="Company Address" onPlaceSelect={this.onCompanyAddressChosen} onAddressUpdate={this.onCompanyAddressChange} />
+                            </div>
+                                <div className="form-input__section">
+>>>>>>> dev
                                 <input type="password" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)} onKeyPress={this.handleKeyPress} />
                             </div>
                             <div className="form-input__section">
