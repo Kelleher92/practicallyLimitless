@@ -30,18 +30,10 @@
 		else if($action === 'registerUser') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
-<<<<<<< HEAD
 			$res = $admin->registerUser($data->name, $data->email, $data->password, $data->geoCoor);
 			echo json_encode($res);
 		} 
 
-
-=======
-			$res = $admin->registerUser($data->name, $data->email, $data->address, $data->password, $data->geoCoor);
-			echo json_encode($res);
-		} 
-
->>>>>>> dev
 		else if($action === 'updateCompanyLogo') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
