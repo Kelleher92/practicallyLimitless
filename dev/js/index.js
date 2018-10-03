@@ -221,7 +221,7 @@ class App extends Component {
                             )}/>
 
                             <Route exact={true} path="/user-login" render={(props) => (
-                                <UserLogin {...props} token={this.token} setLoggedIn={this.setLoggedIn} showFlashNotification={this.showFlashNotification} />
+                                <UserLogin {...props} token={this.token} setLoggedInUser={this.setLoggedInUser} showFlashNotification={this.showFlashNotification} />
                             )}/>
 
                             <Route exact={true} path="/company-forgot-password" render={(props) => (
