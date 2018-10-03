@@ -17,15 +17,15 @@
 			    //$mail->Username = getenv('EMAIL_UNAME');              // Username
 			    //$mail->Password = getenv('EMAIL_PASS'); 
 
-			    $mail->Username = "phoebestaab1@gmail.com";
+			    $mail->Username = "phoebestaab@gmail.com";
 				//Password to use for SMTP authentication
 				$mail->Password = "60221phoebe";              // Password    			 
 			    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 			    $mail->Port = getenv('EMAIL_PORT');                   // TCP port to connect to
 			    //Recipients
-			    $mail->setFrom('phoebestaab1@gmail.com', 'Mailer');
+			    $mail->setFrom('phoebestaab@gmail.com', 'Mailer');
 			    $mail->addAddress($email);              
-			    $mail->addReplyTo('phoebestaab1@gmail.com', 'Information');
+			    $mail->addReplyTo('phoebestaab@gmail.com', 'Information');
 			   
 			    //Content
 			    $mail->isHTML(true);                                  // Set email format to HTML
@@ -52,15 +52,15 @@
 			    //$mail->Username = getenv('EMAIL_UNAME');              // Username
 			    //$mail->Password = getenv('EMAIL_PASS'); 
 
-			    $mail->Username = "phoebestaab1@gmail.com";
+			    $mail->Username = "phoebestaab@gmail.com";
 				//Password to use for SMTP authentication
 				$mail->Password = "60221phoebe";              // Password    			 
 			    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 			    $mail->Port = getenv('EMAIL_PORT');                   // TCP port to connect to
 			    //Recipients
-			    $mail->setFrom('phoebestaab1@gmail.com', 'Mailer');
+			    $mail->setFrom('phoebestaab@gmail.com', 'Mailer');
 			    $mail->addAddress($email);              
-			    $mail->addReplyTo('phoebestaab1@gmail.com', 'Information');
+			    $mail->addReplyTo('phoebestaab@gmail.com', 'Information');
 			   
 			    //Content
 			    $mail->isHTML(true);                                  // Set email format to HTML
