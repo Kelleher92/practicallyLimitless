@@ -34,7 +34,6 @@
 			echo json_encode($res);
 		} 
 
-
 		else if($action === 'updateCompanyLogo') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();

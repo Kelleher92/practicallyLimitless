@@ -5,7 +5,6 @@ import PreLoader from '../components/PreLoader.js';
 import $ from 'jquery';
 import AuthenticationModel from '../models/authentication.model.js';
 
-
 class UserRegistration extends Component {
     constructor(props) {
         super(props);
@@ -24,7 +23,6 @@ class UserRegistration extends Component {
         this.onClickSubmit = this.onClickSubmit.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.authenticationModel = new AuthenticationModel();
-       
     }
 
     handleChange(name, e) {
@@ -35,7 +33,6 @@ class UserRegistration extends Component {
         let { history } = this.props;
         history.push('/user-login');
     }
-
 
     handleKeyPress(target) {
         if(target.charCode == 13) {
@@ -65,7 +62,6 @@ class UserRegistration extends Component {
                 },
                 url: 'public/process.php',
                 success: function(res) {
-                    console.log(res);
                     setTimeout(function() { 
                         console.log(res);
                         res = JSON.parse(res);

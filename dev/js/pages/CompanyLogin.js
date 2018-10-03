@@ -26,7 +26,6 @@ class CompanyLogin extends Component {
 
         if(areAllFieldsComplete([this.state.email, this.state.password]) && isValidEmail(this.state.email) && isValidPassword(this.state.password)) {
             let { history } = this.props;
-            
 
             this.props.setLoggedIn(this.state.email, this.state.password).then(function(res) {
                 res = JSON.parse(res);
