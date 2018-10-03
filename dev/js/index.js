@@ -74,12 +74,7 @@ class App extends Component {
         });
     }
 
-<<<<<<< HEAD
-    
-setLoggedIn(email, password) {
-=======
     setLoggedIn(email, password) {
->>>>>>> dev
         let me = this;
         return $.ajax({
             method: 'POST',
@@ -105,7 +100,6 @@ setLoggedIn(email, password) {
         });
     } 
 
-
     setLoggedInUser(email, password) {
         let me = this;
         return $.ajax({
@@ -130,7 +124,6 @@ setLoggedIn(email, password) {
             }
         });
     } 
-
 
     setLoggedOut() {
         let me = this;
