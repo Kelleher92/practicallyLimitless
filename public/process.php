@@ -100,6 +100,13 @@
 			$res = $admin->activateCompany($data->email, $data->token);		
 			echo json_encode($res);
 		} 
+
+		else if($action === 'activateUser') { 
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->activateUser($data->email, $data->token);		
+			echo json_encode($res);
+		} 
 			
 		else if($action === 'companyForgotPassword') { 
 			$data = json_decode($_POST['data']);
@@ -122,10 +129,24 @@
 			echo json_encode($res);
 		} 
 
+		else if($action === 'resetUser') {
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->userVerifyResetToken($data->email, $data->token);
+			echo json_encode($res);
+		} 
+
 		else if($action === 'companyResetPassword') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
 			$res = $admin->companyResetPassword($data->email, $data->password);
+			echo json_encode($res);
+		} 
+
+		else if($action === 'userResetPassword') {
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->userResetPassword($data->email, $data->password);
 			echo json_encode($res);
 		} 
 

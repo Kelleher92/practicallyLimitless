@@ -8,7 +8,9 @@ import ModalContentsGeneric from './components/ModalContentsGeneric';
 import Home from './pages/Home'; 
 import PrivateRoute from './pages/PrivateRoute';
 import Verify from './pages/Verify';
+import UserVerify from './pages/UserVerify';
 import Reset from './pages/Reset';
+import UserReset from './pages/UserReset';
 import Dashboard from './pages/Dashboard';
 import PreLoader from './components/PreLoader';
 import CompanyRegistration from './pages/CompanyRegistration.js';
@@ -18,6 +20,7 @@ import UserLogin from './pages/UserLogin.js';
 import ForgotPassword from './pages/ForgotPassword.js';
 import UserForgotPassword from './pages/UserForgotPassword.js';
 import ResetPassword from './pages/ResetPassword.js';
+import UserResetPassword from './pages/UserResetPassword.js';
 import FlashNotification, {openSnackbar} from './components/FlashNotification';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Donate from './pages/Donate';
@@ -83,6 +86,7 @@ setLoggedIn(email, password) {
             },
             url: 'public/process.php',
             success: function(res) {
+                console.log(res);
                 res = JSON.parse(res);
 
                 if(res.responseCode === 200) {
@@ -234,6 +238,10 @@ setLoggedIn(email, password) {
                             <Route exact={true} path="/company-reset-password" render={(props) => (
                                 <ResetPassword {...props} token={this.token} />
                             )} />
+
+                            <Route exact={true} path="/user-reset-password" render={(props) => (
+                                <UserResetPassword {...props} token={this.token} />
+                            )} />
                             
                             <Route exact={true} path="/donate" render={(props) => (
                                 <Donate {...props} token={this.token} isLoggedIn={this.state.isLoggedIn} setLoggedOut={this.setLoggedOut} />
@@ -242,9 +250,17 @@ setLoggedIn(email, password) {
                             <Route exact={true} path="/verify" render={(props) => (
                                 <Verify {...props} token={this.token} />
                             )} />
+
+                            <Route exact={true} path="/user-verify" render={(props) => (
+                                <UserVerify {...props} token={this.token} />
+                            )} />
                          
                             <Route exact={true} path="/reset" render={(props) => (
                                 <Reset {...props} token={this.token} />
+                            )} />
+
+                            <Route exact={true} path="/user-reset" render={(props) => (
+                                <UserReset {...props} token={this.token} />
                             )} />
 
                             <Route exact={true} path="/company-logo" render={(props) => (

@@ -48,7 +48,7 @@ CREATE TABLE `company` (
   `resetTokenSent` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `isResetTokenExpired` tinyint(4) NOT NULL,
   `version` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `company`
@@ -120,7 +120,7 @@ CREATE TABLE `users` (
   `resetTokenSent` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `isResetTokenExpired` tinyint(4) NOT NULL,
   `version` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `company`
