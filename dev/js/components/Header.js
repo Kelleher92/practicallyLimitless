@@ -12,24 +12,23 @@ class Header extends Component {
         this.handleLogOutClick = this.handleLogOutClick.bind(this);
         this.handleNotificationClick = this.handleNotificationClick.bind(this);
     }
-
+    
     handleLogoClick() {
         this.props.history.push('/home');
     }
-
+    
     handleLogOutClick() {
         let { history } = this.props;
         this.props.setLoggedOut();
-	history.push('/');
+        history.push('/');
     }
-
+    
     handleNotificationClick() {
         openSnackbar({ message: 'Opened a flash message' });
     }
-
+    
     renderNav() {
         if(!this.props.isLoggedIn) return <div className="header__nav__container" />;
-
         return (
             <div className="header__nav__container">
                 <Link to="/dashboard"><div className="header__nav__item">Dashboard</div></Link>
@@ -38,11 +37,11 @@ class Header extends Component {
     }
     
     render() {
-        let logInButton, registerButton, logOutButton = null;
+        let UserlogInButton, registerButton, logOutButton = null;
         
         if(!this.props.isLoggedIn) {
-            logInButton = <Link to="/company-login"><button className="pl-button--style-2 off-white">Log in</button></Link>;
-            registerButton = <Link to="/company-registration"><button className="pl-button--style-2 orange">Sign Up</button></Link>;
+            UserlogInButton = <Link to="/user-login"><button className="pl-button--style-2 off-white">Login</button></Link>;
+            registerButton = <Link to="/user-registration"><button className="pl-button--style-2 orange">Sign Up</button></Link>;
         } else {
             logOutButton = <button className="pl-button--style-2 off-white" onClick={this.handleLogOutClick}>Log Out</button>;
         }
@@ -54,11 +53,11 @@ class Header extends Component {
                 </div>
                 {this.renderNav()}
                 <div className="header__buttons">
-                    {logInButton}
+                    {UserlogInButton}
                     {registerButton}
                     {logOutButton}
-                    <Link to="/donate">
-                        <button className="pl-button--style-3 off-black">Donate</button>
+                    <Link to="/company-login">
+                        <button className="pl-button--style-3 off-black">Charity</button>
                     </Link>
                     <i className="header__buttons__notify fas fa-bell" onClick={this.handleNotificationClick}></i>
                 </div>

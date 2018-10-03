@@ -57,14 +57,13 @@
 			return $res;	
 		}
 
-		public function registerUser($name, $email, $address, $password, $geoCoor) {
+		public function registerUser($name, $email, $password, $geoCoor) {
 			if($_POST['action'] != 'registerUser') {
 				return "Invalid action supplied for registerUser.";
 			}
 
 			$uname = $this->sanitizeValue($name);
 			$email = $this->sanitizeValue($email);
-			$address = $this->sanitizeValue($address);
 			$pword = $this->sanitizeValue($password);
 			$geoCoor = $this->sanitizeValue($geoCoor); 
 
@@ -74,15 +73,15 @@
 
 			$res = new Response_Obj();
 		
-			if($this->isUniqueForCompanies('email', $email)) {
-				$query ="INSERT INTO users". "(userId, name, email, address, password, tempActivationToken, tokenSent, geoCoor) ";
-				$values = "values ('$userId', '$uname', '$email', '$address', '$userhash', '$token', now(), '$geoCoor')";
+			if($this->isUniqueForUsers('email', $email)) {
+				$query ="INSERT INTO users". "(userId, name, email, password, tempActivationToken, tokenSent, geoCoor) ";
+				$values = "values ('$userId', '$name', '$email', '$userhash', '$token', now(), '$geoCoor')";
 
 				try {
 				    $this->insertQuery($query . $values);		
 
 				    $mh = new Mailer();
-				    $mh->sendVerificationEmail($email, $this->generateVefificationLink($email, $token));
+				    $mh->sendVerificationEmail($email, $this->generateUserVefificationLink($email, $token));
 
 				    $res->responseCode = 200;
 				    $res->message = "Your registration was successful. Check your inbox!";
@@ -210,6 +209,57 @@
 			return $res;
 		}
 
+		public function loginUser($userName, $password) {
+			if($_POST['action'] != 'loginUser') {
+				return "Invalid action supplied for loginUser.";
+			}
+
+			$userName = $this->sanitizeValue($userName);
+			$password = $this->sanitizeValue($password);
+
+			$sql = "SELECT
+				`id`, `userId`, `name`, `email`, `password`, `isActivated`
+				FROM `users`
+				WHERE
+				`email` = '$userName' 
+				LIMIT 1";
+
+			$results = $this->query($sql);
+
+			$res = new Response_Obj();
+
+			if(!isset($results) || empty($results)) {
+				$res->responseCode = 400;
+				$res->message = "Your username is not recognised.";
+			} else {
+				$user = $results[0];
+
+				if(!boolVal($user['isActivated'])) {
+					$res->responseCode = 400;
+					$res->message = 'Your account is not activated yet. Please check your email.';
+				}
+				else{
+					$hash = $user['password'];
+
+					if(password_verify($password, $hash)) {
+						$_SESSION['user'] = array(
+							'id' => $user['userId'],
+							'name' => $user['name'],
+							'email' => $user['email']
+						);
+						$res->responseCode = 200;
+						$res->message = 'Login successful.';
+						$res->data = $user['userId'];
+					} else {
+						$res->responseCode = 400;
+						$res->message = 'Your username and password combination is invalid.';
+					}
+				}
+			}
+
+			return $res;
+		}
+
 		private function companyVerifyEmail($email) {
 			$email = $this->sanitizeValue($email);
 
@@ -230,12 +280,48 @@
 			return $res;
 		}
 
+		private function userVerifyEmail($email) {
+			$email = $this->sanitizeValue($email);
+
+			$sql = "SELECT `email` FROM `users` WHERE `email` = '$email' LIMIT 1";
+
+			$user = $this->query($sql);
+
+			$res = new Response_Obj();
+
+			if(empty($user)) {
+				$res->message = 'E-mail ok.';
+				$res->responseCode = 200;
+			} else {
+				$res->message = 'E-mail already registered.';
+				$res->responseCode = 400;
+			}
+
+			return $res;
+		}
+
+
 		public function logoutCompany() {
 			if($_POST['action'] != 'logoutCompany') {
 				echo "Invalid action supplied for logoutCompany.";
 			}
 
 			$_SESSION['company'] = array(
+				'id' => '',
+				'name' => '',
+				'email' => ''
+			);
+
+			echo 'Log out complete.';
+		}
+
+
+		public function logoutUser() {
+			if($_POST['action'] != 'logoutUser') {
+				echo "Invalid action supplied for logoutUser.";
+			}
+
+			$_SESSION['user'] = array(
 				'id' => '',
 				'name' => '',
 				'email' => ''
@@ -308,6 +394,22 @@
 			return empty($company) ? null : $company[0];
 		}
 
+		private function fetchUserForActivation($email, $token) {
+			if(!isset($email) || !isset($token)) {
+				exit('Invalid request');
+			}
+
+			$sql = "SELECT
+				`id`, `email`, `isActivated`, `tempActivationToken`, `tokenSent`, `isActivationTokenExpired` 
+				FROM `users`
+				WHERE `email` = '$email' AND `tempActivationToken` = '$token' 
+				LIMIT 1";
+
+			$user = $this->query($sql);
+
+			return empty($user) ? null : $user[0];
+		}
+
 		public function activateCompany($email, $token) {
 			if($_POST['action'] != 'activateCompany') {
 				return "Invalid action supplied for activateCompany.";
@@ -315,24 +417,49 @@
 			
 			$email = $this->sanitizeValue($email);
 			$token = $this->sanitizeValue($token);
-
-			$company = $this->fetchCompanyForActivation($email, $token);
+			$company= $this->fetchCompanyForActivation($email, $token);
 			
 			$res = new Response_Obj();
 
-			if(!isset($company) || $company['isActivationTokenExpired'] || $this->isTokenExpired($company['tokenSent'], $this->_expirationPeriod)) {
+			if(!(isset($company)) || $company['isActivationTokenExpired'] || $this->isTokenExpired($company['tokenSent'], $this->_expirationPeriod)) {
 				$res->responseCode = 400;
 				$res->message = "Session expired.";
-			} else {
+			} else{
 				$sql = "UPDATE `company` SET `isActivated` = 1, `isActivationTokenExpired` = 1 WHERE `email` = '$email' and tempActivationToken = '$token'";
 				$this->insertQuery($sql);
-
 				$res->responseCode = 200;
-				$res->message = "Company activated.";
+				$res->message = "Activated.";
 			}
 
 			return $res;
 		}
+
+
+		public function activateUser($email, $token) {
+			if($_POST['action'] != 'activateUser') {
+				return "Invalid action supplied for activateUser.";
+			}
+			
+			$email = $this->sanitizeValue($email);
+			$token = $this->sanitizeValue($token);
+			$user= $this->fetchUserForActivation($email, $token);
+			
+			$res = new Response_Obj();
+
+			if(!(isset($user)) || $user['isActivationTokenExpired'] || $this->isTokenExpired($user['tokenSent'], $this->_expirationPeriod)) {
+				$res->responseCode = 400;
+				$res->message = "Session expired.";
+			} else{
+				$sql = "UPDATE `users` SET `isActivated` = 1, `isActivationTokenExpired` = 1 WHERE `email` = '$email' and tempActivationToken = '$token'";
+				$this->insertQuery($sql);
+				$res->responseCode = 200;
+				$res->message = "Activated.";
+			}
+
+			return $res;
+		}
+
+		
 
 		public function uploadCompanyLogo($companyId, $image, $imageName) {
 			$companyId = $this->sanitizeValue($companyId);
@@ -394,6 +521,42 @@
 			return $res;		
 		}
 
+		public function userForgotPassword($email) {
+			if($_POST['action'] != 'userForgotPassword') {
+				return "Invalid action supplied for userForgotPassword.";
+			}
+
+			$email = $this->sanitizeValue($email);
+			$token = $this->generateToken($email);
+
+			$res = new Response_Obj();
+
+			if(($this->userVerifyEmail($email)->responseCode == 400)) {
+				$sql = "UPDATE `users` SET `tempResetToken` = '$token', `resetTokenSent` = now(), `isResetTokenExpired` = 0 WHERE `email` = '$email'";
+
+				try {
+				   	$this->insertQuery($sql);
+
+				    $mh = new Mailer();
+					$mh->sendResetPasswordEmail($email, $this->generateUserResetLink($email, $token));
+
+					$res->message = 'Reset password was successful. Check your inbox!';
+					$res->responseCode = 200;
+			    }
+				catch(PDOException $e) {
+				    $this->getDb()->rollback();
+				    $res->message = "Error: " . $e->getMessage();
+					$res->responseCode = 400;
+			    }
+			}
+			else {
+				$res->message = "The e-mail address you used was not recognised. Please try again!";
+				$res->responseCode = 400;
+			}	
+
+			return $res;		
+		}
+
 		public function companyResetPassword($email, $password) {
 			if($_POST['action'] != 'companyResetPassword') {
 				return "Invalid action supplied for companyResetPassword.";
@@ -422,6 +585,36 @@
 		    return $res;
 		}
 
+		public function userResetPassword($email, $password) {
+			if($_POST['action'] != 'userResetPassword') {
+				return "Invalid action supplied for userResetPassword.";
+			}
+
+			$email = $this->sanitizeValue($email);
+			$password = $this->sanitizeValue($password);
+			$userhash = $this->_getHashFromPassword($password);
+		
+			$query = "UPDATE `users` SET `password` = '$userhash' WHERE `email` = '$email'";
+						
+			$res = new Response_Obj();
+
+			try {
+			    $this->insertQuery($query);
+
+				$res->message = 'Reset password was successful.';
+				$res->responseCode = 200;
+		    }
+			catch(PDOException $e) {
+			    $this->getDb()->rollback();
+			    $res->message = "Error: " . $e->getMessage();
+				$res->responseCode = 400;
+		    }			
+
+		    return $res;
+		}
+
+
+
 		public function companyVerifyResetToken($email, $token) {
 			if($_POST['action'] != 'resetCompany') {
 				return "Invalid action supplied for companyVerifyResetToken.";
@@ -446,6 +639,30 @@
 			return $res;
 		}
 
+		public function userVerifyResetToken($email, $token) {
+			if($_POST['action'] != 'resetUser') {
+				return "Invalid action supplied for userVerifyResetToken.";
+			}
+			
+			$email = $this->sanitizeValue($email);
+			$token = $this->sanitizeValue($token);
+
+			$user = $this->fetchUserForReset($email, $token);
+			$res = new Response_Obj();
+
+			if(!isset($user) || $user['isResetTokenExpired'] || !$user['isActivated'] || $this->isTokenExpired($user['resetTokenSent'], $this->_expirationPeriod)) {
+				$res->message = 'User or token invalid.';
+				$res->responseCode = 400;
+			} else {
+				$sql = "UPDATE `users` SET `isResetTokenExpired` = 1 WHERE `email` = '$email' and `tempResetToken` = '$token'";
+				$this->insertQuery($sql);
+				$res->message = 'User and token valid.';
+				$res->responseCode = 200;
+			}
+
+			return $res;
+		}
+
 		public function fetchCompanyForReset($email, $token) {
 			if(!isset($email) || !isset($token)) {
 				exit('Invalid request');
@@ -462,12 +679,36 @@
 			return empty($company) ? null : $company[0];
 		}
 
+		public function fetchUserForReset($email, $token) {
+			if(!isset($email) || !isset($token)) {
+				exit('Invalid request');
+			}
+
+			$sql = "SELECT
+				`id`, `email`, `isActivated`, `tempResetToken`, `resetTokenSent`, `isResetTokenExpired` 
+				FROM `users`
+				WHERE `email` = '$email' AND `tempResetToken` = '$token' 
+				LIMIT 1";
+
+			$user = $this->query($sql);
+
+			return empty($user) ? null : $user[0];
+		}
+
 		private function generateVefificationLink($email, $token) {
 			if(!$email || !$token) {
 				throw new Exception('missing key info');
 				exit();
 			}
 			return $this->ROOT."/verify?email=".$email."&token=".$token;
+		}
+
+		private function generateUserVefificationLink($email, $token) {
+			if(!$email || !$token) {
+				throw new Exception('missing key info');
+				exit();
+			}
+			return $this->ROOT."/user-verify?email=".$email."&token=".$token;
 		}
 
 		private function generateToken($email) {
@@ -481,6 +722,15 @@
 			}
 
 			return $this->ROOT."/reset?email=".$email."&token=".$token;
+		}
+
+		private function generateUserResetLink($email, $token) {
+			if(!$email || !$token) {
+				throw new Exception('missing key info');
+				exit();
+			}
+
+			return $this->ROOT."/user-reset?email=".$email."&token=".$token;
 		}
 
 		private function isTokenExpired($sentTime, $limit) {
@@ -509,6 +759,21 @@
 					`name`, `email` 
 					from
 					`company` 
+					where ". $field ."=". "'".$value. "'";
+
+				return empty($this->query($sql));
+		 	}
+		 	return false;
+		}
+
+		public function isUniqueForUsers($field, $value) {
+		 	$allowedFields = ['name', 'email'];
+
+		 	if(in_array($field, $allowedFields)) {
+				$sql = "SELECT 
+					`name`, `email` 
+					from
+					`users` 
 					where ". $field ."=". "'".$value. "'";
 
 				return empty($this->query($sql));

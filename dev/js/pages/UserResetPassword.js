@@ -1,69 +1,59 @@
 import React, {Component} from 'react';
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
+import { isValidPassword } from '../helpers/utils.js';
 import VerificationNotice from '../components/VerificationNotice.js';
 import PreLoader from '../components/PreLoader.js';
+import qs from 'query-string';
 import $ from 'jquery';
-import AuthenticationModel from '../models/authentication.model.js';
 
-class UserRegistration extends Component {
+class UserResetPassword extends Component {
     constructor(props) {
         super(props);
+
+        let userEmail = qs.parse(this.props.location.search).email;
+        
         this.state = {
-            name: '',
-            email: '',
+            email: userEmail,
             password: '',
             confirmPassword: '',
             hasStartedRegistrationCheck: false,
             isVerificationCheckComplete: false,
-            wasRegistrationSuccessful: false,
-            geoCoor: '52.7942,-6.1469'
+            wasRegistrationSuccessful: false
         };
 
-        this.onClickLogin = this.onClickLogin.bind(this);
         this.onClickSubmit = this.onClickSubmit.bind(this);
-        this.handleKeyPress = this.handleKeyPress.bind(this);
-        this.authenticationModel = new AuthenticationModel();
+        this.isPasswordConfirmValid = this.isPasswordConfirmValid.bind(this);
+        this.isSubmitable = this.isSubmitable.bind(this);
     }
 
     handleChange(name, e) {
         this.setState({[name]: e.target.value});
     }
-   
-    onClickLogin() {
-        let { history } = this.props;
-        history.push('/user-login');
+
+    isPasswordConfirmValid() {
+       return this.state.password === this.state.confirmPassword;
     }
 
-    handleKeyPress(target) {
-        if(target.charCode == 13) {
-            this.onClickSubmit();    
-        }
+    isSubmitable() {
+        return isValidPassword(this.state.password) && this.isPasswordConfirmValid();
     }
 
     onClickSubmit() {
-        this.authenticationModel.setData({
-            name: this.state.name,
-            email: this.state.email,
-            password: this.state.password,
-            confirmPassword: this.state.confirmPassword,
-            geoCoor: this.state.geoCoor
-        });
-
-        if(this.authenticationModel.isSubmitable()) {
+        if(this.isSubmitable()) {
             let me = this;
             me.setState({hasStartedRegistrationCheck: true});  
-            
+
             $.ajax({
                 method: 'POST',
                 data: {
                     token: this.props.token,
-                    action: 'registerUser',
-                    data: this.authenticationModel.registrationData()
+                    action: 'userResetPassword',
+                    data: JSON.stringify({email: this.state.email, password: this.state.password})
                 },
                 url: 'public/process.php',
                 success: function(res) {
+                    console.log(res);
                     setTimeout(function() { 
-                        console.log(res);
                         res = JSON.parse(res);
 
                         if(res.responseCode === 200) {
@@ -92,7 +82,7 @@ class UserRegistration extends Component {
     }
     
     render() {
-        return (
+         return (
             <div className="form__wrap">
                 {this.state.hasStartedRegistrationCheck ? (
                     this.state.isVerificationCheckComplete ? (
@@ -100,16 +90,16 @@ class UserRegistration extends Component {
                             <VerificationNotice 
                                 verificationStatus={true} 
                                 title="success!" 
-                                subTitle="Registration successful. Check your inbox!"
-                                linkText="Return Home"
-                                linkLocation="/" />
+                                subTitle="Change password successful. You can now proceed to log in!"
+                                linkText="Log In"
+                                linkLocation="/user-login" />
                         ) : (
                             <VerificationNotice 
                                 verificationStatus={false} 
                                 title="error!" 
-                                subTitle="There was an error processing your registration."
+                                subTitle="There was an error processing your request."
                                 linkText="Try Again"
-                                linkLocation="/user-registration" />
+                                linkLocation="/user-forgot-password" />
                         )
                     ) : (
                         <PreLoader />
@@ -117,25 +107,18 @@ class UserRegistration extends Component {
                 ) : (
                     <div className="form__container">
                         <div className="form-logo"></div>
-                        <div className="form-header">Sign Up</div>
+                        <div className="form-header">Set New Password</div>
                         <div className="form-body">
                             <div className="form-input__section">
-                                <input type="text" placeholder="Name" className="form-input__value" onChange={(e) => this.handleChange("name", e)} onKeyPress={this.handleKeyPress} autoFocus />
-                            </div>
+                                <input type="password" placeholder="New Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)} autoFocus />
+                            </div>                 
                             <div className="form-input__section">
-                                <input type="email" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)} onKeyPress={this.handleKeyPress} />
-                            </div>
-                            <div className="form-input__section">
-                                <input type="password" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)} onKeyPress={this.handleKeyPress} />
-                            </div>
-                            <div className="form-input__section">
-                                <input type="password" placeholder="Confirm Password" className="form-input__value" onChange={(e) => this.handleChange("confirmPassword", e)} onKeyPress={this.handleKeyPress} />
+                                <input type="password" placeholder="Confirm Password" className="form-input__value" onChange={(e) => this.handleChange("confirmPassword", e)} />
                             </div>
                             <div className="form-submission__section">
                                 <button className="form__submit-button" onClick={this.onClickSubmit}>Submit</button>
-                                <button className="form__submit-link pl-buffer-top-10" onClick={this.onClickLogin}>Already registered?</button>
                             </div>    
-                        </div>
+                        </div>                       
                     </div>
                 )}
             </div>
@@ -143,4 +126,4 @@ class UserRegistration extends Component {
     }
 }
 
-export default withRouter(UserRegistration);
+export default withRouter(UserResetPassword);

@@ -48,7 +48,7 @@ CREATE TABLE `company` (
   `resetTokenSent` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `isResetTokenExpired` tinyint(4) NOT NULL,
   `version` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `company`
@@ -74,6 +74,7 @@ CREATE TABLE `offer` (
   `companyId` varchar(42) COLLATE utf8_unicode_ci NOT NULL,
   `offerName` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `requirements` varchar(1048) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(1048) COLLATE utf8_unicode_ci NOT NULL,
   `expiryDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -81,17 +82,17 @@ CREATE TABLE `offer` (
 -- Dumping data for table `offer`
 --
 
-INSERT INTO `offer` (`id`, `companyId`, `offerName`, `requirements`, `expiryDate`) VALUES
-(1, 'f7ca11ede651ff94b5227e2571149ef3', '5 haircuts', 'car, barber skills, license', '2018-08-10'),
-(2, 'ca95807293f55d94e97d1f9e5704be82', '5 haircuts', '', '2018-08-10'),
-(3, 'f7ca11ede651ff94b5227e2571149ef3', 'First one', '', '2018-08-30'),
-(4, 'f7ca11ede651ff94b5227e2571149ef3', 'second offer', '', '2018-10-11'),
-(5, 'f7ca11ede651ff94b5227e2571149ef3', 'fdsf', '', '2018-08-17'),
-(6, 'f7ca11ede651ff94b5227e2571149ef3', 'ghvbbc', '', '2018-08-16'),
-(7, 'f7ca11ede651ff94b5227e2571149ef3', 'test offer', '', '2018-08-31'),
-(9, 'f7ca11ede651ff94b5227e2571149ef3', 'fghfgh', '', '2018-09-01'),
-(10, 'f7ca11ede651ff94b5227e2571149ef3', 'ttttt', '', '2018-09-07'),
-(11, 'f7ca11ede651ff94b5227e2571149ef3', 'Van, license', 'Van, license', '2018-11-30');
+INSERT INTO `offer` (`id`, `companyId`, `offerName`, `requirements`,`description`, `expiryDate`) VALUES
+(1, 'f7ca11ede651ff94b5227e2571149ef3', '5 haircuts', 'car, barber skills, license','desc', '2018-08-10'),
+(2, 'ca95807293f55d94e97d1f9e5704be82', '5 haircuts', '','desc', '2018-08-10'),
+(3, 'f7ca11ede651ff94b5227e2571149ef3', 'First one', '','desc', '2018-08-30'),
+(4, 'f7ca11ede651ff94b5227e2571149ef3', 'second offer', '','desc', '2018-10-11'),
+(5, 'f7ca11ede651ff94b5227e2571149ef3', 'fdsf', '','desc', '2018-08-17'),
+(6, 'f7ca11ede651ff94b5227e2571149ef3', 'ghvbbc', '','desc', '2018-08-16'),
+(7, 'f7ca11ede651ff94b5227e2571149ef3', 'test offer', '','desc', '2018-08-31'),
+(9, 'f7ca11ede651ff94b5227e2571149ef3', 'fghfgh', '','desc', '2018-09-01'),
+(10, 'f7ca11ede651ff94b5227e2571149ef3', 'ttttt', '','desc', '2018-09-07'),
+(11, 'f7ca11ede651ff94b5227e2571149ef3', 'Van, license', 'Van, license', 'desc','2018-11-30');
 
 -- --------------------------------------------------------
 
@@ -119,7 +120,7 @@ CREATE TABLE `users` (
   `resetTokenSent` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `isResetTokenExpired` tinyint(4) NOT NULL,
   `version` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `company`

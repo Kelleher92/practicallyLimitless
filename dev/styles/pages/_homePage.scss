@@ -10,7 +10,7 @@
     position: relative;
     height: max-content;
     font-size: 1.5rem;
-    color: $off-black;
+    color: $white;
 }
   
 .home__section--title::before{
@@ -18,7 +18,7 @@
     position: absolute;
     width: 40px;
     height: 2px;
-    background-color: lightgray;
+    background-color: grey;
     left: calc(50% - 20px);
     bottom: 0px;
 }
@@ -34,6 +34,7 @@
 .home__step{
     width: 30%;
     background-color: $white;
+    opacity: 0.4;
     box-shadow: 0em 0em 0.25em rgba(0,0,0,0.25);
     position: relative;
     display: flex;

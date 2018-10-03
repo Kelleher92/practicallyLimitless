@@ -4,7 +4,9 @@ html, body{
     font-family: $font-family-primary;
     font-family: arial;
     font-size: 16px;
-    background-color: #fff;
+    background: url('../../images/test1.png');
+    background-repeat: no-repeat;
+    background-size: cover;
     min-height: 100vh;
     min-height: 100vh;
     -webkit-display: flex;

@@ -3,7 +3,7 @@ import $ from 'jquery';
 import { Redirect, withRouter } from 'react-router-dom';
 import { isValidEmail, isValidPassword, areAllFieldsComplete } from '../helpers/utils.js';
 
-class CompanyLogin extends Component {
+class UserLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,7 +27,7 @@ class CompanyLogin extends Component {
         if(areAllFieldsComplete([this.state.email, this.state.password]) && isValidEmail(this.state.email) && isValidPassword(this.state.password)) {
             let { history } = this.props;
 
-            this.props.setLoggedIn(this.state.email, this.state.password).then(function(res) {
+            this.props.setLoggedInUser(this.state.email, this.state.password).then(function(res) {
                 res = JSON.parse(res);
 
                 if(res.responseCode === 200) {
@@ -39,11 +39,6 @@ class CompanyLogin extends Component {
         }
     }
 
-    onClickSignup() {
-        let { history } = this.props;
-        history.push('/company-registration');
-    }
-
     handleKeyPress(target) {
         if(target.charCode == 13) {
             this.onClickSubmit();    
@@ -52,7 +47,12 @@ class CompanyLogin extends Component {
 
     onClickForgotPassword() {
         let { history } = this.props;
-        history.push('/company-forgot-password');
+        history.push('/user-forgot-password');
+    }
+
+     onClickSignup() {
+        let { history } = this.props;
+        history.push('/user-registration');
     }
     
     render() {
@@ -63,13 +63,13 @@ class CompanyLogin extends Component {
                     <div className="form-header">Log In</div>
                     <div className="form-body">
                     <div className="form-input__section">
-                        <input type="text" placeholder=" Enter E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)} onKeyPress={this.handleKeyPress} autoFocus />
+                        <input type="text" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)} onKeyPress={this.handleKeyPress} autoFocus />
                     </div>
                     <div className="form-input__section">
                         <input type="password" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)} onKeyPress={this.handleKeyPress} />
                     </div>
                         <div className="form-submission__section">
-                            <button className="form__submit-button" onClick={this.onClickSubmit}>Submit</button>
+                            <button className="form__submit-button" onClick={this.onClickSubmit}>Login</button>
                             <button className="form__submit-link pl-buffer-top-10" onClick={this.onClickForgotPassword}>Forgot Password?</button>
                             <button className="form__submit-link pl-buffer-top-10" onClick={this.onClickSignup}>New User? Click here to register</button>
                         </div>    
@@ -80,4 +80,4 @@ class CompanyLogin extends Component {
     }
 }
 
-export default withRouter(CompanyLogin);
+export default withRouter(UserLogin);

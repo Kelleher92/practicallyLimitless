@@ -30,7 +30,7 @@
 		else if($action === 'registerUser') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
-			$res = $admin->registerUser($data->name, $data->email, $data->address, $data->password, $data->geoCoor);
+			$res = $admin->registerUser($data->name, $data->email, $data->password, $data->geoCoor);
 			echo json_encode($res);
 		} 
 
@@ -55,15 +55,34 @@
 			echo json_encode($res);
 		}	
 
+		else if($action === 'loginUser') {
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->loginUser($data->email, $data->password);	
+			echo json_encode($res);
+		}	
+
 		else if($action === 'logoutCompany') {
 			$admin = new Admin();
 			echo $admin->logoutCompany();			
+		} 
+
+		else if($action === 'logoutUser') {
+			$admin = new Admin();
+			echo $admin->logoutUser();			
 		} 
 
 		else if($action === 'fetchCompany') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
 			$res = $admin->fetchCompany($data->companyId);	
+			echo json_encode($res);
+		}
+
+		else if($action === 'userCompany') {
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->fetchUser($data->userId);	
 			echo json_encode($res);
 		}
 		
@@ -80,11 +99,25 @@
 			$res = $admin->activateCompany($data->email, $data->token);		
 			echo json_encode($res);
 		} 
+
+		else if($action === 'activateUser') { 
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->activateUser($data->email, $data->token);		
+			echo json_encode($res);
+		} 
 			
 		else if($action === 'companyForgotPassword') { 
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
 			$res = $admin->companyForgotPassword($data->email);		
+			echo json_encode($res);
+		} 
+
+		else if($action === 'userForgotPassword') { 
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->userForgotPassword($data->email);		
 			echo json_encode($res);
 		} 
 
@@ -95,10 +128,24 @@
 			echo json_encode($res);
 		} 
 
+		else if($action === 'resetUser') {
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->userVerifyResetToken($data->email, $data->token);
+			echo json_encode($res);
+		} 
+
 		else if($action === 'companyResetPassword') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
 			$res = $admin->companyResetPassword($data->email, $data->password);
+			echo json_encode($res);
+		} 
+
+		else if($action === 'userResetPassword') {
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->userResetPassword($data->email, $data->password);
 			echo json_encode($res);
 		} 
 
