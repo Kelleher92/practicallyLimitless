@@ -23,7 +23,7 @@
 		<div id="modal-root"></div>
 		
 		<input id="session-token" type="hidden" value="<?php echo $_SESSION['token']; ?>"/>
-		<input id="login-token" type="hidden" value="<?php echo $_SESSION['company']['id']; ?>"/>
+		<input id="login-token" type="hidden" value="<?php echo $_SESSION['user']['id']; ?>"/>
 
 		<script src="./public/js/home.js"></script>
 	</body>

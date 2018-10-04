@@ -131,6 +131,37 @@
 			return $res;	
 		}
 
+		public function updateUser($companyId, $name, $skills, $geoCoor, $number, $blurb) {
+			if($_POST['action'] != 'updateUser') {
+				return "Invalid action supplied for updateUser.";
+			}
+
+			$companyId = $this->sanitizeValue($companyId);
+			$name = $this->sanitizeValue($name);
+			$skills = $this->sanitizeValue($skills);
+			$geoCoor = $this->sanitizeValue($geoCoor);
+			$number = $this->sanitizeValue($number);
+			$blurb = $this->sanitizeValue($blurb);
+			
+			$res = new Response_Obj();
+		
+			$sql = "UPDATE `users` SET `name` = '$name', `skills` = '$skills', `geoCoor` = '$geoCoor', `number` = '$number', `blurb` = '$blurb' WHERE `userId` = '$companyId'";
+
+			try {
+				$this->insertQuery($sql);		
+
+				$res->responseCode = 200;
+				$res->message = "Details updated successfully.";
+			}
+			catch(PDOException $e) {
+				$this->getDb()->rollback();
+				$res->responseCode = 400;
+				$res->message = "Error: " . $e->getMessage();
+			}
+
+			return $res;	
+		}
+
 		public function updateCompanyLogo($companyId, $logo) {
 			if($_POST['action'] != 'updateCompanyLogo') {
 				return "Invalid action supplied for updateCompanyLogo.";
@@ -191,7 +222,7 @@
 					$hash = $user['password'];
 
 					if(password_verify($password, $hash)) {
-						$_SESSION['company'] = array(
+						$_SESSION['user'] = array(
 							'id' => $user['companyId'],
 							'name' => $user['name'],
 							'email' => $user['email']
@@ -306,7 +337,7 @@
 				echo "Invalid action supplied for logoutCompany.";
 			}
 
-			$_SESSION['company'] = array(
+			$_SESSION['user'] = array(
 				'id' => '',
 				'name' => '',
 				'email' => ''
@@ -372,6 +403,54 @@
 				);
 			} else {
 				$res->message = 'No company found.';
+				$res->responseCode = 400;
+			}
+
+			return $res;
+		}
+
+		public function fetchUser($companyId) {
+			if($_POST['action'] != 'fetchUser') {
+				return "Invalid action supplied for fetchCompany.";
+			}
+
+			$companyId = $this->sanitizeValue($companyId);
+
+			$sql = "SELECT
+				`name`, `email`, `address`, `logo`, `geoCoor`, `number`, `blurb`,`skills` 
+				FROM `users`
+				WHERE `userId` = '$companyId'";
+
+			$user = $this->query($sql);
+
+			$sql = "SELECT
+				`id`, `offerName`, `requirements`, `expiryDate` 
+				FROM `offer`
+				WHERE `companyId` = '$companyId'
+				ORDER BY `expiryDate`";
+
+			$offers = $this->query($sql);
+			$expiredOffers = array();
+			
+			foreach($offers as $key => $value) {
+			    if($value["expiryDate"] < date('Y-m-d')) {
+			        $expiredOffers[] = $value;
+			        unset($offers[$key]);
+			    }
+			}
+			
+			$res = new Response_Obj();
+
+			if(!empty($user)) {
+				$res->message = 'Successful fetch.';
+				$res->responseCode = 200;
+				$res->data = array(
+					'user' => $user[0], 
+					'currentOffers' => array_values($offers), 
+					'expiredOffers' => array_values($expiredOffers)
+				);
+			} else {
+				$res->message = 'No user found.';
 				$res->responseCode = 400;
 			}
 
@@ -612,8 +691,6 @@
 
 		    return $res;
 		}
-
-
 
 		public function companyVerifyResetToken($email, $token) {
 			if($_POST['action'] != 'resetCompany') {

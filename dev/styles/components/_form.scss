@@ -19,23 +19,39 @@
 }
 
 .form__container{
-    border-radius: 5px;
     background-color: rgba(255,255,255,0.7);
-    width: 400px;
+    width: 500px;
+    -moz-border-radius: 70px;
+    -webkit-border-radius: 70px;
+    border-radius: 55px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%); 
-    box-shadow: 0em 0em 1.2em rgba(0, 0, 0, 0.25);
-
+    box-shadow: 0em 0em .5em rgba(0, 0, 0, 0.00);
+    
     &.wide{
         width: 1000px;
-        min-height: 500px;
+        min-height: 300px;
+    }
+}
+
+.form__containerdash{
+    background-color: rgba(248, 245, 245, 0.9);
+    width: 1000px;
+    margin: auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); 
+    box-shadow: 0em 0em .5em rgba(0, 0, 0, 0.00);
+    &.wide{
+        width: 1000px;
+        min-height: 300px;
     }
 }
 
 .form-logo{
     background-image: url('../../images/logo.ico');
-    height: 80px;
+    height: 170px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -72,12 +88,12 @@
 .form-input__section{
     margin: 0 auto;
     width: 90%;
-
+    
     input{
         margin: 0;
         margin-top: 8px;
     }
-
+    
     &.labelled{
         display: flex;
         padding: 10px;
@@ -94,7 +110,7 @@
 .form-input__value{
     color: $black;
     font-size: 1rem;
-    border: 0.5px solid $black;
+    border: 0.2px solid $black;
     border-radius: 2px;
     padding: 5px;
     width: 100%;
@@ -140,18 +156,18 @@
         position: relative;
         left: 0;
         transform: none;
-
+    
         &.wide{
             width: 100%;
             min-height: 670PX;
         }
     }
-
+    
     .form-body{
         margin-top: 20px;
         padding-bottom: 70px;
     }
-
+    
     .form-company-details__logo {
         padding: 20px 0 0 0;
         margin: auto;
@@ -162,7 +178,7 @@
             display: block;
         }
     }
-
+    
     .form-input__label{
         font-size: 1.1rem;
         margin-top: 0px;
