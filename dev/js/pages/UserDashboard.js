@@ -33,7 +33,7 @@ class UserDashboard extends Component {
 
         this.onClickNew = this.onClickNew.bind(this);
         this.onClickUpdate = this.onClickUpdate.bind(this);
-	    this.switchTab = this.switchTab.bind(this);
+	this.switchTab = this.switchTab.bind(this);
         this.createNewOffer = this.createNewOffer.bind(this);
         this.updateDetails = this.updateDetails.bind(this);
         this.updateGeoCoor = this.updateGeoCoor.bind(this);
@@ -84,11 +84,10 @@ class UserDashboard extends Component {
             }
         });
     }
+	
     onClickNew() {
-
         this.setState({newOffer: true});
     }
-
 
     updateDetails(name, value) {
         this.setState({[name]: value});
