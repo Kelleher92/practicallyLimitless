@@ -11,14 +11,12 @@ class AccountDashboardDetails extends Component {
             number:this.props.number,
             email: this.props.email,
         };
-
     }
 
     handleChange(name, e) {
         this.setState({[name]: e.target.value});
         this.props.updateDetails([name], e.target.value);
     }
-
     
     render() {
         return (
@@ -39,6 +37,7 @@ class AccountDashboardDetails extends Component {
                         <div className="form-input__label">E-mail Address</div>
                         <input type="email" placeholder="E-mail Address" className="form-input__value" value={this.state.email} readOnly/>
                     </div> 
+<<<<<<< HEAD
                    
                     <br></br>
                     <br></br>
@@ -47,7 +46,11 @@ class AccountDashboardDetails extends Component {
                     <button className="pl-button--style-2" onClick={this.onClickUpdate}>Delete Account</button>
                     
                     
+=======
+>>>>>>> 261a19bc22fbc007490176d1a5c69a5cc190c83a
 
+                    <button className="form__submit-button" onClick={this.onClickResetPassword}>Reset Password</button>
+                    <button className="form__submit-button" onClick={this.onClickUpdate}>Delete Account</button>                    
                 </div>
             </div>
         );

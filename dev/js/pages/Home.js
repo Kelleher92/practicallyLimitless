@@ -28,18 +28,14 @@ class Home extends Component {
                             <div className="home__step__icon pink"><i className="fas fa-hand-pointer"></i></div>
                             <div className="home__step__title">Select</div>
                             <div className="home__step__description">
-                                Choose the volunteering task that is right for you. Simply click Apply and then the charity will contact you if you are a match!
-                                <br/><br/>
-    
+                                Choose the volunteering task that is right for you. Simply click Apply and then the charity will contact you if you are a match!  
                             </div>
                         </div>
                         <div className="home__step">
                             <div className="home__step__icon orange"><i className="fas fa-hands-helping"></i></div>
                             <div className="home__step__title">Act</div>
                             <div className="home__step__description">
-                                Once you are accepted, you can complete your volunteering task as required.
-                                <br/><br/>
-             
+                                Once you are accepted, you can complete your volunteering task as required.            
                             </div>
                         </div>
                     </div>

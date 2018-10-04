@@ -450,7 +450,7 @@
 					'expiredOffers' => array_values($expiredOffers)
 				);
 			} else {
-				$res->message = 'No userfound.';
+				$res->message = 'No user found.';
 				$res->responseCode = 400;
 			}
 
@@ -691,8 +691,6 @@
 
 		    return $res;
 		}
-
-
 
 		public function companyVerifyResetToken($email, $token) {
 			if($_POST['action'] != 'resetCompany') {

@@ -17,6 +17,7 @@
     background-repeat: no-repeat;
     background-size: cover; 
 }
+
 .form__container{
     background-color: rgba(255,255,255,0.7);
     width: 500px;
@@ -27,11 +28,13 @@
     left: 50%;
     transform: translateX(-50%); 
     box-shadow: 0em 0em .5em rgba(0, 0, 0, 0.00);
+    
     &.wide{
         width: 1000px;
         min-height: 300px;
     }
 }
+
 .form__containerdash{
     background-color: rgba(248, 245, 245, 0.9);
     width: 1000px;
@@ -45,6 +48,7 @@
         min-height: 300px;
     }
 }
+
 .form-logo{
     background-image: url('../../images/logo.ico');
     height: 170px;
@@ -54,11 +58,13 @@
     margin-top: 30px;
     margin-bottom: 20px;
 }
+
 .form-header{
     font-size: 30px;
     color: $black;
     text-align: center;
 }
+
 .form-body{
     padding: 10px;
     width: 100%;
@@ -69,31 +75,38 @@
     justify-content: space-around;
     align-items: center;
 }
+
 .form-company-details__logo{
     padding: 30px 0 0 40px; 
 }
+
 .form-input__heading{
     font-size: 25px;
     color: $white;
 }
+
 .form-input__section{
     margin: 0 auto;
     width: 90%;
+    
     input{
         margin: 0;
         margin-top: 8px;
     }
+    
     &.labelled{
         display: flex;
         padding: 10px;
     }
 }
+
 .form-input__label{
     font-size: 1.25rem;
     width: 250px;
     text-align: left;
     margin-top: 8px;
 }
+
 .form-input__value{
     color: $black;
     font-size: 1rem;
@@ -102,6 +115,7 @@
     padding: 5px;
     width: 100%;
 }
+
 .form-submission__section{
     padding-top: 20px;
     width: 100%;
@@ -109,6 +123,7 @@
     display: flex;
     flex-direction: column;
 }
+
 .form__submit-button{
     width: 250px; 
     height: 40px;  
@@ -119,6 +134,7 @@
     margin: auto;
     cursor: pointer;
 }
+
 .form__submit-link{
     background: none;
     color: $black;
@@ -126,11 +142,13 @@
     margin: auto;
     cursor: pointer;
 }
+
 @media (max-width: $mobile-break-point){
     .form__submit-button{
         width: 105px; 
         height: 50px;  
     }
+
     .form__container{
         width: 100%;
         height: 100%;
@@ -138,15 +156,18 @@
         position: relative;
         left: 0;
         transform: none;
+    
         &.wide{
             width: 100%;
             min-height: 670PX;
         }
     }
+    
     .form-body{
         margin-top: 20px;
         padding-bottom: 70px;
     }
+    
     .form-company-details__logo {
         padding: 20px 0 0 0;
         margin: auto;
@@ -157,6 +178,7 @@
             display: block;
         }
     }
+    
     .form-input__label{
         font-size: 1.1rem;
         margin-top: 0px;
