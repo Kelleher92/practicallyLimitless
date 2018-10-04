@@ -42,9 +42,9 @@ class AccountDashboardDetails extends Component {
                    
                     <br></br>
                     <br></br>
-                    <button className="form__submit-button" onClick={this.onClickResetPassword}>Reset Password</button>
+                    <button className="pl-button--style-2" onClick={this.onClickResetPassword}>Reset Password</button>
                     <br></br>
-                    <button className="form__submit-button" onClick={this.onClickUpdate}>Delete Account</button>
+                    <button className="pl-button--style-2" onClick={this.onClickUpdate}>Delete Account</button>
                     
                     
 

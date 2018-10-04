@@ -188,17 +188,17 @@ class Dashboard extends Component {
 
     render() {
         return (
-            <div className="contain">               
+            <div className="contain dashboard">               
                 <Header isLoggedIn={this.props.isLoggedIn} setLoggedOut={this.props.setLoggedOut} includeShadow={false}/>
                 <div className="home-contain justify-content-center">
                     <div className="form__wrap">
                     {this.state.checkComplete ? (
                         <div className="form__container wide">
                             <div className="dashboard__tab-container d-flex">
-                                <div className={"dashboard__tab " + (this.state.tab === 0 ? 'selected' : 'unselected')} onClick={() => this.switchTab(0)}>Organisation Details</div>
-                                <div className={"dashboard__tab " + (this.state.tab === 1 ? 'selected' : 'unselected')} onClick={() => this.switchTab(1)}>Location</div>
-                                <div className={"dashboard__tab " + (this.state.tab === 2 ? 'selected' : 'unselected')} onClick={() => this.switchTab(2)}>Tasks</div>
-                                {this.state.tab !== 2 ? (<div className="dashboard__update"><button className="form__submit-button" onClick={this.onClickUpdate}>Update</button></div>) : (<div></div>)}
+                                <div className={"dashboard__tab " + (this.state.tab === 0 ? 'selected' : 'unselected')} onClick={() => this.switchTab(0)}>Profile</div>
+                                <div className={"dashboard__tab " + (this.state.tab === 1 ? 'selected' : 'unselected')} onClick={() => this.switchTab(1)}>Account Settings</div>
+                                <div className={"dashboard__tab " + (this.state.tab === 2 ? 'selected' : 'unselected')} onClick={() => this.switchTab(2)}>Opportunity</div>
+                                {this.state.tab !== 2 ? (<div className="dashboard__update"><button className="pl-button--style-2" onClick={this.onClickUpdate}>Update</button></div>) : (<div></div>)}
                             </div>
                                 {this.state.tab === 0 ? (
                                     <DashboardDetails  token={this.props.token} 

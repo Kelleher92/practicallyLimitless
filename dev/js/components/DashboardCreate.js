@@ -43,7 +43,7 @@ class DashboardCreate extends Component {
                     <input type="date" placeholder="Valid Until" className="form-input__value" value={this.state.offerExpiry} onChange={(e) => this.handleChange("offerExpiry", e)} />
                 </div>
                 <div className="form-input__section">
-                    <button className="form__submit-button" onClick={this.onClickCreate}>Create</button>
+                    <button className="pl-button--style-2" onClick={this.onClickCreate}>Create</button>
                 </div>
             </div>
         );
