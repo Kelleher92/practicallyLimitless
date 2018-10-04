@@ -50,7 +50,6 @@ class DashboardDetails extends Component {
                         <div className="form-input__label">About</div>
                         <textarea rows="5" placeholder="Let volunteers know what you're all about" className="form-input__value" value={this.state.blurb} onChange={(e) => this.handleChange("blurb", e)}></textarea>
                     </div>
-                    
                 </div>
             </div>
         );
