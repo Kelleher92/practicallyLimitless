@@ -8,7 +8,7 @@ class UserDashboardDetails extends Component {
         this.state = {
             companyId: this.props.companyId,
             name: this.props.name,
-            email: this.props.email,
+            skills: this.props.skills,
             blurb: this.props.blurb
         };
     }
@@ -31,15 +31,10 @@ class UserDashboardDetails extends Component {
                     <div className="form-input__section labelled">
                         <div className="form-input__label">Name</div>
                         <input type="text" placeholder="Name" className="form-input__value" value={this.state.name} onChange={(e) => this.handleChange("name", e)}/>
-                    </div>
-              
-                    <div className="form-input__section labelled">
-                        <div className="form-input__label">E-mail Address</div>
-                        <input type="email" placeholder="E-mail Address" className="form-input__value" value={this.state.email} readOnly/>
-                    </div>     
+                    </div>   
                     <div className="form-input__section labelled">
                         <div className="form-input__label">Skills</div>
-                        <input type="text" placeholder="Skills" className="form-input__value" />
+                        <input type="text" placeholder="Skills" className="form-input__value" value={this.state.skills} onChange={(e) => this.handleChange("skills", e)}/>
                     </div>   
                     <div className="form-input__section labelled">
                         <div className="form-input__label">About Me</div>

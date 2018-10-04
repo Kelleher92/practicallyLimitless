@@ -131,6 +131,37 @@
 			return $res;	
 		}
 
+		public function updateUser($companyId, $name, $skills, $geoCoor, $number, $blurb) {
+			if($_POST['action'] != 'updateUser') {
+				return "Invalid action supplied for updateUser.";
+			}
+
+			$companyId = $this->sanitizeValue($companyId);
+			$name = $this->sanitizeValue($name);
+			$skills = $this->sanitizeValue($skills);
+			$geoCoor = $this->sanitizeValue($geoCoor);
+			$number = $this->sanitizeValue($number);
+			$blurb = $this->sanitizeValue($blurb);
+			
+			$res = new Response_Obj();
+		
+			$sql = "UPDATE `users` SET `name` = '$name', `skills` = '$skills', `geoCoor` = '$geoCoor', `number` = '$number', `blurb` = '$blurb' WHERE `userId` = '$companyId'";
+
+			try {
+				$this->insertQuery($sql);		
+
+				$res->responseCode = 200;
+				$res->message = "Details updated successfully.";
+			}
+			catch(PDOException $e) {
+				$this->getDb()->rollback();
+				$res->responseCode = 400;
+				$res->message = "Error: " . $e->getMessage();
+			}
+
+			return $res;	
+		}
+
 		public function updateCompanyLogo($companyId, $logo) {
 			if($_POST['action'] != 'updateCompanyLogo') {
 				return "Invalid action supplied for updateCompanyLogo.";
@@ -386,7 +417,7 @@
 			$companyId = $this->sanitizeValue($companyId);
 
 			$sql = "SELECT
-				`name`, `email`, `address`, `logo`, `geoCoor`, `number`, `blurb` 
+				`name`, `email`, `address`, `logo`, `geoCoor`, `number`, `blurb`,`skills` 
 				FROM `users`
 				WHERE `userId` = '$companyId'";
 

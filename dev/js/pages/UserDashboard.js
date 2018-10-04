@@ -18,11 +18,11 @@ class UserDashboard extends Component {
             checkComplete: false,
             name: '',
             email: '',
-            address: '',
             number: '',
             blurb: '',
             logo: '',
             geoCoor: '',
+            skills: '',
             offerName: '',
             offerExpiry: '',
             currentOffers: [],
@@ -37,7 +37,7 @@ class UserDashboard extends Component {
         this.createNewOffer = this.createNewOffer.bind(this);
         this.updateDetails = this.updateDetails.bind(this);
         this.updateGeoCoor = this.updateGeoCoor.bind(this);
-        this.updateAddress = this.updateAddress.bind(this);
+        this.updateSkills = this.updateSkills.bind(this);
         this.handleUpdateLogo = this.handleUpdateLogo.bind(this);
     }
 
@@ -59,11 +59,11 @@ class UserDashboard extends Component {
                         me.setState({
                             name: res.data.user.name,
                             email: res.data.user.email,
-                            address: res.data.user.address,
                             logo: res.data.user.logo,
                             number: res.data.user.number,
                             blurb: res.data.user.blurb,
                             geoCoor: res.data.user.geoCoor,
+                            skills: res.data.user.skills,
                             currentOffers: res.data.currentOffers,
                             expiredOffers: res.data.expiredOffers,
                             checkComplete: true
@@ -85,8 +85,10 @@ class UserDashboard extends Component {
         });
     }
     onClickNew() {
+
         this.setState({newOffer: true});
     }
+
 
     updateDetails(name, value) {
         this.setState({[name]: value});
@@ -96,8 +98,8 @@ class UserDashboard extends Component {
         this.setState({geoCoor: newCoor});
     }
 
-    updateAddress(newAddress) {
-        this.setState({address: newAddress});
+    updateSkills(newSkills) {
+        this.setState({skills: newSkills});
     }
 
     handleChange(name, e) {
@@ -143,7 +145,7 @@ class UserDashboard extends Component {
     }
 
     isSubmitable() {
-        return isValidString(this.state.name) && isValidString(this.state.address) && isValidString(this.state.geoCoor);
+        return isValidString(this.state.name)  && isValidString(this.state.geoCoor);
     }
 
     onClickUpdate() {
@@ -154,12 +156,13 @@ class UserDashboard extends Component {
                 method: 'POST',
                 data: {
                     token: this.props.token,
-                    action: 'updateCompany',
-                    data: JSON.stringify({companyId: this.props.companyId, name: this.state.name, address: this.state.address, geoCoor: this.state.geoCoor, number: this.state.number, blurb: this.state.blurb})
+                    action: 'updateUser',
+                    data: JSON.stringify({companyId: this.props.companyId, name: this.state.name, skills: this.state.skills, geoCoor: this.state.geoCoor, number: this.state.number, blurb: this.state.blurb})
                 },
                 url: 'public/process.php',
                 success: function(res) {
                     setTimeout(function() { 
+                        console.log(res);
                         res = JSON.parse(res);
 
                         if(res.responseCode === 200) {
@@ -203,8 +206,7 @@ class UserDashboard extends Component {
                                     <UserDashboardDetails  token={this.props.token} 
                                                        companyId={this.props.companyId} 
                                                        name={this.state.name} 
-                                                       address={this.state.address} 
-                                                       number={this.state.number} 
+                                                       skills={this.state.skills}
                                                        blurb={this.state.blurb} 
                                                        email={this.state.email}
                                                        logo={this.state.logo} 
@@ -216,7 +218,6 @@ class UserDashboard extends Component {
                                     <AccountDashboardDetails  token={this.props.token} 
                                                        companyId={this.props.companyId} 
                                                        name={this.state.name} 
-                                                       address={this.state.address} 
                                                        number={this.state.number} 
                                                        blurb={this.state.blurb} 
                                                        email={this.state.email}

@@ -97,7 +97,7 @@ class UserForgotPassword extends Component {
                 ) : (
                     <div className="form__container">
                         <div className="form-logo"></div>
-                        <div className="form-header">Forgot Password</div>
+                        <div className="form-header">Reset Password</div>
                         <div className="form-body">
                             <div className="form-input__section">
                                 <input type="text" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)} onKeyPress={this.handleKeyPress} autoFocus />

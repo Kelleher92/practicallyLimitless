@@ -48,6 +48,13 @@
 			echo json_encode($res);
 		} 
 
+		else if($action === 'updateUser') {
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->updateUser($data->companyId, $data->name, $data->skills, $data->geoCoor, $data->number, $data->blurb);
+			echo json_encode($res);
+		} 
+
 		else if($action === 'loginCompany') {
 			$data = json_decode($_POST['data']);
 			$admin = new Admin();
