@@ -37,7 +37,8 @@ class AccountDashboardDetails extends Component {
                         <div className="form-input__label">E-mail Address</div>
                         <input type="email" placeholder="E-mail Address" className="form-input__value" value={this.state.email} readOnly/>
                     </div> 
-
+                    <button className="pl-button--style-2" onClick={this.onClickResetPassword}>Reset Password</button>
+                    <button className="pl-button--style-2" onClick={this.onClickUpdate}>Delete Account</button>              
                     <button className="form__submit-button" onClick={this.onClickResetPassword}>Reset Password</button>
                     <button className="form__submit-button" onClick={this.onClickUpdate}>Delete Account</button>                    
                 </div>
