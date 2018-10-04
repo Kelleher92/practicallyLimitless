@@ -9,7 +9,7 @@
 	    <meta charset="utf-8">
 	    <meta name="theme-color" content="#1d263b">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
-	    <title>Limitless</title>
+	    <title>Limitless Volunteering</title>
 	    <link rel="icon" href="public/images/logo.ico">
 	    <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
