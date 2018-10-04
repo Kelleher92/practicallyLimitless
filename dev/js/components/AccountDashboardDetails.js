@@ -37,7 +37,8 @@ class AccountDashboardDetails extends Component {
                         <div className="form-input__label">E-mail Address</div>
                         <input type="email" placeholder="E-mail Address" className="form-input__value" value={this.state.email} readOnly/>
                     </div> 
-                    <button className="form__submit-button" onClick={this.onClickUpdate}>Update</button>
+                    
+                    <br></br>
                     <br></br>
                     <br></br>
                         

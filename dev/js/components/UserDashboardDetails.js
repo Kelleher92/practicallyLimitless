@@ -45,7 +45,7 @@ class UserDashboardDetails extends Component {
                         <div className="form-input__label">About Me</div>
                         <textarea rows="5" placeholder="Let charities know your unique interests and skills." className="form-input__value" value={this.state.blurb} onChange={(e) => this.handleChange("blurb", e)}></textarea>
                     </div>
-                    <button className="form__submit-button" onClick={this.onClickUpdate}>Update</button>
+                    
                     
                     
 
