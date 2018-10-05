@@ -808,7 +808,6 @@
 			return $res;
 		}
 
-
 		private function generateVefificationLink($email, $token) {
 			if(!$email || !$token) {
 				throw new Exception('missing key info');
