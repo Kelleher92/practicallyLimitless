@@ -9,8 +9,6 @@ import UserDashboardTable from '../components/UserDashboardTable';
 import UserDashboardDetails from '../components/UserDashboardDetails';
 import AccountDashboardDetails from '../components/AccountDashboardDetails';
 
-
-
 class UserDashboard extends Component {
 	constructor(props) {
         super(props);
@@ -102,7 +100,6 @@ class UserDashboard extends Component {
     handleChange(name, e) {
         this.setState({[name]: e.target.value});
     }
-   
 
     switchTab(index) {
         this.setState({tab: index, newOffer: false});
