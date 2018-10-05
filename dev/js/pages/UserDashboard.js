@@ -5,10 +5,9 @@ import $ from 'jquery';
 import PreLoader from '../components/PreLoader';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import DashboardTable from '../components/DashboardTable';
+import UserDashboardTable from '../components/UserDashboardTable';
 import UserDashboardDetails from '../components/UserDashboardDetails';
 import AccountDashboardDetails from '../components/AccountDashboardDetails';
-import DashboardCreate from '../components/DashboardCreate';
 
 class UserDashboard extends Component {
 	constructor(props) {
@@ -26,7 +25,6 @@ class UserDashboard extends Component {
             offerName: '',
             offerExpiry: '',
             currentOffers: [],
-            expiredOffers: [],
             tab: 0,
             newOffer: false
         }
@@ -34,7 +32,6 @@ class UserDashboard extends Component {
         this.onClickNew = this.onClickNew.bind(this);
         this.onClickUpdate = this.onClickUpdate.bind(this);
 	this.switchTab = this.switchTab.bind(this);
-        this.createNewOffer = this.createNewOffer.bind(this);
         this.updateDetails = this.updateDetails.bind(this);
         this.updateGeoCoor = this.updateGeoCoor.bind(this);
         this.updateSkills = this.updateSkills.bind(this);
@@ -65,7 +62,6 @@ class UserDashboard extends Component {
                             geoCoor: res.data.user.geoCoor,
                             skills: res.data.user.skills,
                             currentOffers: res.data.currentOffers,
-                            expiredOffers: res.data.expiredOffers,
                             checkComplete: true
                         });
                     } else {
@@ -104,40 +100,6 @@ class UserDashboard extends Component {
     handleChange(name, e) {
         this.setState({[name]: e.target.value});
     }
-   
-    createNewOffer(name, requirements, expiry) {
-        let me = this;
-
-        $.ajax({
-            method: 'POST',
-            data: {
-                token: this.props.token,
-                action: 'insertOffer',
-                data: JSON.stringify({companyId: this.props.companyId, name: name, requirements: requirements, expiry: expiry})
-            },
-            url: 'public/process.php',
-            success: function(res) {
-                res = JSON.parse(res);
-
-                if(res.responseCode === 200) {
-                    me.props.showFlashNotification(res.message);
-                } else {
-                    me.props.showFlashNotification(res.message);
-                }
-            },
-            error: function(res) {
-
-            }
-        });
-        this.setState({
-            currentOffers: [...this.state.currentOffers, {
-                id: this.state.currentOffers.length + this.state.expiredOffers.length, 
-                offerName: name, 
-                requirements: requirements,
-                expiryDate: expiry}],
-            offerName: "", requirements: "", offerExpiry: ""
-        })
-    } 
 
     switchTab(index) {
         this.setState({tab: index, newOffer: false});
@@ -198,7 +160,7 @@ class UserDashboard extends Component {
                             <div className="dashboard__tab-container d-flex">
                                 <div className={"dashboard__tab " + (this.state.tab === 0 ? 'selected' : 'unselected')} onClick={() => this.switchTab(0)}>Profile</div>
                                 <div className={"dashboard__tab " + (this.state.tab === 1 ? 'selected' : 'unselected')} onClick={() => this.switchTab(1)}>Account Settings</div>
-                                <div className={"dashboard__tab " + (this.state.tab === 2 ? 'selected' : 'unselected')} onClick={() => this.switchTab(2)}>Opportunities</div>
+                                <div className={"dashboard__tab " + (this.state.tab === 2 ? 'selected' : 'unselected')} onClick={() => this.switchTab(2)}>Current Opportunities</div>
                                 {this.state.tab !== 2 ? (<div className="dashboard__update"><button className="form__submit-button" onClick={this.onClickUpdate}>Update</button></div>) : (<div></div>)}
                             </div>
                                 {this.state.tab === 0 ? (
@@ -225,10 +187,8 @@ class UserDashboard extends Component {
                                                        updateDetails={this.updateDetails}
                                                        showFlashNotification={this.props.showFlashNotification} />
                                     ) : (
-                                this.state.newOffer ? (
-                                    <DashboardCreate createNewOffer={this.createNewOffer} />
-                                ) : (
-                                    <DashboardTable active={this.state.currentOffers} expired={this.state.expiredOffers} onClickNew={this.onClickNew} />
+                                (
+                                    <UserDashboardTable active={this.state.currentOffers} onClickNew={this.onClickNew} />
                                     ))
                                 )}
                         </div>

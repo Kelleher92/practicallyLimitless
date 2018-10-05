@@ -1,5 +1,4 @@
 <?php
-
 	class Admin extends DB_Connect{
 		private $ROOT = null;
 		private $_expirationPeriod = 3;
@@ -426,7 +425,6 @@
 			$sql = "SELECT
 				`id`, `offerName`, `requirements`, `expiryDate` 
 				FROM `offer`
-				WHERE `companyId` = '$companyId'
 				ORDER BY `expiryDate`";
 
 			$offers = $this->query($sql);
@@ -447,7 +445,6 @@
 				$res->data = array(
 					'user' => $user[0], 
 					'currentOffers' => array_values($offers), 
-					'expiredOffers' => array_values($expiredOffers)
 				);
 			} else {
 				$res->message = 'No user found.';
@@ -770,6 +767,45 @@
 			$user = $this->query($sql);
 
 			return empty($user) ? null : $user[0];
+		}
+
+		public function fetchUserForDelete($companyId) {
+			if(!isset($companyId)) {
+				exit('Invalid request');
+			}
+
+			$sql = "SELECT
+				`id`, `email`
+				FROM `users`
+				WHERE `userId` = '$companyId'
+				LIMIT 1";
+
+			$user = $this->query($sql);
+
+			return empty($user) ? null : $user[0];
+		}
+
+		public function deleteUser($companyId){
+			if($_POST['action'] != 'deleteUser') {
+				return "Invalid action supplied for deleteUser.";
+			}			
+
+			$companyId = $this->sanitizeValue($companyId);
+			$user = $this->fetchUserForDelete($companyId);
+
+			if(!isset($user)) {
+				$res->message = 'User or token invalid.';
+				$res->responseCode = 400;
+			} else {
+				$sql = $sql = "DELETE 
+				FROM `users`
+				WHERE `userId` = '$companyId'";
+				$this->insertQuery($sql);
+				$res->message = 'User and token valid.';
+				$res->responseCode = 200;
+			}
+
+			return $res;
 		}
 
 		private function generateVefificationLink($email, $token) {

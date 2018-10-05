@@ -20,6 +20,7 @@ class UserRegistration extends Component {
         };
 
         this.onClickLogin = this.onClickLogin.bind(this);
+        this.onClickLogo = this.onClickLogo.bind(this);
         this.onClickSubmit = this.onClickSubmit.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.authenticationModel = new AuthenticationModel();
@@ -27,6 +28,11 @@ class UserRegistration extends Component {
 
     handleChange(name, e) {
         this.setState({[name]: e.target.value});
+    }
+    
+    onClickLogo() {
+        let { history } = this.props;
+        history.push('/home');
     }
    
     onClickLogin() {
@@ -116,7 +122,7 @@ class UserRegistration extends Component {
                     )
                 ) : (
                     <div className="form__container">
-                        <div className="form-logo"></div>
+                        <div className="form-logo" onClick={this.onClickLogo}></div>
                         <div className="form-header"></div>
                         <div className="form-body">
                             <div className="form-input__section">

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import CompanyLogo from './CompanyLogo';
+import { Link, withRouter } from 'react-router-dom';
+import { isValidString } from '../helpers/utils.js';
 
 class AccountDashboardDetails extends Component {
     constructor(props) {
@@ -11,14 +13,60 @@ class AccountDashboardDetails extends Component {
             number:this.props.number,
             email: this.props.email,
         };
-    }
 
+        this.onClickDelete = this.onClickDelete.bind(this);
+    }
+   
     handleChange(name, e) {
         this.setState({[name]: e.target.value});
         this.props.updateDetails([name], e.target.value);
     }
-    
+
+    isSubmitable() {
+        return isValidString(this.state.name);
+    }
+
+    onClickDelete() {
+        if(this.isSubmitable()) {
+            let me = this;
+            
+            $.ajax({
+                method: 'POST',
+                data: {
+                    token: this.props.token,
+                    action: 'deleteUser',
+                    data: JSON.stringify({companyId: this.props.companyId})
+                },
+                url: 'public/process.php',
+                success: function(res) {
+                    setTimeout(function() { 
+                        res = JSON.parse(res);
+
+                        if(res.responseCode === 200) {
+                            me.props.showFlashNotification(res.message);
+                        } else {
+                            me.props.showFlashNotification(res.message);
+                        }
+                    }, 1000);
+                },
+                error: function(res) {
+                    setTimeout(function() { 
+                        me.props.showFlashNotification(res.message);
+                    }, 1000);
+                }
+            });
+        }
+        else {
+            this.props.showFlashNotification('Deletion of information failed, please try again.');
+        }
+    }
+
     render() {
+        let resetButton = null;
+        let deleteButton = null;
+        resetButton = <Link to="/user-forgot-password"><button className="pl-button--style-2">Reset Password</button></Link>;
+        deleteButton = <Link to="/"><button className="pl-button--style-2" onClick={this.onClickDelete}>Delete Account</button></Link>;
+
         return (
             <div className="d-flex flex-column flex-md-row">
                 <div className="form-company-details__logo">
@@ -35,12 +83,16 @@ class AccountDashboardDetails extends Component {
               
                     <div className="form-input__section labelled">
                         <div className="form-input__label">E-mail Address</div>
-                        <input type="email" placeholder="E-mail Address" className="form-input__value" value={this.state.email} readOnly/>
-                    </div> 
-                    <button className="pl-button--style-2" onClick={this.onClickResetPassword}>Reset Password</button>
-                    <button className="pl-button--style-2" onClick={this.onClickUpdate}>Delete Account</button>              
-                    <button className="form__submit-button" onClick={this.onClickResetPassword}>Reset Password</button>
-                    <button className="form__submit-button" onClick={this.onClickUpdate}>Delete Account</button>                    
+                        <input type="email" placeholder="E-mail Address" className="form-input__value" value={this.state.email} readOnly/>                   
+                    </div>
+
+                    <div> 
+                        {resetButton}
+                    </div>
+                     
+                    <div>
+                        {deleteButton}             
+                    </div>              
                 </div>
             </div>
         );

@@ -170,6 +170,13 @@
 			echo json_encode($res);
 		} 
 
+		else if($action === 'deleteUser') {
+			$data = json_decode($_POST['data']);
+			$admin = new Admin();
+			$res = $admin->deleteUser($data->companyId);
+			echo json_encode($res);
+		} 
+
 		else {
 			throw new Exception('Invalid request');
 		}

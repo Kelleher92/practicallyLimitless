@@ -23,6 +23,7 @@ class CompanyRegistration extends Component {
 
         this.onClickLogin = this.onClickLogin.bind(this);
         this.onClickSubmit = this.onClickSubmit.bind(this);
+        this.onClickLogo = this.onClickLogo.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.authenticationModel = new AuthenticationModel();
         this.onCompanyAddressChosen = this.onCompanyAddressChosen.bind(this);
@@ -31,6 +32,11 @@ class CompanyRegistration extends Component {
 
     handleChange(name, e) {
         this.setState({[name]: e.target.value});
+    }
+
+    onClickLogo() {
+        let { history } = this.props;
+        history.push('/home');
     }
    
     onClickLogin() {
@@ -135,7 +141,7 @@ class CompanyRegistration extends Component {
                     )
                 ) : (
                     <div className="form__container">
-                        <div className="form-logo"></div>
+                        <div className="form-logo" onClick={this.onClickLogo}></div>
                         <div className="form-header"></div>
                         <div className="form-body">
                             <div className="form-input__section">
