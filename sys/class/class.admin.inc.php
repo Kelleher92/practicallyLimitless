@@ -796,7 +796,7 @@
 			if(!isset($user)) {
 				$res->message = 'User or token invalid.';
 				$res->responseCode = 400;
-			}else {
+			} else {
 				$sql = $sql = "DELETE 
 				FROM `users`
 				WHERE `userId` = '$companyId'";
