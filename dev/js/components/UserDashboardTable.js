@@ -25,19 +25,13 @@ class UserDashboardTable extends Component {
     render() {
         return (
             <div className="form-body">
-
                 <div className="form-input__section">
-
-
                  <div className="form-input__section labelled">
                         <div className="form-input__label">Search</div>
                         <input type="text" placeholder="Enter Search Value" className="form-input__value" value='' />
                         <button className="pl-button--style-2" >Search</button>  
                     </div>
-
-
-
-
+            
                     <table className="table table-sm">
                         <thead>
                             <tr>
