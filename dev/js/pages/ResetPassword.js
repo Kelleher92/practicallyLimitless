@@ -22,6 +22,7 @@ class ResetPassword extends Component {
         };
 
         this.onClickSubmit = this.onClickSubmit.bind(this);
+        this.onClickLogo = this.onClickLogo.bind(this);
         this.isPasswordConfirmValid = this.isPasswordConfirmValid.bind(this);
         this.isSubmitable = this.isSubmitable.bind(this);
     }
@@ -36,6 +37,11 @@ class ResetPassword extends Component {
 
     isSubmitable() {
         return isValidPassword(this.state.password) && this.isPasswordConfirmValid();
+    }
+
+    onClickLogo() {
+        let { history } = this.props;
+        history.push('/home');
     }
 
     onClickSubmit() {
@@ -105,7 +111,7 @@ class ResetPassword extends Component {
                     )
                 ) : (
                     <div className="form__container">
-                        <div className="form-logo"></div>
+                        <div className="form-logo" onClick={this.onClickLogo}></div>
                         <div className="form-header">Set New Password</div>
                         <div className="form-body">
                             <div className="form-input__section">

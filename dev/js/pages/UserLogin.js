@@ -12,6 +12,7 @@ class UserLogin extends Component {
         };
         
         this.onClickSubmit = this.onClickSubmit.bind(this);
+        this.onClickLogo = this.onClickLogo.bind(this);
         this.onClickForgotPassword = this.onClickForgotPassword.bind(this);
         this.onClickSignup = this.onClickSignup.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -19,6 +20,11 @@ class UserLogin extends Component {
 
     handleChange(name, e) {
         this.setState({[name]: e.target.value});
+    }
+    
+    onClickLogo() {
+        let { history } = this.props;
+        history.push('/home');
     }
 
     onClickSubmit() { 
@@ -60,7 +66,7 @@ class UserLogin extends Component {
         return (
             <div className="form__wrap">
                 <div className="form__container">
-                    <div className="form-logo"></div>
+                    <div className="form-logo" onClick={this.onClickLogo}></div>
                     <div className="form-header"></div>
                     <div className="form-body">
                     <div className="form-input__section">
