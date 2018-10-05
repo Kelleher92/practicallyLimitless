@@ -1,5 +1,4 @@
 <?php
-
 	class Admin extends DB_Connect{
 		private $ROOT = null;
 		private $_expirationPeriod = 3;
