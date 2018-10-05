@@ -1,5 +1,4 @@
 <?php
-
 	class Admin extends DB_Connect{
 		private $ROOT = null;
 		private $_expirationPeriod = 3;
@@ -797,7 +796,7 @@
 			if(!isset($user)) {
 				$res->message = 'User or token invalid.';
 				$res->responseCode = 400;
-			}else {
+			} else {
 				$sql = $sql = "DELETE 
 				FROM `users`
 				WHERE `userId` = '$companyId'";
@@ -808,7 +807,6 @@
 
 			return $res;
 		}
-
 
 		private function generateVefificationLink($email, $token) {
 			if(!$email || !$token) {
