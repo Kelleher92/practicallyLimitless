@@ -3,23 +3,26 @@
 }
 
 .home__section--title{
-    width: 200px;
-    margin: 10px auto;
-    padding: 5px 0;
+    width: 400px;
+    margin: auto;
+    padding: 15px 0;
     text-align: center;
     position: relative;
     height: max-content;
-    font-size: 2rem;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
     color: $green;
+    font-style: italic;
+    letter-spacing: 5px;
 }
   
 .home__section--title::before{
     content: '';
     position: absolute;
-    width: 40px;
+    width: 50px;
     height: 2px;
-    background-color: grey;
-    left: calc(50% - 20px);
+    background-color: $green;
+    left: calc(50% - 25px);
     bottom: 0px;
 }
 
@@ -32,18 +35,20 @@
 }
 
 .home__step{
-    width: 30.5%;
+    width: 300px;
+    height: 300px;
     background-color: $white;
-    opacity: 0.6;
-    box-shadow: 0em 0em 0.25em rgba(0,0,0,0.25);
-    -moz-border-radius: 200px;
-    -webkit-border-radius: 200px;
-    border-radius: 240px;
+    opacity: 0.75;
+    box-shadow: 0em 0em 0.25em $green;
+    -moz-border-radius: 150px;
+    -webkit-border-radius: 150px;
+    border-radius: 150px;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 70px 10px 10px 10px;
+    padding: 40px 10px;
+    margin-top: 50px;
 }
 
 .home__step__title{
@@ -83,14 +88,7 @@
         margin: 20px auto 0 auto;
     }
 
-    .home__step__title{
-        padding: 10px 0;
-        font-size: 1.3rem;
+    .home__section--title{
+        width: 100vw;
     }
-
-    .home__step{
-        width: 80%;
-        margin-top: 60px;
-        padding: 60px 10px 10px 10px;
-    }    
 }
