@@ -119,6 +119,10 @@ a:hover{
     padding: 0 10px;
     cursor: pointer;
     margin: 0 5px;
+
+    &.search{
+        8px 8px 0;
+    }
 }
 
 .pl-button--style-4{

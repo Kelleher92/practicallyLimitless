@@ -156,7 +156,7 @@ class UserDashboard extends Component {
                 <div className="home-contain justify-content-center">
                     <div className="form__wrap">
                     {this.state.checkComplete ? (
-                        <div className="form__containerdash wide">
+                        <div className="form__container dash wide">
                             <div className="dashboard__tab-container d-flex">
                                 <div className={"dashboard__tab " + (this.state.tab === 0 ? 'selected' : 'unselected')} onClick={() => this.switchTab(0)}>Profile</div>
                                 <div className={"dashboard__tab " + (this.state.tab === 1 ? 'selected' : 'unselected')} onClick={() => this.switchTab(1)}>Account Settings</div>

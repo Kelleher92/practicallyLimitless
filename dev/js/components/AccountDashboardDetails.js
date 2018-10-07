@@ -86,12 +86,13 @@ class AccountDashboardDetails extends Component {
                         <input type="email" placeholder="E-mail Address" className="form-input__value" value={this.state.email} readOnly/>                   
                     </div>
 
-                    <div> 
-                        {resetButton}
-                    </div>
-                     
-                    <div>
-                        {deleteButton}             
+                    <div className="d-flex">
+                        <div> 
+                            {resetButton}
+                        </div>
+                        <div>
+                            {deleteButton}             
+                        </div>              
                     </div>              
                 </div>
             </div>

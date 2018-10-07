@@ -29,7 +29,7 @@ class UserDashboardTable extends Component {
                  <div className="form-input__section labelled">
                         <div className="form-input__label">Search</div>
                         <input type="text" placeholder="Enter Search Value" className="form-input__value" value='' />
-                        <button className="pl-button--style-2" >Search</button>  
+                        <button className="pl-button--style-2 search">Search</button>  
                     </div>
             
                     <table className="table table-sm">

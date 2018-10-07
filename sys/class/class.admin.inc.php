@@ -330,7 +330,6 @@
 			return $res;
 		}
 
-
 		public function logoutCompany() {
 			if($_POST['action'] != 'logoutCompany') {
 				echo "Invalid action supplied for logoutCompany.";
@@ -344,7 +343,6 @@
 
 			echo 'Log out complete.';
 		}
-
 
 		public function logoutUser() {
 			if($_POST['action'] != 'logoutUser') {
@@ -510,7 +508,6 @@
 			return $res;
 		}
 
-
 		public function activateUser($email, $token) {
 			if($_POST['action'] != 'activateUser') {
 				return "Invalid action supplied for activateUser.";
@@ -534,8 +531,6 @@
 
 			return $res;
 		}
-
-		
 
 		public function uploadCompanyLogo($companyId, $image, $imageName) {
 			$companyId = $this->sanitizeValue($companyId);

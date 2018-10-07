@@ -31,7 +31,7 @@ class Header extends Component {
         if(!this.props.isLoggedIn) return <div className="header__nav__container" />;
         return (
             <div className="header__nav__container">
-                <Link to="/dashboard"><div className="header__nav__item">Dashboard</div></Link>
+                {/*<Link to="/dashboard"><div className="header__nav__item">Dashboard</div></Link>*/}
             </div>
         );
     }
@@ -57,7 +57,7 @@ class Header extends Component {
                     {registerButton}
                     {logOutButton}
                     <Link to="/company-login">
-                        <button className="pl-button--style-3 off-black">Charity?</button>
+                        <button className="pl-button--style-3 off-black header__nav__item">Charity?</button>
                     </Link>
                     {/*<i className="header__buttons__notify fas fa-bell" onClick={this.handleNotificationClick}></i>*/}
                 </div>
