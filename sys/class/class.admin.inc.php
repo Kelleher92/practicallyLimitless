@@ -161,7 +161,7 @@
 			return $res;	
 		}
 
-		public function updateCompanyLogo($companyId, $logo) {
+		public function updateCompanyLogo($companyId, $logo, $company) {
 			if($_POST['action'] != 'updateCompanyLogo') {
 				return "Invalid action supplied for updateCompanyLogo.";
 			}
@@ -171,7 +171,7 @@
 			
 			$res = new Response_Obj();
 		
-			$sql = "UPDATE `company` SET `logo` = '$logo' WHERE `companyId` = '$companyId'";
+			$sql = $company ? "UPDATE `company` SET `logo` = '$logo' WHERE `companyId` = '$companyId'" : "UPDATE `users` SET `logo` = '$logo' WHERE `userId` = '$companyId'";;
 
 			try {
 				$this->insertQuery($sql);		

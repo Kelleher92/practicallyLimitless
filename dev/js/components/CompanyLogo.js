@@ -64,12 +64,14 @@ class CompanyLogo extends Component {
 
     // Save cloudinary URL for new logo to the database
     saveNewLogo() {
+        let me = this;
+        
         $.ajax({
             method: 'POST',
             data: {
                 token: this.props.token,
                 action: 'updateCompanyLogo',
-                data: JSON.stringify({companyId: this.props.companyId, logo: this.props.logo})
+                data: JSON.stringify({companyId: this.props.companyId, logo: this.props.logo, company: me.props.company})
             },
             url: 'public/process.php',
             success: function(res) {

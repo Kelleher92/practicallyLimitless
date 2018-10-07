@@ -73,7 +73,7 @@ class CompanyLogin extends Component {
                     <div className="form-header">Charity Login</div>
                     <div className="form-body">
                     <div className="form-input__section">
-                        <input type="text" placeholder=" Enter E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)} onKeyPress={this.handleKeyPress} autoFocus />
+                        <input type="text" placeholder="E-mail Address" className="form-input__value" onChange={(e) => this.handleChange("email", e)} onKeyPress={this.handleKeyPress} autoFocus />
                     </div>
                     <div className="form-input__section">
                         <input type="password" placeholder="Password" className="form-input__value" onChange={(e) => this.handleChange("password", e)} onKeyPress={this.handleKeyPress} />

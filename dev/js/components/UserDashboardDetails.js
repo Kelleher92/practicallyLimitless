@@ -25,7 +25,8 @@ class UserDashboardDetails extends Component {
                     <CompanyLogo logo={this.props.logo} 
                                 companyId={this.state.companyId}
                                 token={this.props.token}
-                                handleUpdateLogo={this.props.handleUpdateLogo}/>
+                                handleUpdateLogo={this.props.handleUpdateLogo}
+                                company={false}/>
                 </div>
                 <div className="form-body">
                     <div className="form-input__section labelled">

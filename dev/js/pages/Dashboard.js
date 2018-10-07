@@ -135,7 +135,9 @@ class Dashboard extends Component {
                 offerName: name, 
                 requirements: requirements,
                 expiryDate: expiry}],
-            offerName: "", requirements: "", offerExpiry: ""
+            offerName: "", 
+            requirements: "", 
+            offerExpiry: ""
         })
     } 
 
