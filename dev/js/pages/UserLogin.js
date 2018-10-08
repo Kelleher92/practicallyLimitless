@@ -34,7 +34,6 @@ class UserLogin extends Component {
             let { history } = this.props;
 
             this.props.setLoggedInUser(this.state.email, this.state.password).then(function(res) {
-                console.log(res);
                 res = JSON.parse(res);
 
                 if(res.responseCode === 200) {

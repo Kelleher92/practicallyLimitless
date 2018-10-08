@@ -69,7 +69,6 @@ class UserRegistration extends Component {
                 url: 'public/process.php',
                 success: function(res) {
                     setTimeout(function() { 
-                        console.log(res);
                         res = JSON.parse(res);
 
                         if(res.responseCode === 200) {

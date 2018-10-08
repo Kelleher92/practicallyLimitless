@@ -52,7 +52,6 @@ class UserResetPassword extends Component {
                 },
                 url: 'public/process.php',
                 success: function(res) {
-                    console.log(res);
                     setTimeout(function() { 
                         res = JSON.parse(res);
 

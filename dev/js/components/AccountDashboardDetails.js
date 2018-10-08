@@ -62,10 +62,8 @@ class AccountDashboardDetails extends Component {
     }
 
     render() {
-        let resetButton = null;
-        let deleteButton = null;
-        resetButton = <Link to="/user-forgot-password"><button className="pl-button--style-2">Reset Password</button></Link>;
-        deleteButton = <Link to="/"><button className="pl-button--style-2" onClick={this.onClickDelete}>Delete Account</button></Link>;
+        let resetButton = <Link to="/user-forgot-password"><button className="pl-button--style-2">Reset Password</button></Link>;
+        let deleteButton = <Link to="/"><button className="pl-button--style-2" onClick={this.onClickDelete}>Delete Account</button></Link>;
 
         return (
             <div className="d-flex flex-column flex-md-row">
