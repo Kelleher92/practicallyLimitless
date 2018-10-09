@@ -1,4 +1,5 @@
 <?php
+
 	class Admin extends DB_Connect{
 		private $ROOT = null;
 		private $_expirationPeriod = 3;
@@ -161,7 +162,7 @@
 			return $res;	
 		}
 
-		public function updateCompanyLogo($companyId, $logo, $company) {
+		public function updateCompanyLogo($companyId, $logo) {
 			if($_POST['action'] != 'updateCompanyLogo') {
 				return "Invalid action supplied for updateCompanyLogo.";
 			}
@@ -171,7 +172,7 @@
 			
 			$res = new Response_Obj();
 		
-			$sql = $company ? "UPDATE `company` SET `logo` = '$logo' WHERE `companyId` = '$companyId'" : "UPDATE `users` SET `logo` = '$logo' WHERE `userId` = '$companyId'";;
+			$sql = "UPDATE `company` SET `logo` = '$logo' WHERE `companyId` = '$companyId'";
 
 			try {
 				$this->insertQuery($sql);		
@@ -330,6 +331,7 @@
 			return $res;
 		}
 
+
 		public function logoutCompany() {
 			if($_POST['action'] != 'logoutCompany') {
 				echo "Invalid action supplied for logoutCompany.";
@@ -343,6 +345,7 @@
 
 			echo 'Log out complete.';
 		}
+
 
 		public function logoutUser() {
 			if($_POST['action'] != 'logoutUser') {
@@ -420,10 +423,11 @@
 
 			$user = $this->query($sql);
 
-			$sql = "SELECT
-				`id`, `offerName`, `requirements`, `expiryDate` 
-				FROM `offer`
-				ORDER BY `expiryDate`";
+			$sql = "
+				SELECT o.id, o.offerName, c.name, o.requirements, o.expiryDate, o.companyId, c.email, c.address, c.number
+				FROM company c, offer o
+				WHERE c.companyId = o.companyId
+				ORDER BY o.expiryDate";
 
 			$offers = $this->query($sql);
 			$expiredOffers = array();
@@ -508,6 +512,7 @@
 			return $res;
 		}
 
+
 		public function activateUser($email, $token) {
 			if($_POST['action'] != 'activateUser') {
 				return "Invalid action supplied for activateUser.";
@@ -531,6 +536,8 @@
 
 			return $res;
 		}
+
+		
 
 		public function uploadCompanyLogo($companyId, $image, $imageName) {
 			$companyId = $this->sanitizeValue($companyId);
@@ -791,7 +798,7 @@
 			if(!isset($user)) {
 				$res->message = 'User or token invalid.';
 				$res->responseCode = 400;
-			} else {
+			}else {
 				$sql = $sql = "DELETE 
 				FROM `users`
 				WHERE `userId` = '$companyId'";
@@ -802,6 +809,7 @@
 
 			return $res;
 		}
+
 
 		private function generateVefificationLink($email, $token) {
 			if(!$email || !$token) {
