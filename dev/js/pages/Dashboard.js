@@ -135,9 +135,7 @@ class Dashboard extends Component {
                 offerName: name, 
                 requirements: requirements,
                 expiryDate: expiry}],
-            offerName: "", 
-            requirements: "", 
-            offerExpiry: ""
+            offerName: "", requirements: "", offerExpiry: ""
         })
     } 
 
@@ -197,9 +195,9 @@ class Dashboard extends Component {
                     {this.state.checkComplete ? (
                         <div className="form__container wide">
                             <div className="dashboard__tab-container d-flex">
-                                <div className={"dashboard__tab " + (this.state.tab === 0 ? 'selected' : 'unselected')} onClick={() => this.switchTab(0)}>Details</div>
-                                <div className={"dashboard__tab " + (this.state.tab === 1 ? 'selected' : 'unselected')} onClick={() => this.switchTab(1)}>Location</div>
-                                <div className={"dashboard__tab " + (this.state.tab === 2 ? 'selected' : 'unselected')} onClick={() => this.switchTab(2)}>Opportunities</div>
+                                <div className={"dashboard__tab " + (this.state.tab === 0 ? 'selected' : 'unselected')} onClick={() => this.switchTab(0)}>Profile</div>
+                                <div className={"dashboard__tab " + (this.state.tab === 1 ? 'selected' : 'unselected')} onClick={() => this.switchTab(1)}>Account Settings</div>
+                                <div className={"dashboard__tab " + (this.state.tab === 2 ? 'selected' : 'unselected')} onClick={() => this.switchTab(2)}>Opportunity</div>
                                 {this.state.tab !== 2 ? (<div className="dashboard__update"><button className="pl-button--style-2" onClick={this.onClickUpdate}>Update</button></div>) : (<div></div>)}
                             </div>
                                 {this.state.tab === 0 ? (

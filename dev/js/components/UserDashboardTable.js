@@ -4,7 +4,6 @@ class UserDashboardTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            initial: this.props.active,
             active: this.props.active,
             sortKey: null
         };
@@ -24,7 +23,7 @@ class UserDashboardTable extends Component {
         value= value.toLowerCase();
 
         for(var i = 0; i < updatedList.length; i++) {
-            if(updatedList[i].offerName.toLowerCase().includes(value)|| updatedList[i].requirements.toLowerCase().includes(value)) {
+            if(updatedList[i].offerName.toLowerCase().includes(value)|| updatedList[i].name.toLowerCase().includes(value)) {
                 tempList.push(updatedList[ i]);
             }
         }
@@ -47,27 +46,46 @@ class UserDashboardTable extends Component {
     render() {
         return (
             <div className="form-body">
+
                 <div className="form-input__section">
-                    <div className="form-input__section labelled">
-                        <div className="form-input__section">
-                            <input type="text" placeholder="Search the task" className="form-input__value" onChange={(e) => this.onTypeSearch(e)} />
-                        </div>
+
+
+                 <div className="form-input__section labelled">
+                        <div className="form-input__label">Search</div>
+                        <input type="text" placeholder="Enter Search Value" className="form-input__value" value='' />
+                        <button className="pl-button--style-2" >Search</button>  
                     </div>
-            
+
+
+
+
                     <table className="table table-sm">
                         <thead>
                             <tr>
-                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'offerName')}>Name</th>
+                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'name')}>Name</th>
+                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'address')}> Address </th>
+                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'email')}>E-mail</th>
+                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'number')}> Contact number</th>
+                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'companyId')}>Company ID</th>
+                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'offerName')}>offer Name</th>
                                 <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'requirements')}>Requirements</th>
                                 <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'expiryDate')}>Expiry Date</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
+
                             {this.state.active.map(i => 
                                 <tr key={i.id}>
+                                    <td>{i.name}</td>
+                                    <td>{i.address}</td>
+                                    <td>{i.email}</td>
+                                    <td>{i.number}</td>
+                                    <td>{i.companyId}</td>
                                     <td>{i.offerName}</td>
                                     <td>{i.requirements}</td>
                                     <td>{i.expiryDate}</td>
+                                                  
                                 </tr>
                             )}
                         </tbody>

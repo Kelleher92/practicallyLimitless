@@ -25,8 +25,7 @@ class UserDashboardDetails extends Component {
                     <CompanyLogo logo={this.props.logo} 
                                 companyId={this.state.companyId}
                                 token={this.props.token}
-                                handleUpdateLogo={this.props.handleUpdateLogo}
-                                company={false}/>
+                                handleUpdateLogo={this.props.handleUpdateLogo}/>
                 </div>
                 <div className="form-body">
                     <div className="form-input__section labelled">
@@ -41,6 +40,10 @@ class UserDashboardDetails extends Component {
                         <div className="form-input__label">About Me</div>
                         <textarea rows="5" placeholder="Let charities know your unique interests and skills." className="form-input__value" value={this.state.blurb} onChange={(e) => this.handleChange("blurb", e)}></textarea>
                     </div>
+                    
+                    
+                    
+
                 </div>
             </div>
         );

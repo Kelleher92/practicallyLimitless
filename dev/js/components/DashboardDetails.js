@@ -27,8 +27,7 @@ class DashboardDetails extends Component {
                     <CompanyLogo logo={this.props.logo} 
                                 companyId={this.state.companyId}
                                 token={this.props.token}
-                                handleUpdateLogo={this.props.handleUpdateLogo}
-                                company={true}/>
+                                handleUpdateLogo={this.props.handleUpdateLogo}/>
                 </div>
                 <div className="form-body">
                     <div className="form-input__section labelled">
