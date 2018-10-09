@@ -1,14 +1,14 @@
 html, body{
-    // @include background-with-gradient();
+    @include background-with-gradient();
     font-size: 16px;
     font-family: $font-family-primary;
     font-family: arial;
     font-size: 16px;
-    background-image: linear-gradient(rgba(255,255,255,.9), rgba(255,255,255,.1)), url('../../images/test3.png');
+    background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)),url('../../images/test3.png') 0 20%;
     background-repeat: no-repeat;
     background-size: cover;
-    min-width: 100vw;
-    min-height: 125vh;
+    min-height: 100vh;
+    min-height: 100vh;
     -webkit-display: flex;
     -moz-display: flex;
     -ms-display: flex;
@@ -113,23 +113,19 @@ a:hover{
     width: auto;
     height: 36px;
     line-height: 32px;
-    border-radius: 4px;
+    border-radius: 2px;
     text-align: center;  
     color: $primary-font-color;
     padding: 0 10px;
     cursor: pointer;
     margin: 0 5px;
-
-    &.search{
-        margin: 8px 8px 0;
-    }
 }
 
 .pl-button--style-4{
     width: inherit;
     height: 40px;
     line-height: 36px;
-    border-radius: 4px;
+    border-radius: 2px;
     text-align: center;  
     color: $primary-font-color;
     padding: 0 10px;
@@ -190,7 +186,7 @@ a:hover{
     cursor: pointer;
 }
 
-@media (max-width: $mobile-break-point) {
+@media (max-width: $mobile-break-point){
     .contain{
         height: 100%;
     }
