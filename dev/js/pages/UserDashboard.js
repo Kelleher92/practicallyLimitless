@@ -10,10 +10,10 @@ import UserDashboardDetails from '../components/UserDashboardDetails';
 import AccountDashboardDetails from '../components/AccountDashboardDetails';
 
 class UserDashboard extends Component {
-	constructor(props) {
+    constructor(props) {
         super(props);
- 		
- 	this.state = {
+        
+        this.state = {
             checkComplete: false,
             name: '',
             email: '',
@@ -28,18 +28,19 @@ class UserDashboard extends Component {
             tab: 0,
             newOffer: false
         }
-
+        
         this.onClickNew = this.onClickNew.bind(this);
         this.onClickUpdate = this.onClickUpdate.bind(this);
-	this.switchTab = this.switchTab.bind(this);
+        this.switchTab = this.switchTab.bind(this);
         this.updateDetails = this.updateDetails.bind(this);
         this.updateGeoCoor = this.updateGeoCoor.bind(this);
         this.updateSkills = this.updateSkills.bind(this);
         this.handleUpdateLogo = this.handleUpdateLogo.bind(this);
     }
-
+    
     componentDidMount() {
-    var me = this;
+        var me = this;
+        
         $.ajax({
             method: 'POST',
             data: {
@@ -51,7 +52,6 @@ class UserDashboard extends Component {
             success: function(res) {
                 setTimeout(function() { 
                     res = JSON.parse(res);
-
                     if(res.responseCode === 200) {
                         me.setState({
                             name: res.data.user.name,
@@ -80,35 +80,35 @@ class UserDashboard extends Component {
             }
         });
     }
-	
+    
     onClickNew() {
         this.setState({newOffer: true});
     }
-
+    
     updateDetails(name, value) {
         this.setState({[name]: value});
     }
-
+    
     updateGeoCoor(newCoor) {
         this.setState({geoCoor: newCoor});
     }
-
+    
     updateSkills(newSkills) {
         this.setState({skills: newSkills});
     }
-
+    
     handleChange(name, e) {
         this.setState({[name]: e.target.value});
     }
-
+   
     switchTab(index) {
         this.setState({tab: index, newOffer: false});
     }
-
+    
     isSubmitable() {
         return isValidString(this.state.name)  && isValidString(this.state.geoCoor);
     }
-
+    
     onClickUpdate() {
         if(this.isSubmitable()) {
             let me = this;
@@ -124,7 +124,6 @@ class UserDashboard extends Component {
                 success: function(res) {
                     setTimeout(function() { 
                         res = JSON.parse(res);
-
                         if(res.responseCode === 200) {
                             me.props.showFlashNotification(res.message);
                         } else {
@@ -143,11 +142,11 @@ class UserDashboard extends Component {
             this.props.showFlashNotification('Update of information failed, please try again.');
         }
     }
-
+    
     handleUpdateLogo(newLogo) {
         this.setState({logo:newLogo});
     }
-
+    
     render() {
         return (
             <div className="contain">               

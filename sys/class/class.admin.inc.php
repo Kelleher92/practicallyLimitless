@@ -414,16 +414,17 @@
 			$companyId = $this->sanitizeValue($companyId);
 
 			$sql = "SELECT
-				`name`, `email`, `address`, `logo`, `geoCoor`, `number`, `blurb`,`skills` 
+				`name`, `email`, `address`, `logo`, `geoCoor`, `number`, `blurb`, `skills` 
 				FROM `users`
 				WHERE `userId` = '$companyId'";
 
 			$user = $this->query($sql);
 
-			$sql = "SELECT
-				`id`, `offerName`, `requirements`, `expiryDate` 
-				FROM `offer`
-				ORDER BY `expiryDate`";
+			$sql = "
+				SELECT o.id, o.offerName, c.name, o.requirements, o.expiryDate, o.companyId, c.email, c.address, c.number
+				FROM company c, offer o
+				WHERE c.companyId = o.companyId
+				ORDER BY o.expiryDate";
 
 			$offers = $this->query($sql);
 			$expiredOffers = array();
