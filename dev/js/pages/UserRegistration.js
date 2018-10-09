@@ -69,6 +69,7 @@ class UserRegistration extends Component {
                 url: 'public/process.php',
                 success: function(res) {
                     setTimeout(function() { 
+                        console.log(res);
                         res = JSON.parse(res);
 
                         if(res.responseCode === 200) {
@@ -122,7 +123,7 @@ class UserRegistration extends Component {
                 ) : (
                     <div className="form__container">
                         <div className="form-logo" onClick={this.onClickLogo}></div>
-                        <div className="form-header">Sign Up</div>
+                        <div className="form-header"></div>
                         <div className="form-body">
                             <div className="form-input__section">
                                 <input type="text" placeholder="Name" className="form-input__value" onChange={(e) => this.handleChange("name", e)} onKeyPress={this.handleKeyPress} autoFocus />

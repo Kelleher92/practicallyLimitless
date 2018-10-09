@@ -9,6 +9,8 @@ import UserDashboardTable from '../components/UserDashboardTable';
 import UserDashboardDetails from '../components/UserDashboardDetails';
 import AccountDashboardDetails from '../components/AccountDashboardDetails';
 
+
+
 class UserDashboard extends Component {
 	constructor(props) {
         super(props);
@@ -100,6 +102,7 @@ class UserDashboard extends Component {
     handleChange(name, e) {
         this.setState({[name]: e.target.value});
     }
+   
 
     switchTab(index) {
         this.setState({tab: index, newOffer: false});
@@ -123,6 +126,7 @@ class UserDashboard extends Component {
                 url: 'public/process.php',
                 success: function(res) {
                     setTimeout(function() { 
+                        console.log(res);
                         res = JSON.parse(res);
 
                         if(res.responseCode === 200) {
@@ -155,7 +159,7 @@ class UserDashboard extends Component {
                 <div className="home-contain justify-content-center">
                     <div className="form__wrap">
                     {this.state.checkComplete ? (
-                        <div className="form__container dash wide">
+                        <div className="form__containerdash wide">
                             <div className="dashboard__tab-container d-flex">
                                 <div className={"dashboard__tab " + (this.state.tab === 0 ? 'selected' : 'unselected')} onClick={() => this.switchTab(0)}>Profile</div>
                                 <div className={"dashboard__tab " + (this.state.tab === 1 ? 'selected' : 'unselected')} onClick={() => this.switchTab(1)}>Account Settings</div>

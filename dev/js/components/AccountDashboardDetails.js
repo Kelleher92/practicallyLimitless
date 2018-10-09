@@ -4,6 +4,7 @@ import CompanyLogo from './CompanyLogo';
 import { Link, withRouter } from 'react-router-dom';
 import { isValidString } from '../helpers/utils.js';
 
+
 class AccountDashboardDetails extends Component {
     constructor(props) {
         super(props);
@@ -16,6 +17,7 @@ class AccountDashboardDetails extends Component {
 
         this.onClickDelete = this.onClickDelete.bind(this);
     }
+
    
     handleChange(name, e) {
         this.setState({[name]: e.target.value});
@@ -26,7 +28,10 @@ class AccountDashboardDetails extends Component {
         return isValidString(this.state.name);
     }
 
-    onClickDelete() {
+
+     onClickDelete() {
+        alert("Your account has been deleted.");
+
         if(this.isSubmitable()) {
             let me = this;
             
@@ -39,6 +44,7 @@ class AccountDashboardDetails extends Component {
                 },
                 url: 'public/process.php',
                 success: function(res) {
+                    console.log(res);
                     setTimeout(function() { 
                         res = JSON.parse(res);
 
@@ -61,9 +67,15 @@ class AccountDashboardDetails extends Component {
         }
     }
 
+    
+    
     render() {
-        let resetButton = <Link to="/user-forgot-password"><button className="pl-button--style-2">Reset Password</button></Link>;
-        let deleteButton = <Link to="/"><button className="pl-button--style-2" onClick={this.onClickDelete}>Delete Account</button></Link>;
+        let resetButton = null;
+        let deleteButton = null;
+        resetButton = <Link to="/user-forgot-password"><button className="pl-button--style-2">Reset Password</button></Link>;
+        deleteButton = <Link to="/"><button className="pl-button--style-2" onClick={this.onClickDelete}>Delete Account</button></Link>;
+
+
 
         return (
             <div className="d-flex flex-column flex-md-row">
@@ -81,16 +93,16 @@ class AccountDashboardDetails extends Component {
               
                     <div className="form-input__section labelled">
                         <div className="form-input__label">E-mail Address</div>
-                        <input type="email" placeholder="E-mail Address" className="form-input__value" value={this.state.email} readOnly/>                   
+                        <input type="email" placeholder="E-mail Address" className="form-input__value" value={this.state.email} readOnly/>
+                        
                     </div>
 
-                    <div className="d-flex">
-                        <div> 
-                            {resetButton}
-                        </div>
-                        <div>
-                            {deleteButton}             
-                        </div>              
+                    <div> 
+                    {resetButton}
+                    </div>
+                     
+                    <div>
+                    {deleteButton}             
                     </div>              
                 </div>
             </div>

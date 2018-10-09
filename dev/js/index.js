@@ -86,6 +86,7 @@ class App extends Component {
             },
             url: 'public/process.php',
             success: function(res) {
+                console.log(res);
                 res = JSON.parse(res);
 
                 if(res.responseCode === 200) {
@@ -162,7 +163,6 @@ class App extends Component {
             modalLinkText: modalParams.modalLinkText || 'Home',
             modalLinkLocation: modalParams.modalLinkLocation || '/home'
         };
-
         this.setState(newState);
     }
       
@@ -171,14 +171,14 @@ class App extends Component {
     }
 
     renderModal() {
-        if(this.state.modalType === 'genericModal') {
+        if(this.state.modalType==='genericModal') {
             return(
                 <Modal hide={this.handleHideModal}>
                     <ModalContentsGeneric handleHideModal={this.handleHideModal} />
                 </Modal>
             );
         } 
-        else if(this.state.modalType === 'successModal') {
+        else if(this.state.modalType==='successModal') {
             return(
                 <Modal hide={this.handleHideModal}>
                     <VerificationNotice 
@@ -191,13 +191,9 @@ class App extends Component {
             );
         }
         else {
-            return (
-                <Modal hide={this.handleHideModal}>
-                    <div>Error rendering modal</div>
-                </Modal>
-                )
-            }
+            return(<Modal hide={this.handleHideModal}><div>Error rendering modal</div></Modal>)
         }
+    }
 
 	render() {
 		return (
