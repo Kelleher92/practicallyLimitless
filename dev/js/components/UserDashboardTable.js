@@ -20,9 +20,11 @@ class UserDashboardTable extends Component {
     onTypeSearch(e) {
         var updatedList = this.state.initial;
         var tempList = [];
+        var value= e.target.value;
+        value= value.toLowerCase();
 
         for(var i = 0; i < updatedList.length; i++) {
-            if(updatedList[i].offerName.includes(e.target.value) || updatedList[i].requirements.includes(e.target.value)) {
+            if(updatedList[i].offerName.toLowerCase().includes(value)|| updatedList[i].requirements.toLowerCase().includes(value)) {
                 tempList.push(updatedList[ i]);
             }
         }
