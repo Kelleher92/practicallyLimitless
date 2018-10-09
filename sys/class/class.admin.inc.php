@@ -509,7 +509,6 @@
 			return $res;
 		}
 
-
 		public function activateUser($email, $token) {
 			if($_POST['action'] != 'activateUser') {
 				return "Invalid action supplied for activateUser.";
@@ -533,8 +532,6 @@
 
 			return $res;
 		}
-
-		
 
 		public function uploadCompanyLogo($companyId, $image, $imageName) {
 			$companyId = $this->sanitizeValue($companyId);
@@ -795,7 +792,7 @@
 			if(!isset($user)) {
 				$res->message = 'User or token invalid.';
 				$res->responseCode = 400;
-			}else {
+			} else {
 				$sql = $sql = "DELETE 
 				FROM `users`
 				WHERE `userId` = '$companyId'";
@@ -806,7 +803,6 @@
 
 			return $res;
 		}
-
 
 		private function generateVefificationLink($email, $token) {
 			if(!$email || !$token) {
