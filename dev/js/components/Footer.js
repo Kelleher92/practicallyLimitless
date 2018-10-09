@@ -4,7 +4,7 @@ class Footer extends Component {
     render() {
         return (
             <div className="footer--container">
-                &copy; NoMad Deloitte.
+                &copy; NoMad Deloitte 2018.
             </div>
         );
     }
