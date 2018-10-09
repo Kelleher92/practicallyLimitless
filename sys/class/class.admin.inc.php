@@ -1,5 +1,4 @@
 <?php
-
 	class Admin extends DB_Connect{
 		private $ROOT = null;
 		private $_expirationPeriod = 3;
@@ -162,7 +161,7 @@
 			return $res;	
 		}
 
-		public function updateCompanyLogo($companyId, $logo) {
+		public function updateCompanyLogo($companyId, $logo, $company) {
 			if($_POST['action'] != 'updateCompanyLogo') {
 				return "Invalid action supplied for updateCompanyLogo.";
 			}
@@ -172,7 +171,7 @@
 			
 			$res = new Response_Obj();
 		
-			$sql = "UPDATE `company` SET `logo` = '$logo' WHERE `companyId` = '$companyId'";
+			$sql = $company ? "UPDATE `company` SET `logo` = '$logo' WHERE `companyId` = '$companyId'" : "UPDATE `users` SET `logo` = '$logo' WHERE `userId` = '$companyId'";;
 
 			try {
 				$this->insertQuery($sql);		
@@ -331,7 +330,6 @@
 			return $res;
 		}
 
-
 		public function logoutCompany() {
 			if($_POST['action'] != 'logoutCompany') {
 				echo "Invalid action supplied for logoutCompany.";
@@ -345,7 +343,6 @@
 
 			echo 'Log out complete.';
 		}
-
 
 		public function logoutUser() {
 			if($_POST['action'] != 'logoutUser') {
@@ -417,7 +414,7 @@
 			$companyId = $this->sanitizeValue($companyId);
 
 			$sql = "SELECT
-				`name`, `email`, `address`, `logo`, `geoCoor`, `number`, `blurb`,`skills` 
+				`name`, `email`, `address`, `logo`, `geoCoor`, `number`, `blurb`, `skills` 
 				FROM `users`
 				WHERE `userId` = '$companyId'";
 
