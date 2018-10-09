@@ -20,10 +20,10 @@ class UserDashboardTable extends Component {
     onTypeSearch(e) {
         var updatedList = this.state.initial;
         var tempList = [];
-        var value=e.target.value.toLowerCase();
+        var value = e.target.value.toLowerCase();
 
         for(var i = 0; i < updatedList.length; i++) {
-            if(updatedList[i].offerName.toLowerCase().includes(value) || updatedList[i].name.toLowerCase().includes(value)) {
+            if(updatedList[i].name.toLowerCase().includes(value) || updatedList[i].offerName.toLowerCase().includes(value) || updatedList[i].name.toLowerCase().includes(value)) {
                 tempList.push(updatedList[ i]);
             }
         }
@@ -63,8 +63,7 @@ class UserDashboardTable extends Component {
                                 <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'companyId')}>Company ID</th>
                                 <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'offerName')}>offer Name</th>
                                 <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'requirements')}>Requirements</th>
-                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'expiryDate')}>Expiry Date</th>
-                                
+                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'expiryDate')}>Expiry Date</th>  
                             </tr>
                         </thead>
                         <tbody>
@@ -77,8 +76,7 @@ class UserDashboardTable extends Component {
                                     <td>{i.companyId}</td>
                                     <td>{i.offerName}</td>
                                     <td>{i.requirements}</td>
-                                    <td>{i.expiryDate}</td>
-                                                  
+                                    <td>{i.expiryDate}</td>        
                                 </tr>
                             )}
                         </tbody>
@@ -88,4 +86,5 @@ class UserDashboardTable extends Component {
         );
     }
 }
+
 export default UserDashboardTable;
