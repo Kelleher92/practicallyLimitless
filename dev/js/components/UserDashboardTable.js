@@ -24,7 +24,7 @@ class UserDashboardTable extends Component {
         value= value.toLowerCase();
 
         for(var i = 0; i < updatedList.length; i++) {
-            if(updatedList[i].offerName.toLowerCase().includes(value)|| updatedList[i].requirements.toLowerCase().includes(value)) {
+            if(updatedList[i].offerName.toLowerCase().includes(value)|| updatedList[i].name.toLowerCase().includes(value)) {
                 tempList.push(updatedList[ i]);
             }
         }
@@ -57,17 +57,29 @@ class UserDashboardTable extends Component {
                     <table className="table table-sm">
                         <thead>
                             <tr>
-                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'offerName')}>Name</th>
+                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'name')}>Name</th>
+                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'address')}> Address </th>
+                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'email')}>E-mail</th>
+                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'number')}> Contact number</th>
+                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'companyId')}>Company ID</th>
+                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'offerName')}>offer Name</th>
                                 <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'requirements')}>Requirements</th>
                                 <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'expiryDate')}>Expiry Date</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
                             {this.state.active.map(i => 
                                 <tr key={i.id}>
+                                    <td>{i.name}</td>
+                                    <td>{i.address}</td>
+                                    <td>{i.email}</td>
+                                    <td>{i.number}</td>
+                                    <td>{i.companyId}</td>
                                     <td>{i.offerName}</td>
                                     <td>{i.requirements}</td>
                                     <td>{i.expiryDate}</td>
+                                                  
                                 </tr>
                             )}
                         </tbody>
