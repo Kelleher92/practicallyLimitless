@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 import DashboardTable from '../components/DashboardTable';
 import DashboardDetails from '../components/DashboardDetails';
 import DashboardCreate from '../components/DashboardCreate';
-import LocationMap from '../components/LocationMap';
+import CharityAccountDashboardDetails from '../components/CharityAccountDashboardDetails';
 
 class Dashboard extends Component {
 	constructor(props) {
@@ -197,8 +197,8 @@ class Dashboard extends Component {
                     {this.state.checkComplete ? (
                         <div className="form__container wide">
                             <div className="dashboard__tab-container d-flex">
-                                <div className={"dashboard__tab " + (this.state.tab === 0 ? 'selected' : 'unselected')} onClick={() => this.switchTab(0)}>Details</div>
-                                <div className={"dashboard__tab " + (this.state.tab === 1 ? 'selected' : 'unselected')} onClick={() => this.switchTab(1)}>Location</div>
+                                <div className={"dashboard__tab " + (this.state.tab === 0 ? 'selected' : 'unselected')} onClick={() => this.switchTab(0)}>Profile</div>
+                                <div className={"dashboard__tab " + (this.state.tab === 1 ? 'selected' : 'unselected')} onClick={() => this.switchTab(1)}>Account Details</div>
                                 <div className={"dashboard__tab " + (this.state.tab === 2 ? 'selected' : 'unselected')} onClick={() => this.switchTab(2)}>Opportunities</div>
                                 {this.state.tab !== 2 ? (<div className="dashboard__update"><button className="pl-button--style-2" onClick={this.onClickUpdate}>Update</button></div>) : (<div></div>)}
                             </div>
@@ -216,7 +216,16 @@ class Dashboard extends Component {
                                                        showFlashNotification={this.props.showFlashNotification} />
                                 ) : (
                                 this.state.tab === 1 ? (
-                                    <LocationMap address={this.state.address} newAddress={this.updateAddress} geoCoor={this.state.geoCoor} newGeoCoor={this.updateGeoCoor} />
+                                    <CharityAccountDashboardDetails  token={this.props.token} 
+                                                       companyId={this.props.companyId} 
+                                                       name={this.state.name} 
+                                                       number={this.state.number} 
+                                                       blurb={this.state.blurb} 
+                                                       email={this.state.email}
+                                                       logo={this.state.logo} 
+                                                       handleUpdateLogo={this.handleUpdateLogo}
+                                                       updateDetails={this.updateDetails}
+                                                       showFlashNotification={this.props.showFlashNotification} />
                                 ) : (
                                 this.state.newOffer ? (
                                     <DashboardCreate createNewOffer={this.createNewOffer} />

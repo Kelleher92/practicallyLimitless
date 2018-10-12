@@ -11,6 +11,7 @@ class DashboardCreate extends Component {
         };
 
         this.onClickCreate = this.onClickCreate.bind(this);
+        this.onClickCancel = this.onClickCancel.bind(this);
     }
 
     handleChange(name, e) {
@@ -25,6 +26,11 @@ class DashboardCreate extends Component {
         if(this.isSubmitable()) {
             this.props.createNewOffer(this.state.offerName, this.state.requirements, this.state.offerExpiry);
         }
+
+    }
+
+    onClickCancel() {
+        this.props.newOffer= false;
     }
 
     render() {
@@ -44,6 +50,9 @@ class DashboardCreate extends Component {
                 </div>
                 <div className="form-input__section">
                     <button className="pl-button--style-2" onClick={this.onClickCreate}>Create</button>
+                </div>
+                <div className="form-input__section">
+                    <button className="pl-button--style-2" onClick={this.onClickCancel} >Cancel</button>
                 </div>
             </div>
         );

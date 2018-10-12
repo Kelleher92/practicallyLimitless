@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Cards from './Cards';
 
 class DashboardTable extends Component {
     constructor(props) {
@@ -9,6 +10,18 @@ class DashboardTable extends Component {
             sortKey: null
         };
         this.onSort = this.onSort.bind(this)
+    }
+
+    onTypeSearch(e) {
+        var updatedList = this.state.active;
+        var tempList = [];
+        var value = e.target.value.toLowerCase();
+
+        for(var i = 0; i < updatedList.length; i++) {
+            if(updatedList[i].name.toLowerCase().includes(value) || updatedList[i].offerName.toLowerCase().includes(value) || updatedList[i].name.toLowerCase().includes(value)) {
+                tempList.push(updatedList[ i]);
+            }
+        }
     }
 
     onSort(event, sortKey) {
@@ -30,31 +43,17 @@ class DashboardTable extends Component {
         return (
             <div className="form-body">
                 <div className="form-input__section">
-                    <table className="table table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'offerName')}>Name</th>
-                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'requirements')}>Requirements</th>
-                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'expiryDate')}>Expiry Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {this.state.active.map(i => 
-                            <tr key={i.id}>
-                                <td>{i.offerName}</td>
-                                <td>{i.requirements}</td>
-                                <td>{i.expiryDate}</td>
-                            </tr>
-                        )}
+                <input type="text" placeholder="Search the task" className="form-input__value" onChange={(e) => this.onTypeSearch(e)} />
+
+                        {this.state.active.map(i =>
+                            <Cards  cardStatus={this.state.cardStatus} name={i.offerName} description={i.requirements} date={i.expiryDate} logo={i.logo}  />
+                            )} 
+
                         {this.state.expired.map(i => 
-                            <tr key={i.id}>
-                                <td className="table-danger">{i.offerName}</td>
-                                <td className="table-danger">{i.requirements}</td>
-                                <td className="table-danger">{i.expiryDate}</td>
-                            </tr>
+                            <Cards  cardStatus={this.state.cardStatus} name={i.offerName} description={i.requirements} date={i.expiryDate} logo={i.logo}  />
+                            
                         )}
-                        </tbody>
-                    </table>
+
                 </div>
                 <div className="form-input__section">
                     <button className="form__submit-button" onClick={this.props.onClickNew}>New Task</button>
