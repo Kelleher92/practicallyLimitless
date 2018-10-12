@@ -19,12 +19,9 @@ class AccountDashboardDetails extends Component {
         this.onClickDelete = this.onClickDelete.bind(this);
     }
 
-toggleModal = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-
-  }
+    toggleModal = () => {
+        this.setState({isOpen: !this.state.isOpen});
+    }
    
     handleChange(name, e) {
         this.setState({[name]: e.target.value});
@@ -89,14 +86,12 @@ toggleModal = () => {
                         <input type="text" placeholder="Phone Number" className="form-input__value" value={this.state.number} onChange={(e) => this.handleChange("number", e)}/>
                     </div>
 
-
                     <div className="form-input__section labelled">
                         <div className="form-input__label">E-mail Address</div>
                         <input type="email" placeholder="E-mail Address" className="form-input__value" value={this.state.email} readOnly/>                   
                     </div>
 
                     <div className="d-flex">
-
                         <div >
                             <CancelModal show={this.state.isOpen} onClose={this.toggleModal}>
                                 <div>
@@ -107,16 +102,13 @@ toggleModal = () => {
                                 </div>
                             </CancelModal>
                         </div>
-
-                    
+                
                         <div> 
                             {resetButton}
                         </div>
                         <div>
                             {deleteButton}             
-                        </div> 
-                        
-
+                        </div>                         
                     </div>              
                 </div>
             </div>
