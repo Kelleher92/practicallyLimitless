@@ -3,6 +3,7 @@ import $ from 'jquery';
 import { Link, withRouter } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Countdown from '../components/Countdown';
 
 class Home extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class Home extends Component {
 		return (
             <div className="contain">               
                 <Header isLoggedIn={this.props.isLoggedIn} setLoggedOut={this.props.setLoggedOut} includeShadow={false}/>
+
                 <div className="home-contain">
                     <div className="home__section--title">connecting <b>you</b> with the <b>right</b> opportunities</div>
                     <div className="home__step__wrapper">
@@ -45,8 +47,14 @@ class Home extends Component {
                         <button className="pl-button--style-4"><Link to="/user-registration">Get Started</Link></button>
                     </div>
                 </div>
+                <p className="Countdown-heading-text"> Countdown to the big launch on 1st December</p>
+                <div className="Countdown-wrapper">
+                <Countdown date={`2018-12-01T00:00:00`}/>
+                </div>
+
                 <Footer />
             </div>
+
 		);
 	}
 }

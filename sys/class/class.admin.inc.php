@@ -421,7 +421,7 @@
 			$user = $this->query($sql);
 
 			$sql = "
-				SELECT o.id, o.offerName, c.name, o.requirements, o.expiryDate, o.companyId, c.email, c.address, c.number
+				SELECT o.id, o.offerName, c.name, o.requirements, o.expiryDate, o.companyId, c.email, c.address, c.number, c.logo
 				FROM company c, offer o
 				WHERE c.companyId = o.companyId
 				ORDER BY o.expiryDate";

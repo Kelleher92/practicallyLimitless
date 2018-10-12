@@ -28,6 +28,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Donate from './pages/Donate';
 import VerificationNotice from './components/VerificationNotice';
 import CompanyLogo from './components/CompanyLogo';
+import Countdown from './components/Countdown';
 
 class App extends Component {
     constructor() {
