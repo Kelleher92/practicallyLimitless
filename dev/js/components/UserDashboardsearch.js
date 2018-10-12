@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Cards from './Cards';
 
-
 class UserDashboardsearch extends Component {
     constructor(props) {
         super(props);
@@ -53,16 +52,17 @@ class UserDashboardsearch extends Component {
                         <div className="form-input__section">
                             <input type="text" placeholder="Search the task" className="form-input__value" onChange={(e) => this.onTypeSearch(e)} />
                         </div>
-                        </div>
-                        <div>
+                     </div>
+                 <div>
 
                         {this.state.active.map(i =>
                             <Cards  cardStatus={this.state.cardStatus} name={i.offerName} description={i.requirements} date={i.expiryDate} logo={i.logo}  />
                             )}        
-        </div>
-        </div>
-        </div>
+                    </div>
+                </div>
+            </div>
         );
     }
 }
+
 export default UserDashboardsearch;
