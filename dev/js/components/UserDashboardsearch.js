@@ -53,9 +53,9 @@ class UserDashboardSearch extends Component {
                             <input type="text" placeholder="Search Open Opportunities" className="form-input__value" onChange={(e) => this.onTypeSearch(e)} />
                         </div>
                     </div>
-                    <div class="card__list-wrapper">
+                    <div className="card__list-wrapper">
                         {this.state.active.map(i =>
-                            <Cards  cardStatus={this.state.cardStatus} name={i.offerName} description={i.requirements} date={i.expiryDate} logo={i.logo}  />
+                            <Cards key={i.id} cardStatus={this.state.cardStatus} name={i.offerName} description={i.requirements} date={i.expiryDate} logo={i.logo}  />
                         )}        
                     </div>
                 </div>
