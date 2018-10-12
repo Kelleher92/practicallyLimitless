@@ -4,6 +4,7 @@ import { BrowserRouter as Router, browserHistory, Route, Switch } from 'react-ro
 import $ from 'jquery';
 
 import Modal from './components/Modal';
+import CancelModal from './components/CancelModal';
 import ModalContentsGeneric from './components/ModalContentsGeneric';
 import Home from './pages/Home'; 
 import PrivateRoute from './pages/PrivateRoute';

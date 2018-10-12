@@ -3,6 +3,7 @@ import $ from 'jquery';
 import CompanyLogo from './CompanyLogo';
 import { Link, withRouter } from 'react-router-dom';
 import { isValidString } from '../helpers/utils.js';
+import CancelModal from './CancelModal';
 
 class AccountDashboardDetails extends Component {
     constructor(props) {
@@ -12,9 +13,14 @@ class AccountDashboardDetails extends Component {
             name: this.props.name,
             number:this.props.number,
             email: this.props.email,
+            isOpen: false
         };
 
         this.onClickDelete = this.onClickDelete.bind(this);
+    }
+
+    toggleModal = () => {
+        this.setState({isOpen: !this.state.isOpen});
     }
    
     handleChange(name, e) {
@@ -63,7 +69,8 @@ class AccountDashboardDetails extends Component {
 
     render() {
         let resetButton = <Link to="/user-forgot-password"><button className="pl-button--style-2">Reset Password</button></Link>;
-        let deleteButton = <Link to="/"><button className="pl-button--style-2" onClick={this.onClickDelete}>Delete Account</button></Link>;
+        let deleteButton = <button className="pl-button--style-2" onClick={this.toggleModal}>Delete Account</button>;
+        let deleteAccountButton = <Link to="/"><button className="pl-button--style-2" onClick={this.onClickDelete}>Delete Account</button></Link>;
 
         return (
             <div className="d-flex flex-column flex-md-row">
@@ -78,19 +85,30 @@ class AccountDashboardDetails extends Component {
                         <div className="form-input__label">Phone Number</div>
                         <input type="text" placeholder="Phone Number" className="form-input__value" value={this.state.number} onChange={(e) => this.handleChange("number", e)}/>
                     </div>
-              
+
                     <div className="form-input__section labelled">
                         <div className="form-input__label">E-mail Address</div>
                         <input type="email" placeholder="E-mail Address" className="form-input__value" value={this.state.email} readOnly/>                   
                     </div>
 
                     <div className="d-flex">
+                        <div >
+                            <CancelModal show={this.state.isOpen} onClose={this.toggleModal}>
+                                <div>
+                                <p> Are you sure you want to delete your account?</p>
+                                </div>
+                                <div>
+                                {deleteAccountButton}
+                                </div>
+                            </CancelModal>
+                        </div>
+                
                         <div> 
                             {resetButton}
                         </div>
                         <div>
                             {deleteButton}             
-                        </div>              
+                        </div>                         
                     </div>              
                 </div>
             </div>
