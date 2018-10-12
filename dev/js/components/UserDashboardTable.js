@@ -56,12 +56,11 @@ class UserDashboardTable extends Component {
                     <table className="table table-sm">
                         <thead>
                             <tr>
-                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'name')}>Name</th>
-                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'address')}> Address </th>
+                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'name')}>Charity Name</th>
+                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'address')}>Address</th>
                                 <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'email')}>E-mail</th>
-                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'number')}> Contact number</th>
-                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'companyId')}>Company ID</th>
-                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'offerName')}>offer Name</th>
+                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'number')}>Charity Number</th>
+                                <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'offerName')}>Opportunity</th>
                                 <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'requirements')}>Requirements</th>
                                 <th scope="col" className="dashboard__table-header" onClick={e => this.onSort(e, 'expiryDate')}>Expiry Date</th>  
                             </tr>
@@ -73,7 +72,6 @@ class UserDashboardTable extends Component {
                                     <td>{i.address}</td>
                                     <td>{i.email}</td>
                                     <td>{i.number}</td>
-                                    <td>{i.companyId}</td>
                                     <td>{i.offerName}</td>
                                     <td>{i.requirements}</td>
                                     <td>{i.expiryDate}</td>        
