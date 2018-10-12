@@ -1,6 +1,7 @@
 .card__list-wrapper{
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 
     @media(max-width: $mobile-break-point){
         display: block;
@@ -9,24 +10,15 @@
 
 .card__container{
     background-color: rgba(255,255,255,0.7);
-    width: 500px;
+    width: 250px;
     -moz-border-radius: 70px;
     -webkit-border-radius: 70px;
     border-radius: 55px;
     position: relative;
     left: 50%;
-    top: 70px;
+    margin: 20px;
     transform: translateX(-50%); 
     box-shadow: 0em 0em .5em rgba(0, 0, 0, 0.00);
-    
-    &.wide{
-        width: 1100px;
-        min-height: 300px;
-    } 
-
-    &.dash{
-        background-color: rgba(248, 245, 245, 0.9);
-    }
 }
 
 .card__logo{
