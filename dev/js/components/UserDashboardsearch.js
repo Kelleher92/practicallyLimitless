@@ -52,12 +52,11 @@ class UserDashboardsearch extends Component {
                         <div className="form-input__section">
                             <input type="text" placeholder="Search the task" className="form-input__value" onChange={(e) => this.onTypeSearch(e)} />
                         </div>
-                     </div>
-                 <div>
-
+                    </div>
+                    <div class="d-flex justify-content-center">
                         {this.state.active.map(i =>
                             <Cards  cardStatus={this.state.cardStatus} name={i.offerName} description={i.requirements} date={i.expiryDate} logo={i.logo}  />
-                            )}        
+                        )}        
                     </div>
                 </div>
             </div>

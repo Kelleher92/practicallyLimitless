@@ -5,7 +5,7 @@ class Cards extends Component {
 
     let status = this.props.cardStatus;
        return (
-           <div className=".col-6 .col-sm-4">
+           <div>
                <div className="form__cardcontainer">
                    <div><img src={this.props.logo} alt="logo" className="form-cardlogo"/> </div>
                    <div className="form-cardheader"> {this.props.name} </div>
