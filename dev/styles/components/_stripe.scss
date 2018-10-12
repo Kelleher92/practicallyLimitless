@@ -94,10 +94,6 @@ input::placeholder{
     }
 }
 
-.stripe-amount-euro::before{
-
-}
-
 input:focus, .StripeElement--focus{
     box-shadow: rgba(50, 50, 93, 0.109804) 0px 4px 6px, rgba(0, 0, 0, 0.0784314) 0px 1px 3px;
     -webkit-transition: all 150ms ease;
@@ -107,8 +103,6 @@ input:focus, .StripeElement--focus{
 .StripeElement.IdealBankElement, .StripeElement.PaymentRequestButton{
     padding: 0;
 }
-
-
 
 @media (max-width: $mobile-break-point){
     .stripe-checkout{

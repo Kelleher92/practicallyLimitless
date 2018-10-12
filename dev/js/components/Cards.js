@@ -6,11 +6,11 @@ class Cards extends Component {
     let status = this.props.cardStatus;
        return (
            <div>
-               <div className="form__cardcontainer">
-                   <div><img src={this.props.logo} alt="logo" className="form-cardlogo"/> </div>
-                   <div className="form-cardheader"> {this.props.name} </div>
-                   <div className="form-cardoffername"> {this.props.description} </div>
-                   <div className="form-cardoffername"> {this.props.date} </div>
+               <div className="card__container">
+                   <div><img src={this.props.logo} alt="logo" className="card__logo"/> </div>
+                   <div className="card__header"> {this.props.name} </div>
+                   <div className="card__offername"> {this.props.description} </div>
+                   <div className="card__offername"> {this.props.date} </div>
                    <button className="pl-button--style-2" >Apply</button>
                 </div>
            </div>

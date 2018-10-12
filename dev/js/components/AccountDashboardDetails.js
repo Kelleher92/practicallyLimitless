@@ -92,7 +92,7 @@ class AccountDashboardDetails extends Component {
                     </div>
 
                     <div className="d-flex">
-                        <div >
+                        <div>
                             <CancelModal show={this.state.isOpen} onClose={this.toggleModal}>
                                 <div>
                                     <p>Are you sure you want to delete your account?</p>

@@ -1,5 +1,13 @@
+.card__list-wrapper{
+    display: flex;
+    justify-content: space-between;
 
-.form__cardcontainer{
+    @media(max-width: $mobile-break-point){
+        display: block;
+    }
+}
+
+.card__container{
     background-color: rgba(255,255,255,0.7);
     width: 500px;
     -moz-border-radius: 70px;
@@ -21,7 +29,7 @@
     }
 }
 
-.form-cardlogo{
+.card__logo{
     cursor: pointer;
     height: 170px;
     background-size: contain;
@@ -31,19 +39,19 @@
     margin-bottom: 20px;
 }
 
-.form-cardheader{
+.card__header{
     font-size: 30px;
     color: $black;
     text-align: center;
 }
 
-.form-cardoffername{
+.card__offername{
     font-size: 10px;
     color: $black;
     text-align: center;
 }
 
-.form-cardbody{
+.card__body{
     padding: 10px;
     width: 100%;
     text-align: center;

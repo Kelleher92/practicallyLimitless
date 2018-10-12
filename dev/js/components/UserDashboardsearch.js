@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Cards from './Cards';
 
-class UserDashboardsearch extends Component {
+class UserDashboardSearch extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -50,10 +50,10 @@ class UserDashboardsearch extends Component {
                 <div className="form-input__section">
                     <div className="form-input__section labelled">
                         <div className="form-input__section">
-                            <input type="text" placeholder="Search the task" className="form-input__value" onChange={(e) => this.onTypeSearch(e)} />
+                            <input type="text" placeholder="Search Open Opportunities" className="form-input__value" onChange={(e) => this.onTypeSearch(e)} />
                         </div>
                     </div>
-                    <div class="d-flex justify-content-around">
+                    <div class="card__list-wrapper">
                         {this.state.active.map(i =>
                             <Cards  cardStatus={this.state.cardStatus} name={i.offerName} description={i.requirements} date={i.expiryDate} logo={i.logo}  />
                         )}        
@@ -64,4 +64,4 @@ class UserDashboardsearch extends Component {
     }
 }
 
-export default UserDashboardsearch;
+export default UserDashboardSearch;

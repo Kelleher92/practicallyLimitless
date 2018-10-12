@@ -5,7 +5,7 @@ import $ from 'jquery';
 import PreLoader from '../components/PreLoader';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import UserDashboardsearch from '../components/UserDashboardsearch';
+import UserDashboardSearch from '../components/UserDashboardSearch';
 import UserDashboardDetails from '../components/UserDashboardDetails';
 import AccountDashboardDetails from '../components/AccountDashboardDetails';
 
@@ -186,7 +186,7 @@ class UserDashboard extends Component {
                                                        showFlashNotification={this.props.showFlashNotification} />
                                     ) : (
                                 (
-                                    <UserDashboardsearch active={this.state.currentOffers} onClickNew={this.onClickNew} />
+                                    <UserDashboardSearch active={this.state.currentOffers} onClickNew={this.onClickNew} />
                                     ))
                                 )}
                         </div>
