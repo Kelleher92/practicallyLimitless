@@ -7,8 +7,8 @@ class CancelModal extends React.Component {
             return null;
         }
 
-    return (
-             <div className="modal" >
+        return (
+            <div className="modal" >
                 <div className="modal-dialog modal-lg modal-dialog-centered">
                     <div className="modal-content">
                         {this.props.children}
@@ -19,8 +19,8 @@ class CancelModal extends React.Component {
                     </div>
                 </div>
             </div>
-    );
-  }
+        );
+    }
 }
 
 CancelModal.propTypes = {

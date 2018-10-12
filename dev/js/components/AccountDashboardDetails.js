@@ -95,10 +95,10 @@ class AccountDashboardDetails extends Component {
                         <div >
                             <CancelModal show={this.state.isOpen} onClose={this.toggleModal}>
                                 <div>
-                                <p> Are you sure you want to delete your account?</p>
+                                    <p>Are you sure you want to delete your account?</p>
                                 </div>
                                 <div>
-                                {deleteAccountButton}
+                                    {deleteAccountButton}
                                 </div>
                             </CancelModal>
                         </div>
